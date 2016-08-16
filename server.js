@@ -6,13 +6,13 @@ var app = express();
 var db = require('./db.js');
 var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
-
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 
-app.get('/', function(req, res) {
-	res.send('Survivor Pool API Root');
-});
+// app.get('/', function(req, res) {
+// 	res.send('Survivor Pool API Root');
+// });
 
 app.get('/users', middleware.requireAuthentication,  function(req, res) {
 	console.log("here");
