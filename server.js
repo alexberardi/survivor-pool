@@ -21,13 +21,15 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 
 
 //post user
-app.post('/user', function(req,res){
-	var body = _.pick(req.body, 'email', 'password');
+app.post('/users', function(req,res){
+	console.log('here');
+	var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
 	db.user.create(body)
 		.then(function(user) {
 			res.json(user.toPublicJSON());
 		})
 		.catch(function(e) {
+			console.log(e);
 			res.status(400).json(e);
 		});
 });
