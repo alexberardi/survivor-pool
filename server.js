@@ -6,13 +6,11 @@ var app = express();
 var db = require('./db.js');
 var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
-app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 
-// app.get('/', function(req, res) {
-// 	res.send('Survivor Pool API Root');
-// });
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/users', middleware.requireAuthentication,  function(req, res) {
 	console.log("here");
@@ -23,7 +21,6 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 
 //post user
 app.post('/users', function(req,res){
-	console.log('here');
 	var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
 	db.user.create(body)
 		.then(function(user) {
