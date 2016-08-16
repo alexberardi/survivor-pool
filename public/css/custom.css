@@ -1,0 +1,12 @@
+.sign-up {
+	margin: 5rem auto;
+	display: flex;
+}
+
+.nav {
+	background-color: #AA3939;
+}
+.nav-item {
+		color: #FFF;
+		padding-left: 5rem;
+}

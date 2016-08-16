@@ -1,22 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		Survivor Pool
-	</title>
-</head>
-<body>
-	<div>
-		<label>First:</label>
-		<input type="text" name="first"></br>
-		<label>Last:</label>
-		<input type="text" name="last"></br>
-		<label>Email:</label>
-		<input type="text" name="email"></br>
-		<label>Password:</label>
-		<input type="text" name="password"></br>
-		<label>Team Name (Optional):</label>
-		<input type="text" name="teamName"></br>
-	</div>
-</body>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survivor Pool</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+  <body>
+    <div class="top-bar nav">
+    	<div class="top-bar-left nav-item">	
+    		Survivor Pool
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="large-8 medium-8 columns sign-up">
+    		<form>
+    			<div class="row">
+    				<div class="medium-6 columns">
+    					<label>First Name</label>
+    					<input type="text" name="first">
+    				</div>
+    				<div class="medium-6 columns">
+    					<label>Last Name</label>
+    					<input type="text" name="last">
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="large-12 columns">
+    					<label>Email</label>
+    					<input type="text" name="email"></br>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="medium-6 columns">
+    					<label>Password</label>
+    					<input type="text" name="password"></br>
+    				</div>
+    				<div class="medium-6 columns">
+    					<label>Verify Password</label>
+    					<input type="text" name="password"></br>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="large-12 columns">
+    					<label>Team Name (Optional)</label>
+    					<input type="text" name="teamName"></br>
+    				</div>
+    			</div>
+  			</form>
+  		</div>
+  		<div class="large-3 medium-3 columns sign-up">
+  			Sign Up!
+  		</div>
+  	</div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/what-input.js"></script>
+    <script src="js/foundation.js"></script>
+  </body>
 </html>
