@@ -6,49 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survivor Pool</title>
     <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
-    <div class="top-bar">
-    	<div class="top-bar-left">	
+    <div class="top-bar nav">
+    	<div class="top-bar-left nav-item">	
     		Survivor Pool
     	</div>
     </div>
-
-    <div class="large-8 medium-8 columns">
-    	<form>
-    		<div class="row">
-    			<div class="medium-6 columns">
-    				<label>First Name</label>
-    				<input type="text" name="first">
+    <div class="row">
+    	<div class="large-8 medium-8 columns sign-up">
+    		<form>
+    			<div class="row">
+    				<div class="medium-6 columns">
+    					<label>First Name</label>
+    					<input type="text" name="first">
+    				</div>
+    				<div class="medium-6 columns">
+    					<label>Last Name</label>
+    					<input type="text" name="last">
+    				</div>
     			</div>
-    			<div class="medium-6 columns">
-    				<label>Last Name</label>
-    				<input type="text" name="last">
+    			<div class="row">
+    				<div class="large-12 columns">
+    					<label>Email</label>
+    					<input type="text" name="email"></br>
+    				</div>
     			</div>
-    		</div>
-    		<div class="row">
-    			<div class="large-12 columns">
-    				<label>Email</label>
-    				<input type="text" name="email"></br>
+    			<div class="row">
+    				<div class="medium-6 columns">
+    					<label>Password</label>
+    					<input type="text" name="password"></br>
+    				</div>
+    				<div class="medium-6 columns">
+    					<label>Verify Password</label>
+    					<input type="text" name="password"></br>
+    				</div>
     			</div>
-    		</div>
-    		<div class="row">
-    			<div class="medium-6 columns">
-    				<label>Password</label>
-    				<input type="text" name="password"></br>
+    			<div class="row">
+    				<div class="large-12 columns">
+    					<label>Team Name (Optional)</label>
+    					<input type="text" name="teamName"></br>
+    				</div>
     			</div>
-    			<div class="medium-6 columns">
-    				<label>Verify Password</label>
-    				<input type="text" name="password"></br>
-    			</div>
-    		</div>
-    		<div class="row">
-    			<div class="large-12 columns">
-    				<label>Team Name (Optional)</label>
-    				<input type="text" name="teamName"></br>
-    			</div>
-    		</div>
-  		</form>
+  			</form>
+  		</div>
+  		<div class="large-3 medium-3 columns sign-up">
+  			Sign Up!
+  		</div>
   	</div>
 
     <script src="js/jquery.js"></script>
