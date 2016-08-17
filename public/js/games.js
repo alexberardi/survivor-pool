@@ -26,14 +26,14 @@
 		var games = getRequest(settings.gamesurl);
 		games.forEach(function(game) {
 			var gameInfo = {
-
-				date: game.gameDate,
+				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
 				hometeam: game.homeTeamName,
 				hometeamscore: game.homeScore,
 				awayteam: game.awayTeamName,
 				awayteamscore: game.awayScore
 			};
-			console.log(gameInfo.hometeamscore);
+
+
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), gameInfo));
 		});
 	}
