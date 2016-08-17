@@ -5,6 +5,7 @@ var _ = require('underscore');
 module.exports = function(sequelize, DataTypes){
 	return sequelize.define('games', {
 		gameID: {
+			unique: true,
 			type: DataTypes.INTEGER,
 			allowNull: false
 			},
