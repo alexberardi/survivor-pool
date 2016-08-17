@@ -8,6 +8,36 @@
 }
 .nav-item {
 	color: #FFF;
-	padding-left: 5rem;
+	padding-left: 3rem;
 
+}
+
+.title-bar {
+	background-color: #0D4D4D;
+	padding: .5rem;
+	padding-left: 3rem;
+}
+
+.schedule {
+	padding-top: 3rem;
+	background-color: #407F7F;
+	border-style: none;
+	padding-bottom: 5rem;
+}
+
+.schedule-body > tr:nth-child(even) {
+	background-color: #669999;
+	color: #FFF;
+}
+
+.schedule-header {
+	padding-top: 3rem;
+	background-color: #226666;
+	border-style: none;
+	color: #FFF;
+}
+
+.footer-large {
+	margin: 6rem;
+	text-align: center;
 }
