@@ -18,7 +18,7 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 });
 
 
-app.get('/games', function(req, res){
+app.get('/games/populate', function(req, res){
 	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
 		body = JSON.parse(body)
 		week = body.w;
@@ -55,6 +55,24 @@ app.get('/games', function(req, res){
 		}
 
 	});
+});
+
+app.get('/games', function(req, res){
+	db.games.max('week')
+  	.then(function(max){
+  		db.games.findAll({
+  			where: {week : max}
+  		})
+  		.then(function(weeks){
+  			res.json(weeks);
+  		})
+  		.catch(function(e){
+  			return res.status(500).json(e);
+  		});
+  	})
+  	.catch(function(e){
+  			return res.status(500).json(e);
+  		});
 });
 
 //post user
@@ -110,9 +128,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync({
-		force:true
-	})
+db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
