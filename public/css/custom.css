@@ -4,7 +4,7 @@
 }
 
 .nav {
-	background-color: #AA3939;
+	background-color: #801515;
 }
 .nav-item {
 	color: #FFF;
@@ -19,10 +19,10 @@
 }
 
 .schedule {
-	padding-top: 3rem;
+	padding-top: 6rem;
 	background-color: #407F7F;
 	border-style: none;
-	padding-bottom: 5rem;
+	padding-bottom: 10rem;
 }
 
 .schedule-body > tr:nth-child(even) {
@@ -45,4 +45,6 @@
 .hero-home {
 	padding: 20rem;
 	text-align: center;
+	background-color: #D46A6A;
+	color: #FFF;
 }
