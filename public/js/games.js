@@ -7,19 +7,19 @@
 		tableAppend: "#schedule",
 	};
 	
-	function getRequest(cURL) {
-		var oReturn = null;
+	function getRequest(address) {
+		var request = null;
 		
 		$.ajax({
 			type: "GET",
-			url: cURL,
+			url: address,
 			async: false
 		})
-		.done(function(oData) {
-			oReturn = oData;
+		.done(function(data) {
+			request = data;
 		});
 
-		return oReturn;
+		return request;
 	}
 	
 	function init() {
