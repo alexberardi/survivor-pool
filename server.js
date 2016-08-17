@@ -18,12 +18,13 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 });
 
 
-app.post('/games', function(req, res){
-	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, res, body){
+app.get('/games', function(req, res){
+	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
 		body = JSON.parse(body)
 		week = body.w;
 
 		games = body.gms;
+		var error;
 
 		games.forEach(function(game){
 			var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
@@ -42,8 +43,16 @@ app.post('/games', function(req, res){
 				quarter: sanitizeGame.q,
 				week: week,
 			}
-			db.games.create(gameInfo);
+			db.games.create(gameInfo)
+				.catch(function(e){
+					error = e;
+				});
 		})
+		if (!error) {
+			res.status(200).send();
+		} else {
+			res.status(400).json(e);
+		}
 
 	});
 });
