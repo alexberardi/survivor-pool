@@ -17,13 +17,52 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 	console.log("here");
 });
 
+app.get('/teams/populate', function(req, res){
+	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
+		body = JSON.parse(body)
 
-app.post('/games', function(req, res){
-	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, res, body){
+		games = body.gms;
+		var error;
+
+		games.forEach(function(game){
+			var sanitizeTeam = _.pick(game, 'h', 'v', 'vnn', 'hnn');
+			
+			var homeTeamInfo = {
+				teamName: sanitizeTeam.hnn,
+				teamCity: sanitizeTeam.h,
+			}
+			var awayTeamInfo ={
+				teamName: sanitizeTeam.vnn,
+				teamCity: sanitizeTeam.v,				
+			}
+
+			db.teams.create(homeTeamInfo)
+				.catch(function(e){
+					error = e;
+				});
+
+			db.teams.create(awayTeamInfo)
+				.catch(function(e){
+					error = e;
+				});
+		})
+		if (!error) {
+			res.status(200).send();
+		} else {
+			res.status(400).json(e);
+		}
+
+	});
+});
+
+
+app.get('/games/populate', function(req, res){
+	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
 		body = JSON.parse(body)
 		week = body.w;
 
 		games = body.gms;
+		var error;
 
 		games.forEach(function(game){
 			var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
@@ -42,10 +81,36 @@ app.post('/games', function(req, res){
 				quarter: sanitizeGame.q,
 				week: week,
 			}
-			db.games.create(gameInfo);
+			db.games.create(gameInfo)
+				.catch(function(e){
+					error = e;
+				});
 		})
+		if (!error) {
+			res.status(200).send();
+		} else {
+			res.status(400).json(e);
+		}
 
 	});
+});
+
+app.get('/games', function(req, res){
+	db.games.max('week')
+  	.then(function(max){
+  		db.games.findAll({
+  			where: {week : max}
+  		})
+  		.then(function(weeks){
+  			res.json(weeks);
+  		})
+  		.catch(function(e){
+  			return res.status(500).json(e);
+  		});
+  	})
+  	.catch(function(e){
+  			return res.status(500).json(e);
+  		});
 });
 
 //post user
@@ -101,9 +166,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync({
-		force:true
-	})
+db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');

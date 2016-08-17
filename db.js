@@ -17,6 +17,7 @@ var db = {};
 db.user = sequelize.import(__dirname + '/models/user.js');
 db.token = sequelize.import(__dirname + '/models/token.js');
 db.games = sequelize.import(__dirname + '/models/games.js');
+db.teams = sequelize.import(__dirname + '/models/teams.js');
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
