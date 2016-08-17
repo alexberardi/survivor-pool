@@ -27,6 +27,12 @@
     	</div>
     </section>
 
+    <section class="rules">
+    	<div class="row">
+    		<p>Explain how the game works here</p>
+    	</div>
+    </section>
+
     <section>
     <div class="row">
     	<div class="large-8 medium-8 columns sign-up">
@@ -89,35 +95,12 @@
   						<tr class="schedule-header">
 							<th width="150">Date</th>
 							<th width="200">Home</th>
+							<th width="150">Home Score</th>
 							<th width="200">Away</th>
+							<th width="150">Away Score</th>
 						</tr>
 					</thead>
-					<tbody class="schedule-body">
-						<tr>
-							<td>date goes here</td>
-							<td>home team goes here</td>
-							<td>away team goes here</td>
-						</tr>
-						<tr>
-							<td>date goes here</td>
-							<td>home team goes here</td>
-							<td>away team goes here</td>
-						</tr>
-						<tr>
-							<td>date goes here</td>
-							<td>home team goes here</td>
-							<td>away team goes here</td>
-						</tr>
-						<tr>
-							<td>date goes here</td>
-							<td>home team goes here</td>
-							<td>away team goes here</td>
-						</tr>
-						<tr>
-							<td>date goes here</td>
-							<td>home team goes here</td>
-							<td>away team goes here</td>
-						</tr>
+					<tbody class="schedule-body" id="schedule">
 					</tbody>
 				</table>
 			</div>
@@ -132,5 +115,17 @@
     <script src="js/jquery.js"></script>
     <script src="js/what-input.js"></script>
     <script src="js/foundation.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="js/games.js"></script>
+    
+<script type="text/template" id="TableRow">
+	<tr>
+		<td>{{date}}</td>
+		<td>{{hometeam}}</td>
+		<td>{{homescore}}</td>
+		<td>{{awayteam}}</td>
+		<td>{{awayscore}}</td>
+	</tr>
+</script>
   </body>
 </html>

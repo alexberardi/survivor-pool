@@ -43,8 +43,15 @@
 }
 
 .hero-home {
-	padding: 20rem;
+	padding: 25rem;
 	text-align: center;
 	background-color: #D46A6A;
 	color: #FFF;
+}
+
+.rules {
+	padding: 25rem;
+	background-color: #407F7F;
+	color: #FFF;
+
 }
