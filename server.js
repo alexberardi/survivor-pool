@@ -6,6 +6,7 @@ var app = express();
 var db = require('./db.js');
 var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
+var request = require('request');
 app.use(bodyParser.json());
 
 
@@ -17,7 +18,35 @@ app.get('/users', middleware.requireAuthentication,  function(req, res) {
 });
 
 
+app.post('/games', function(req, res){
+	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, res, body){
+		body = JSON.parse(body)
+		week = body.w;
 
+		games = body.gms;
+
+		games.forEach(function(game){
+			var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
+			
+			var gameInfo = {
+				gameID: sanitizeGame.gsis,
+				homeTeamName: sanitizeGame.hnn,
+				homeTeamCityAbbr: sanitizeGame.h,
+				homeScore: sanitizeGame.hs,
+				awayTeamName: sanitizeGame.vnn,
+				awayTeamCityAbbr: sanitizeGame.v,
+				awayScore: sanitizeGame.vs,
+				dayOfWeek: sanitizeGame.d,
+				time: sanitizeGame.t,
+				gameDate: sanitizeGame.eid,
+				quarter: sanitizeGame.q,
+				week: week,
+			}
+			db.games.create(gameInfo);
+		})
+
+	});
+});
 
 //post user
 app.post('/users', function(req,res){
