@@ -13,8 +13,14 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/users', middleware.requireAuthentication,  function(req, res) {
-	console.log("here");
+app.get('/users', function(req, res) {
+	db.user.findAll()
+		.then(function(users){
+			res.json(users);
+		})
+		.catch(function(e){
+			res.status(400).send();
+		});
 });
 
 app.get('/teams/populate', function(req, res){
