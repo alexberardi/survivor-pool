@@ -30,10 +30,12 @@ app.get('/teams/populate', function(req, res){
 			var homeTeamInfo = {
 				teamName: sanitizeTeam.hnn,
 				teamCity: sanitizeTeam.h,
+				logoFileName: sanitizeTeam.hnn + '.gif'
 			}
 			var awayTeamInfo ={
 				teamName: sanitizeTeam.vnn,
-				teamCity: sanitizeTeam.v,				
+				teamCity: sanitizeTeam.v,	
+				logoFileName: sanitizeTeam.vnn + '.gif',			
 			}
 
 			db.teams.create(homeTeamInfo)
@@ -166,7 +168,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync()
+db.sequelize.sync({force:true})
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');

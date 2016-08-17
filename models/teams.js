@@ -15,5 +15,16 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.STRING,
 			allowNull: true
 		}
-	});
+	},
+	{
+		hooks: {
+			beforeValidate: function(teams, options) {
+				if (typeof teams.logoFileName === 'string') {
+					teams.logoFileName = 'teamLogos/' + teams.logoFileName.toLowerCase();
+				}
+			}
+		}
+	}
+
+	);
 };
