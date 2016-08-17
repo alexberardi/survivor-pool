@@ -94,9 +94,9 @@
               <thead>
                 <tr class="schedule-header">
                   <th width="150">Date</th>
-                  <th width="200">Home</th>
-                  <th width="150">Home Score</th>
-                  <th width="200">Away</th>
+                  <th width="100">Home Score</th>
+                  <th width="75">Home</th>
+                  <th width="75">Away</th>
                   <th width="150">Away Score</th>
                 </tr>
               </thead>
@@ -104,9 +104,9 @@
           <script type="text/template" id="TableRow">
                 <tr>
                   <td>{{date}}</td>
-                  <td>{{hometeam}}</td>
                   <td>{{hometeamscore}}</td>
-                  <td>{{awayteam}}</td>
+                  <td><img src= "{{hometeamLogo}}" width="75px"></td>
+                  <td><img src= "{{awayteamLogo}}" width="75px"></td>
                   <td>{{awayteamscore}}</td>
                 </tr>
           </script>

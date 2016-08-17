@@ -10,10 +10,6 @@ module.exports = function(sequelize, DataTypes){
 		teamCity: {
 			type: DataTypes.STRING,
 			allowNull: false
-		},
-		logoFileName: {
-			type: DataTypes.STRING,
-			allowNull: true
 		}
 	},
 	{
