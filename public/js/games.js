@@ -5,7 +5,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "localhost:3000/games",
+		gamesurl: "/games",
 		rowTemplate: "#TableRow",
 		tableAppend: "#schedule",
 	};
