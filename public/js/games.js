@@ -6,7 +6,8 @@
 
 	var settings = {
 		gamesurl: "/games",
-		rowTemplate: "#TableRow",
+		rowTemplate: "<tr><td>{{date}}</td><td>{{hometeam}}</td><td>{{homescore}}</td><td>{{awayteam}}</td><td>{{awayscore}}</td></tr>",
+		//rowTemplate: "#TableRow",
 		tableAppend: "#schedule",
 	};
 	
@@ -27,14 +28,14 @@
 	
 	function init() {
 		var games = getRequest(settings.gamesurl);
-		console.log(games);
-		$(games).each(function() {
+
+		games.forEach(function(game) {
 			var game = {
-				date: $(this).find("gameDate").text(),
-				hometeam: $(this).find("homeTeamName").text(),
-				hometeamscore: $(this).find("homeScore").text(),
-				awayteam: $(this).find("awayTeamName").text(),
-				awayteamscore: $(this).find("awayScore").text()
+				date: game.gameDate,
+				hometeam: game.homeTeamName,
+				hometeamscore: game.homeScore,
+				awayteam: game.awayTeamName,
+				awayteamscore: game.awayScore
 			};
 
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), game));
