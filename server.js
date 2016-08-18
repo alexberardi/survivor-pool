@@ -9,47 +9,6 @@ var middleware = require('./middleware.js')(db);
 var request = require('request');
 app.use(bodyParser.json());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/users', function(req, res) {
