@@ -8,7 +8,7 @@ var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
 var request = require('request');
 app.use(bodyParser.json());
-
+console.log(process.env.DATABASE_URL);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/users', function(req, res) {
