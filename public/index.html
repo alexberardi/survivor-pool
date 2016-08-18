@@ -15,8 +15,35 @@
     	</div>
     	<div class="top-bar-right nav-item menu">
     		<li><a href="https://github.com/alexberardi/survivor-pool" target="_blank">Github</a></li>
-    		<li><a href="#">Log In</a></li>
+    		<li><a href="#" data-reveal-id="login" id="login">Log In</a></li>
     	</div>
+    	<div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+			<div class="modal-content">
+	  			<a class="close-reveal-modal" aria-label="Close" id="closeModal">&#215;</a>
+				<h2 id="modalTitle">Log In</h2>
+	  				<form id="login-form" action="home.html">
+		  				<div class="row">
+		    				<div class="medium-6 columns">
+		    					<label>Email:</label>
+		    					<input type="text" name="login-email">
+		    				</div>
+	    				</div>
+	    				<div class="row">
+		    				<div class="medium-6 columns">
+		    					<label>Password:</label>
+		    					<input type="text" name="login-password">
+		    				</div>
+	    				</div>
+	    				<div class="row">
+	    				<div class="large-12 columns">
+	    					<button type="button" id="login-button" class="large button">Sign Up</button>
+	    				</div>
+	  				</form>
+    			</div>
+	  		</div>
+	  	</div>
+	</div>
+
     </div>
 
     <section class="hero-home large">
@@ -133,6 +160,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
     <script src="js/games.js"></script>
     <script src="js/register.js"></script>
-
+    <script src="js/login-modal.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

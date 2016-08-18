@@ -9,8 +9,6 @@ var middleware = require('./middleware.js')(db);
 var request = require('request');
 app.use(bodyParser.json());
 
-
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/users', function(req, res) {
@@ -174,7 +172,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync({force:true})
+db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
