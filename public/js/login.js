@@ -16,7 +16,7 @@ loginBtn.onclick = function() {
 			})
 			.done(function(data, textStatus, request){
 				document.cookie = "Auth="+ request.getResponseHeader('Auth');
-				alert("successful login");
+				document.getElementById('login-form').submit();
 			});
 		} else if (user.email.length === 0 && user.email.password === 0) {
 			alert("Email and password are required");
