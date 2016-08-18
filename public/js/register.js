@@ -17,6 +17,11 @@ $(function () {
 			contentType: 'application/json',
 			type: 'POST',
 			success: function() {
+				$('input[name=first]').val('');
+				$('input[name=last]').val(''); 
+				$('input[name=email]').val('');
+				$('input[name=password]').val('');
+				$('input[name=teamName]').val('');
 				$('#success').append(successMsg);
 			}
 		});
