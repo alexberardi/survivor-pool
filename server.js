@@ -6,7 +6,7 @@ var app = express();
 var db = require('./db.js');
 var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
-var request = require('request');
+//var request = require('request');
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
