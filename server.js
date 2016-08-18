@@ -21,85 +21,85 @@ app.get('/users', function(req, res) {
 		});
 });
 
-app.get('/teams/populate', function(req, res){
-	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
-		body = JSON.parse(body)
+// app.get('/teams/populate', function(req, res){
+// 	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
+// 		body = JSON.parse(body)
 
-		games = body.gms;
-		var error;
+// 		games = body.gms;
+// 		var error;
 
-		games.forEach(function(game){
-			var sanitizeTeam = _.pick(game, 'h', 'v', 'vnn', 'hnn');
+// 		games.forEach(function(game){
+// 			var sanitizeTeam = _.pick(game, 'h', 'v', 'vnn', 'hnn');
 			
-			var homeTeamInfo = {
-				teamName: sanitizeTeam.hnn,
-				teamCity: sanitizeTeam.h,
-				logoFileName: sanitizeTeam.hnn + '.gif'
-			}
-			var awayTeamInfo ={
-				teamName: sanitizeTeam.vnn,
-				teamCity: sanitizeTeam.v,	
-				logoFileName: sanitizeTeam.vnn + '.gif',			
-			}
+// 			var homeTeamInfo = {
+// 				teamName: sanitizeTeam.hnn,
+// 				teamCity: sanitizeTeam.h,
+// 				logoFileName: sanitizeTeam.hnn + '.gif'
+// 			}
+// 			var awayTeamInfo ={
+// 				teamName: sanitizeTeam.vnn,
+// 				teamCity: sanitizeTeam.v,	
+// 				logoFileName: sanitizeTeam.vnn + '.gif',			
+// 			}
 
-			db.teams.create(homeTeamInfo)
-				.catch(function(e){
-					error = e;
-				});
+// 			db.teams.create(homeTeamInfo)
+// 				.catch(function(e){
+// 					error = e;
+// 				});
 
-			db.teams.create(awayTeamInfo)
-				.catch(function(e){
-					error = e;
-				});
-		})
-		if (!error) {
-			res.status(200).send();
-		} else {
-			res.status(400).json(e);
-		}
+// 			db.teams.create(awayTeamInfo)
+// 				.catch(function(e){
+// 					error = e;
+// 				});
+// 		})
+// 		if (!error) {
+// 			res.status(200).send();
+// 		} else {
+// 			res.status(400).json(e);
+// 		}
 
-	});
-});
+// 	});
+// });
 
 
-app.get('/games/populate', function(req, res){
-	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
-		body = JSON.parse(body)
-		week = body.w;
+// app.get('/games/populate', function(req, res){
+// 	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
+// 		body = JSON.parse(body)
+// 		week = body.w;
 
-		games = body.gms;
-		var error;
+// 		games = body.gms;
+// 		var error;
 
-		games.forEach(function(game){
-			var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
+// 		games.forEach(function(game){
+// 			var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
 			
-			var gameInfo = {
-				gameID: sanitizeGame.gsis,
-				homeTeamName: sanitizeGame.hnn,
-				homeTeamCityAbbr: sanitizeGame.h,
-				homeScore: sanitizeGame.hs,
-				awayTeamName: sanitizeGame.vnn,
-				awayTeamCityAbbr: sanitizeGame.v,
-				awayScore: sanitizeGame.vs,
-				dayOfWeek: sanitizeGame.d,
-				time: sanitizeGame.t,
-				gameDate: sanitizeGame.eid,
-				quarter: sanitizeGame.q,
-				week: week,
-			}
-			db.games.create(gameInfo)
-				.catch(function(e){
-					error = e;
-				});
-		})
-		if (!error) {
-			res.status(200).send();
-		} else {
-			res.status(400).json(e);
-		}
+// 			var gameInfo = {
+// 				gameID: sanitizeGame.gsis,
+// 				homeTeamName: sanitizeGame.hnn,
+// 				homeTeamCityAbbr: sanitizeGame.h,
+// 				homeScore: sanitizeGame.hs,
+// 				awayTeamName: sanitizeGame.vnn,
+// 				awayTeamCityAbbr: sanitizeGame.v,
+// 				awayScore: sanitizeGame.vs,
+// 				dayOfWeek: sanitizeGame.d,
+// 				time: sanitizeGame.t,
+// 				gameDate: sanitizeGame.eid,
+// 				quarter: sanitizeGame.q,
+// 				week: week,
+// 			}
+// 			db.games.create(gameInfo)
+// 				.catch(function(e){
+// 					error = e;
+// 				});
+// 		})
+// 		if (!error) {
+// 			res.status(200).send();
+// 		} else {
+// 			res.status(400).json(e);
+// 		}
 
-	});
-});
+// 	});
+// });
 
 app.get('/games', function(req, res){
 	db.games.max('week')
