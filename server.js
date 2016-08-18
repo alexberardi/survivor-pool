@@ -6,20 +6,20 @@ var app = express();
 var db = require('./db.js');
 var PORT = process.env.PORT || 3000;
 var middleware = require('./middleware.js')(db);
-//var request = require('request');
+var request = require('request');
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 
-app.get('/users', function(req, res) {
-	db.user.findAll()
-		.then(function(users){
-			res.json(users);
-		})
-		.catch(function(e){
-			res.status(400).send();
-		});
-});
+// app.get('/users', function(req, res) {
+// 	db.user.findAll()
+// 		.then(function(users){
+// 			res.json(users);
+// 		})
+// 		.catch(function(e){
+// 			res.status(400).send();
+// 		});
+// });
 
 // app.get('/teams/populate', function(req, res){
 // 	request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
@@ -101,80 +101,80 @@ app.get('/users', function(req, res) {
 // 	});
 // });
 
-app.get('/games', function(req, res){
-	db.games.max('week')
-  	.then(function(max){
-  		db.games.findAll({
-  			where: {week : max}
-  		})
-  		.then(function(weeks){
-  			res.json(weeks);
-  		})
-  		.catch(function(e){
-  			return res.status(500).json(e);
-  		});
-  	})
-  	.catch(function(e){
-  			return res.status(500).json(e);
-  		});
-});
+// app.get('/games', function(req, res){
+// 	db.games.max('week')
+//   	.then(function(max){
+//   		db.games.findAll({
+//   			where: {week : max}
+//   		})
+//   		.then(function(weeks){
+//   			res.json(weeks);
+//   		})
+//   		.catch(function(e){
+//   			return res.status(500).json(e);
+//   		});
+//   	})
+//   	.catch(function(e){
+//   			return res.status(500).json(e);
+//   		});
+// });
 
-//post user
-app.post('/users', function(req,res){
-	var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
-	db.user.create(body)
-		.then(function(user) {
-			res.json(user.toPublicJSON());
-		})
-		.catch(function(e) {
-			console.log(e);
-			res.status(400).json(e);
-		});
-});
+// //post user
+// app.post('/users', function(req,res){
+// 	var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
+// 	db.user.create(body)
+// 		.then(function(user) {
+// 			res.json(user.toPublicJSON());
+// 		})
+// 		.catch(function(e) {
+// 			console.log(e);
+// 			res.status(400).json(e);
+// 		});
+// });
 
-//POST /users/login
-app.post('/users/login', function(req, res) {
-	var body = _.pick(req.body, 'email', 'password');
-	var userInstance;
+// //POST /users/login
+// app.post('/users/login', function(req, res) {
+// 	var body = _.pick(req.body, 'email', 'password');
+// 	var userInstance;
 
-	db.user.authenticate(body)
-		.then(function(user) {
+// 	db.user.authenticate(body)
+// 		.then(function(user) {
 
-			var token = user.generateToken('authentication');
-			userInstance = user;
-			return db.token.create({
-					token: token
-				})
-				.then(function(tokenInstance) {
-					if (token) {
-						res.header('Auth', tokenInstance.get('token')).json(userInstance.toPublicJSON());
-					} else {
-						res.status(401).send();
-					}
-				})
-		})
-		.catch(function(e) {
-			res.status(401).send();
-		});
-});
+// 			var token = user.generateToken('authentication');
+// 			userInstance = user;
+// 			return db.token.create({
+// 					token: token
+// 				})
+// 				.then(function(tokenInstance) {
+// 					if (token) {
+// 						res.header('Auth', tokenInstance.get('token')).json(userInstance.toPublicJSON());
+// 					} else {
+// 						res.status(401).send();
+// 					}
+// 				})
+// 		})
+// 		.catch(function(e) {
+// 			res.status(401).send();
+// 		});
+// });
 
-//DELETE Token- logout
-// DELETE users/login
-app.delete('/users/login', middleware.requireAuthentication, function(req, res){
-	req.token.destroy()
-	.then(function(){
-		res.status(204).send();
-	}).
-	catch(function(e){
-		res.status(500).send();
-	});
-});
+// //DELETE Token- logout
+// // DELETE users/login
+// app.delete('/users/login', middleware.requireAuthentication, function(req, res){
+// 	req.token.destroy()
+// 	.then(function(){
+// 		res.status(204).send();
+// 	}).
+// 	catch(function(e){
+// 		res.status(500).send();
+// 	});
+// });
 
 
 
-db.sequelize.sync()
-	.then(
-		app.listen(PORT, function() {
-			console.log('express listening on port ' + PORT + '!');
-		})
-	);
+// db.sequelize.sync()
+// 	.then(
+// 		app.listen(PORT, function() {
+// 			console.log('express listening on port ' + PORT + '!');
+// 		})
+// 	);
