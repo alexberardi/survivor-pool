@@ -29,10 +29,10 @@
 				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
 				hometeam: game.homeTeamName,
 				hometeamscore: game.homeScore,
-				hometeamLogo: 'teamLogos/' + game.homeTeamName.toLowerCase() + '.gif',
+				hometeamLogo: 'images/' + game.homeTeamName.toLowerCase() + '.gif',
 				awayteam: game.awayTeamName,
 				awayteamscore: game.awayScore,
-				awayteamLogo: 'teamLogos/' + game.awayTeamName.toLowerCase() + '.gif'
+				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif'
 			};
 
 
