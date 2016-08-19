@@ -1,12 +1,5 @@
 $(function () {
-    $(document).foundation({
-        abide: {
-            patterns: {
-                password: /^(.){7,}$/
-            }
-        }
-    });
-
+	Foundation.Abide.defaults.patterns['password'] = /^(.){7,}$/;
 	$('#register-button').on('click', function() {
 		$("#register-form").submit();
 	});
@@ -41,3 +34,6 @@ $(function () {
 			});
 	});
 });
+
+
+ 

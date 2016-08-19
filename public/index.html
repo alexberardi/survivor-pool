@@ -80,24 +80,23 @@
     				</div>
     			</div>
     			<div class="row">
-    				<div class="medium-6 columns">
+    				<div class="large-12 columns">
     					<label>Password
-    					  <input type="password" id="password" name="password" pattern="password" required></br>
+    					  <input type="password" id="password" name="password" aria-describedby="passwordhelper" pattern="password" required></br>
+                <p class="help-text" id="passwordhelper">Password must be at least 7 characters.</p>
                 <span class="form-error">
                   Did you forget a password?
                 </span>
               </label>
     				</div>
-    				<div class="medium-6 columns">
+    				<div class="large-12 columns">
     					<label>Verify Password
-    					  <input type="password" name="verifypassword" required data-equalto="password"></br>
+    					  <input type="password" name="verifypassword" required data-equalto="password"></br></br>
                 <span class="form-error">
                   Passwords don't match!
                 </span>
               </label>
     				</div>
-    			</div>
-    			<div class="row">
     				<div class="large-12 columns">
     					<label>Team Name (Optional)
     					  <input type="text" name="teamName" aria-describedby="teamNameHelper" data-abide-ignore></br>
