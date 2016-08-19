@@ -1,4 +1,12 @@
 $(function () {
+    $(document).foundation({
+        abide: {
+            patterns: {
+                password: /^(.){7,}$/
+            }
+        }
+    });
+
 	$('#register-button').on('click', function() {
 		$("#register-form").submit();
 	});
