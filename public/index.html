@@ -9,39 +9,20 @@
     <link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
-    <div class="top-bar nav">
-    	<div class="top-bar-left nav-item">	
-    		Survivor Pool
-    	</div>
-    	<div class="top-bar-right nav-item menu">
-    		<li><a class="button" href="#" data-reveal-id="login" id="login">Log In</a></li>
-    	</div>
-    	<div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-			<div class="modal-content">
-	  			<a class="close-reveal-modal" aria-label="Close" id="closeModal">&#215;</a>
-				<h2 id="modalTitle" class="small-5 small-centered columns">Log In</h2>
-	  				<form id="login-form" action="home.html">
-		  				<div class="row">
-		    				<div class="small-5 small-centered columns">
-		    					<label>Email:</label>
-		    					<input type="text" name="login-email">
-		    				</div>
-	    				</div>
-	    				<div class="row">
-		    				<div class="small-5 small-centered columns">
-		    					<label>Password:</label>
-		    					<input type="text" name="login-password">
-		    				</div>
-	    				</div>
-	    				<div class="row">
-	    				<div class="small-5 small-centered columns">
-	    					<button type="button" id="login-button" class="large button">Sign Up</button>
-	    				</div>
-	  				</form>
-    			</div>
-	  		</div>
-	  	</div>
-	</div>
+    <div data-sticky-container>
+      <div class="title-bar" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="1" data-btm-anchor="success:bottom">
+        <div class="title-bar-left">
+        Survivor Pool
+        </div>
+      <div class="title-bar-right" id="userentry">
+        <ul class="menu" id="login">
+          <li><input type="email" id="login-email" placeholder="Email"></li>
+          <li><input type="password" id="login-pass" placeholder="Password"></li>
+          <li><button type="button" class="button" id="login-button">Login</butto</li>
+        </ul>
+    </div>
+  </div>
+</div>
 
     </div>
 
@@ -159,8 +140,10 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
     <script src="js/games.js"></script>
     <script src="js/register.js"></script>
-    <script src="js/login-modal.js"></script>
     <script src="js/login.js"></script>
+    <script>
+    $(document).foundation()
+    </script>
 
   </body>
 </html>

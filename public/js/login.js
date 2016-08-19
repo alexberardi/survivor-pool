@@ -1,10 +1,9 @@
-var loginBtn = document.getElementById('login-button');
-
-loginBtn.onclick = function() {
-	var user = {
-		"email": document.getElementsByName('login-email')[0].value,
-		"password": document.getElementsByName('login-password')[0].value
-	}
+$(function () {
+	$('#login-button').click(function (e) {
+		var user = {
+			"email": $("#login-email").val(),
+			"password": $("#login-pass").val()
+		}
 
 		if(user.email.length > 0 && user.password.length > 0){
 			$.ajax({
@@ -16,7 +15,12 @@ loginBtn.onclick = function() {
 			})
 			.done(function(data, textStatus, request){
 				document.cookie = "Auth="+ request.getResponseHeader('Auth');
-				document.getElementById('login-form').submit();
+
+				var logoutmenu = '<ul class="menu" id="logout"><li><button type="button" class="button" id="logout-button">Logout</button></li></ul>'
+				
+				$("#login").remove();
+				$("#userentry").append(logoutmenu);
+
 			});
 		} else if (user.email.length === 0 && user.email.password === 0) {
 			alert("Email and password are required");
@@ -25,5 +29,5 @@ loginBtn.onclick = function() {
 		} else {
 			alert("Password is required");
 		}
-
-}
+	});
+});
