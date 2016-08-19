@@ -43,41 +43,65 @@
     <section>
     <div class="row" 
           <div class="medium-6 columns sign-up" id="success">
+          <div data-abide-error class="alert callout" style="display: none;">
+            <p><i class="fi-alert"></i> There are some errors in your form.</p>
+          </div>
           </div>
     </div>
     <div class="row">
     	<div class="large-8 medium-8 columns sign-up">
-    		<form>
+    		<form data-abide="ajax" id="register-form">
     			<div class="row">
     				<div class="medium-6 columns">
-    					<label>First Name</label>
-    					<input type="text" name="first">
+    					<label>First Name
+    					  <input type="text" name="first" required>
+                <span class="form-error">
+                What's your name?
+                </span>
+              </label>
     				</div>
     				<div class="medium-6 columns">
-    					<label>Last Name</label>
-    					<input type="text" name="last">
+    					<label>Last Name
+    					  <input type="text" name="last" required>
+                <span class="form-error">
+                ...And your last name?
+                </span>
+              </label>
     				</div>
     			</div>
     			<div class="row">
     				<div class="large-12 columns">
-    					<label>Email</label>
-    					<input type="text" name="email"></br>
+    					<label>Email
+    					  <input type="email" name="email" required></br>
+                <span class="form-error">
+                We need your email!
+                </span>
+              </label>
     				</div>
     			</div>
     			<div class="row">
     				<div class="medium-6 columns">
-    					<label>Password</label>
-    					<input type="password" name="password"></br>
+    					<label>Password
+    					  <input type="password" id="password" name="password" required></br>
+                <span class="form-error">
+                  Did you forget a password?
+                </span>
+              </label>
     				</div>
     				<div class="medium-6 columns">
-    					<label>Verify Password</label>
-    					<input type="password" name="verifypassword"></br>
+    					<label>Verify Password
+    					  <input type="password" name="verifypassword" required data-equalto="password"></br>
+                <span class="form-error">
+                  Passwords don't match!
+                </span>
+              </label>
     				</div>
     			</div>
     			<div class="row">
     				<div class="large-12 columns">
-    					<label>Team Name (Optional)</label>
-    					<input type="text" name="teamName"></br>
+    					<label>Team Name (Optional)
+    					  <input type="text" name="teamName" aria-describedby="teamNameHelper" data-abide-ignore></br>
+              </label>
     				</div>
     			</div>
     			<div class="row">
