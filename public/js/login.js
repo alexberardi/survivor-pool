@@ -16,10 +16,8 @@ $(function () {
 			.done(function(data, textStatus, request){
 				document.cookie = "Auth="+ request.getResponseHeader('Auth');
 
-				var logoutmenu = '<ul class="menu" id="logout"><li><button type="button" class="button" id="logout-button">Logout</button></li></ul>'
-				
-				$("#login").remove();
-				$("#userentry").append(logoutmenu);
+				$("#login").hide();
+				$("#logout").show();
 
 			});
 		} else if (user.email.length === 0 && user.email.password === 0) {

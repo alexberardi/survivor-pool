@@ -1,6 +1,6 @@
 $(function () {
     $('#logout-button').click(function (e) {
-        e.preventDefault();
+
         var user = {
             "cookie": getCookie('Auth')
         }        
@@ -8,17 +8,21 @@ $(function () {
         $.ajax({
                 type: "DELETE",
                 url: 'users/login',
-                contentType : 'application/json',
-                data: JSON.stringify(user),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': user.cookie
+                },
                 async: false
                 })
                 .done(function(data, textStatus, request){
 
-                    var loginmenu = '<ul class="menu" id="login"><li><input type="email" id="login-email" placeholder="Email"></li><li><input type="password" id="login-pass" placeholder="Password"></li><li><button type="button" class="button" id="login-button">Login</butto</li></ul>';
+                    $("#logout").hide();
+                    $("#login").show();
+                })
 
-                    $("#logout").remove();
-                    $("#userentry").append(loginmenu);
-        });
+                .fail(function(data, textStatus, request){
+                    console.log(data, textStatus, request);
+                });
     });
 });
 
