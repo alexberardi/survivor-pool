@@ -15,7 +15,8 @@ $(function () {
 			})
 			.done(function(data, textStatus, request){
 				document.cookie = "Auth="+ request.getResponseHeader('Auth');
-
+				$('login-pass').val('');
+				$('login-email').val('');
 				$("#login").hide();
 				$("#logout").show();
 

@@ -10,7 +10,7 @@ $(function () {
                 url: 'users/login',
                 contentType: 'application/json',
                 headers: {
-                    'Authorization': user.cookie
+                    'Auth': user.cookie
                 },
                 async: false
                 })
