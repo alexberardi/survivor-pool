@@ -1,9 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Successful login</title>
-</head>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
 <body>
+<div data-sticky-container>
+	<div class="title-bar" data-sticky data-options="marginTop:0;" style="width:100%">
+		<div class="title-bar-left">
+	        Home
+	        
+	    </div>
+	</div>
+</div>
+<section class="schedule">
+ 	<div class="row">
+ 		<div class="small-9 small-centered large-uncentered columns">
+        <table id="scheduleTable">
+            <thead>
+              <tr class="schedule-header">
+                <th width="150">Date</th>
+                <th width="100">Home Score</th>
+                <th width="75">Home</th>
+                <th width="75">Away</th>
+                <th width="150">Away Score</th>
+              </tr>
+            </thead>
+            <tbody class="schedule-body " id="schedule">
+        <script type="text/template" id="TableRow">
+              <tr>
+                <td>{{date}}</td>
+                <td>{{hometeamscore}}</td>
+                <td><img src= "{{hometeamLogo}}" width="75px"></td>
+                <td><img src= "{{awayteamLogo}}" width="75px"></td>
+                <td>{{awayteamscore}}</td>
+              </tr>
+        </script>
+            </tbody>
+        </table>
+ 		</div>	
+ 	</div>
+</section>
 
+  	<script src="js/jquery.js"></script>
+    <script src="js/what-input.js"></script>
+    <script src="js/foundation.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/logout.js"></script>
+    <script>
+    $(document).foundation()
+    </script>
 </body>
 </html>

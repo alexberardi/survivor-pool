@@ -15,17 +15,17 @@
         Survivor Pool
         </div>
       <div class="title-bar-right" id="userentry">
-        <ul class="menu" id="login">
-          <li><input type="email" id="login-email" placeholder="Email"></li>
-          <li><input type="password" id="login-pass" placeholder="Password"></li>
-          <li><button type="button" class="button" id="login-button">Login</butto</li>
-        </ul>
+        <form data-abide id="login-form" action="home.html">
+          <ul class="menu" id="login">
+            <li><input type="email" id="login-email" placeholder="Email" required></li>
+            <li><input type="password" id="login-pass" placeholder="Password" required></li>
+            <li><button type="submit" class="button" id="login-button" value="submit">Login</button></li>
+          </ul>
+        </form>
         <ul class="menu" id="logout" style="display:none;"><li><button type="button" class="button" id="logout-button">Logout</button></li></ul>
+      </div>
     </div>
   </div>
-</div>
-
-    </div>
 
     <section class="hero-home large">
     	<div class="row">
@@ -114,44 +114,10 @@
   		<div class="large-3 medium-3 columns sign-up">
   			<h1>Sign Up!</h1>
   		</div>
+
   	</div>
   	
     </section>
-
-  	<div class="title-bar">
-  			<div class="title-bar-left">
-  			Team Scores
-  			</div>
-  	</div>
-  	<section class="schedule">
-  		<div class="row">
-  			<div class="small-9 small-centered large-uncentered columns">
-          <table id="scheduleTable">
-              <thead>
-                <tr class="schedule-header">
-                  <th width="150">Date</th>
-                  <th width="100">Home Score</th>
-                  <th width="75">Home</th>
-                  <th width="75">Away</th>
-                  <th width="150">Away Score</th>
-                </tr>
-              </thead>
-              <tbody class="schedule-body " id="schedule">
-          <script type="text/template" id="TableRow">
-                <tr>
-                  <td>{{date}}</td>
-                  <td>{{hometeamscore}}</td>
-                  <td><img src= "{{hometeamLogo}}" width="75px"></td>
-                  <td><img src= "{{awayteamLogo}}" width="75px"></td>
-                  <td>{{awayteamscore}}</td>
-                </tr>
-          </script>
-              </tbody>
-          </table>
-  				  
-			</div>
-		</div>
-  	</section>
 
   	<footer class="footer-large">
   		This is a footer
@@ -161,8 +127,6 @@
     <script src="js/jquery.js"></script>
     <script src="js/what-input.js"></script>
     <script src="js/foundation.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-    <script src="js/games.js"></script>
     <script src="js/register.js"></script>
     <script src="js/login.js"></script>
     <script src="js/logout.js"></script>
