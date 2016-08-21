@@ -10,9 +10,16 @@
   </head>
   <body>
     <div data-sticky-container id="sticky-menu">
-      <div class="title-bar" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="1" data-btm-anchor="success:bottom">
+      <div class="title-bar" data-sticky data-options="marginTop:0;" style="width:100%">
         <div class="title-bar-left">
+        <center>
         Survivor Pool
+        </center>
+          <div class="button-group">
+            <a class="button" href="#home">Home</a>
+            <a class="button" href="#rules">Rules</a>
+            <a class="button item" href="#sign-up">Sign Up</a>
+          </div>
         </div>
       <div class="title-bar-right" id="userentry">
         <form data-abide id="login-form">
@@ -27,7 +34,7 @@
     </div>
   </div>
 
-    <section class="hero-home large">
+    <section class="hero-home large" id="home">
     	<div class="row">
     		<div class="small-centered medium-uncentered medium-6 large-7 columns">
     			<h1>This is a hero</h1>
@@ -35,13 +42,13 @@
     	</div>
     </section>
 
-    <section class="rules">
+    <section class="rules" id="rules">
     	<div class="row">
     		<p>Explain how the game works here</p>
     	</div>
     </section>
 
-    <section>
+    <section id="sign-up">
     <div class="row" 
           <div class="medium-6 columns sign-up" id="success">
           <div data-abide-error class="alert callout" style="display: none;">
