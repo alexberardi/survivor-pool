@@ -15,9 +15,7 @@ $(function () {
                 async: false
                 })
                 .done(function(data, textStatus, request){
-
-                    $("#logout").hide();
-                    $("#login").show();
+                    window.location.href = "/index.html";
                 })
 
                 .fail(function(data, textStatus, request){
