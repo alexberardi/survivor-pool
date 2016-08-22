@@ -18,7 +18,7 @@ $(function () {
 	
 			var successMsg = '<div class="success callout" data-closable><h5>signed up!</h5><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button></div>'
 	
-			$.ajax('/users', {
+			$.ajax('/api/users', {
 				data: user,
 				contentType: 'application/json',
 				type: 'POST',

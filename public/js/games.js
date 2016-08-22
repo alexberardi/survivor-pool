@@ -2,7 +2,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "/games",
+		gamesurl: "/api/games",
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
