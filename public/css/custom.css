@@ -63,3 +63,7 @@
 #userentry {
 	padding-top: 1.5rem;
 }
+
+.pick:hover {
+	background-color: #2D882D;
+}

@@ -32,7 +32,9 @@
 				hometeamLogo: 'images/' + game.homeTeamName.toLowerCase() + '.gif',
 				awayteam: game.awayTeamName,
 				awayteamscore: game.awayScore,
-				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif'
+				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif',
+				week: game.week,
+				gameid: game.gameID
 			};
 
 
