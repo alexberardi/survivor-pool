@@ -11,8 +11,6 @@ var updateStreak = function(req, res) {
                 } else {
                     body.total = streak.total;
                 }
-                console.log(body.total);
-                console.log(streak.total);
                 return streak.update(body)
                     .then(function(streak){
                        res.json(streak.toJSON());
