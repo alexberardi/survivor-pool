@@ -10,7 +10,6 @@ var routes = require('./api/routes');
 var PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-console.log(process.env.DATABASE_URL);
 app.use(express.static(__dirname + '/public'));
 app.use('/api', routes);
 
@@ -35,3 +34,4 @@ db.sequelize.sync()
 			console.log('express listening on port ' + PORT + '!');
 		})
 	);
+

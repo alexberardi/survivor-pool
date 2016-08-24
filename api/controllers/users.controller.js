@@ -15,7 +15,6 @@ var usersGetAll = function(req, res) {
 
 var userCreate = function(req,res){
     var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
-    console.log("here");
     db.user.create(body)
         .then(function(user) {
             res.json(user.toPublicJSON());
