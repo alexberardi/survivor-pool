@@ -3,6 +3,7 @@ var router = express.Router();
 var ctrlUsers = require('../controllers/users.controller.js');
 var ctrlGames = require('../controllers/games.controller');
 var ctrlNFLTeams = require('../controllers/nflTeams.controller');
+var ctrlUserPicks = require('../controllers/userPicks.controller');
 
 //USERS API FUNCTIONS
 router
@@ -33,5 +34,9 @@ router
 //END OF NFL TEAMS API FUNCTIONS
 
 
+//USER PICKS API FUNCTIONS
+router
+    .route('/picks')
+    .post(ctrlUserPicks.makePick);
 
 module.exports = router;
