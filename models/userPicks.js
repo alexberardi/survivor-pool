@@ -10,8 +10,8 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        teamId: {
-            type: DataTypes.INTEGER,
+        teamName: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         gameId: {
