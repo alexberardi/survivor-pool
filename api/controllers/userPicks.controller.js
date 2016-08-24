@@ -3,14 +3,13 @@ var db = require('../../db');
 
 
 var makePick = function(req, res) {
-    var body = _.pick(req.body, 'week', 'userId', 'teamId', 'gameId');
+    var body = _.pick(req.body, 'week', 'userId', 'teamName', 'gameId');
 
     body.userId = parseInt(body.userId);
-    body.teamId = parseInt(body.teamId);
     body.gameId = parseInt(body.gameId);
 
     db.userPicks.findOne({where: {userId: body.userId, week: body.week}})
-        .then(function(pick){
+       .then(function(pick){
             if(pick) {
                 return pick.update(body)
                     .then(function(pick){
@@ -29,9 +28,15 @@ var makePick = function(req, res) {
                     });
             }
         }, function(e) {
-            res.status(500).send();
+            db.userPicks.create(body)
+                .then(function(pick){
+                    res.json(pick);
+                })
+                .catch(function(e){
+                    console.log(e);
+                    res.status(500).json(e);
+                });
         })
-
 }
 
 module.exports = {

@@ -6,7 +6,7 @@ $(function () {
 
 	$('.pick').click(function() {
 		teamName = $(this).data("team-name");
-		gameID = $(this).data("game-id");
+		gameID = $(this).data("gameid");
 		week = $(this).data("week");
 		$("#team-name").text(teamName);
 	});
@@ -24,15 +24,17 @@ $(function () {
 
         var pick = {
         	"week": week,
-        	"userid": 1,
-        	"teamid": teamName,
-        	"gameid": gameID
+        	"userId": 1,
+        	"teamName": teamName,
+        	"gameId": gameID
         };
 
+        pick = JSON.stringify(pick);
+		
 		$.ajax({
                 type: "POST",
                 data: pick,
-                url: 'api/pick',
+                url: 'api/picks',
                 contentType: 'application/json',
                 headers: {
                     'Auth': auth.cookie
