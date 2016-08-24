@@ -29,7 +29,14 @@ var makePick = function(req, res) {
                     });
             }
         }, function(e) {
-            res.status(500).send();
+            db.userPicks.create(body)
+                .then(function(pick){
+                    res.json(pick);
+                })
+                .catch(function(e){
+                    console.log(e);
+                    res.status(500).json(e);
+                });
         })
 
 }

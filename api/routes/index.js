@@ -4,6 +4,7 @@ var ctrlUsers = require('../controllers/users.controller.js');
 var ctrlGames = require('../controllers/games.controller');
 var ctrlNFLTeams = require('../controllers/nflTeams.controller');
 var ctrlUserPicks = require('../controllers/userPicks.controller');
+var ctrlUserStreaks = require('../controllers/userStreaks.controller');
 
 //USERS API FUNCTIONS
 router
@@ -38,5 +39,11 @@ router
 router
     .route('/picks')
     .post(ctrlUserPicks.makePick);
+
+
+//USER STREAKS API FUNCTIONS
+router
+    .route('/streak')
+    .put(ctrlUserStreaks.updateStreak);
 
 module.exports = router;
