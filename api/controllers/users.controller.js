@@ -17,8 +17,12 @@ var userCreate = function(req,res){
     var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
     db.user.create(body)
         .then(function(user) {
-            res.json(user.toPublicJSON());
+            db.userStreaks.create({userId: user.id, total: 0, current: true})
+                .then(function(streak){
+                    res.json(user.toPublicJSON());
+            });
         })
+
         .catch(function(e) {
             console.log(e);
             res.status(400).json(e);
