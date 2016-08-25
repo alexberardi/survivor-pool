@@ -16,8 +16,6 @@ $(function () {
 	
 			user = JSON.stringify(user);
 	
-			var successMsg = '<div class="success callout" data-closable><h5>signed up!</h5><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button></div>'
-	
 			$.ajax('/api/users', {
 				data: user,
 				contentType: 'application/json',
@@ -29,7 +27,7 @@ $(function () {
 					$('input[name=password]').val('');
 					$('input[name=verifypassword]').val('');
 					$('input[name=teamName]').val('');
-					$('#success').append(successMsg);
+					$("#register-modal").foundation('open');
 				}
 			});
 	});
