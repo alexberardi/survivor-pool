@@ -13,26 +13,31 @@
 }
 
 .title-bar {
-	background-color: #0D4D4D;
+	background-color: #34409E;
+	border
 	padding: .5rem;
 	padding-left: 3rem;
 }
 
 .schedule {
 	padding-top: 6rem;
-	background-color: #407F7F;
+	background-color: #FFF;
 	border-style: none;
 	padding-bottom: 10rem;
 }
 
 .schedule-body > tr:nth-child(even) {
-	background-color: #669999;
+	background-color: #646EB9;
 	color: #FFF;
+}
+
+.schedule-body > tr:nth-child(odd) {
+	color: #0C176A;
 }
 
 .schedule-header {
 	padding-top: 3rem;
-	background-color: #226666;
+	background-color: #0C176A;
 	border-style: none;
 	color: #FFF;
 }
@@ -45,14 +50,14 @@
 .hero-home {
 	padding-top: 15rem;
 	padding-bottom: 15rem;
-	background-color: #D46A6A;
-	color: #FFF;
+	background-color: #FFF;
+	color: #0C176A;
 }
 
 .rules {
 	padding-top: 15rem;
 	padding-bottom: 15rem;
-	background-color: #407F7F;
+	background-color: #646EB9;
 	color: #FFF;
 
 }
@@ -66,5 +71,10 @@
 }
 
 .pick:hover {
-	background-color: #2D882D;
+	background-color: #7DC0BB;
+}
+
+.pick {
+	justify-content: center;
+	align-items: center;
 }
