@@ -27,6 +27,11 @@
 <section class="schedule">
  	<div class="row">
  		<div class="small-12">
+ 			<h1>Schedule</h1>
+ 			<p>Make your pick for the upcoming week by selecting a team's logo.
+ 			</p>
+ 		</div>
+ 		<div class="small-12">
         <table id="scheduleTable">
             <thead>
               <tr class="schedule-header">
@@ -42,8 +47,8 @@
               <tr>
                 <td>{{date}}</td>
                 <td>{{hometeamscore}}</td>
-                <td class="pick" data-open="pick-modal" data-team-name="{{hometeam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img src= "{{hometeamLogo}}" width="75px"></td>
-                <td class="pick" data-open="pick-modal" data-team-name="{{awayteam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img src= "{{awayteamLogo}}" width="75px"></td>
+                <td class="pick" data-open="pick-modal" data-team-name="{{hometeam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{hometeam}}" src= "{{hometeamLogo}}" width="75px"></td>
+                <td class="pick" data-open="pick-modal" data-team-name="{{awayteam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{awayteam}}" src= "{{awayteamLogo}}" width="75px"></td>
                 <td>{{awayteamscore}}</td>
               </tr>
         </script>
@@ -51,8 +56,7 @@
         </table>
  		</div>	
  	</div>
-</section>
-<div class="reveal" id="pick-modal" data-reveal>
+ 	<div class="reveal" id="pick-modal" data-reveal>
   <h1>Confirm Pick?</h1>
   <p class="lead">Are you sure you want to pick the <span id="team-name"></span>?</p>
   <button class="close-button" data-close aria-label="Close reveal" type="button">
@@ -63,6 +67,14 @@
   	<button class="alert button" id="cancel-pick">Cancel</button>
   </div>
 </div>
+</section>
+
+<section class="standings">
+	<div class="row">
+		<div class="small-12">
+		</div>
+	</div>
+</section>
 
   	<script src="js/jquery.js"></script>
   	<script src="js/checkLogin.js"></script>
