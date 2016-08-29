@@ -27,12 +27,12 @@
 }
 
 .schedule-body > tr:nth-child(even) {
-	background-color: #646EB9;
+	background-color: #362C6A;
 	color: #FFF;
 }
 
 .schedule-body > tr:nth-child(odd) {
-	color: #0C176A;
+	color: #362C6A;
 }
 
 .schedule-header {
@@ -51,13 +51,13 @@
 	padding-top: 15rem;
 	padding-bottom: 15rem;
 	background-color: #FFF;
-	color: #0C176A;
+	color: #362C6A;
 }
 
 .rules {
 	padding-top: 15rem;
 	padding-bottom: 15rem;
-	background-color: #646EB9;
+	background-color: #362C6A;
 	color: #FFF;
 
 }
@@ -71,7 +71,7 @@
 }
 
 .pick:hover {
-	background-color: #133453;
+	background-color: #736A9E;
 }
 
 .pick {
