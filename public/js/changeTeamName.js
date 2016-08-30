@@ -13,7 +13,7 @@ $(function () {
           
 
 		$.ajax({
-		type: "POST",
+		type: "PUT",
 		url: 'users/teamName/' + userID,
 		contentType : 'application/json',
 		data: JSON.stringify(teamName),
