@@ -1,8 +1,15 @@
 .sign-up {
-	margin: 6rem auto;
+	padding-top: 6rem;
 	display: flex;
 	padding-left: 3rem;
 }
+
+.signup-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #362C6A;
+	padding-left: 3rem;
+}	
 
 .nav {
 	background-color: #801515;
@@ -69,7 +76,7 @@
 
 .hero-title {
 	font-family: 'Yesteryear', cursive;
-	font-size: 72px;
+	font-size: 108px;
 	color: #133453;
 	padding-left: 3rem;
 }
@@ -89,6 +96,11 @@
 
 }
 
+.rules-header {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+} 
+
 .settings {
 	padding-top: 9rem;
 	padding-bottom: 15rem;
@@ -103,11 +115,6 @@
 	padding-left: 3rem;
 } 
 
-
-.rules-header {
-	font-family: 'Yesteryear', cursive;
-	font-size: 72px;
-} 
 
 .alert {
 	text-align: center;
