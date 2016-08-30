@@ -1,5 +1,5 @@
 $(function () {
-	$('#change-password').on('valid submit', function (e) {
+	$('#password-change').on('valid submit', function (e) {
 		e.preventDefault();
 		
 
