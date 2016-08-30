@@ -37,6 +37,10 @@ app.put('/users/teamName/:id', function(req, res){
 	ctrlUsers.updateTeamName(req, res);
 });
 
+app.put('/users/password/:id', function(req, res){
+	ctrlUsers.updatePassword(req, res);
+});
+
 //GAMES REQUESTS
 app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);

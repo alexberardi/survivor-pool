@@ -98,10 +98,44 @@ var updateTeamName = function(req, res) {
         });
 };
 
+
+var updatePassword = function(req, res) {
+    var userID = parseInt(req.params.id, 10);
+    var body = _.pick(req.body, 'password');
+
+    if (!body.hasOwnProperty('password')){
+        res.status(401).send();
+        return;
+    }
+
+    var attributes = { password : body.password};
+
+    db.user.findOne({
+        where: {
+            id: userID
+        }
+    })
+        .then(function(user) {
+            if (user) {
+                return user.update(attributes)
+                    .then(function(user){
+                        res.json(user.toJSON());
+                    }, function(e){
+                        res.status(400).json(e);
+                    });
+            } else {
+                res.status(404).send();
+            }
+        }, function(){
+            res.status(500).send();
+        });
+};
+
 module.exports = {
     usersGetAll: usersGetAll,
     userCreate: userCreate,
     userLogin : userLogin,
     userLogout: userLogout,
-    updateTeamName: updateTeamName
+    updateTeamName: updateTeamName,
+    updatePassword: updatePassword
 };
