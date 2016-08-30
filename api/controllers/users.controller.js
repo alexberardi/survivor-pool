@@ -101,7 +101,7 @@ var updateTeamName = function(req, res) {
 
 var updatePassword = function(req, res) {
     var userID = parseInt(req.params.id, 10);
-    var body = _.pick(req.body, 'password');
+    var body = _.pick(req.body, 'oldPassword', 'password');
 
     if (!body.hasOwnProperty('password')){
         res.status(401).send();
@@ -117,12 +117,16 @@ var updatePassword = function(req, res) {
     })
         .then(function(user) {
             if (user) {
-                return user.update(attributes)
-                    .then(function(user){
-                        res.json(user.toJSON());
-                    }, function(e){
-                        res.status(400).json(e);
-                    });
+                if (user.checkOldPassword(body.oldPassword)){
+                    return user.update(attributes)
+                        .then(function(user){
+                            res.json(user.toJSON());
+                        }, function(e){
+                            res.status(400).json(e);
+                        });
+                } else {
+                    res.status(404).send();
+                }
             } else {
                 res.status(404).send();
             }

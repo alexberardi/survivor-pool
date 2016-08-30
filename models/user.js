@@ -86,6 +86,13 @@ module.exports = function(sequelize, DataTypes) {
 					console.error(e);
 					return undefined;
 				}
+			},
+			checkOldPassword: function(password) {
+				if (bcrypt.compareSync(password, this.get('password_hash'))) {
+					return true;
+				} else{
+					return false;
+				}
 			}
 		},
 		classMethods: {
