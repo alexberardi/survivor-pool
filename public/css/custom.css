@@ -20,6 +20,11 @@
 	padding-left: 3rem;
 }
 
+.titlebar-logo {
+	font-family: 'Yesteryear', cursive;
+	font-size: 40px;
+}
+
 .schedule {
 	padding-top: 6rem;
 	background-color: #FFF;
