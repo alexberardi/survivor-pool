@@ -26,7 +26,23 @@ var updateStreak = function(req, res) {
             });
 };
 
+var getStandings = function(req, res) {
+    var userID = parseInt(req.params.userId, 10);
+    db.userStreaks.findAll({
+        order: [
+            ['total', 'DESC']
+        ]
+    })
+        .then(function(streaks){
+            res.json(streaks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+}
+
 module.exports = {
-    updateStreak: updateStreak
+    updateStreak: updateStreak,
+    getStandings: getStandings
 };
 

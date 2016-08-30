@@ -70,6 +70,12 @@ app.post('/streak', function (req, res) {
 	ctrlUserStreaks.updateStreak();
 });
 
+//STANDINGS REQUESTS
+app.get('/standings', function (req, res) {
+	ctrlUserStreaks.getStandings(req, res);
+});
+
+
 //DELETE Token- logout
 // DELETE users/login
 app.delete('/users/login', middleware.requireAuthentication, function(req, res){
