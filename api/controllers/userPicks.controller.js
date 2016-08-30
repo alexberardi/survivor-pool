@@ -8,35 +8,53 @@ var makePick = function(req, res) {
     body.userId = parseInt(body.userId);
     body.gameId = parseInt(body.gameId);
 
-    db.userPicks.findOne({where: {userId: body.userId, week: body.week}})
-       .then(function(pick){
-            if(pick) {
-                return pick.update(body)
+
+    db.userPicks.findOne(
+        {
+            where: {
+                week: {$ne : parseInt(body.week)},
+                userId: body.userId,
+                teamName: body.teamName
+            }
+        })
+        .then(function(game){
+            if (!game) {
+                db.userPicks.findOne({where: {userId: body.userId, week: body.week}})
                     .then(function(pick){
-                        res.json(pick.toJSON());
-                    }, function(e){
-                        res.status(400).json(e);
-                    });
-            } else {
-                db.userPicks.create(body)
-                    .then(function(pick){
-                        res.json(pick);
-                    })
-                    .catch(function(e){
-                        console.log(e);
-                        res.status(400).json(e);
+                        if(pick) {
+                            return pick.update(body)
+                                .then(function(pick){
+                                    res.json(pick.toJSON());
+                                }, function(e){
+                                    res.status(400).json(e);
+                                });
+                        } else {
+                            db.userPicks.create(body)
+                                .then(function(pick){
+                                    res.json(pick);
+                                })
+                                .catch(function(e){
+                                    console.log(e);
+                                    res.status(400).json(e);
+                                });
+                        }
+                    }, function(e) {
+                        db.userPicks.create(body)
+                            .then(function(pick){
+                                res.json(pick);
+                            })
+                            .catch(function(e){
+                                console.log(e);
+                                res.status(500).json(e);
+                            });
                     });
             }
-        }, function(e) {
-            db.userPicks.create(body)
-                .then(function(pick){
-                    res.json(pick);
-                })
-                .catch(function(e){
-                    console.log(e);
-                    res.status(500).json(e);
-                });
-        })
+            else {
+                res.status(401).send();
+            }
+        });
+
+
 }
 
 var getPicks = function(req, res) {
