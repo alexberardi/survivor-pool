@@ -25,6 +25,7 @@
 	background-color: #FFF;
 	border-style: none;
 	padding-bottom: 10rem;
+	padding-left: 3rem;
 }
 
 .schedule-body > tr:nth-child(even) {
@@ -41,6 +42,12 @@
 	background-color: #133453;
 	border-style: none;
 	color: #FFF;
+}
+
+.schedule-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #362C6A;
 }
 
 .footer-large {
@@ -76,6 +83,21 @@
 	padding-left: 3rem;
 
 }
+
+.settings {
+	padding-top: 9rem;
+	padding-bottom: 15rem;
+	color: #362C6A;
+	padding-left: 3rem;
+
+}
+
+.settings-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	padding-left: 3rem;
+} 
+
 
 .rules-header {
 	font-family: 'Yesteryear', cursive;
