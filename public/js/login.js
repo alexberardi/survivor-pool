@@ -8,7 +8,7 @@ $(function () {
 
 		$.ajax({
 		type: "POST",
-		url: 'api/users/login',
+		url: '/users/login',
 		contentType : 'application/json',
 		data: JSON.stringify(user),
 		async: false

@@ -16,7 +16,7 @@ $(function () {
 	
 			user = JSON.stringify(user);
 	
-			$.ajax('/api/users', {
+			$.ajax('/users', {
 				data: user,
 				contentType: 'application/json',
 				type: 'POST',

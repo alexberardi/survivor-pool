@@ -2,7 +2,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "/api/games",
+		gamesurl: "/games",
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
@@ -13,6 +13,9 @@
 		$.ajax({
 			type: "GET",
 			url: address,
+			headers: {
+				'Auth': getCookie('Auth')
+			},
 			async: false
 		})
 		.done(function(data) {

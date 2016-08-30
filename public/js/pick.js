@@ -34,7 +34,7 @@ $(function () {
 		$.ajax({
                 type: "POST",
                 data: pick,
-                url: 'api/picks',
+                url: '/picks',
                 contentType: 'application/json',
                 headers: {
                     'Auth': auth.cookie

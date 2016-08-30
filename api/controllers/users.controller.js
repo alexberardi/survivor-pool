@@ -1,7 +1,5 @@
 var db = require('../../db');
 var _ = require('underscore');
-var middleware = require('../../middleware')(db);
-
 
 var usersGetAll = function(req, res) {
     db.user.findAll()
