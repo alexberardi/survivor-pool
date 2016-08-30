@@ -1,6 +1,7 @@
 .sign-up {
 	margin: 6rem auto;
 	display: flex;
+	padding-left: 3rem;
 }
 
 .nav {
@@ -54,13 +55,32 @@
 	color: #362C6A;
 }
 
+.hero-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #133453;
+	padding-left: 3rem;
+}
+
+#home > span {
+	font-size: 28px;
+	font-weight: bold;
+	padding-left: 5rem;
+}
+
 .rules {
 	padding-top: 15rem;
 	padding-bottom: 15rem;
 	background-color: #362C6A;
 	color: #FFF;
+	padding-left: 3rem;
 
 }
+
+.rules-header {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+} 
 
 .alert {
 	text-align: center;
