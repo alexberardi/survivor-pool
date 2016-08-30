@@ -56,6 +56,10 @@ app.get('teams/populate', function(req, res){
 });
 
 //PICKS REQUESTS
+app.get('/picks/:userId', function(req, res){
+	ctrlUserPicks.getPicks(req, res);
+});
+
 app.post('/picks',  middleware.requireAuthentication, function(req, res){
 	ctrlUserPicks.makePick(req, res);
 });

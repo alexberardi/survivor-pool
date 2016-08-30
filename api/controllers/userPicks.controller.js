@@ -39,6 +39,25 @@ var makePick = function(req, res) {
         })
 }
 
+var getPicks = function(req, res) {
+    var userID = parseInt(req.params.userId, 10);
+    db.userPicks.findAll({
+        order: [
+            ['week', 'DESC']
+        ],
+        where : {
+            userId: userID
+        }
+    })
+        .then(function(picks){
+            res.json(picks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+}
+
 module.exports = {
-    makePick: makePick
+    makePick: makePick,
+    getPicks: getPicks
 };
