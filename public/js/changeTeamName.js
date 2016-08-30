@@ -11,7 +11,6 @@ $(function () {
 			"teamName": $("#teamName").val()
 		}		
           
-
 		$.ajax({
 		type: "PUT",
 		url: 'users/teamName/' + userID,
