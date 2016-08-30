@@ -33,6 +33,10 @@ app.post('/users/login', function(req, res){
 	ctrlUsers.userLogin(req, res);
 });
 
+app.put('/users/teamName/:id', function(req, res){
+	ctrlUsers.updateTeamName(req, res);
+});
+
 //GAMES REQUESTS
 app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);

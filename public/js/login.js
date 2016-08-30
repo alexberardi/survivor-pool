@@ -14,7 +14,12 @@ $(function () {
 		async: false
 		})
 		.done(function(data, textStatus, request){
-			document.cookie = "Auth="+ request.getResponseHeader('Auth');
+			console.log('data : ' + data);
+			console.log('request : ' + request);
+			document.cookie = 'Auth='+ request.getResponseHeader('Auth');
+			document.cookie = 'userID=' + data.id;
+			document.cookie = 'email=' + data.email;
+			document.cookie = 'teamName=' + data.teamName;
 			$('#login-pass').val('');
 			$('#login-email').val('');
 			window.location.href = "/home.html";
