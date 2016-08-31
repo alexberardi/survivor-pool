@@ -21,12 +21,24 @@
         </div>
       <div class="title-bar-right" id="userentry">
         <div class="button-group">
+        	  <a class="button" href="/standings.html">Standings</a>
               <a class="button" href="/settings.html">Settings</a>
               <a class="button" id="logout-button">Logout</a>
         </div>
       </div>
     </div>
   </div>
+<section class="news">
+	<div class="row">
+		<div class="small-12">
+			<span class="news-title">News</span>
+			<div class="small-6"><hr></div>
+			<p>Welcome to Survivor Pool!</p>
+			<p>We plan to continously update this with new features and stuff. Write generic announcements here.</p>
+		</div>
+	</div>
+</section>
+
 <section class="schedule">
  	<div class="row">
  		<div class="small-12">
@@ -71,31 +83,6 @@
   </div>
 </div>
 </section>
-
-<section class="standings">
-	<div class="row">
-		<div class="small-12">
-			<span class="standings-title">Standings</span>
-		</div>
-		 <table id="standingsTable">
-            <thead>
-              <tr class="standings-header">
-                <th width="150">Streak</th>
-                <th width="100">Team Name</th>
-                <th width="75">Player Name</th>
-              </tr>
-            </thead>
-            <tbody class="standings-body " id="standings-table">
-		<script type="text/template" id="standingsRow">
-              <tr>
-                <td>{{Name}}</td>
-                <td>{{Streak}}</td>
-                <td>{{awayteamscore}}</td>
-              </tr>
-        </script>
-	</div>
-</section>
-
   	<script src="js/jquery.js"></script>
   	<script src="js/checkLogin.js"></script>
     <script src="js/getCookie.js"></script>
@@ -105,7 +92,6 @@
     <script src="js/games.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/pick.js"></script>
-    <script src="js/standings.js"></script>
     </script>
     <script>
     $(document).foundation()

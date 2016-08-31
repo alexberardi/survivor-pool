@@ -37,6 +37,20 @@
 
 }
 
+.news {
+	padding-top: 9rem;
+	padding-bottom: 9rem;
+	background-color: #362C6A;
+	padding-left: 1rem;
+	color: #FFF;
+}
+
+.news-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	padding-left: 3rem;
+}
+
 .pick > img:hover {
 	background-color: #736A9E;
 }
@@ -44,6 +58,15 @@
 .pick {
 	justify-content: center;
 	align-items: center;
+}
+
+.purple-button {
+	background-color: #362C6A;
+    color: #FFF;
+	}
+    .purple-button:hover, .purple-button:focus {
+      background-color: #FFF;
+      color: #362C6A; 
 }
 
 .rules {

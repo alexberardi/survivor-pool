@@ -1466,12 +1466,12 @@ kbd {
   padding: 0.85em 1em;
   margin: 0 0 1rem 0;
   font-size: 0.9rem;
-  background-color: #2199e8;
-  color: #fefefe; }
+  background-color: #FFF;
+  color: #362C6A; }
   [data-whatinput='mouse'] .button {
     outline: 0; }
   .button:hover, .button:focus {
-    background-color: #1583cc;
+    background-color: #362C6A;
     color: #fefefe; }
   .button.tiny {
     font-size: 0.6rem; }
