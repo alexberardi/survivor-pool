@@ -1,65 +1,5 @@
-.sign-up {
-	padding-top: 6rem;
-	display: flex;
-	padding-left: 3rem;
-}
-
-.signup-title {
-	font-family: 'Yesteryear', cursive;
-	font-size: 72px;
-	color: #362C6A;
-	padding-left: 3rem;
-}	
-
-.nav {
-	background-color: #801515;
-}
-.nav-item {
-	color: #FFF;
-	padding-left: 3rem;
-
-}
-
-.title-bar {
-	background-color: #133453;
-	border
-	padding: .5rem;
-	padding-left: 3rem;
-}
-
-.titlebar-logo {
-	font-family: 'Yesteryear', cursive;
-	font-size: 40px;
-}
-
-.schedule {
-	padding-top: 6rem;
-	background-color: #FFF;
-	border-style: none;
-	padding-bottom: 10rem;
-	padding-left: 3rem;
-}
-
-.schedule-body > tr:nth-child(even) {
-	background-color: #362C6A;
-	color: #FFF;
-}
-
-.schedule-body > tr:nth-child(odd) {
-	color: #362C6A;
-}
-
-.schedule-header {
-	padding-top: 3rem;
-	background-color: #133453;
-	border-style: none;
-	color: #FFF;
-}
-
-.schedule-title {
-	font-family: 'Yesteryear', cursive;
-	font-size: 72px;
-	color: #362C6A;
+.alert {
+	text-align: center;
 }
 
 .footer-large {
@@ -85,6 +25,25 @@
 	font-size: 28px;
 	font-weight: bold;
 	padding-left: 5rem;
+}
+
+
+.nav {
+	background-color: #801515;
+}
+.nav-item {
+	color: #FFF;
+	padding-left: 3rem;
+
+}
+
+.pick > img:hover {
+	background-color: #736A9E;
+}
+
+.pick {
+	justify-content: center;
+	align-items: center;
 }
 
 .rules {
@@ -115,20 +74,81 @@
 	padding-left: 3rem;
 } 
 
+.schedule {
+	padding-top: 6rem;
+	background-color: #FFF;
+	border-style: none;
+	padding-bottom: 10rem;	
+}
 
-.alert {
-	text-align: center;
+.schedule-body > tr:nth-child(even) {
+	background-color: #362C6A;
+	color: #FFF;
+}
+
+.schedule-body > tr:nth-child(odd) {
+	color: #362C6A;
+}
+
+.schedule-header {
+	padding-top: 3rem;
+	background-color: #133453;
+	border-style: none;
+	color: #FFF;
+}
+
+.schedule-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #362C6A;
+	padding-left: 3rem;
+}
+
+.sign-up {
+	padding-top: 6rem;
+	display: flex;
+	padding-left: 3rem;
+}
+
+.signup-title {
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #362C6A;
+	padding-left: 3rem;
+}
+
+.standings {
+	padding-top: 6rem;
+	background-color: #362C6A;
+	color: #FFF;
+	padding-bottom: 6rem;
+}
+
+.standings-header {
+	color: #133453;
+	border-style: none;
+}	
+
+.standings-title {
+	padding-left: 3rem;
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #FFF;
+	padding-left: 3rem;
+}
+
+.title-bar {
+	background-color: #133453;
+	border
+	padding: .5rem;
+	padding-left: 3rem;
+}
+
+.titlebar-logo {
+	font-family: 'Yesteryear', cursive;
+	font-size: 40px;
 }
 
 #userentry {
 	padding-top: 1.5rem;
-}
-
-.pick:hover {
-	background-color: #736A9E;
-}
-
-.pick {
-	justify-content: center;
-	align-items: center;
 }

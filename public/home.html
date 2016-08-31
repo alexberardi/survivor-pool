@@ -42,17 +42,17 @@
                 <th width="100">Home Score</th>
                 <th width="75">Home</th>
                 <th width="75">Away</th>
-                <th width="150">Away Score</th>
+                <th width="100">Away Score</th>
               </tr>
             </thead>
             <tbody class="schedule-body " id="schedule">
         <script type="text/template" id="TableRow">
               <tr>
-                <td><b>{{date}}</b></td>
-                <td><b>{{hometeamscore}}</b></td>
+                <td>{{date}}</td>
+                <td>{{hometeamscore}}</td>
                 <td class="pick" data-open="pick-modal" data-team-name="{{hometeam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{hometeam}}" src= "{{hometeamLogo}}" width="75px"></td>
                 <td class="pick" data-open="pick-modal" data-team-name="{{awayteam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{awayteam}}" src= "{{awayteamLogo}}" width="75px"></td>
-                <td><b>{{awayteamscore}}</b></td>
+                <td>{{awayteamscore}}</td>
               </tr>
         </script>
             </tbody>
@@ -75,7 +75,24 @@
 <section class="standings">
 	<div class="row">
 		<div class="small-12">
+			<span class="standings-title">Standings</span>
 		</div>
+		 <table id="standingsTable">
+            <thead>
+              <tr class="standings-header">
+                <th width="150">Streak</th>
+                <th width="100">Team Name</th>
+                <th width="75">Player Name</th>
+              </tr>
+            </thead>
+            <tbody class="standings-body " id="standings-table">
+		<script type="text/template" id="standingsRow">
+              <tr>
+                <td>{{Name}}</td>
+                <td>{{Streak}}</td>
+                <td>{{awayteamscore}}</td>
+              </tr>
+        </script>
 	</div>
 </section>
 
@@ -88,6 +105,8 @@
     <script src="js/games.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/pick.js"></script>
+    <script src="js/standings.js"></script>
+    </script>
     <script>
     $(document).foundation()
     </script>
