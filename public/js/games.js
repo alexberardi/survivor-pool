@@ -2,7 +2,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "/games",
+		gamesurl: "/games/" + getCookie('userID'),
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
@@ -27,20 +27,30 @@
 	
 	function init() {
 		var games = getRequest(settings.gamesurl);
+		var previousPicks = getRequest('/picks/' + getCookie('userID'));
 		games.forEach(function(game) {
 			var gameInfo = {
 				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
 				hometeam: game.homeTeamName,
 				hometeamscore: game.homeScore,
+				hometeamstyle: 'unused',
 				hometeamLogo: 'images/' + game.homeTeamName.toLowerCase() + '.gif',
 				awayteam: game.awayTeamName,
 				awayteamscore: game.awayScore,
+				awayteamstyle: 'unused',
 				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif',
 				week: game.week,
 				gameid: game.gameID
 			};
+			previousPicks.forEach(function(pick) {
+				if (game.homeTeamName === pick.teamName) {
+					gameInfo.hometeamstyle = 'used';
+				}
+				if (game.awayTeamName === pick.teamName) {
+					gameInfo.hometeamstyle = 'used';
+				}
 
-
+			});
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), gameInfo));
 		});
 	}

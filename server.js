@@ -46,7 +46,7 @@ app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games',  middleware.requireAuthentication, function(req, res){
+app.get ('/games/:userID',  middleware.requireAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
 
