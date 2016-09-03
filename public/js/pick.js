@@ -42,11 +42,14 @@ $(function () {
                 async: false
                 })
                 .done(function(data, textStatus, request){
-                    alert("you've made your pick");
+                    alert("You've made your pick");
                 })
 
                 .fail(function(data, textStatus, request){
                     console.log(data, textStatus, request);
+					if (data.status === 401) {
+						alert("You cannot select the same team twice.");
+					}
                 });
 
 	});
