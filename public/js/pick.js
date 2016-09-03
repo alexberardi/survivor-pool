@@ -16,8 +16,6 @@ $(function () {
 	});
 
 	$('#confirm-pick').click(function() {
-
-
 		var auth = {
             "cookie": getCookie('Auth')
         };

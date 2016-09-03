@@ -29,7 +29,7 @@
 		var games = getRequest(settings.gamesurl);
 		var previousPicks = getRequest('/picks/' + getCookie('userID'));
 		var currentPick = getRequest('/picks/current/' + getCookie('userID'));
-
+		
 		games.forEach(function(game) {
 			var gameInfo = {
 				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
@@ -67,6 +67,12 @@
 
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), gameInfo));
 		});
+
+		if (!jQuery.isEmptyObject(currentPick)){
+			var currentPickHTML = "<div class='current-pick-info'>You've picked " + currentPick[0].teamName + ", Good luck!</div>"
+			$("#schedule-top").append(currentPickHTML);
+		}
+
 	}
 	
 	init();

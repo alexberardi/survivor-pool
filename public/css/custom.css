@@ -39,7 +39,7 @@
 
 .news {
 	padding-top: 9rem;
-	padding-bottom: 9rem;
+	padding-bottom: 15rem;
 	background-color: #362C6A;
 	padding-left: 1rem;
 	color: #FFF;
@@ -58,6 +58,10 @@
 .pick {
 	justify-content: center;
 	align-items: center;
+}
+
+.pick.current {
+	background-color: #2D882D;
 }
 
 .purple-button {
@@ -165,6 +169,15 @@
 	border
 	padding: .5rem;
 	padding-left: 3rem;
+}
+
+.current-pick-info{
+	font-size: 48px;
+	text-align: center;
+	background-color: #FFF;
+	border: .5px solid #362C6A ;
+	color: #362C6A;
+	font-family: 'Yesteryear', cursive;;
 }
 
 .titlebar-logo {
