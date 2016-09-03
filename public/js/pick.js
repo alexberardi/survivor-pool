@@ -42,7 +42,8 @@ $(function () {
                 async: false
                 })
                 .done(function(data, textStatus, request){
-                    alert("You've made your pick");
+                    $("#pick-modal").foundation('close');
+                    alert("You've made your pick!");
                 })
 
                 .fail(function(data, textStatus, request){
