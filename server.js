@@ -60,6 +60,10 @@ app.get('/picks/:userId', function(req, res){
 	ctrlUserPicks.getPicks(req, res);
 });
 
+app.get('/picks/current/:userId', function(req, res){
+	ctrlUserPicks.getCurrentPicks(req, res);
+});
+
 app.post('/picks',  middleware.requireAuthentication, function(req, res){
 	ctrlUserPicks.makePick(req, res);
 });

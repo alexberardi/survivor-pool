@@ -73,9 +73,32 @@ var getPicks = function(req, res) {
         .catch(function(e){
             return res.status(500).json(e);
         });
+};
+
+var getCurrentPicks = function(req, res) {
+    var userID = parseInt(req.params.userId, 10);
+    db.games.max('week')
+        .then(function(max){
+            db.userPicks.findAll({
+                where: {
+                    week: max,
+                    userId: userID
+                }
+            })
+                .then(function(userPick){
+                    res.json(userPick);
+                })
+                .catch(function(e){
+                    return res.status(500).json(e);
+                });
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
 }
 
 module.exports = {
     makePick: makePick,
-    getPicks: getPicks
+    getPicks: getPicks,
+    getCurrentPicks: getCurrentPicks
 };
