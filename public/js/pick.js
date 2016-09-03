@@ -24,7 +24,7 @@ $(function () {
 
         var pick = {
         	"week": week,
-        	"userId": 1,
+        	"userId": getCookie('userID'),
         	"teamName": teamName,
         	"gameId": gameID
         };
@@ -43,7 +43,8 @@ $(function () {
                 })
                 .done(function(data, textStatus, request){
                     $("#pick-modal").foundation('close');
-                    alert("You've made your pick!");
+                    alert("You've made your pick!")
+					location.reload();
                 })
 
                 .fail(function(data, textStatus, request){
