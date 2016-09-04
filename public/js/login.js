@@ -14,8 +14,6 @@ $(function () {
 		async: false
 		})
 		.done(function(data, textStatus, request){
-			console.log('data : ' + data);
-			console.log('request : ' + request);
 			document.cookie = 'Auth='+ request.getResponseHeader('Auth');
 			document.cookie = 'userID=' + data.id;
 			document.cookie = 'email=' + data.email;

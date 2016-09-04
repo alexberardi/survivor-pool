@@ -164,6 +164,15 @@
 	padding-left: 3rem;
 }
 
+.standings-body > tr:nth-child(even) {
+	background-color: #362C6A;
+	color: #FFF;
+}
+
+.standings-body > tr:nth-child(odd) {
+	color: #362C6A;
+}
+
 .title-bar {
 	background-color: #133453;
 	border
