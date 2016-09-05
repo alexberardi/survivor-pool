@@ -26,6 +26,7 @@
 	}
 	
 	function init() {
+		updateScores();
 		var games = getRequest(settings.gamesurl);
 		var previousPicks = getRequest('/picks/' + getCookie('userID'));
 		var currentPick = getRequest('/picks/current/' + getCookie('userID'));

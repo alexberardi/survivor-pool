@@ -50,6 +50,11 @@ app.get ('/games/:userID',  middleware.requireAuthentication, function(req, res)
 	ctrlGames.getWeeklyGames(req, res);
 });
 
+app.put('/games/liveUpdate/:gameID', middleware.requireAuthentication, function(req, res){
+	ctrlGames.updateGames(req, res);
+});
+
+
 //TEAMS REQUESTS
 app.get('teams/populate', function(req, res){
 	ctrlNFLTeams();

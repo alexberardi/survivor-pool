@@ -59,8 +59,29 @@ var getWeeklyGames = function(req, res){
         });
 };
 
+var updateGames = function(req, res) {
+    var gameID = parseInt(req.params.gameID, 10);
+    var body = _.pick(req.body, 'homeScore', 'awayScore', 'quarter');
+    db.games.findOne({
+        where: {
+            gameID: gameID
+        }
+    })
+        .then(function(game) {
+            game.update(body)
+                .then(function(game){
+                    res.json(game.toJSON());
+                })
+
+        })
+        .catch(function(e){
+            res.status(400).send();
+        })
+}
+
 
 module.exports = {
     populateGames: populateGames,
-    getWeeklyGames: getWeeklyGames
+    getWeeklyGames: getWeeklyGames,
+    updateGames: updateGames
 }
