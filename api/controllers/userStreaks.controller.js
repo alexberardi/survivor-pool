@@ -38,7 +38,7 @@ var getStandings = function(req, res) {
 };
 
 var checkActive = function (req, res) {
-    var userID = parseInt(req.params.userid, 10);
+    var userid = parseInt(req.params.userid, 10);
     db.userStreaks.findOne({
         where: {
             userId: userid

@@ -7,7 +7,7 @@ $(function () {
 	$('#password-change').on('valid submit', function (e) {
 		e.preventDefault();
 
-		var userID = getCookie('userID');
+		var userID = getCookie('userid');
 		var Auth = getCookie('Auth');
 		
 		var password = {

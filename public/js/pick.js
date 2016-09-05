@@ -26,9 +26,9 @@ $(function () {
 
         var pick = {
         	"week": week,
-        	"userId": getCookie('userID'),
-        	"teamName": teamName,
-        	"gameId": gameID
+        	"userid": getCookie('userid'),
+        	"teamname": teamName,
+        	"gameid": gameID
         };
 
         pick = JSON.stringify(pick);
@@ -71,7 +71,7 @@ function checkActive(){
 	var returnValue = false;
 	$.ajax({
 		type: "GET",
-		url: '/streak/active/' + getCookie('userID'),
+		url: '/streak/active/' + getCookie('userid'),
 		headers: {
 			'Auth': getCookie('Auth')
 		},

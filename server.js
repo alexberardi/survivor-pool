@@ -46,7 +46,7 @@ app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games/user/:userID',  middleware.requireAuthentication, function(req, res){
+app.get ('/games/user/:userid',  middleware.requireAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
 
@@ -55,7 +55,7 @@ app.get ('/games/started',  middleware.requireAuthentication, function(req, res)
 });
 
 
-app.put('/games/liveUpdate/:gameID', middleware.requireAuthentication, function(req, res){
+app.put('/games/liveUpdate/:gameid', middleware.requireAuthentication, function(req, res){
 	ctrlGames.updateGames(req, res);
 });
 
@@ -66,11 +66,11 @@ app.get('teams/populate', function(req, res){
 });
 
 //PICKS REQUESTS
-app.get('/picks/user/:userId', middleware.requireAuthentication,  function(req, res){
+app.get('/picks/user/:userid', middleware.requireAuthentication,  function(req, res){
 	ctrlUserPicks.getPicks(req, res);
 });
 
-app.get('/picks/current/:userId', middleware.requireAuthentication,  function(req, res){
+app.get('/picks/current/:userid', middleware.requireAuthentication,  function(req, res){
 	ctrlUserPicks.getCurrentPicks(req, res);
 });
 
@@ -80,7 +80,7 @@ app.post('/picks',  middleware.requireAuthentication, function(req, res){
 
 
 //STREAK REQUESTS
-app.get('/streak/active/:userID', middleware.requireAuthentication,  function(res, req){
+app.get('/streak/active/:userid', middleware.requireAuthentication,  function(res, req){
 	ctrlUserStreaks.checkActive(res, req);
 });
 
@@ -110,7 +110,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync({force:true})
+db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');

@@ -15,9 +15,9 @@ $(function () {
 		})
 		.done(function(data, textStatus, request){
 			document.cookie = 'Auth='+ request.getResponseHeader('Auth');
-			document.cookie = 'userID=' + data.id;
+			document.cookie = 'userid=' + data.id;
 			document.cookie = 'email=' + data.email;
-			document.cookie = 'teamName=' + data.teamName;
+			document.cookie = 'teamname=' + data.teamname;
 			$('#login-pass').val('');
 			$('#login-email').val('');
 			window.location.href = "/standings.html";

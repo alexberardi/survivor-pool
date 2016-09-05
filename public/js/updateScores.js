@@ -18,8 +18,8 @@ function putRequest(game) {
     var address = '/games/liveUpdate/' + game.gsis;
 
     var body = {
-        "homeScore": game.hs,
-        "awayScore": game.vs,
+        "homescore": game.hs,
+        "awayscore": game.vs,
         "quarter": game.q
     };
 

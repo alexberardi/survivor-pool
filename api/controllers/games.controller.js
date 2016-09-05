@@ -60,7 +60,7 @@ var getWeeklyGames = function(req, res){
 };
 
 var updateGames = function(req, res) {
-    var gameID = parseInt(req.params.gameID, 10);
+    var gameID = parseInt(req.params.gameid, 10);
     var body = _.pick(req.body, 'homescore', 'awayscore', 'quarter');
     db.games.findOne({
         where: {

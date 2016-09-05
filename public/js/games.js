@@ -2,7 +2,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "/games/user/" + getCookie('userID'),
+		gamesurl: "/games/user/" + getCookie('userid'),
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
@@ -28,23 +28,23 @@
 	function init() {
 		updateScores();
 		var games = getRequest(settings.gamesurl);
-	//	var previousPicks = getRequest('/picks/user/' + getCookie('userID'));
-	//	var currentPick = getRequest('/picks/current/' + getCookie('userID'));
-	//	var gamesStarted = getRequest(('/games/started'));
+		var previousPicks = getRequest('/picks/user/' + getCookie('userid'));
+		var currentPick = getRequest('/picks/current/' + getCookie('userid'));
+		var gamesStarted = getRequest(('/games/started'));
 
 		games.forEach(function(game) {
 			var gameInfo = {
-				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
-				hometeam: game.homeTeamName,
+				date: game.gamedate.substring(4, 6) + "/" + game.gamedate.substring(6,8) + "/" + game.gamedate.substring(0,4),
+				hometeam: game.hometeamname,
 				hometeamstyle: 'unused',
-				hometeamscore: game.homeScore,
-				hometeamLogo: 'images/' + game.homeTeamName.toLowerCase() + '.gif',
-				awayteam: game.awayTeamName,
+				hometeamscore: game.homescore,
+				hometeamLogo: 'images/' + game.hometeamname.toLowerCase() + '.gif',
+				awayteam: game.awayteamname,
 				awayteamstyle: 'unused',
-				awayteamscore: game.awayScore,
-				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif',
+				awayteamscore: game.awayscore,
+				awayteamLogo: 'images/' + game.awayteamname.toLowerCase() + '.gif',
 				week: game.week,
-				gameid: game.gameID,
+				gameid: game.gameid,
 				quarter: game.quarter,
 				inprogress: ''
 			};
@@ -52,10 +52,10 @@
 
 			if (!jQuery.isEmptyObject(previousPicks)) {
 				previousPicks.forEach(function (pick) {
-					if (game.homeTeamName === pick.teamName) {
+					if (game.hometeamname === pick.teamname) {
 						gameInfo.hometeamstyle = 'used';
 					}
-					if (game.awayTeamName === pick.teamName) {
+					if (game.awayteamname === pick.teamname) {
 						gameInfo.awayteamstyle = 'used';
 					}
 
@@ -63,16 +63,16 @@
 			}
 
 			if (!jQuery.isEmptyObject(currentPick)){
-				if (currentPick[0].teamName === game.homeTeamName) {
+				if (currentPick[0].teamname === game.hometeamname) {
 					gameInfo.hometeamstyle = 'current';
-				} else if (currentPick[0].teamName === game.awayTeamName) {
+				} else if (currentPick[0].teamname === game.awayteamname) {
 					gameInfo.awayteamstyle = 'current';
 				}
 			}
 
 			if (!jQuery.isEmptyObject(gamesStarted)) {
 				gamesStarted.forEach(function (inProgress) {
-					if (inProgress.homeTeamName === game.homeTeamName) {
+					if (inProgress.hometeamname === game.hometeamname) {
 						gameInfo.hometeamstyle = gameInfo.hometeamstyle + ' inProgress';
 						gameInfo.awayteamstyle = gameInfo.awayteamstyle  + ' inProgress';
 						gameInfo.inprogress = 'inProgress';
@@ -87,7 +87,7 @@
 		});
 
 		if (!jQuery.isEmptyObject(currentPick)){
-			var currentPickHTML = "<div class='current-pick-info'>You've picked " + currentPick[0].teamName + ", Good luck!</div>"
+			var currentPickHTML = "<div class='current-pick-info'>You've picked " + currentPick[0].teamname + ", Good luck!</div>"
 			$("#schedule-top").append(currentPickHTML);
 		}
 
@@ -100,7 +100,7 @@
 function checkActive(gameInfo){
 	$.ajax({
 		type: "GET",
-		url: '/streak/active/' + getCookie('userID'),
+		url: '/streak/active/' + getCookie('userid'),
 		headers: {
 			'Auth': getCookie('Auth')
 		},

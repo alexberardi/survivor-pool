@@ -37,7 +37,7 @@
 		standings.forEach(function(standing) {
 			var standingsInfo = {
 				streak: standing.total,
-				teamname: standing.teamName,
+				teamname: standing.teamname,
 				playername: standing.first + ' ' + standing.last
 			};
 

@@ -6,11 +6,11 @@ $(function () {
 	$('#teamname-change').on('valid submit', function (e) {
 		e.preventDefault();
 
-		var userID = getCookie('userID');
+		var userID = getCookie('userid');
 		var Auth = getCookie('Auth');
 
 		var teamName = {
-			"teamName": $("#teamName").val()
+			"teamname": $("#teamName").val()
 		}		
           
 		$.ajax({

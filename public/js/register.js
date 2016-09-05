@@ -11,7 +11,7 @@ $(function () {
 				"last": $('input[name=last]').val(), 
 				"email": $('input[name=email]').val(),
 				"password": $('input[name=password]').val(),
-				"teamName": $('input[name=teamName]').val()   
+				"teamname": $('input[name=teamName]').val()
 			};
 	
 			user = JSON.stringify(user);
