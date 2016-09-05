@@ -27,10 +27,10 @@
 	
 	function init() {
 	//	updateScores();
-		var games = getRequest(settings.gamesurl);
-		var previousPicks = getRequest('/picks/user/' + getCookie('userID'));
-		var currentPick = getRequest('/picks/current/' + getCookie('userID'));
-		var gamesStarted = getRequest(('/games/started'));
+	//	var games = getRequest(settings.gamesurl);
+	//	var previousPicks = getRequest('/picks/user/' + getCookie('userID'));
+	//	var currentPick = getRequest('/picks/current/' + getCookie('userID'));
+	//	var gamesStarted = getRequest(('/games/started'));
 
 		games.forEach(function(game) {
 			var gameInfo = {
