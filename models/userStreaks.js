@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes){
     return sequelize.define('userstreaks', {
-        userId: {
+        userid: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
