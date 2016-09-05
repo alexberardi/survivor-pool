@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
 				this.setDataValue('password_hash', hashedPassword);
 			}
 		},
-		teamName: {
+		teamname: {
 			type: DataTypes.STRING,
 			allowNull: true
 		}
@@ -55,15 +55,15 @@ module.exports = function(sequelize, DataTypes) {
 					user.email = user.email.toLowerCase();
 				}
 
-				if (typeof user.teamName === 'undefined' || user.teamName === '') {
-					user.teamName = user.email;
+				if (typeof user.teamname === 'undefined' || user.teamname === '') {
+					user.teamname = user.email;
 				}
 			}
 		},
 		instanceMethods: {
 			toPublicJSON: function() {
 				var json = this.toJSON();
-				return _.pick(json, 'id', 'email', 'teamName', 'createdAt', 'updatedAt');
+				return _.pick(json, 'id', 'email', 'teamname', 'createdAt', 'updatedAt');
 			},
 			generateToken: function(type) {
 				if (!_.isString(type)) {

@@ -2,36 +2,36 @@ var _ = require('underscore');
 
 module.exports = function(sequelize, DataTypes){
 	return sequelize.define('games', {
-		gameID: {
+		gameid: {
 			unique: true,
 			type: DataTypes.INTEGER,
 			allowNull: false
 			},
-		homeTeamName: {
+		hometeamname: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		homeTeamCityAbbr: {
+		hometeamcityabbr: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		homeScore: {
+		homescore: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		awayTeamName: {
+		awayteamname: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		awayTeamCityAbbr: {
+		awayteamcityabbr: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		awayScore: {
+		awayscore: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		dayOfWeek: {
+		dayofweek: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.TIME,
 			allowNull: false
 		},
-		gameDate: {
+		gamedate: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},

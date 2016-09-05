@@ -12,10 +12,10 @@ var usersGetAll = function(req, res) {
 }
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamName');
+    var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamname');
     db.user.create(body)
         .then(function(user) {
-            db.userStreaks.create({userId: user.id, total: 0, current: true})
+            db.userStreaks.create({userid: user.id, total: 0, current: true})
                 .then(function(streak){
                     res.json(user.toPublicJSON());
             });
@@ -68,14 +68,14 @@ var userLogout = function(req, res) {
 
 var updateTeamName = function(req, res) {
     var userID = parseInt(req.params.id, 10);
-    var body = _.pick(req.body, 'teamName');
+    var body = _.pick(req.body, 'teamname');
 
-    if (!body.hasOwnProperty('teamName')){
+    if (!body.hasOwnProperty('teamname')){
         res.status(401).send();
         return;
     }
 
-    var attributes = { teamName : body.teamName};
+    var attributes = { teamname : body.teamname};
 
     db.user.findOne({
         where: {

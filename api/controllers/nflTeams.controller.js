@@ -13,14 +13,12 @@ module.exports = function(req, res){
             var sanitizeTeam = _.pick(game, 'h', 'v', 'vnn', 'hnn');
 
             var homeTeamInfo = {
-                teamName: sanitizeTeam.hnn,
-                teamCity: sanitizeTeam.h,
-                logoFileName: sanitizeTeam.hnn + '.gif'
+                teamname: sanitizeTeam.hnn,
+                teamcity: sanitizeTeam.h
             }
             var awayTeamInfo ={
-                teamName: sanitizeTeam.vnn,
-                teamCity: sanitizeTeam.v,
-                logoFileName: sanitizeTeam.vnn + '.gif',
+                teamname: sanitizeTeam.vnn,
+                teamcity: sanitizeTeam.v
             }
 
             db.teams.create(homeTeamInfo)

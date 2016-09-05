@@ -1,18 +1,18 @@
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define('userPicks', {
+    return sequelize.define('userpicks', {
         week: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        userId: {
+        userid: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        teamName: {
+        teamname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        gameId: {
+        gameid: {
             type: DataTypes.INTEGER,
             allowNull: false
         }

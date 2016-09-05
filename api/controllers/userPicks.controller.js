@@ -3,23 +3,23 @@ var db = require('../../db');
 
 
 var makePick = function(req, res) {
-    var body = _.pick(req.body, 'week', 'userId', 'teamName', 'gameId');
+    var body = _.pick(req.body, 'week', 'userid', 'teamname', 'gameid');
 
-    body.userId = parseInt(body.userId);
-    body.gameId = parseInt(body.gameId);
+    body.userId = parseInt(body.userid);
+    body.gameId = parseInt(body.gameid);
 
 
     db.userPicks.findOne(
         {
             where: {
                 week: {$ne : parseInt(body.week)},
-                userId: body.userId,
-                teamName: body.teamName
+                userid: body.userid,
+                teamname: body.teamname
             }
         })
         .then(function(game){
             if (!game) {
-                db.userPicks.findOne({where: {userId: body.userId, week: body.week}})
+                db.userPicks.findOne({where: {userid: body.userid, week: body.week}})
                     .then(function(pick){
                         if(pick) {
                             return pick.update(body)
@@ -58,13 +58,13 @@ var makePick = function(req, res) {
 }
 
 var getPicks = function(req, res) {
-    var userID = parseInt(req.params.userId, 10);
+    var userID = parseInt(req.params.userid, 10);
     db.userPicks.findAll({
         order: [
             ['week', 'DESC']
         ],
         where : {
-            userId: userID
+            userid: userID
         }
     })
         .then(function(picks){
@@ -76,13 +76,13 @@ var getPicks = function(req, res) {
 };
 
 var getCurrentPicks = function(req, res) {
-    var userID = parseInt(req.params.userId, 10);
+    var userID = parseInt(req.params.userid, 10);
     db.games.max('week')
         .then(function(max){
             db.userPicks.findAll({
                 where: {
                     week: max,
-                    userId: userID
+                    userid: userID
                 }
             })
                 .then(function(userPick){
