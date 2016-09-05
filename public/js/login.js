@@ -20,7 +20,7 @@ $(function () {
 			document.cookie = 'teamName=' + data.teamName;
 			$('#login-pass').val('');
 			$('#login-email').val('');
-			window.location.href = "/home.html";
+			window.location.href = "/standings.html";
 		})
 		.fail(function(data, textStatus, request){
 			var errorMsg = '<div class="alert callout" data-closable><h5>Invalid Login</h5><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button></div>'

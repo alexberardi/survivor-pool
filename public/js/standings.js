@@ -9,10 +9,18 @@
 	
 	function getRequest(address) {
 		var request = null;
-		
+
+		var auth = {
+			"cookie": getCookie('Auth')
+		};
+
+
 		$.ajax({
 			type: "GET",
 			url: address,
+			headers: {
+				'Auth': auth.cookie
+			},
 			async: false
 		})
 		.done(function(data) {
@@ -25,11 +33,12 @@
 	function init() {
 		var standings = getRequest(settings.standingsURL);
 		//need to change this for name / teamname
+		standings = standings[0];
 		standings.forEach(function(standing) {
 			var standingsInfo = {
 				streak: standing.total,
-				playername: standing.userId,
-				teamname: standing.id
+				teamname: standing.teamName,
+				playername: standing.first + ' ' + standing.last
 			};
 
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), standingsInfo));

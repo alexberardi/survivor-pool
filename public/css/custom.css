@@ -70,7 +70,7 @@
 	cursor: default;
 }
 
-.inProgress {
+.pick.inProgress {
 	background-color: #D3D3D3;
 	pointer-events: none;
 	cursor: default;

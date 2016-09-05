@@ -44,7 +44,6 @@ $(function () {
 			})
 				.done(function(data, textStatus, request){
 					$("#pick-modal").foundation('close');
-					alert("You've made your pick!")
 					location.reload();
 				})
 

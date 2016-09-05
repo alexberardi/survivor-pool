@@ -55,7 +55,7 @@ module.exports = function(sequelize, DataTypes) {
 					user.email = user.email.toLowerCase();
 				}
 
-				if (typeof user.teamName === undefined) {
+				if (typeof user.teamName === 'undefined' || user.teamName === '') {
 					user.teamName = user.email;
 				}
 			}

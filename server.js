@@ -33,11 +33,11 @@ app.post('/users/login', function(req, res){
 	ctrlUsers.userLogin(req, res);
 });
 
-app.put('/users/teamName/:id', function(req, res){
+app.put('/users/teamName/:id', middleware.requireAuthentication, function(req, res){
 	ctrlUsers.updateTeamName(req, res);
 });
 
-app.put('/users/password/:id', function(req, res){
+app.put('/users/password/:id', middleware.requireAuthentication,  function(req, res){
 	ctrlUsers.updatePassword(req, res);
 });
 
@@ -66,11 +66,11 @@ app.get('teams/populate', function(req, res){
 });
 
 //PICKS REQUESTS
-app.get('/picks/:userId', function(req, res){
+app.get('/picks/:userId', middleware.requireAuthentication,  function(req, res){
 	ctrlUserPicks.getPicks(req, res);
 });
 
-app.get('/picks/current/:userId', function(req, res){
+app.get('/picks/current/:userId', middleware.requireAuthentication,  function(req, res){
 	ctrlUserPicks.getCurrentPicks(req, res);
 });
 
@@ -80,7 +80,7 @@ app.post('/picks',  middleware.requireAuthentication, function(req, res){
 
 
 //STREAK REQUESTS
-app.get('/streak/active/:userID', function(res, req){
+app.get('/streak/active/:userID', middleware.requireAuthentication,  function(res, req){
 	ctrlUserStreaks.checkActive(res, req);
 });
 
@@ -91,7 +91,7 @@ app.post('/streak', function (req, res) {
 
 
 //STANDINGS REQUESTS
-app.get('/standings', function (req, res) {
+app.get('/standings', middleware.requireAuthentication,  function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
 });
 
