@@ -79,9 +79,23 @@ var updateGames = function(req, res) {
         })
 }
 
+var getStartedGames = function(req, res) {
+    db.games.findAll({
+        where: {
+            quarter: {$ne : 'P'}
+        }
+    })
+        .then(function(game){
+            res.json(game);
+        })
+        .catch(function(e){
+            res.status(500).send();
+        });
+}
 
 module.exports = {
     populateGames: populateGames,
     getWeeklyGames: getWeeklyGames,
-    updateGames: updateGames
+    updateGames: updateGames,
+    getStartedGames: getStartedGames
 }

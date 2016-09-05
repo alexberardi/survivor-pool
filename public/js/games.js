@@ -2,7 +2,7 @@
 	"use strict";
 
 	var settings = {
-		gamesurl: "/games/" + getCookie('userID'),
+		gamesurl: "/games/user/" + getCookie('userID'),
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
@@ -26,36 +26,41 @@
 	}
 	
 	function init() {
-		updateScores();
+	//	updateScores();
 		var games = getRequest(settings.gamesurl);
 		var previousPicks = getRequest('/picks/' + getCookie('userID'));
 		var currentPick = getRequest('/picks/current/' + getCookie('userID'));
-		
+		var gamesStarted = getRequest(('/games/started'));
+
 		games.forEach(function(game) {
 			var gameInfo = {
 				date: game.gameDate.substring(4, 6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4),
 				hometeam: game.homeTeamName,
-				hometeamscore: game.homeScore,
 				hometeamstyle: 'unused',
+				hometeamscore: game.homeScore,
 				hometeamLogo: 'images/' + game.homeTeamName.toLowerCase() + '.gif',
 				awayteam: game.awayTeamName,
-				awayteamscore: game.awayScore,
 				awayteamstyle: 'unused',
+				awayteamscore: game.awayScore,
 				awayteamLogo: 'images/' + game.awayTeamName.toLowerCase() + '.gif',
 				week: game.week,
-				gameid: game.gameID
+				gameid: game.gameID,
+				quarter: game.quarter,
+				inprogress: ''
 			};
 
 
-			previousPicks.forEach(function(pick) {
-				if (game.homeTeamName === pick.teamName) {
-					gameInfo.hometeamstyle = 'used';
-				}
-				if (game.awayTeamName === pick.teamName) {
-					gameInfo.awayteamstyle = 'used';
-				}
+			if (!jQuery.isEmptyObject(previousPicks)) {
+				previousPicks.forEach(function (pick) {
+					if (game.homeTeamName === pick.teamName) {
+						gameInfo.hometeamstyle = 'used';
+					}
+					if (game.awayTeamName === pick.teamName) {
+						gameInfo.awayteamstyle = 'used';
+					}
 
-			});
+				});
+			}
 
 			if (!jQuery.isEmptyObject(currentPick)){
 				if (currentPick[0].teamName === game.homeTeamName) {
@@ -63,6 +68,17 @@
 				} else if (currentPick[0].teamName === game.awayTeamName) {
 					gameInfo.awayteamstyle = 'current';
 				}
+			}
+
+			if (!jQuery.isEmptyObject(gamesStarted)) {
+				gamesStarted.forEach(function (inProgress) {
+					if (inProgress.homeTeamName === game.homeTeamName) {
+						gameInfo.hometeamstyle = gameInfo.hometeamstyle + ' inProgress';
+						gameInfo.awayteamstyle = gameInfo.awayteamstyle  + ' inProgress';
+						gameInfo.inprogress = 'inProgress';
+					}
+
+				});
 			}
 
 

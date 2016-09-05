@@ -64,6 +64,18 @@
 	background-color: #2D882D;
 }
 
+.pick.used {
+	background-color: #ff0000;
+	pointer-events: none;
+	cursor: default;
+}
+
+.inProgress {
+	background-color: #D3D3D3;
+	pointer-events: none;
+	cursor: default;
+}
+
 .purple-button {
 	background-color: #362C6A;
     color: #FFF;

@@ -61,7 +61,8 @@
         <table id="scheduleTable">
             <thead>
               <tr class="schedule-header">
-                <th width="150">Date</th>
+                <th width="100">Date</th>
+                <th width="50">Quarter</th>
                 <th width="100">Home Score</th>
                 <th width="75">Home</th>
                 <th width="75">Away</th>
@@ -71,11 +72,12 @@
             <tbody class="schedule-body " id="schedule">
         <script type="text/template" id="TableRow">
               <tr>
-                <td>{{date}}</td>
-                <td>{{hometeamscore}}</td>
+                <td class="{{inprogress}}">{{date}}</td>
+                  <td class="{{inprogress}}">{{quarter}}</td>
+                <td class="{{inprogress}}">{{hometeamscore}}</td>
                 <td class="pick {{hometeamstyle}}" data-open="pick-modal" data-team-name="{{hometeam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{hometeam}}" src= "{{hometeamLogo}}" width="75px"></td>
                 <td class="pick {{awayteamstyle}}" data-open="pick-modal" data-team-name="{{awayteam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{awayteam}}" src= "{{awayteamLogo}}" width="75px"></td>
-                <td>{{awayteamscore}}</td>
+                <td class="{{inprogress}}">{{awayteamscore}}</td>
               </tr>
         </script>
             </tbody>

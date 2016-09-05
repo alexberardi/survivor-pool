@@ -46,9 +46,14 @@ app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games/:userID',  middleware.requireAuthentication, function(req, res){
+app.get ('/games/user/:userID',  middleware.requireAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
+
+app.get ('/games/started',  middleware.requireAuthentication, function(req, res){
+	ctrlGames.getStartedGames(req, res);
+});
+
 
 app.put('/games/liveUpdate/:gameID', middleware.requireAuthentication, function(req, res){
 	ctrlGames.updateGames(req, res);
