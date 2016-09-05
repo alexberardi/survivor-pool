@@ -28,9 +28,9 @@
 	function init() {
 		updateScores();
 		var games = getRequest(settings.gamesurl);
-	//	var previousPicks = getRequest('/picks/user/' + getCookie('userid'));
-	//	var currentPick = getRequest('/picks/current/' + getCookie('userid'));
-	//	var gamesStarted = getRequest(('/games/started'));
+		var previousPicks = getRequest('/picks/user/' + getCookie('userid'));
+		var currentPick = getRequest('/picks/current/' + getCookie('userid'));
+		var gamesStarted = getRequest(('/games/started'));
 
 		games.forEach(function(game) {
 			var gameInfo = {
