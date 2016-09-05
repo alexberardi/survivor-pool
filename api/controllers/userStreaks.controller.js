@@ -41,7 +41,7 @@ var checkActive = function (req, res) {
     var userid = parseInt(req.params.userid, 10);
     db.userStreaks.findOne({
         where: {
-            userId: userid
+            userid: userid
         }
     })
         .then(function(streak){
