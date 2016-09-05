@@ -28,29 +28,57 @@ $(function () {
         };
 
         pick = JSON.stringify(pick);
-		
-		$.ajax({
-                type: "POST",
-                data: pick,
-                url: '/picks',
-                contentType: 'application/json',
-                headers: {
-                    'Auth': auth.cookie
-                },
-                async: false
-                })
-                .done(function(data, textStatus, request){
-                    $("#pick-modal").foundation('close');
-                    alert("You've made your pick!")
-					location.reload();
-                })
 
-                .fail(function(data, textStatus, request){
-                    console.log(data, textStatus, request);
+
+
+		if (checkActive()){
+			$.ajax({
+				type: "POST",
+				data: pick,
+				url: '/picks',
+				contentType: 'application/json',
+				headers: {
+					'Auth': auth.cookie
+				},
+				async: false
+			})
+				.done(function(data, textStatus, request){
+					$("#pick-modal").foundation('close');
+					alert("You've made your pick!")
+					location.reload();
+				})
+
+				.fail(function(data, textStatus, request){
+					console.log(data, textStatus, request);
 					if (data.status === 401) {
 						alert("You cannot select the same team twice.");
 					}
-                });
+				});
+		} else {
+			alert('Your streak is no longer active. Better luck next season.');
+			location.reload();
+		}
+
+
 
 	});
 });
+
+function checkActive(){
+	var returnValue = false;
+	$.ajax({
+		type: "GET",
+		url: '/streak/active/' + getCookie('userID'),
+		headers: {
+			'Auth': getCookie('Auth')
+		},
+		async: false
+	})
+		.success(function(data){
+			returnValue = true;
+		})
+		.fail(function(data) {
+			returnValue = false;
+		});
+	return returnValue;
+}

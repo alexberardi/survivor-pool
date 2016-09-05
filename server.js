@@ -80,9 +80,15 @@ app.post('/picks',  middleware.requireAuthentication, function(req, res){
 
 
 //STREAK REQUESTS
+app.get('/streak/active/:userID', function(res, req){
+	ctrlUserStreaks.checkActive(res, req);
+});
+
 app.post('/streak', function (req, res) {
 	ctrlUserStreaks.updateStreak();
 });
+
+
 
 //STANDINGS REQUESTS
 app.get('/standings', function (req, res) {

@@ -39,10 +39,28 @@ var getStandings = function(req, res) {
         .catch(function(e){
             return res.status(500).json(e);
         });
-}
+};
+
+var checkActive = function (req, res) {
+    var userID = parseInt(req.params.userID, 10);
+    db.userStreaks.findOne({
+        where: {
+            userId: userID
+        }
+    })
+        .then(function(streak){
+          if (streak.current === true) {
+              res.status(200).send();
+          }
+          else {
+              res.status(401).send();
+          }
+        })
+};
 
 module.exports = {
     updateStreak: updateStreak,
-    getStandings: getStandings
+    getStandings: getStandings,
+    checkActive: checkActive
 };
 

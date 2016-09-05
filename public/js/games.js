@@ -9,7 +9,7 @@
 	
 	function getRequest(address) {
 		var request = null;
-		
+
 		$.ajax({
 			type: "GET",
 			url: address,
@@ -18,9 +18,9 @@
 			},
 			async: false
 		})
-		.done(function(data) {
-			request = data;
-		});
+			.done(function(data) {
+				request = data;
+			});
 
 		return request;
 	}
@@ -81,6 +81,7 @@
 				});
 			}
 
+			checkActive(gameInfo);
 
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), gameInfo));
 		});
@@ -95,3 +96,19 @@
 	init();
 
 }(jQuery, Mustache));
+
+function checkActive(gameInfo){
+	$.ajax({
+		type: "GET",
+		url: '/streak/active/' + getCookie('userID'),
+		headers: {
+			'Auth': getCookie('Auth')
+		},
+		async: false
+	})
+		.fail(function(data) {
+			gameInfo.hometeamstyle = ' inProgress';
+			gameInfo.awayteamstyle = ' inProgress';
+			gameInfo.inprogress = 'inProgress';
+		});
+}
