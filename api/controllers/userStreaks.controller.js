@@ -28,7 +28,7 @@ var updateStreak = function(req, res) {
 
 var getStandings = function(req, res) {
     var userID = parseInt(req.params.userId, 10);
-    db.sequelize.query('SELECT * FROM userStreaks JOIN users on userStreaks.userId = users.id ORDER BY userStreaks.total DESC')
+    db.sequelize.query('SELECT * FROM userStreaks JOIN users on userStreaks.userId = users.Id ORDER BY userStreaks.total DESC')
         .then(function(streaks){
             res.json(streaks);
         })
