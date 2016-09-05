@@ -27,6 +27,13 @@
 	padding-left: 5rem;
 }
 
+#backToSchedule a{
+	color: #FFF;
+
+}
+#pickHistory a {
+	color: #362C6A
+}
 
 .nav {
 	background-color: #801515;
@@ -75,6 +82,20 @@
 	pointer-events: none;
 	cursor: default;
 }
+
+.pickHistory {
+	alignitems: right;
+}
+
+.previous-picks-title {
+	padding-left: 3rem;
+	font-family: 'Yesteryear', cursive;
+	font-size: 72px;
+	color: #FFF;
+	padding-left: 3rem;
+}
+
+
 
 .purple-button {
 	background-color: #362C6A;

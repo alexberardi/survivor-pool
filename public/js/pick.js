@@ -4,6 +4,10 @@ $(function () {
 	var gameID = 0;
 	var week = 0;
 
+	$('#pickHistory').click(function(){
+		window.location.href = "/pickHistory.html";
+	});
+
 	$('.pick').click(function() {
 		teamName = $(this).data("team-name");
 		gameID = $(this).data("gameid");
