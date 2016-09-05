@@ -62,6 +62,10 @@ var getWeeklyGames = function(req, res){
 var updateGames = function(req, res) {
     var gameID = parseInt(req.params.gameid, 10);
     var body = _.pick(req.body, 'homescore', 'awayscore', 'quarter');
+
+    body.homescore = parseInt(body.homescore);
+    body.awayscore = parseInt(body.awayscore)
+
     db.games.findOne({
         where: {
             gameID: gameID
