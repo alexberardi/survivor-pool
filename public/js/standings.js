@@ -32,7 +32,7 @@
 	
 	function init() {
 		var standings = getRequest(settings.standingsURL);
-		//need to change this for name / teamname
+		
 		standings = standings[0];
 		standings.forEach(function(standing) {
 			var standingsInfo = {
