@@ -2,7 +2,18 @@ var bcrypt = require('bcryptjs');
 var _ = require('underscore');
 var cryptojs = require('crypto-js');
 var jwt = require('jsonwebtoken');
-var keys = require('../keys.js');
+var keys = {}
+if (env === 'production') {
+	keys = {
+		encrypt: process.env.EKEY,
+		decrypt: process.env.DKEY
+	};
+} else {
+	keys = {
+		encrypt: 'abcdef',
+		decrypt: 'abcdef'
+	}
+}
 
 module.exports = function(sequelize, DataTypes) {
 	var user = sequelize.define('user', {
