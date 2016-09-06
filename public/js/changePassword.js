@@ -28,6 +28,9 @@ $(function () {
 		.done(function(data, textStatus, request){
 			var successMsg = "<div class='success callout' data-closable='slide-out-right'><p>You've changed your Password.</p><button class='close-button' aria-label='Dismiss alert' type='button' data-close><span aria-hidden='true'>&times;</span></button></div>"
 			$("#successPass").append(successMsg);
+			$("#existingpass").val('');
+			$("#password").val('');
+			$("#verifypassword").val('');
 		})
 		.fail(function(data, textStatus, request){
 			var successMsg = "<div class='alert callout' data-closable='slide-out-right'><p>Uh Oh, something went wrong.</p><button class='close-button' aria-label='Dismiss alert' type='button' data-close><span aria-hidden='true'>&times;</span></button></div>"
