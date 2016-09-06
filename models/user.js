@@ -2,6 +2,8 @@ var bcrypt = require('bcryptjs');
 var _ = require('underscore');
 var cryptojs = require('crypto-js');
 var jwt = require('jsonwebtoken');
+
+var env = process.env.NODE_ENV || 'development';
 var keys = {}
 if (env === 'production') {
 	keys = {
