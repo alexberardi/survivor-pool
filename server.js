@@ -16,14 +16,14 @@ var PORT = process.env.PORT || 3000;
 
 var env = process.env.NODE_ENV || 'development';
 
-
+var keys = {}
 if (env === 'production') {
 	keys = {
 		encrypt: process.env.EKEY,
 		decrypt: process.env.DKEY
 	};
 } else {
-	var keys = {
+	keys = {
 		encrypt: 'abcdef',
 		decrypt: 'abcdef'
 	}
