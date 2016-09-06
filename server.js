@@ -12,9 +12,20 @@ var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
 var ctrlUserPicks = require('./api/controllers/userPicks.controller');
 var ctrlUserStreaks = require('./api/controllers/userStreaks.controller');
 
-
-
 var PORT = process.env.PORT || 3000;
+
+var env = process.env.NODE_ENV || 'development';
+
+
+if (env === 'production') {
+	keys = {
+		encrypt: process.env.EKEY,
+		decrypt: process.env.DKEY,
+	};
+} else {
+	var keys = require('./keys.js');
+}
+
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
@@ -110,7 +121,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
 
 
 
-db.sequelize.sync({force:true})
+db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
