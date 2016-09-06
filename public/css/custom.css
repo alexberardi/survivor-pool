@@ -31,11 +31,27 @@
 }
 
 .history {
-	padding-top: 6rem;
+	padding-top: 1.5rem;
+	background-color: #FFF;
+	color: #133453;
+	height: 90vh;
+	border-style: none;
+}
+
+.history-body > tr:nth-child(even) {
 	background-color: #362C6A;
 	color: #FFF;
-	padding-bottom: 15rem;
 }
+
+.history-body > tr:nth-child(odd) {
+	color: #362C6A;
+}
+
+.history-header {
+	color: #133453;
+	background-color: #FFF;
+	border-style: none;
+}	
 
 #home > span {
 	font-size: 28px;
@@ -107,7 +123,7 @@
 	padding-left: 3rem;
 	font-family: 'Yesteryear', cursive;
 	font-size: 72px;
-	color: #FFF;
+	color: #133453;
 	padding-left: 3rem;
 }
 
@@ -135,10 +151,9 @@
 } 
 
 .settings {
-	padding-top: 9rem;
 	padding-bottom: 15rem;
 	color: #362C6A;
-	padding-left: 3rem;
+	height: 90vh;
 
 }
 
@@ -192,10 +207,9 @@
 }
 
 .standings {
-	padding-top: 6rem;
 	background-color: #362C6A;
 	color: #FFF;
-	padding-bottom: 6rem;
+	height: 90vh;
 }
 
 .standings-header {
