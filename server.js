@@ -19,8 +19,8 @@ var env = process.env.NODE_ENV || 'development';
 
 if (env === 'production') {
 	keys = {
-		encrypt: process.env.EKEY,
-		decrypt: process.env.DKEY,
+		encrypt: 'abc', //process.env.EKEY,
+		decrypt: 'def'// process.env.DKEY,
 	};
 } else {
 	var keys = require('./keys.js');
