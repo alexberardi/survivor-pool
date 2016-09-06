@@ -36,8 +36,9 @@ var userLogin = function(req, res) {
 
             var token = user.generateToken('authentication');
             userInstance = user;
+
             return db.token.create({
-                token: token
+                token: token,
             })
                 .then(function(tokenInstance) {
                     if (token) {
