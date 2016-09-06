@@ -29,9 +29,10 @@
         </div>
       <div class="title-bar-right" id="userentry">
         <div class="button-group">
+            <a class="button" href="/schedule.html">Schedule</a>
         	  <a class="button" href="/standings.html">Standings</a>
-              <a class="button" href="/settings.html">Settings</a>
-              <a class="button" id="logout-button">Logout</a>
+            <a class="button" href="/settings.html">Settings</a>
+            <a class="button" id="logout-button">Logout</a>
         </div>
       </div>
     </div>
@@ -49,57 +50,6 @@
 	</div>
 </section>
 
-<div id="schedule-top"></div>
-<section class="schedule" id="schedule-section">
- 	<div class="row">
-        <div class="title-bar-right" id="pickHistory">
-                <button type="button" class="purple-button large button">Pick History</button>
-        </div>
- 		<div class="small-12">
- 			<span class="schedule-title">Schedule</span>
- 			<p>Make your pick for the upcoming week by selecting a team's logo.</p>
- 		</div>
- 		<div class="small-12">
-        <table id="scheduleTable">
-            <thead>
-              <tr class="schedule-header">
-                <th width="100">Date</th>
-                <th width="50">Quarter</th>
-                <th width="100">Home Score</th>
-                <th width="75">Home</th>
-                <th width="75">Away</th>
-                <th width="100">Away Score</th>
-              </tr>
-            </thead>
-            <tbody class="schedule-body " id="schedule">
-        <script type="text/template" id="TableRow">
-              <tr>
-                <td class="{{inprogress}}">{{date}}</td>
-                  <td class="{{inprogress}}">{{quarter}}</td>
-                <td class="{{inprogress}}">{{hometeamscore}}</td>
-                <td class="pick {{hometeamstyle}}" data-open="pick-modal" data-team-name="{{hometeam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{hometeam}}" src= "{{hometeamLogo}}" width="75px"></td>
-                <td class="pick {{awayteamstyle}}" data-open="pick-modal" data-team-name="{{awayteam}}" data-gameid="{{gameid}}" data-week="{{week}}"><img title="{{awayteam}}" src= "{{awayteamLogo}}" width="75px"></td>
-                <td class="{{inprogress}}">{{awayteamscore}}</td>
-              </tr>
-        </script>
-            </tbody>
-        </table>
-            <p><i>***Your current pick will be highlighted in green. Previous picks will be red. Games that have already started will be grey.***</i></p>
- 		</div>	
- 	</div>
- 	<div class="reveal" id="pick-modal" data-reveal>
-  <h1>Confirm Pick?</h1>
-  <p class="lead">Are you sure you want to pick the <span id="team-name"></span>?</p>
-  <button class="close-button" data-close aria-label="Close reveal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div>
-  	<button class="success button" id="confirm-pick">Confirm</button>
-  	<button class="alert button" id="cancel-pick">Cancel</button>
-  </div>
-</div>
-</section>
-
 <footer class="footer-large">
   		Made with love <a href="https://github.com/alexberardi/survivor-pool"><img src="images/GitHub32px.png"></img></a>
  </footer>
@@ -108,11 +58,8 @@
     <script src="js/getCookie.js"></script>
     <script src="js/what-input.js"></script>
     <script src="js/foundation.js"></script>
-    <script src="js/updateScores.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-    <script src="js/games.js"></script>
     <script src="js/logout.js"></script>
-    <script src="js/pick.js"></script>
     </script>
     <script>
     $(document).foundation()
