@@ -2,6 +2,15 @@
 	text-align: center;
 }
 
+.current-pick-info{
+	font-size: 48px;
+	text-align: center;
+	background-color: #FFF;
+	border: .5px solid #362C6A ;
+	color: #362C6A;
+	font-family: 'Yesteryear', cursive;;
+}
+
 .footer-large {
 	margin: 6rem;
 	text-align: center;
@@ -19,6 +28,13 @@
 	font-size: 108px;
 	color: #133453;
 	padding-left: 3rem;
+}
+
+.history {
+	padding-top: 6rem;
+	background-color: #362C6A;
+	color: #FFF;
+	padding-bottom: 15rem;
 }
 
 #home > span {
@@ -94,8 +110,6 @@
 	color: #FFF;
 	padding-left: 3rem;
 }
-
-
 
 .purple-button {
 	background-color: #362C6A;
@@ -211,15 +225,6 @@
 	border
 	padding: .5rem;
 	padding-left: 3rem;
-}
-
-.current-pick-info{
-	font-size: 48px;
-	text-align: center;
-	background-color: #FFF;
-	border: .5px solid #362C6A ;
-	color: #362C6A;
-	font-family: 'Yesteryear', cursive;;
 }
 
 .titlebar-logo {
