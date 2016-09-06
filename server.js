@@ -23,7 +23,10 @@ if (env === 'production') {
 		decrypt: process.env.DKEY
 	};
 } else {
-	var keys = require('./keys.js');
+	var keys = {
+		encrypt: 'abcdef',
+		decrypt: 'abcdef'
+	}
 }
 
 
