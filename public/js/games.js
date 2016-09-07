@@ -68,11 +68,7 @@
 				} else if (currentPick[0].teamname === game.awayteamname) {
 					gameInfo.awayteamstyle = 'current';
 				}
-				if (currentPick[0].quarter != 'P') {
-					gameInfo.hometeamstyle = 'inProgress';
-					gameInfo.awayteamstyle = 'inProgress';
-					gameInfo.inProgress = 'inProgress';
-				}
+
 			}
 
 			if (!jQuery.isEmptyObject(gamesStarted)) {
