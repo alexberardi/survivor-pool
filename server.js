@@ -55,6 +55,10 @@ app.put('/users/password/:id', middleware.requireAuthentication,  function(req, 
 	ctrlUsers.updatePassword(req, res);
 });
 
+app.put('/users/email/:id', middleware.requireAuthentication, function(req, res){
+	ctrlUsers.updateEmail(req, res);
+});
+
 //GAMES REQUESTS
 app.get('/games/populate', function(req, res) {
 	ctrlGames.populateGames(req, res);

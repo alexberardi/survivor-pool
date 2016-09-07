@@ -39,7 +39,7 @@
 </div>
 
 <section class="settings">
-    <div class="row">
+
       <div class="small-12 columns">
         <span class="settings-title">Change Password</span>
         <form data-abide="ajax" id="password-change">
@@ -69,10 +69,30 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
-    <div id="successPass"></div>
-    <div class="row">
+  <div id="successPass"></div>
+      <div class="small-12 columns">
+        <span class="settings-title">Change Email Address</span>
+        <form data-abide="ajax" id="email-change">
+          <div class="large-6 columns">
+              <label>New Email
+                <input type="email" id="email" name="email" pattern="email" required>
+                <span class="form-error">
+                  What's your email?
+                </span>
+              </label>
+              <label>Verify New Email
+                <input type="email" name="verifyemail" id="verifyemail" required data-equalto="email">
+                <span class="form-error">
+                  Emails don't match!
+                </span>
+              </label>
+            </div>
+            <div class="large-12 columns">
+              <button type="button" id="changeemail-button" class="large button alert">Submit</button>
+            </div>
+          </div>
+        </form>
+    <div id="successEmail"></div>
       <div class="small-12 columns">
         <span class="settings-title">Change Team Name</span>
         <form data-abide="ajax" id="teamname-change">
@@ -83,10 +103,8 @@
           <div class="large-12 columns">
               <button type="button" id="changeteam-button" class="large button alert" value="submit">Submit</button>
           </div>
-
         </form>
       </div>
-    </div>
     <div id="successTeam"></div>
 </section>
 
@@ -99,6 +117,7 @@
     <script src="js/logout.js"></script>
     <script src="js/changeTeamName.js"></script>
     <script src="js/changePassword.js"></script>
+    <script src="js/changeEmail.js"></script>
     <script>
     $(document).foundation()
     </script>

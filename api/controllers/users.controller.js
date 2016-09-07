@@ -99,6 +99,38 @@ var updateTeamName = function(req, res) {
         });
 };
 
+var updateEmail = function(req, res) {
+    var userID = parseInt(req.params.id, 10);
+    var body = _.pick(req.body, 'email');
+
+    if (!body.hasOwnProperty('email')){
+        res.status(401).send();
+        return;
+    }
+
+    var attributes = { email : body.email};
+
+    db.user.findOne({
+        where: {
+            id: userID
+        }
+    })
+        .then(function(user) {
+            if (user) {
+                return user.update(attributes)
+                    .then(function(user){
+                        res.json(user.toJSON());
+                    }, function(e){
+                        res.status(400).json(e);
+                    });
+            } else {
+                res.status(404).send();
+            }
+        }, function(){
+           res.status(500).send();
+        });
+};
+
 
 var updatePassword = function(req, res) {
     var userID = parseInt(req.params.id, 10);
@@ -142,5 +174,6 @@ module.exports = {
     userLogin : userLogin,
     userLogout: userLogout,
     updateTeamName: updateTeamName,
-    updatePassword: updatePassword
+    updatePassword: updatePassword,
+    updateEmail: updateEmail
 };
