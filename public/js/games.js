@@ -31,6 +31,7 @@
 		var previousPicks = getRequest('/picks/user/' + getCookie('userid'));
 		var currentPick = getRequest('/picks/current/' + getCookie('userid'));
 		var gamesStarted = getRequest(('/games/started'));
+		var currentWeek = '';
 
 		games.forEach(function(game) {
 			var gameInfo = {
@@ -49,6 +50,7 @@
 				inprogress: ''
 			};
 
+			currentWeek = game.week;
 
 			if (!jQuery.isEmptyObject(previousPicks)) {
 				previousPicks.forEach(function (pick) {
@@ -92,6 +94,7 @@
 			$("#schedule-top").append(currentPickHTML);
 		}
 
+		$("#current-week").html("Week " + currentWeek);
 	}
 
 	init();

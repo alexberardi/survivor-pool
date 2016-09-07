@@ -66,6 +66,7 @@ $(function () {
 	});
 });
 
+
 function checkActive(){
 	var returnValue = false;
 	$.ajax({
