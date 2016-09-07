@@ -3,7 +3,7 @@
 
 
     $("#backToSchedule").click(function(){
-        window.location.href = "/home.html#schedule-section";
+        window.location.href = "/schedule.html";
     });
 
     var settings = {
