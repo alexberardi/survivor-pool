@@ -68,7 +68,7 @@ var userLogout = function(req, res) {
 };
 
 var updateTeamName = function(req, res) {
-    var userID = parseInt(req.params.id, 10);
+    var userID = parseInt(req.params.userid, 10);
     var body = _.pick(req.body, 'teamname');
 
     if (!body.hasOwnProperty('teamname')){
@@ -100,7 +100,7 @@ var updateTeamName = function(req, res) {
 };
 
 var updateEmail = function(req, res) {
-    var userID = parseInt(req.params.id, 10);
+    var userID = parseInt(req.params.userid, 10);
     var body = _.pick(req.body, 'email');
 
     if (!body.hasOwnProperty('email')){
@@ -133,7 +133,7 @@ var updateEmail = function(req, res) {
 
 
 var updatePassword = function(req, res) {
-    var userID = parseInt(req.params.id, 10);
+    var userID = parseInt(req.params.userid, 10);
     var body = _.pick(req.body, 'oldPassword', 'password');
 
     if (!body.hasOwnProperty('password')){
