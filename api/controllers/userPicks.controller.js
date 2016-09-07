@@ -5,7 +5,7 @@ var db = require('../../db');
 var makePick = function(req, res) {
     var body = _.pick(req.body, 'week', 'teamname', 'gameid');
 
-    body.userId = parseInt(req.params.userid);
+    body.userid = parseInt(req.params.userid, 10);
     body.gameId = parseInt(body.gameid);
 
 
