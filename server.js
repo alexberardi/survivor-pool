@@ -47,15 +47,15 @@ app.post('/users/login', function(req, res){
 	ctrlUsers.userLogin(req, res);
 });
 
-app.put('/users/teamName/:id', middleware.requireAuthentication, function(req, res){
+app.put('/users/teamName/:userid', middleware.requireAuthentication, function(req, res){
 	ctrlUsers.updateTeamName(req, res);
 });
 
-app.put('/users/password/:id', middleware.requireAuthentication,  function(req, res){
+app.put('/users/password/:userid', middleware.requireAuthentication,  function(req, res){
 	ctrlUsers.updatePassword(req, res);
 });
 
-app.put('/users/email/:id', middleware.requireAuthentication, function(req, res){
+app.put('/users/email/:userid', middleware.requireAuthentication, function(req, res){
 	ctrlUsers.updateEmail(req, res);
 });
 
@@ -92,7 +92,7 @@ app.get('/picks/current/:userid', middleware.requireAuthentication,  function(re
 	ctrlUserPicks.getCurrentPicks(req, res);
 });
 
-app.post('/picks',  middleware.requireAuthentication, function(req, res){
+app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res){
 	ctrlUserPicks.makePick(req, res);
 });
 

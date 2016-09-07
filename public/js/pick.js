@@ -26,7 +26,6 @@ $(function () {
 
         var pick = {
         	"week": week,
-        	"userid": getCookie('userid'),
         	"teamname": teamName,
         	"gameid": gameID
         };
@@ -39,7 +38,7 @@ $(function () {
 			$.ajax({
 				type: "POST",
 				data: pick,
-				url: '/picks',
+				url: '/picks/' + getCookie('userid'),
 				contentType: 'application/json',
 				headers: {
 					'Auth': auth.cookie

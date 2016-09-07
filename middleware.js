@@ -17,6 +17,13 @@ module.exports = function(db){
 				return db.user.findByToken(token);
 			})
 			.then(function(user){
+
+				if (req.params.hasOwnProperty('userid')){
+					if (req.params.userid != user.id) {
+						reject();
+					}
+				}
+
 				req.user = user;
 				next();
 			})
