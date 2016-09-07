@@ -11,6 +11,14 @@
 	font-family: 'Yesteryear', cursive;;
 }
 
+.current-week {
+	font-size: 48px;
+	color: #133453;
+	font-weight: bold;
+	padding-left: 3rem;
+	text-align: center;
+}
+
 .footer-large {
 	margin: 6rem;
 	text-align: center;
@@ -168,6 +176,11 @@
 	background-color: #FFF;
 	border-style: none;
 	padding-bottom: 10rem;	
+}
+
+.schedule-instructions {
+	color: #133453;
+	font-size: 25px;
 }
 
 .schedule-body > tr:nth-child(even) {

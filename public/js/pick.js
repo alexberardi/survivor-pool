@@ -67,6 +67,11 @@ $(function () {
 	});
 });
 
+
+function checkProgress(gameID){
+
+}
+
 function checkActive(){
 	var returnValue = false;
 	$.ajax({
