@@ -54,6 +54,9 @@ $(function () {
 					console.log(data, textStatus, request);
 					if (data.status === 401) {
 						alert("You cannot select the same team twice.");
+					} else if (data.status === 402) {
+						alert("Sorry, the game for your current pick has already started. You may not update your pick this week.");
+						location.reload();
 					}
 				});
 		} else {

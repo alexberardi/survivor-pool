@@ -66,6 +66,12 @@
 	font-weight: bold;
 	padding-left: 5rem;
 }
+.inProgress {
+	background-color: #D3D3D3;
+	pointer-events: none;
+	cursor: default;
+}
+
 
 #backToSchedule a{
 	color: #FFF;
@@ -109,6 +115,12 @@
 
 .pick.current {
 	background-color: #2D882D;
+}
+
+.pick.current.inProgress {
+	background-color: #2D882D;
+	pointer-events: none;
+	cursor: default;
 }
 
 .pick.used {

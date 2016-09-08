@@ -22,12 +22,26 @@ var makePick = function(req, res) {
                 db.userPicks.findOne({where: {userid: body.userid, week: body.week}})
                     .then(function(pick){
                         if(pick) {
-                            return pick.update(body)
-                                .then(function(pick){
-                                    res.json(pick.toJSON());
-                                }, function(e){
-                                    res.status(400).json(e);
-                                });
+                            db.games.findOne({
+                                where: {
+                                    gameid: pick.gameid
+                                }
+                            })
+                                .then( function(currentgame){
+                                    if (currentgame.quarter === 'P') {
+                                        return pick.update(body)
+                                            .then(function(pick){
+                                                res.json(pick.toJSON());
+                                            }, function(e){
+                                                res.status(400).json(e);
+                                            });
+                                    } else {
+                                        res.status(402).send();
+                                    }
+                                }, function(e) {
+                                  res.status(500).send();
+                                })
+
                         } else {
                             db.userPicks.create(body)
                                 .then(function(pick){

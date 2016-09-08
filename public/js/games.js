@@ -32,22 +32,37 @@
 		var currentPick = getRequest('/picks/current/' + getCookie('userid'));
 		var gamesStarted = getRequest(('/games/started'));
 		var currentWeek = '';
+		var currentPickGameStarted = '';
+
+		if (!jQuery.isEmptyObject(gamesStarted))
+		{
+			gamesStarted.forEach(function(gameStarted){
+				if (!jQuery.isEmptyObject(currentPick)){
+					if (gameStarted.hometeamname === currentPick[0].teamname || gameStarted.awayteamname === currentPick[0].teamname){
+						currentPickGameStarted  = ' inProgress';
+					}
+				}
+
+
+			})
+		}
+
 
 		games.forEach(function(game) {
 			var gameInfo = {
 				date: game.gamedate.substring(4, 6) + "/" + game.gamedate.substring(6,8) + "/" + game.gamedate.substring(0,4),
 				hometeam: game.hometeamname,
-				hometeamstyle: 'unused',
+				hometeamstyle: 'unused' + currentPickGameStarted,
 				hometeamscore: game.homescore,
 				hometeamLogo: 'images/' + game.hometeamname.toLowerCase() + '.gif',
 				awayteam: game.awayteamname,
-				awayteamstyle: 'unused',
+				awayteamstyle: 'unused' + currentPickGameStarted,
 				awayteamscore: game.awayscore,
 				awayteamLogo: 'images/' + game.awayteamname.toLowerCase() + '.gif',
 				week: game.week,
 				gameid: game.gameid,
 				quarter: game.quarter,
-				inprogress: ''
+				inprogress: currentPickGameStarted.trim()
 			};
 
 			currentWeek = game.week;
@@ -55,10 +70,10 @@
 			if (!jQuery.isEmptyObject(previousPicks)) {
 				previousPicks.forEach(function (pick) {
 					if (game.hometeamname === pick.teamname) {
-						gameInfo.hometeamstyle = 'used';
+						gameInfo.hometeamstyle = 'used' + currentPickGameStarted;
 					}
 					if (game.awayteamname === pick.teamname) {
-						gameInfo.awayteamstyle = 'used';
+						gameInfo.awayteamstyle = 'used' + currentPickGameStarted;
 					}
 
 				});
@@ -66,11 +81,10 @@
 
 			if (!jQuery.isEmptyObject(currentPick)){
 				if (currentPick[0].teamname === game.hometeamname) {
-					gameInfo.hometeamstyle = 'current';
+					gameInfo.hometeamstyle = 'current' + currentPickGameStarted;
 				} else if (currentPick[0].teamname === game.awayteamname) {
-					gameInfo.awayteamstyle = 'current';
+					gameInfo.awayteamstyle = 'current' + currentPickGameStarted;
 				}
-
 			}
 
 			if (!jQuery.isEmptyObject(gamesStarted)) {
@@ -80,7 +94,6 @@
 						gameInfo.awayteamstyle = gameInfo.awayteamstyle  + ' inProgress';
 						gameInfo.inprogress = 'inProgress';
 					}
-
 				});
 			}
 
@@ -116,3 +129,4 @@ function checkActive(gameInfo){
 			gameInfo.inprogress = 'inProgress';
 		});
 }
+
