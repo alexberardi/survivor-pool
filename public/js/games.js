@@ -50,7 +50,7 @@
 
 		games.forEach(function(game) {
 			var gameInfo = {
-				date: game.gamedate.substring(4, 6) + "/" + game.gamedate.substring(6,8) + "/" + game.gamedate.substring(0,4),
+				date: game.gamedate.substring(4, 6) + "/" + game.gamedate.substring(6,8) + "/" + game.gamedate.substring(0,4) + " @ " + game.time,
 				hometeam: game.hometeamname,
 				hometeamstyle: 'unused' + currentPickGameStarted,
 				hometeamscore: game.homescore,
@@ -61,7 +61,7 @@
 				awayteamLogo: 'images/' + game.awayteamname.toLowerCase() + '.gif',
 				week: game.week,
 				gameid: game.gameid,
-				quarter: game.quarter,
+				quarter: game.quarter == "P" ? "Pregame" : game.quarter,
 				inprogress: currentPickGameStarted.trim()
 			};
 
