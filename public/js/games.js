@@ -6,7 +6,7 @@
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
-	
+
 	function getRequest(address) {
 		var request = null;
 
@@ -111,7 +111,6 @@
 	}
 
 	init();
-
 }(jQuery, Mustache));
 
 function checkActive(gameInfo){
