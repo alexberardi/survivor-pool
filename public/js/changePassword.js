@@ -1,7 +1,11 @@
 $(function () {
 	Foundation.Abide.defaults.patterns['password'] = /^(.){7,}$/;
 	$('#changepass-button').on('click', function() {
-		$("#password-change").submit();
+		if ($("#password").val() == $("#verifypassword").val()) {
+			$("#password-change").submit();
+		} else {
+			$("#password-change").foundation('validateForm');
+		}
 	});
 
 	$('#password-change').on('valid submit', function (e) {

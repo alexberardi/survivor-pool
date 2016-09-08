@@ -1777,7 +1777,7 @@ select {
     background-image: none; }
 
 .is-invalid-input:not(:focus) {
-  background-color: rgba(236, 88, 64, 0.1);
+  background-color: #FFF;
   border-color: #ec5840; }
 
 .is-invalid-label {
