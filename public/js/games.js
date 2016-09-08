@@ -61,7 +61,7 @@
 				awayteamLogo: 'images/' + game.awayteamname.toLowerCase() + '.gif',
 				week: game.week,
 				gameid: game.gameid,
-				quarter: game.quarter,
+				quarter: game.quarter == "P" ? "Pregame" : game.quarter,
 				inprogress: currentPickGameStarted.trim()
 			};
 
