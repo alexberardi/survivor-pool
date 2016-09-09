@@ -24,7 +24,6 @@
 					xAxes: [{
 						ticks: {
 							beginAtZero: true,
-							stepSize: 1
 						}
 					}],
 					yAxes: [{
