@@ -61,11 +61,25 @@
 				awayteamLogo: 'images/' + game.awayteamname.toLowerCase() + '.gif',
 				week: game.week,
 				gameid: game.gameid,
-				quarter: game.quarter == "P" ? "Pregame" : game.quarter,
+				quarter: game.quarter,
 				inprogress: currentPickGameStarted.trim()
 			};
 
 			currentWeek = game.week;
+
+			switch(game.quarter) {
+				case "P":
+					game.quarter = "Pregame";
+					break;
+				case "H":
+					game.quarter = "Half-Time";
+					break;
+				case "F":
+					game.quarter = "Finished";
+					break;
+				default:
+					game.quarter = game.quarter;
+			}
 
 			if (!jQuery.isEmptyObject(previousPicks)) {
 				previousPicks.forEach(function (pick) {
