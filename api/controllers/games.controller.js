@@ -63,8 +63,8 @@ var updateGames = function(req, res) {
     var gameid = parseInt(req.params.gameid, 10);
     var body = _.pick(req.body, 'homescore', 'awayscore', 'quarter');
 
-    body.homescore = parseInt(body.homescore);
-    body.awayscore = parseInt(body.awayscore)
+    body.homescore = parseInt(body.homescore, 10);
+    body.awayscore = parseInt(body.awayscore, 10)
 
     db.games.findOne({
         where: {
