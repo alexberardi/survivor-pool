@@ -1,18 +1,3 @@
-function getRequest(address) {
-    var request = null;
-
-    $.ajax({
-        type: "GET",
-        url: address,
-        async: false
-    })
-        .done(function(data) {
-            request = data;
-        });
-
-    return request;
-}
-
 function putRequest(game) {
     var request = null;
     var address = '/games/liveUpdate/' + game.gsis;
@@ -45,7 +30,7 @@ function putRequest(game) {
 
 
 function updateScores(){
-    var games = getRequest('http://www.nfl.com/liveupdate/scorestrip/ss.json');
+    var games = getRequestNoAuth('http://www.nfl.com/liveupdate/scorestrip/ss.json');
 
     games.gms.forEach(function(game){
        putRequest(game);

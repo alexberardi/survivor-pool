@@ -239,9 +239,13 @@
 }
 
 .standings {
-	background-color: #362C6A;
-	color: #FFF;
+	background-color: #FFF;
+	color: #362C6A;
 	height: 90vh;
+}
+
+.standings-chart {
+	padding-left: 3rem;
 }
 
 .standings-header {
@@ -253,8 +257,8 @@
 	padding-left: 3rem;
 	font-family: 'Yesteryear', cursive;
 	font-size: 72px;
-	color: #FFF;
-	padding-left: 3rem;
+	color: #362C6A;
+	padding-left: 5rem;
 }
 
 .standings-body > tr:nth-child(even) {
