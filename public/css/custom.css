@@ -285,3 +285,7 @@
 #userentry {
 	padding-top: 1.5rem;
 }
+
+@media (max-width: 439px) {
+	.standings-chart {display: none;}
+}
