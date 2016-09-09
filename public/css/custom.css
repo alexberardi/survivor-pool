@@ -22,6 +22,7 @@
 .footer-large {
 	margin: 6rem;
 	text-align: center;
+	color: #133453;
 }
 
 .hero-home {
@@ -92,7 +93,7 @@
 
 .news {
 	padding-top: 9rem;
-	padding-bottom: 15rem;
+	padding-bottom: 20rem;
 	background-color: #362C6A;
 	padding-left: 1rem;
 	color: #FFF;
@@ -216,6 +217,12 @@
 	font-size: 72px;
 	color: #362C6A;
 	padding-left: 3rem;
+}
+
+.signature {
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
 }
 
 .sign-up {
