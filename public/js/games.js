@@ -67,18 +67,18 @@
 
 			currentWeek = game.week;
 
-			switch(game.quarter) {
+			switch(gameInfo.quarter) {
 				case "P":
-					game.quarter = "Pregame";
+					gameInfo.quarter = "Pregame";
 					break;
 				case "H":
-					game.quarter = "Half-Time";
+					gameInfo.quarter = "Half-Time";
 					break;
 				case "F":
-					game.quarter = "Finished";
+					gameInfo.quarter = "Final";
 					break;
 				default:
-					game.quarter = game.quarter;
+					gameInfo.quarter = gameInfo.quarter;
 			}
 
 			if (!jQuery.isEmptyObject(previousPicks)) {
