@@ -29,9 +29,19 @@
 
 		return request;
 	}
+
+	function createChart(data) {
+		var chartCanvas = $("#bar-chart");
+		var standingsChart = new Chart(chartCanvas, {
+			type: 'horizontalBar',
+			data: data
+		});
+	}
 	
 	function init() {
 		var standings = getRequest(settings.standingsURL);
+		var barPlayers = [];
+		var barData = [];
 		
 		standings = standings[0];
 		standings.forEach(function(standing) {
@@ -41,8 +51,22 @@
 				playername: standing.first + ' ' + standing.last
 			};
 
+			barPlayers.push(standings.playername + " (" +standings.teamName + ")");
+			barData.push(standings.streak);
+
 			$(settings.tableAppend).append(M.to_html($(settings.rowTemplate).html(), standingsInfo));
 		});
+
+		var data = {
+			labels: barPlayers,
+			datasets: [{
+				label: "Standings",
+				fillcolor: "#133453",
+				strokeColor: "#133454",
+				data: barData
+			}]
+		};
+		createChart(data);
 	}
 	
 	init();
