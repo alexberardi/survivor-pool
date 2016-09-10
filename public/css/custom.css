@@ -245,6 +245,11 @@
 
 }
 
+.statistics {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
 .standings-header {
 	color: #133453;
 	border-style: none;

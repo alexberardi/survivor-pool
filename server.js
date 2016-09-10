@@ -39,6 +39,10 @@ app.get('/users',  middleware.requireAuthentication, function(req, res) {
 	ctrlUsers.usersGetAll(req, res);
 });
 
+app.get('/users/count', middleware.requireAuthentication, function(req, res) {
+	ctrlUsers.userGetCountAll(req, res);
+});
+
 app.post('/users', function(req, res) {
 	ctrlUsers.userCreate(req, res);
 });
@@ -100,6 +104,10 @@ app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res)
 //STREAK REQUESTS
 app.get('/streak/active/:userid', middleware.requireAuthentication,  function(res, req){
 	ctrlUserStreaks.checkActive(res, req);
+});
+
+app.get('/streak/count/active', middleware.requireAuthentication, function(res, req){
+	ctrlUserStreaks.getCountActive(res, req);
 });
 
 app.post('/streak', function (req, res) {
