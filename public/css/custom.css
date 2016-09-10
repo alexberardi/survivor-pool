@@ -242,15 +242,22 @@
 	background-color: #FFF;
 	color: #362C6A;
 	height: 90vh;
+
 }
 
 .standings-chart {
 	padding-left: 3rem;
 }
 
+.standings-info {
+	float: right;
+	display: none;
+}
+
 .standings-header {
 	color: #133453;
 	border-style: none;
+	display: none;
 }	
 
 .standings-title {
@@ -286,8 +293,15 @@
 	padding-top: 1.5rem;
 }
 
+#standingsTable {
+	display: none;
+}
+
 @media (max-width: 439px) {
-	.standings-chart {display: none;}
+  	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* ----------- iPhone 4 and 4S ----------- */
@@ -298,7 +312,11 @@
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
+
 
 /* Portrait */
 @media only screen 
@@ -307,6 +325,9 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Landscape */
@@ -316,6 +337,9 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* ----------- iPhone 5 and 5S ----------- */
@@ -326,6 +350,9 @@
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Portrait */
@@ -335,6 +362,9 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Landscape */
@@ -344,6 +374,9 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* ----------- iPhone 6 ----------- */
@@ -353,7 +386,10 @@
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) {
-  	.standings-chart {display: none;} 
+  	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Portrait */
@@ -362,7 +398,10 @@
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
-  	.standings-chart {display: none;} 
+  	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Landscape */
@@ -372,6 +411,9 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) { 
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* ----------- iPhone 6+ ----------- */
@@ -382,6 +424,9 @@
   and (max-device-width: 736px) 
   and (-webkit-min-device-pixel-ratio: 3) { 
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Portrait */
@@ -391,6 +436,9 @@
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: portrait) { 
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
 
 /* Landscape */
@@ -400,4 +448,7 @@
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: landscape) { 
   	.standings-chart {display: none;}
+  	#standingsTable {display: inline;}
+	.standings-header {display: inline;}
+	.standings-info {display: inline;}
 }
