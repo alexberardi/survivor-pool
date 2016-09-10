@@ -42,7 +42,6 @@
 	<div class="row">
 		<div class="small-12">
 			<span class="standings-title">Standings</span>
-      <span class="standings-info info label"><i class="fi-widget"></i>View on Desktop for a chart</span><div>
 		</div>
 		 <table id="standingsTable">
             <thead>
@@ -53,28 +52,20 @@
               </tr>
             </thead>
             <tbody class="standings-body " id="standings-table">
-		<script type="text/template" id="TableRow">
+		          <script type="text/template" id="TableRow">
               <tr>
                 <td>{{streak}}</td>
                 <td>{{teamname}}</td>
                 <td>{{playername}}</td>
               </tr>
-        </script>
+              </script>
+        </tbody>
+      </table>
 	</div>
 </section>
-<section class="standings-chart">
-  <div class="row">
-    <div class="small-12">
-      <canvas id="bar-chart" width="800" height="600"></canvas>
-    </div>
-  </div>
-</section>
-
 
 
    	<script src="js/jquery.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
     <script src="js/getRequest.js"></script>
   	<script src="js/checkLogin.js"></script>
     <script src="js/getCookie.js"></script>
