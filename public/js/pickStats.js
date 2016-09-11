@@ -46,10 +46,7 @@ var teamColorsMap = {
 			data: data,
 			options: {
 				legend: {
-					labels: {
-						boxWidth: 20,
-						fontSize: 12
-					}
+					display: false
 				},
 				tooltips: {
 					backgroundColor: "#133453"
