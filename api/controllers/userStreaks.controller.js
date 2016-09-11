@@ -37,6 +37,17 @@ var getStandings = function(req, res) {
         });
 };
 
+
+var getCountActive = function(req, res) {
+    db.sequelize.query("SELECT COUNT(*) FROM userStreaks WHERE current = true", { type: db.sequelize.QueryTypes.SELECT})
+        .then(function(streaks){
+            res.json(streaks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+};
+
 var checkActive = function (req, res) {
     var userid = parseInt(req.params.userid, 10);
     db.userStreaks.findOne({
@@ -57,6 +68,7 @@ var checkActive = function (req, res) {
 module.exports = {
     updateStreak: updateStreak,
     getStandings: getStandings,
-    checkActive: checkActive
+    checkActive: checkActive,
+    getCountActive: getCountActive
 };
 

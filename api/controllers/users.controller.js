@@ -9,7 +9,17 @@ var usersGetAll = function(req, res) {
         .catch(function(e){
             res.status(400).send();
         });
-}
+};
+
+var userGetCountAll = function(req, res){
+    db.sequelize.query("SELECT COUNT(*) FROM users", { type: db.sequelize.QueryTypes.SELECT})
+        .then(function(count){
+            res.json(count);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+    });
+};
 
 var userCreate = function(req,res){
     var body = _.pick(req.body, 'first', 'last', 'email', 'password', 'teamname');
@@ -51,7 +61,7 @@ var userLogin = function(req, res) {
         .catch(function(e) {
             res.status(401).send();
         });
-}
+};
 
 var userLogout = function(req, res) {
     middleware.requireAuthentication
@@ -175,5 +185,6 @@ module.exports = {
     userLogout: userLogout,
     updateTeamName: updateTeamName,
     updatePassword: updatePassword,
-    updateEmail: updateEmail
+    updateEmail: updateEmail,
+    userGetCountAll: userGetCountAll 
 };

@@ -39,6 +39,10 @@ app.get('/users',  middleware.requireAuthentication, function(req, res) {
 	ctrlUsers.usersGetAll(req, res);
 });
 
+app.get('/users/count', middleware.requireAuthentication, function(req, res) {
+	ctrlUsers.userGetCountAll(req, res);
+});
+
 app.post('/users', function(req, res) {
 	ctrlUsers.userCreate(req, res);
 });
@@ -72,6 +76,10 @@ app.get ('/games/started',  middleware.requireAuthentication, function(req, res)
 	ctrlGames.getStartedGames(req, res);
 });
 
+app.get('/games/week/current', middleware.requireAuthentication, function(req, res){
+	ctrlGames.getCurrentWeek(req, res);
+});
+
 
 app.put('/games/liveUpdate/:gameid', middleware.requireAuthentication, function(req, res){
 	ctrlGames.updateGames(req, res);
@@ -92,6 +100,10 @@ app.get('/picks/current/:userid', middleware.requireAuthentication,  function(re
 	ctrlUserPicks.getCurrentPicks(req, res);
 });
 
+app.get('/picks/popular', middleware.requireAuthentication, function(req, res){
+	ctrlUserPicks.getPopularPicks(req, res);
+});
+
 app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res){
 	ctrlUserPicks.makePick(req, res);
 });
@@ -100,6 +112,10 @@ app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res)
 //STREAK REQUESTS
 app.get('/streak/active/:userid', middleware.requireAuthentication,  function(res, req){
 	ctrlUserStreaks.checkActive(res, req);
+});
+
+app.get('/streak/count/active', middleware.requireAuthentication, function(res, req){
+	ctrlUserStreaks.getCountActive(res, req);
 });
 
 app.post('/streak', function (req, res) {
