@@ -89,6 +89,19 @@ var getPicks = function(req, res) {
         });
 };
 
+
+var getPopularPicks = function(req, res) {
+    var week = parseInt(req.query.week);
+
+    db.sequelize.query("SELECT teamname, count(teamname) FROM userpicks WHERE week='" + week + "' GROUP BY teamname")
+        .then(function(picks){
+            res.json(picks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+};
+
 var getCurrentPicks = function(req, res) {
     var userID = parseInt(req.params.userid, 10);
     db.games.max('week')
@@ -114,5 +127,6 @@ var getCurrentPicks = function(req, res) {
 module.exports = {
     makePick: makePick,
     getPicks: getPicks,
-    getCurrentPicks: getCurrentPicks
+    getCurrentPicks: getCurrentPicks,
+    getPopularPicks: getPopularPicks
 };

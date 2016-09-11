@@ -76,6 +76,10 @@ app.get ('/games/started',  middleware.requireAuthentication, function(req, res)
 	ctrlGames.getStartedGames(req, res);
 });
 
+app.get('/games/week/current', middleware.requireAuthentication, function(req, res){
+	ctrlGames.getCurrentWeek(req, res);
+});
+
 
 app.put('/games/liveUpdate/:gameid', middleware.requireAuthentication, function(req, res){
 	ctrlGames.updateGames(req, res);
@@ -94,6 +98,10 @@ app.get('/picks/user/:userid', middleware.requireAuthentication,  function(req, 
 
 app.get('/picks/current/:userid', middleware.requireAuthentication,  function(req, res){
 	ctrlUserPicks.getCurrentPicks(req, res);
+});
+
+app.get('/picks/popular', middleware.requireAuthentication, function(req, res){
+	ctrlUserPicks.getPopularPicks(req, res);
 });
 
 app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res){

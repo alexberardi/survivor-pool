@@ -6,24 +6,6 @@
 		rowTemplate: $("#TableRow"),
 		tableAppend: "#schedule",
 	};
-
-	function getRequest(address) {
-		var request = null;
-
-		$.ajax({
-			type: "GET",
-			url: address,
-			headers: {
-				'Auth': getCookie('Auth')
-			},
-			async: false
-		})
-			.done(function(data) {
-				request = data;
-			});
-
-		return request;
-	}
 	
 	function init() {
 		updateScores();

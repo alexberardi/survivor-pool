@@ -57,7 +57,7 @@ var getWeeklyGames = function(req, res){
         .catch(function(e){
             return res.status(500).json(e);
         });
-};
+}
 
 var updateGames = function(req, res) {
     var gameid = parseInt(req.params.gameid, 10);
@@ -97,9 +97,20 @@ var getStartedGames = function(req, res) {
         });
 }
 
+var getCurrentWeek = function(req, res) {
+    db.games.max('week')
+        .then(function(max){
+            res.json(max);
+        })
+        .catch(function(e){
+            res.status(500).json(e);
+        })   
+}
+
 module.exports = {
     populateGames: populateGames,
     getWeeklyGames: getWeeklyGames,
     updateGames: updateGames,
-    getStartedGames: getStartedGames
+    getStartedGames: getStartedGames,
+    getCurrentWeek: getCurrentWeek
 }

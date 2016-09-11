@@ -40,8 +40,14 @@
   </div>
 <section class="statistics">
   <div class="row">
-    <div class="small-4">
-      <canvas id="pieChart" width="200" height="100"></canvas>
+    <div class="small-4 columns">
+      <canvas id="survivorsChart" width="200" height="100"></canvas>
+    </div>
+    <div class="small-4 columns">
+      <canvas id="popularCurrent" width="200" height="100"></canvas>
+    </div>
+    <div class="small-4 columns">
+      <canvas id="popularLast" width="200" height="100"></canvas>
     </div>
   </div>
 </section>
@@ -86,6 +92,7 @@
     <script src="js/logout.js"></script>
     <script src="js/standings.js"></script>
     <script src="js/getActive.js"></script>
+    <script src="js/pickStats.js"></script>
     </script>
     <script>
     $(document).foundation()

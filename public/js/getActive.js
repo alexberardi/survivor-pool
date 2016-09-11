@@ -1,7 +1,7 @@
 $(function () {
 
-	function createChart(data){
-		var chartCanvas = $("#pieChart");
+	function createActiveChart(data){
+		var chartCanvas = $("#survivorsChart");
 		var activeChart = new Chart(chartCanvas, {
 			type: 'doughnut',
 			animation: {
@@ -41,5 +41,5 @@ $(function () {
 
 	};
 
-	createChart(data);
+	createActiveChart(data);
 });
