@@ -25,9 +25,8 @@ $(function () {
 	var activeUsers = getRequest('/streak/count/active');
 	var totalUsers = getRequest('/users/count');
 	var inactiveUsers = totalUsers[0]['count'] - activeUsers[0]['count'];
-	console.log(totalUsers[0]['count']);
-	console.log(activeUsers[0]['count']);
-	console.log(inactiveUsers);
+	if (inactiveUsers < 0)
+		inactiveUsers = 0;
 
 	var data = {
 		labels: [
