@@ -56,49 +56,6 @@ var teamColorsMap = {
 		});
 	}
 
-	function currentPicksPie(){
-		var currentWeek = getRequest('/games/week/current');
-		var data = {
-			"week": currentWeek
-		};
-
-		var currentPicks = getRequestWithData('/picks/popular', data);
-		var teamNames = [];
-		var teamCount = [];
-		var teamColors = [];
-
-		picks = currentPicks[0];
-		picks.forEach(function(pick) {
-			var popularPicks = {
-				count: pick['count'],
-				teamname: pick['teamname']
-			};
-
-
-			teamNames.push(popularPicks.teamname);
-			teamCount.push(popularPicks.count);
-
-			var team = popularPicks.teamname;
-
-			if (team == "49ers") {
-				teamColors.push(teamColorsMap.FortyNiners);
-			} else {				
-				teamColors.push(teamColorsMap[team]);
-			}
-			
-		});
-
-		var data = {
-				labels: teamNames,
-				datasets: [{
-					data: teamCount,
-					backgroundColor: teamColors
-				}]
-			};
-		
-		createPopularChart(data, "popularCurrent", "Popular teams this week");
-	}
-
 	function lastWeekPicksPie(){
 		var currentWeek = getRequest('/games/week/current');
 		if (currentWeek == 1){
@@ -147,5 +104,4 @@ var teamColorsMap = {
 	}
 
 	lastWeekPicksPie();
-	currentPicksPie();
 });
