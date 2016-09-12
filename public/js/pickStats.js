@@ -54,7 +54,6 @@ var teamColorsMap = {
 				}
 			}
 		});
-		console.log('chart created');
 	}
 
 	function currentPicksPie(){
@@ -70,20 +69,16 @@ var teamColorsMap = {
 
 		picks = currentPicks[0];
 		picks.forEach(function(pick) {
-			console.log(pick);
 			var popularPicks = {
 				count: pick['count'],
 				teamname: pick['teamname']
 			};
 
-			console.log('current count', popularPicks.count);
-			console.log('current team', popularPicks.teamname);
 
 			teamNames.push(popularPicks.teamname);
 			teamCount.push(popularPicks.count);
 
 			var team = popularPicks.teamname;
-			console.log('currentTeam', team);
 
 			if (team == "49ers") {
 				teamColors.push(teamColorsMap.FortyNiners);
@@ -128,14 +123,10 @@ var teamColorsMap = {
 				teamname: pick['teamname']
 			};
 
-			console.log('current count', popularPicks.count);
-			console.log('current team', popularPicks.teamname);
-
 			teamNames.push(popularPicks.teamname);
 			teamCount.push(popularPicks.count);
 
 			var team = popularPicks.teamname;
-			console.log('lastteam', team);
 
 			if (team == "49ers") {
 				teamColors.push(teamColorsMap.FortyNiners);
