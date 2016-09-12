@@ -59,6 +59,8 @@
 				case "F":
 					gameInfo.quarter = "Final";
 					break;
+				case "FO":
+					gameInfo.quarter = "Final / Overtime";
 				default:
 					gameInfo.quarter = gameInfo.quarter;
 			}
