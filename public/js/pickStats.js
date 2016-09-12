@@ -70,6 +70,7 @@ var teamColorsMap = {
 
 		picks = currentPicks[0];
 		picks.forEach(function(pick) {
+			console.log(pick);
 			var popularPicks = {
 				count: pick['count(teamname)'],
 				teamname: pick['teamname']
