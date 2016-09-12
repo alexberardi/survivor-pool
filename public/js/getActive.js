@@ -26,7 +26,7 @@ $(function () {
 	var totalUsers = getRequest('/users/count');
 	console.log(totalUsers);
 	console.log(activeUsers);
-	var inactiveUsers = totalUsers['count'] - activeUsers['count'];
+	var inactiveUsers = totalUsers[0]['count'] - activeUsers[0]['count'];
 	console.log(inactiveUsers);
 
 	var data = {
@@ -35,7 +35,7 @@ $(function () {
 			"Sunk"
 		],
 		datasets: [{
-			data: [activeUsers.count, inactiveUsers],
+			data: [activeUsers[0]['count'], inactiveUsers],
 			backgroundColor: [
 				"#362C6A",
 				"#9A151F"
