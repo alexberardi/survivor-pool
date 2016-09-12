@@ -43,9 +43,9 @@ app.get('/users/count', middleware.requireAuthentication, function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
 
-app.post('/users', function(req, res) {
-	ctrlUsers.userCreate(req, res);
-});
+//app.post('/users', function(req, res) {
+//	ctrlUsers.userCreate(req, res);
+//});
 
 app.post('/users/login', function(req, res){
 	ctrlUsers.userLogin(req, res);
