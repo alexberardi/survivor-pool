@@ -2,6 +2,11 @@
 	text-align: center;
 }
 
+#backToSchedule a{
+	color: #FFF;
+
+}
+
 .current-pick-info{
 	font-size: 48px;
 	text-align: center;
@@ -74,14 +79,6 @@
 }
 
 
-#backToSchedule a{
-	color: #FFF;
-
-}
-#pickHistory a {
-	color: #362C6A
-}
-
 .nav {
 	background-color: #801515;
 }
@@ -103,6 +100,11 @@
 	font-family: 'Yesteryear', cursive;
 	font-size: 72px;
 	padding-left: 3rem;
+}
+
+
+#pickHistory a {
+	color: #362C6A
 }
 
 .pick > img:hover {
@@ -271,6 +273,12 @@
 
 .standings-body > tr:nth-child(odd) {
 	color: #362C6A;
+}
+
+.sunk {
+	background-color: #9A151F;
+	color: #FFF;
+	font-weight: bold;
 }
 
 .title-bar {

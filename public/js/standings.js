@@ -16,7 +16,8 @@
 			var standingsInfo = {
 				streak: standing.total,
 				teamname: standing.teamname,
-				playername: standing.first + ' ' + standing.last
+				playername: standing.first + ' ' + standing.last,
+				active: standing.current ? "swimming" : "sunk"
 			};
 
 
