@@ -82,7 +82,7 @@ var teamColorsMap = {
 			teamCount.push(popularPicks.count);
 
 			var team = popularPicks.teamname;
-			console.log('currentTeam' team);
+			console.log('currentTeam', team);
 
 			if (team == "49ers") {
 				teamColors.push(teamColorsMap.FortyNiners);
