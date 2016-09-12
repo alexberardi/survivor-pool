@@ -24,7 +24,10 @@ $(function () {
 
 	var activeUsers = getRequest('/streak/count/active');
 	var totalUsers = getRequest('/users/count');
-	var inactiveUsers = totalUsers.count - activeUsers.count;
+	console.log(totalUsers);
+	console.log(activeUsers);
+	var inactiveUsers = totalUsers['count'] - activeUsers['count'];
+	console.log(inactiveUsers);
 
 	var data = {
 		labels: [
