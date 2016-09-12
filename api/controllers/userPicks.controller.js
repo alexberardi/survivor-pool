@@ -93,7 +93,7 @@ var getPicks = function(req, res) {
 var getPopularPicks = function(req, res) {
     var week = parseInt(req.query.week);
 
-    db.sequelize.query("SELECT teamname, count(teamname) FROM userpicks WHERE week='" + week + "' GROUP BY teamname")
+    db.sequelize.query("SELECT teamname, count(teamname) as count FROM userpicks WHERE week='" + week + "' GROUP BY teamname")
         .then(function(picks){
             res.json(picks);
         })

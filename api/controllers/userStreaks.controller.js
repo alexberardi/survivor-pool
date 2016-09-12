@@ -39,7 +39,7 @@ var getStandings = function(req, res) {
 
 
 var getCountActive = function(req, res) {
-    db.sequelize.query("SELECT COUNT(*) FROM userStreaks WHERE current = true", { type: db.sequelize.QueryTypes.SELECT})
+    db.userStreaks.count({where: {current: true}})
         .then(function(streaks){
             res.json(streaks);
         })

@@ -24,7 +24,7 @@ $(function () {
 
 	var activeUsers = getRequest('/streak/count/active');
 	var totalUsers = getRequest('/users/count');
-	var inactiveUsers = totalUsers[0]['count'] - activeUsers[0]['count'];
+	var inactiveUsers = totalUsers - activeUsers;
 	if (inactiveUsers < 0)
 		inactiveUsers = 0;
 
@@ -34,7 +34,7 @@ $(function () {
 			"Sunk"
 		],
 		datasets: [{
-			data: [activeUsers[0]['count'], inactiveUsers],
+			data: [activeUsers, inactiveUsers],
 			backgroundColor: [
 				"#362C6A",
 				"#9A151F"
