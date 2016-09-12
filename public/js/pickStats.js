@@ -72,7 +72,7 @@ var teamColorsMap = {
 		picks.forEach(function(pick) {
 			console.log(pick);
 			var popularPicks = {
-				count: pick['count(teamname)'],
+				count: pick['count'],
 				teamname: pick['teamname']
 			};
 
@@ -124,7 +124,7 @@ var teamColorsMap = {
 		picks = lastPicks[0];
 		picks.forEach(function(pick) {
 			var popularPicks = {
-				count: pick['count(teamname)'],
+				count: pick['count'],
 				teamname: pick['teamname']
 			};
 
