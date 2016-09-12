@@ -34,15 +34,12 @@ var teamColorsMap = {
 	Buccaneers: "#D50A0A",
 	Titans: "#4B92DB",
 	Redskins: "#773141"
-}
+};
 
 	function createPopularChart(data, chartID, title){
 		var chartCanvas = $("#" + chartID);
 		var activeChart = new Chart(chartCanvas, {
 			type: 'doughnut',
-			animation: {
-				animateScale: true,
-			},
 			data: data,
 			options: {
 				legend: {
@@ -57,6 +54,7 @@ var teamColorsMap = {
 				}
 			}
 		});
+		console.log('chart created');
 	}
 
 	function currentPicksPie(){
@@ -64,6 +62,7 @@ var teamColorsMap = {
 		var data = {
 			"week": currentWeek
 		};
+
 		var currentPicks = getRequestWithData('/picks/popular', data);
 		var teamNames = [];
 		var teamCount = [];
@@ -76,10 +75,14 @@ var teamColorsMap = {
 				teamname: pick['teamname']
 			};
 
+			console.log('current count', popularPicks.count);
+			console.log('current team', popularPicks.teamname);
+
 			teamNames.push(popularPicks.teamname);
 			teamCount.push(popularPicks.count);
 
 			var team = popularPicks.teamname;
+			console.log('currentTeam' team);
 
 			if (team == "49ers") {
 				teamColors.push(teamColorsMap.FortyNiners);
@@ -124,10 +127,14 @@ var teamColorsMap = {
 				teamname: pick['teamname']
 			};
 
+			console.log('current count', popularPicks.count);
+			console.log('current team', popularPicks.teamname);
+
 			teamNames.push(popularPicks.teamname);
 			teamCount.push(popularPicks.count);
 
 			var team = popularPicks.teamname;
+			console.log('lastteam', team);
 
 			if (team == "49ers") {
 				teamColors.push(teamColorsMap.FortyNiners);
