@@ -38,6 +38,19 @@
       </div>
     </div>
   </div>
+<section class="statistics">
+  <div class="row">
+    <div class="small-4 columns">
+      <canvas id="survivorsChart" width="200" height="100"></canvas>
+    </div>
+    <div class="small-4 columns">
+      <canvas id="popularCurrent" width="200" height="100"></canvas>
+    </div>
+    <div class="small-4 columns">
+      <canvas id="popularLast" width="200" height="100"></canvas>
+    </div>
+  </div>
+</section>
 <section class="standings">
 	<div class="row">
 		<div class="small-12">
@@ -69,6 +82,7 @@
 
 
    	<script src="js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
     <script src="js/getRequest.js"></script>
   	<script src="js/checkLogin.js"></script>
     <script src="js/getCookie.js"></script>
@@ -77,6 +91,8 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/standings.js"></script>
+    <script src="js/getActive.js"></script>
+    <script src="js/pickStats.js"></script>
     </script>
     <script>
     $(document).foundation()
