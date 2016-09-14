@@ -10,10 +10,6 @@ module.exports = function(sequelize, DataTypes){
 		teamcity: {
 			type: DataTypes.STRING,
 			allowNull: false
-		},
-		teamtype: {
-			type: DataTypes.STRING,
-			allowNull: true
 		}
 	});
 };
