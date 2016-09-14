@@ -102,7 +102,6 @@
 	padding-left: 3rem;
 }
 
-
 #pickHistory a {
 	color: #362C6A
 }
@@ -238,6 +237,11 @@
 	font-size: 72px;
 	color: #362C6A;
 	padding-left: 3rem;
+}
+
+.slide-content {
+	padding-left: 5rem;
+	padding-right: 5rem;
 }
 
 .standings {
