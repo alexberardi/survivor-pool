@@ -66,21 +66,30 @@ var updateGames = function(req, res) {
     body.homescore = parseInt(body.homescore, 10);
     body.awayscore = parseInt(body.awayscore, 10)
 
-    db.games.findOne({
-        where: {
-            gameid: gameid
-        }
-    })
-        .then(function(game) {
-            game.update(body)
-                .then(function(game){
-                    res.json(game.toJSON());
-                })
+    db.games.max('week')
+        .then(function(max) {
+            db.games.findOne({
+                where: {
+                    gameid: gameid,
+                    week: max
+                }
+            })
+                .then(function(game) {
+                    game.update(body)
+                        .then(function(game){
+                            res.json(game.toJSON());
+                        })
 
+                })
+                .catch(function(e){
+                    res.status(400).send();
+                });
         })
         .catch(function(e){
-            res.status(400).send();
-        })
+           res.status(400).send();
+        });
+
+
 }
 
 var getStartedGames = function(req, res) {
