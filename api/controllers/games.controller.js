@@ -66,44 +66,43 @@ var updateGames = function(req, res) {
     body.homescore = parseInt(body.homescore, 10);
     body.awayscore = parseInt(body.awayscore, 10)
 
-    db.games.max('week')
-        .then(function(max) {
-            db.games.findOne({
-                where: {
-                    gameid: gameid,
-                    week: max
-                }
-            })
-                .then(function(game) {
-                    game.update(body)
-                        .then(function(game){
-                            res.json(game.toJSON());
-                        })
-
+    db.games.findOne({
+        where: {
+            gameid: gameid
+        }
+    })
+        .then(function(game) {
+            game.update(body)
+                .then(function(game){
+                    res.json(game.toJSON());
                 })
-                .catch(function(e){
-                    res.status(400).send();
-                });
+
         })
         .catch(function(e){
-           res.status(400).send();
-        });
-
-
+            res.status(400).send();
+        })
 }
 
 var getStartedGames = function(req, res) {
-    db.games.findAll({
-        where: {
-            quarter: {$ne : 'P'}
-        }
-    })
-        .then(function(game){
-            res.json(game);
+    db.games.max('week')
+        .then(function(max) {
+            db.games.findAll({
+                where: {
+                    quarter: {$ne : 'P'},
+                    week: max
+                }
+            })
+                .then(function(game){
+                    res.json(game);
+                })
+                .catch(function(e){
+                    res.status(500).send();
+                });
         })
-        .catch(function(e){
-            res.status(500).send();
+        .catch(function(e) {
+           res.status(400).send();
         });
+
 }
 
 var getCurrentWeek = function(req, res) {
