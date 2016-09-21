@@ -24,6 +24,15 @@
 	text-align: center;
 }
 
+.current-week-admin {
+	font-size: 24px;
+	color: #133453;
+	font-weight: bold;
+	padding-left: 3rem;
+	text-align: center;
+}
+
+
 .footer-large {
 	margin: 6rem;
 	text-align: center;

@@ -108,6 +108,9 @@ app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res)
 	ctrlUserPicks.makePick(req, res);
 });
 
+app.get('/picks/admins', middleware.requireAuthentication, function(req,res){
+	ctrlUserPicks.getAdminPicks(req,res);
+});
 
 //STREAK REQUESTS
 app.get('/streak/active/:userid', middleware.requireAuthentication,  function(res, req){

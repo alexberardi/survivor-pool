@@ -89,6 +89,18 @@ var getPicks = function(req, res) {
         });
 };
 
+var getAdminPicks = function(req, res) {
+    var week = parseInt(req.query.week);
+
+    db.sequelize.query("SELECT U.Id, U.email, UP.TeamName, UP.Week FROM users U JOIN UserPicks UP ON UP.UserID = U.ID WHERE U.ID IN (1,5) AND Week = " + week)
+        .then(function(picks){
+            res.json(picks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+};
+
 
 var getPopularPicks = function(req, res) {
     var week = parseInt(req.query.week);
@@ -128,5 +140,6 @@ module.exports = {
     makePick: makePick,
     getPicks: getPicks,
     getCurrentPicks: getCurrentPicks,
-    getPopularPicks: getPopularPicks
+    getPopularPicks: getPopularPicks,
+    getAdminPicks: getAdminPicks
 };
