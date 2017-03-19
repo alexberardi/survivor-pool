@@ -1,4 +1,4 @@
-#Survivor Pool
+# Survivor Pool
 
 A 'suicide' or 'survivor' game for the NFL regular season.
 Users can register and log in weekly to pick their one team to win for the week, but keep in mind a team can only be picked once!
