@@ -1,94 +1,14 @@
-<!doctype html>
-<html class="no-js" lang="en" dir="ltr">
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survivor Pool</title>
-    <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="/images/manifest.json">
-    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#362c6a">
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <meta name="msapplication-config" content="/images/browserconfig.xml">
-    <meta name="theme-color" content="#362c6a">
-  </head>
-  <body>
-    <div id="top">
-    </div>
-      <div data-sticky-container id="sticky-menu">
-        <div class="title-bar" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="1" data-btm-anchor="sign-up">
-          <div class="title-bar-left">
-          <center>
-            <span class="titlebar-logo">
-              Survivor Pool
-            </span>
-          </center>
-            <div class="button-group">
-              <a class="button" href="#top">Home</a>
-              <a class="button" href="#rules">Rules</a>
-              <a class="button item" href="#sign-up">Sign Up</a>
-            </div>
-          </div>
-        <div class="title-bar-right" id="userentry">
-          <form data-abide id="login-form">
-            <ul class="menu" id="login">
-              <li><input type="email" id="login-email" placeholder="Email" required></li>
-              <li><input type="password" id="login-pass" placeholder="Password" required></li>
-              <li><button type="submit" class="purple-button button" id="login-button" value="submit">Login</button></li>
-            </ul>
-          </form>
-          <ul class="menu" id="logout" style="display:none;"><li><button type="button" class="button" id="logout-button">Logout</button></li></ul>
-        </div>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html>
 
-    <section class="hero-home">
-    	<div class="row small-12" id="home">
-    			<div class="hero-title">Survivor Pool</div>
-          <span>sink or swim</span>
-    	</div>
-    </section>
+<head>
+  <meta charset="UTF-8"/>
+</head>
 
-    <section class="rules" id="rules">
-    	<div class="row small-12">
-    		<span class="rules-header">Game Rules</span>
-            <p>
-                <ul>
-                    <li>Each week, you must select a team that you think will win.</li>
-                    <li>If they win, you swim onto the next week. </li>
-                    <li>If they lose, you're sunk.</li>
-                    <li>You can only pick a team once the entire season.</li>
-                </ul>
-            </p>
-    	</div>
-    </section>
+<body>
+  <div id="app"></div>
 
-    <section id="sign-up">
-	     <div class="row">
-        <div class="small-12 columns sign-up">
-          <span class="signup-title">Registration for Season 1 is closed.</span>
-        </div>
-      </div>
-  </section>
+  <script src="bundle.js"></script>
+</body>
 
-  	<footer class="footer-large">
-  		Made with love <a href="https://github.com/alexberardi/survivor-pool"><img src="images/GitHub32px.png" alt="github pic"></img></a>
-  	</footer>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/what-input.js"></script>
-    <script src="js/foundation.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/logout.js"></script>
-    <script src="js/getCookie.js"></script>
-    <script>
-    $(document).foundation()
-    </script>
-
-  </body>
 </html>
