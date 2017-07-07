@@ -15,4 +15,5 @@ try {
 }
 
 export var googleProvider = new firebase.auth.GoogleAuthProvider();
+export var facebookProvider = new firebase.auth.FacebookAuthProvider();
 export default firebase;
