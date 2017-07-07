@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
-import TodoApp from 'TodoApp';
+import Dashboard from 'Dashboard';
 import Login from 'Login';
 import firebase from 'app/firebase/';
 
@@ -13,7 +13,7 @@ var requireLogin = (nextState, replace, next) => {
 
 var userLoggedIn = (nextState, replace, next) => {
 	if (firebase.auth().currentUser) {
-		replace('/todos');
+		replace('/dashboard');
 	}
 	next();
 };
@@ -21,7 +21,7 @@ var userLoggedIn = (nextState, replace, next) => {
 export default (
 	<Router history={hashHistory}>
 		<Route path="/">
-			<Route path="todos" component={TodoApp} onEnter={requireLogin}/>
+			<Route path="dashboard" component={Dashboard} onEnter={requireLogin}/>
 			<IndexRoute component={Login} onEnter={userLoggedIn}/>
 		</Route>
 	</Router>

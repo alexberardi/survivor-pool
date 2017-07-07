@@ -1,11 +1,8 @@
 import React from 'react';
 import * as Redux from 'react-redux';
-import TodoList from 'TodoList';
-import AddTodo from 'AddTodo';
-import TodoSearch from 'TodoSearch';
 import * as actions from 'actions';
 
-export var TodoApp = React.createClass({
+export var Dashboard = React.createClass({
 	onLogout(e) {
 		e.preventDefault();
 		var {dispatch} = this.props;
@@ -18,13 +15,10 @@ export var TodoApp = React.createClass({
 				<div className="page-actions">
 					<a href="#" onClick={this.onLogout}>Logout</a>
 				</div>
-				<h1 className="page-title">Tasks</h1>
+				<h1 className="page-title">Dashboard</h1>
 				<div className="row">
 					<div className="column small-centered small-11 medium-6 large-5">
 						<div className="container">
-							<TodoSearch/>
-							<TodoList/>
-							<AddTodo/>
 						</div>
 					</div>
 				</div>
@@ -33,4 +27,4 @@ export var TodoApp = React.createClass({
 	}
 });
 
-export default Redux.connect()(TodoApp);
+export default Redux.connect()(Dashboard);
