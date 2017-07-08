@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var jwt = require('jsonwebtoken');
 
 var env = process.env.NODE_ENV || 'development';
 
