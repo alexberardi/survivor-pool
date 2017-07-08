@@ -28,10 +28,10 @@ export var startLogout = () => {
 	};
 };
 
-export var login = (uid) => {
+export var login = (user) => {
 	return {
 		type: 'LOGIN',
-		uid
+		user
 	};
 };
 
@@ -40,3 +40,15 @@ export var logout = () => {
 		type: 'LOGOUT'
 	};
 };
+
+export var getUserInfo = () => {
+	return (dispatch, getState) => {
+		var {displayName, email, photoURL, uid } = getState().auth.user;
+		return {
+			displayName,
+			email,
+			photoURL,
+			uid
+		}
+	} 
+}

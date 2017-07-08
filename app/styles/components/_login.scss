@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Yesteryear');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -27,7 +24,7 @@
 }
 
 .login-title {
-  font-family: 'Yesteryear', cursive;
+  font-family: $YesterYear;
   color: $purple;
   text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
   font-size: 72px;

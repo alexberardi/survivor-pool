@@ -1,26 +1,14 @@
-.primary-button {
-	box-sizing: border-box;
-  height: 50px;
-  width: 200px;
-  display: table;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
-  transition: background .5s;
-  cursor: pointer;
-}
-
 .actions-container {
+	background: $purple;
 	display: flex;
 	justify-content: flex-end;
-	padding: 1rem 2rem 0 0;
+	padding: 1rem 1rem 1rem 1rem;
+	border-bottom: 6px solid $pink;
 }
 
 .dashboard {
 	height: 100vh;
-	background: $purple;
-	border: 1px solid $light-grey-border;
-	border-radius: 5px;
+	background: $off-white;
 	padding: 0;
 }
 
@@ -28,15 +16,16 @@
 	margin: 0;
 	padding: 2rem;
 	text-align: center;
-  font-family: 'Yesteryear', cursive;
+  font-family: $YesterYear;
   color: $pink;
-  text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
+  text-shadow: -1px 0 $purple, 0 1px $purple, 1px 0 $purple, 0 -1px $purple;
   font-size: 72px;
 }
 
 .container {
-	background: #fafafa;
-  border: 1px solid #eee;
+	background: $light-pink;
+  border: 3px solid $lavender;
   border-radius: 5px;
   padding: 0;
+  height: 30vh;
 }
