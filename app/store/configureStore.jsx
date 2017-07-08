@@ -4,9 +4,6 @@ import {searchTextReducer, showCompletedReducer, todosReducer, authReducer} from
 
 export var configure = (initialState = {}) => {
 	var reducer = redux.combineReducers({
-		searchText: searchTextReducer,
-		showCompleted: showCompletedReducer,
-		todos: todosReducer,
 		auth: authReducer
 	});
 

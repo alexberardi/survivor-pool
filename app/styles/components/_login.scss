@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Yesteryear');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-$imagePath : "/images";
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -21,41 +19,24 @@ $imagePath : "/images";
 }
 
 .buttons-container {
+  margin: auto;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: row;
 }
 
 .login-title {
   font-family: 'Yesteryear', cursive;
-  color: #362C6A;
+  color: $purple;
   text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
   font-size: 72px;
   margin: 0 auto;
 }
 
-.login-button {
-  margin: 25px;
-  min-width: 200px;
-  max-width: 200px;
-  height: 45px;
-  background-color: #fcfcfc;
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 #FFF;
-  cursor: pointer;
-  cursor: hand;
-  align-self: center;
-  user-select: none;
-  transition: all 400ms ease 0s;
-  display: flex;
-  background-image: url(#{$imagePath}/googlebutton.png);
-}
-
-
 .app-body {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
   border-top: solid 2px #FFF;
-  background-color: #362C6A;;
+  background: $purple;
 }

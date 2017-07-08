@@ -1,22 +1,22 @@
-import firebase, {googleProvider} from 'app/firebase/';
+import firebase, {googleProvider, facebookProvider} from 'app/firebase/';
 
 export var startLogin = (provider) => {
 	switch(provider) {
 		case 'google':
 			provider = googleProvider;
 			break;
-		case 'github':
-		  provider = githubProvider;
-		  break;
 		case 'facebook':
 			provider = facebookProvider;
 			break;
 	}
 	return (dispatch, getState) => {
 		return firebase.auth().signInWithPopup(provider).then((results) => {
-			console.log('Logged In');
 		}, (error) => {
-			console.log('Unable to Auth', error);
+			if(error.code == 'auth/account-exists-with-different-credential') {
+				alert("You already have an account under a different credential!");
+			} else {
+				console.log(error.code);
+			}
 		});
 	};
 };
@@ -24,7 +24,6 @@ export var startLogin = (provider) => {
 export var startLogout = () => {
 	return (dispatch, getState) => {
 		return firebase.auth().signOut().then(() => {
-			console.log('Logged out');
 		});
 	};
 };
