@@ -11,14 +11,15 @@ export var Dashboard = React.createClass({
 	},
 	render() {
 		return (
-			<div>
-				<div className="page-actions">
-					<a href="#" onClick={this.onLogout}>Logout</a>
+			<div className="dashboard">
+				<div className="actions-container">
+					<button type="button" className="primary-button" onClick={this.onLogout}>Logout</button>
 				</div>
-				<h1 className="page-title">Dashboard</h1>
 				<div className="row">
 					<div className="column small-centered small-11 medium-6 large-5">
+						<div className="dashboard-title">Dashboard</div>
 						<div className="container">
+							Where am I?
 						</div>
 					</div>
 				</div>

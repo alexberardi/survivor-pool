@@ -1,0 +1,42 @@
+.primary-button {
+	box-sizing: border-box;
+  height: 50px;
+  width: 200px;
+  display: table;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+  transition: background .5s;
+  cursor: pointer;
+}
+
+.actions-container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 1rem 2rem 0 0;
+}
+
+.dashboard {
+	height: 100vh;
+	background: $purple;
+	border: 1px solid $light-grey-border;
+	border-radius: 5px;
+	padding: 0;
+}
+
+.dashboard-title {
+	margin: 0;
+	padding: 2rem;
+	text-align: center;
+  font-family: 'Yesteryear', cursive;
+  color: $pink;
+  text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
+  font-size: 72px;
+}
+
+.container {
+	background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 0;
+}
