@@ -1,6 +1,23 @@
 var db = require('../../db');
 var _ = require('underscore');
 
+var userGet = function(req, res) {
+    var authID = req.params.authid;
+
+    db.user.findOne({
+        where: {
+            userID: authID
+        }
+    })
+    .then(function(user) {
+        res.json(user);
+    })
+    .catch(function(e) {
+        res.json(e);
+    });
+    
+}
+
 var usersGetAll = function(req, res) {
     db.user.findAll()
         .then(function(users){
@@ -195,6 +212,7 @@ var updateEmail = function(req, res) {
 // };
 
 module.exports = {
+    userGet: userGet,
     usersGetAll: usersGetAll,
     userCreate: userCreate,
     userLogin : userLogin,
