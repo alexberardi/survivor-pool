@@ -4,15 +4,18 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        userid: {
+        userID: {
+            field: 'userID',
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        teamname: {
+        teamName: {
+            field: 'teamName',
             type: DataTypes.STRING,
             allowNull: false
         },
-        gameid: {
+        gameID: {
+            field: 'gameID',
             type: DataTypes.INTEGER,
             allowNull: false
         }

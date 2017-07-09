@@ -22,10 +22,10 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'first', 'last', 'email', 'teamname');
+    var body = _.pick(req.body, 'first', 'last', 'email', 'userTeamName', 'userID');
     db.user.create(body)
         .then(function(user) {
-            db.userStreaks.create({userid: user.id, total: 0, current: true})
+            db.userStreaks.create({userID: user.userID, total: 0, current: true})
                 .then(function(streak){
                     res.json(user.toPublicJSON());
             });
@@ -36,6 +36,22 @@ var userCreate = function(req,res){
             res.status(400).json(e);
         });
 };
+
+var userLogin = function(req, res) {
+    var body = _.pick(req.body, 'userID', 'token');
+    db.tokens.create(body)
+        .then(function(token) {
+            res.json(token);
+        });
+}
+
+var userLogout = function(req, res) {
+    var body = _.pick(req.body, 'userID');
+    db.tokens.destroy({where: {userID: body.userID}})
+        .then(function(token){
+            res.json();
+        });
+}
 
 // var userLogin = function(req, res) {
 //     var body = _.pick(req.body, 'email', 'password');
@@ -78,19 +94,19 @@ var userCreate = function(req,res){
 // };
 
 var updateTeamName = function(req, res) {
-    var userID = parseInt(req.params.userid, 10);
-    var body = _.pick(req.body, 'teamname');
+    var userID = parseInt(req.params.userID, 10);
+    var body = _.pick(req.body, 'teamName');
 
-    if (!body.hasOwnProperty('teamname')){
+    if (!body.hasOwnProperty('teamName')){
         res.status(401).send();
         return;
     }
 
-    var attributes = { teamname : body.teamname};
+    var attributes = { teamName : body.teamName};
 
     db.user.findOne({
         where: {
-            id: userID
+            userID: userID
         }
     })
         .then(function(user) {
@@ -110,7 +126,7 @@ var updateTeamName = function(req, res) {
 };
 
 var updateEmail = function(req, res) {
-    var userID = parseInt(req.params.userid, 10);
+    var userID = parseInt(req.params.userID, 10);
     var body = _.pick(req.body, 'email');
 
     if (!body.hasOwnProperty('email')){
@@ -122,7 +138,7 @@ var updateEmail = function(req, res) {
 
     db.user.findOne({
         where: {
-            id: userID
+            userID: userID
         }
     })
         .then(function(user) {
@@ -181,8 +197,8 @@ var updateEmail = function(req, res) {
 module.exports = {
     usersGetAll: usersGetAll,
     userCreate: userCreate,
-    //userLogin : userLogin,
-    //userLogout: userLogout,
+    userLogin : userLogin,
+    userLogout: userLogout,
     updateTeamName: updateTeamName,
     //updatePassword: updatePassword,
     updateEmail: updateEmail,

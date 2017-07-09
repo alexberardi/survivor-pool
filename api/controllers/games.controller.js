@@ -14,19 +14,20 @@ var populateGames = function(req, res){
             var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
 
             var gameInfo = {
-                gameid: sanitizeGame.gsis,
-                hometeamname: sanitizeGame.hnn,
-                hometeamcityabbr: sanitizeGame.h,
-                homescore: sanitizeGame.hs,
-                awayteamname: sanitizeGame.vnn,
-                awayteamcityabbr: sanitizeGame.v,
-                awayscore: sanitizeGame.vs,
-                dayofweek: sanitizeGame.d,
+                gameID: sanitizeGame.gsis,
+                homeTeamName: sanitizeGame.hnn,
+                homeTeamCityAbbr: sanitizeGame.h,
+                homeScore: sanitizeGame.hs,
+                awayTeamName: sanitizeGame.vnn,
+                awayTeamCityAbbr: sanitizeGame.v,
+                awayScore: sanitizeGame.vs,
+                dayOfWeek: sanitizeGame.d,
                 time: sanitizeGame.t,
-                gamedate: sanitizeGame.eid,
+                gameDate: sanitizeGame.eid,
                 quarter: sanitizeGame.q,
                 week: week,
             }
+            console.log("here");
             db.games.create(gameInfo)
                 .catch(function(e){
                     error = e;
@@ -60,15 +61,15 @@ var getWeeklyGames = function(req, res){
 }
 
 var updateGames = function(req, res) {
-    var gameid = parseInt(req.params.gameid, 10);
-    var body = _.pick(req.body, 'homescore', 'awayscore', 'quarter');
+    var gameID = parseInt(req.params.gameID, 10);
+    var body = _.pick(req.body, 'homeScore', 'awayScore', 'quarter');
 
-    body.homescore = parseInt(body.homescore, 10);
-    body.awayscore = parseInt(body.awayscore, 10)
+    body.homeScore = parseInt(body.homeScore, 10);
+    body.awayScore = parseInt(body.awayScore, 10)
 
     db.games.findOne({
         where: {
-            gameid: gameid
+            gameID: gameID
         }
     })
         .then(function(game) {

@@ -20,9 +20,15 @@ module.exports = function(sequelize, DataTypes) {
 				isEmail: true
 			}
 		},
-		teamname: {
+		userTeamName: {
+			field: 'userTeamName',
 			type: DataTypes.STRING,
 			allowNull: true
+		},
+		userID: {
+			field: 'userID',
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 	}, {
 		hooks: {
@@ -39,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
 		instanceMethods: {
 			toPublicJSON: function() {
 				var json = this.toJSON();
-				return _.pick(json, 'id', 'email', 'teamname', 'createdAt', 'updatedAt');
+				return _.pick(json, 'userID', 'email', 'teamname', 'createdAt', 'updatedAt');
 			}
 		}
 	});

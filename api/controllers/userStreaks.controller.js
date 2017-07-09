@@ -2,9 +2,9 @@ var _ = require('underscore');
 var db = require('../../db');
 
 var updateStreak = function(req, res) {
-       var body = _.pick(req.body, 'userid', 'current');
+       var body = _.pick(req.body, 'userID', 'current');
 
-        db.userStreaks.findOne({where: {userid: body.userid, current: true}})
+        db.userStreaks.findOne({where: {userID: body.userID, current: true}})
             .then(function(streak){
                 if (Boolean(body.current) === true) {
                     body.total = streak.total + 1;
@@ -27,8 +27,8 @@ var updateStreak = function(req, res) {
 };
 
 var getStandings = function(req, res) {
-    var userID = parseInt(req.params.userid, 10);
-    db.sequelize.query('SELECT userStreaks.total, users.teamname, users.first, users.last, userStreaks.current FROM userStreaks JOIN users on userStreaks.userId = users.Id ORDER BY userStreaks.total DESC')
+    var userID = parseInt(req.params.userID, 10);
+    db.sequelize.query('SELECT userStreaks.total, users.teamName, users.first, users.last, userStreaks.current FROM userStreaks JOIN users on userStreaks.userID = users.userID ORDER BY userStreaks.total DESC')
         .then(function(streaks){
             res.json(streaks);
         })
@@ -49,10 +49,10 @@ var getCountActive = function(req, res) {
 };
 
 var checkActive = function (req, res) {
-    var userid = parseInt(req.params.userid, 10);
+    var userID = parseInt(req.params.userID, 10);
     db.userStreaks.findOne({
         where: {
-            userid: userid
+            userID: userID
         }
     })
         .then(function(streak){
