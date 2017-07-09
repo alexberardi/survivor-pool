@@ -62,6 +62,10 @@ app.get('/users', function(req, res) {
 	ctrlUsers.usersGetAll(req, res);
 });
 
+app.get('/users/:authid', function(req, res) {
+	ctrlUsers.userGet(req, res);
+});
+
 app.get('/users/count', function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
