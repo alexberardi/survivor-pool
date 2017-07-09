@@ -41,7 +41,7 @@ export var logout = () => {
 	};
 };
 
-export var getUserInfo = () => {
+export var getUserAuthInfo = () => {
 	return (dispatch, getState) => {
 		var {displayName, email, photoURL, uid } = getState().auth.user;
 		return {

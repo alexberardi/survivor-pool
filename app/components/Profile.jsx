@@ -12,11 +12,11 @@ export var Profile = React.createClass({
 	},
 	render: function() {
 		var {dispatch} = this.props;
-		var user = dispatch(actions.getUserInfo());
+		var {photoURL} = dispatch(actions.getUserAuthInfo());
 
 		return (
 			<div className="profile-container">
-				<img className="profile-image"  src={user.photoURL} />
+				<img className="profile-image"  src={photoURL} />
 				<button type="button" className="primary-button" onClick={this.onLogout}>Logout</button>
 			</div>
 		)
