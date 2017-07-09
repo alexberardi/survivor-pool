@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 
-
-export var Profile = React.createClass({
+class Profile extends Component {
+	constructor(props) {
+		super(props);
+		this.onLogout  = this.onLogout.bind(this);
+	}
 	onLogout(e) {
 		e.preventDefault();
-		var {dispatch} = this.props;
-
-		dispatch(actions.startLogout());
-	},
-	render: function() {
+		this.props.dispatch(actions.startLogout());
+	}
+	render() {
 		var {dispatch} = this.props;
 		var {photoURL} = dispatch(actions.getUserAuthInfo());
 
@@ -21,6 +22,6 @@ export var Profile = React.createClass({
 			</div>
 		)
 	}
-});
+};
 
 export default Redux.connect()(Profile);

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import * as Users from 'Users';
 
 
-export var TeamInfo = React.createClass({
-	render: function() {
+class TeamInfo extends Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
 
 		var {dispatch} = this.props;
 		var {uid} = dispatch(actions.getUserAuthInfo());
@@ -19,6 +22,6 @@ export var TeamInfo = React.createClass({
 			</div>
 		)
 	}
-});
+};
 
 export default Redux.connect()(TeamInfo);

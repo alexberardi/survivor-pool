@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 
 import TeamInfo from 'TeamInfo';
 import Profile from 'Profile';
 
-export var Dashboard = React.createClass({
-
-	render: function() {
+class Dashboard extends Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
 		return (
 			<div className="dashboard">
 				<div className="actions-container">
@@ -23,6 +25,6 @@ export var Dashboard = React.createClass({
 			</div>
 		)
 	}
-});
+};
 
 export default Redux.connect()(Dashboard);
