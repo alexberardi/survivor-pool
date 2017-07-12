@@ -39,9 +39,9 @@ class TeamInfo extends Component {
 		let teamDisplay = null;
 
 		if(hasTeamName) {
-			teamDisplay = <DisplayTeam displayName={this.state.displayName} teamName={this.state.teamName}/>
+			teamDisplay = <DisplayTeam displayName={this.state.displayName} teamName={this.state.teamName} refreshTeam={this.refreshTeamDisplay} userID={this.state.uid}/>
 		} else {
-			teamDisplay = <CreateTeam userID={this.state.uid} refreshTeam={this.refreshTeamDisplay}/>
+			teamDisplay = <CreateTeam userID={this.state.uid} refreshTeam={this.refreshTeamDisplay} title={'Looks like you need a Team name!'}/>
 		}
 
 		return (

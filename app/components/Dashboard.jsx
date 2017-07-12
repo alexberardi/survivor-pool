@@ -23,6 +23,9 @@ class Dashboard extends Component {
 								<div className="card-title">
 									This is another card
 								</div>
+								<div className="card-content">
+									This is some card content.
+								</div>
 							</div>
 						</div>
 					</div>

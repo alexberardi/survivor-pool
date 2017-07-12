@@ -1,0 +1,16 @@
+.change-team-input-container {
+    display: flex;
+    flex: 1;
+    border: 2px solid $orange;
+    border-radius: 4px;
+}
+
+.team-link {
+    font-family: $Brawler;
+    color: $purple;
+    font-size: 24px;
+    font-weight: bold;
+    &:hover {
+        color: $orange;
+    }
+}

@@ -42,7 +42,7 @@
 	border-radius: 4px;
 
 	&-title {
-		margin: 12px 0px 0px 18px;
+		margin: 12px 0px 12px 18px;
     font-family: $Brawler;
     color: $purple;
     font-size: 20px;
@@ -50,7 +50,11 @@
 	}
 
 	&-content {
-		margin: 12px 0px 0px 18px;
+		border-top: 1px solid $light-grey-border;
+		padding: 12px 18px 0px 18px;
+		font-family: $Brawler;
+		font-size: 14px;
+		color: $purple;
 	}
 
 	&:hover {

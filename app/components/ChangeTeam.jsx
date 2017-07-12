@@ -3,7 +3,7 @@ import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import axios from 'axios';
 
-class CreateTeam extends Component {
+class ChangeTeam extends Component {
 	constructor(props) {
         super(props);
         this.state = {userID: props.userID};
@@ -26,7 +26,7 @@ class CreateTeam extends Component {
             axios.put(`/users/teamName/${userID}`, {
                 teamName
             }).then(function(res) {
-                that.props.refreshTeam(teamName);
+                that.props.teamSubmit(teamName);
             })
             .catch(function(error) {
                 console.log(error);
@@ -35,21 +35,16 @@ class CreateTeam extends Component {
     }
 	render() {
 		return (
-			<div className="create-team-container">
-                <div className="card-title">
-                    {this.props.title}
-                </div>
-                <div className="card-content">
-                    <form onSubmit={this.handleSubmit} id="createTeamForm">
-                        <div className="create-team-input-container">
-                            <input type="text" className="team-input" ref="teamName" maxLength={25} placeholder="Enter Team Name"/>
-                            <button type="submit" className="secondary-button">Create</button>
-                        </div>
-                    </form>
-                </div>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="change-team-input-container">
+                        <input type="text" className="team-input" ref="teamName" maxLength={25} defaultValue={this.props.teamName}/>
+                        <button type="submit" className="secondary-button">Change</button>
+                    </div>
+                </form>
             </div>
 		)
 	}
 };
 
-export default Redux.connect()(CreateTeam);
+export default Redux.connect()(ChangeTeam);

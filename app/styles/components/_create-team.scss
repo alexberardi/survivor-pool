@@ -45,10 +45,28 @@
   background: $off-white;
   color: $purple;
   cursor: pointer;	
-
 }
 
 .secondary-button:hover {
+	color: $off-white;
+	background: $orange;
+}
+
+.secondary-button-solo {
+  font-family: $Brawler;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 39px;
+  width: 100px;
+  font-weight: bold;
+  transition: background .5s;
+  background: $off-white;
+  color: $purple;
+  cursor: pointer;
+  border: solid 1px $orange;
+  border-radius: 4px;	
+}
+.secondary-button-solo:hover {
 	color: $off-white;
 	background: $orange;
 }
