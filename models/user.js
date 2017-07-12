@@ -4,11 +4,7 @@ var env = process.env.NODE_ENV || 'development';
 
 module.exports = function(sequelize, DataTypes) {
 	var user = sequelize.define('user', {
-		first: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		last: {
+		fullName: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},

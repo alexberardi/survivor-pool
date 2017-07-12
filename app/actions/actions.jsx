@@ -1,4 +1,5 @@
 import firebase, {googleProvider, facebookProvider} from 'app/firebase/';
+import axios from 'axios';
 
 export var startLogin = (provider) => {
 	switch(provider) {
@@ -11,6 +12,28 @@ export var startLogin = (provider) => {
 	}
 	return (dispatch, getState) => {
 		return firebase.auth().signInWithPopup(provider).then((results) => {
+			let user = {
+				uid: results.user.uid,
+				displayName: results.user.displayName,
+				email: results.user.email
+			};
+
+			axios.get(`/users/${user.uid}`).then(function(res) {
+				if(res.data === null) {
+					axios.post('/users', {
+						fullName: user.displayName, 
+						email: user.email,
+						userID: user.uid
+					})
+					.then(function(res) {
+						console.log('created user');
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
+				}
+			});
+
 		}, (error) => {
 			if(error.code == 'auth/account-exists-with-different-credential') {
 				alert("You already have an account under a different credential!");
