@@ -2,3 +2,4 @@ node_modules/
 public/bundle.js
 *.env
 *.DS_Store
+data/*.sqllite
