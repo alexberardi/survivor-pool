@@ -1,7 +1,5 @@
 node_modules/
 public/bundle.js
-data/dev-survivor-api.sqlite
 *.env
 *.DS_Store
-data/*.sqllite
 data/*.sqlite
