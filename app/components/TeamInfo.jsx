@@ -14,7 +14,7 @@ class TeamInfo extends Component {
 		var {uid} = dispatch(actions.getUserAuthInfo());
 		
 		Users.getUser(uid).then(function(user) {
-			console.log(user.data);
+			
 		});
 
 		return (
