@@ -59,6 +59,9 @@ app.get('/users/count', function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
 
+app.get('/users/:authid', function(req, res) {		
+ 	ctrlUsers.userGet(req, res);		
+});
 
 app.post('/users', function(req, res) {
  	ctrlUsers.userCreate(req, res);

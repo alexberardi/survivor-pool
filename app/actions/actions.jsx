@@ -1,4 +1,5 @@
 import firebase, {googleProvider, facebookProvider} from 'app/firebase/';
+import * as Users from 'Users';
 import axios from 'axios';
 
 export var startLogin = (provider) => {
@@ -12,18 +13,18 @@ export var startLogin = (provider) => {
 	}
 	return (dispatch, getState) => {
 		return firebase.auth().signInWithPopup(provider).then((results) => {
-			let user = {
+			let authUser = {
 				uid: results.user.uid,
 				displayName: results.user.displayName,
 				email: results.user.email
 			};
 
-			axios.get(`/users/${user.uid}`).then(function(res) {
-				if(res.data === null) {
+			Users.getUser(authUser.uid).then(function(user) {
+				if(user.data === null) {
 					axios.post('/users', {
-						fullName: user.displayName, 
-						email: user.email,
-						userID: user.uid
+						fullName: authUser.displayName, 
+						email: authUser.email,
+						userID: authUser.uid
 					})
 					.then(function(res) {
 						console.log('created user');
