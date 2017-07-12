@@ -20,12 +20,14 @@ var ctrlToken = require('./api/controllers/tokens.js');
 var ctrlUsers = require('./api/controllers/users.controller');
 var ctrlUserStreaks = require('./api/controllers/userStreaks.controller');
 
+//Middleware
+var middleware = require('./middleware/common.middleware.js');
 
 app.use(bodyParser.json());
 
 
 //Games Requests
-app.get('/games/populate', function(req, res) {
+app.post('/games/populate', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 

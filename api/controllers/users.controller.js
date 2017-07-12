@@ -18,6 +18,7 @@ var userGet = function(req, res) {
     
 }
 
+
 var usersGetAll = function(req, res) {
     db.user.findAll()
         .then(function(users){
@@ -118,51 +119,11 @@ var updateEmail = function(req, res) {
         });
 };
 
-
-// var updatePassword = function(req, res) {
-//     var userID = parseInt(req.params.userid, 10);
-//     var body = _.pick(req.body, 'oldPassword', 'password');
-
-//     if (!body.hasOwnProperty('password')){
-//         res.status(401).send();
-//         return;
-//     }
-
-//     var attributes = { password : body.password};
-
-//     db.user.findOne({
-//         where: {
-//             id: userID
-//         }
-//     })
-//         .then(function(user) {
-//             if (user) {
-//                 if (user.checkOldPassword(body.oldPassword)){
-//                     return user.update(attributes)
-//                         .then(function(user){
-//                             res.json(user.toJSON());
-//                         }, function(e){
-//                             res.status(400).json(e);
-//                         });
-//                 } else {
-//                     res.status(404).send();
-//                 }
-//             } else {
-//                 res.status(404).send();
-//             }
-//         }, function(){
-//             res.status(500).send();
-//         });
-// };
-
 module.exports = {
     userGet: userGet,
     usersGetAll: usersGetAll,
     userCreate: userCreate,
-    userLogin : userLogin,
-    userLogout: userLogout,
     updateTeamName: updateTeamName,
-    //updatePassword: updatePassword,
     updateEmail: updateEmail,
     userGetCountAll: userGetCountAll 
 };

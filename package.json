@@ -9,7 +9,7 @@
     "postinstall": "npm run build",
     "build": "webpack"
   },
-  "author": "Jimmy Timmons",
+  "author": "Jimmy Timmons & Xander West Side",
   "license": "",
   "dependencies": {
     "axios": "^0.9.1",
@@ -25,6 +25,7 @@
     "expect": "^1.14.0",
     "express": "^4.13.4",
     "firebase": "^3.6.6",
+    "firebase-admin": "^5.0.0",
     "foundation-sites": "6.2.0",
     "jquery": "^2.2.1",
     "moment": "^2.17.1",
