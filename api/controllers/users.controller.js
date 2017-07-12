@@ -54,62 +54,6 @@ var userCreate = function(req,res){
         });
 };
 
-var userLogin = function(req, res) {
-    var body = _.pick(req.body, 'userID', 'token');
-    db.tokens.create(body)
-        .then(function(token) {
-            res.json(token);
-        });
-}
-
-var userLogout = function(req, res) {
-    var body = _.pick(req.body, 'userID');
-    db.tokens.destroy({where: {userID: body.userID}})
-        .then(function(token){
-            res.json();
-        });
-}
-
-// var userLogin = function(req, res) {
-//     var body = _.pick(req.body, 'email', 'password');
-//     var userInstance;
-
-//     db.user.authenticate(body)
-//         .then(function(user) {
-
-//             var token = user.generateToken('authentication');
-//             userInstance = user;
-
-//             return db.token.create({
-//                 token: token
-//             })
-//                 .then(function(tokenInstance) {
-//                     if (token) {
-//                         res.header('Auth', tokenInstance.get('token')).json(userInstance.toPublicJSON());
-//                     } else {
-//                         res.status(401).send();
-//                     }
-//                 })
-//         })
-//         .catch(function(e) {
-//             res.status(401).send();
-//         });
-// };
-
-// var userLogout = function(req, res) {
-//     middleware.requireAuthentication
-//         .then(
-//             function(token){
-//                 req.token.destroy()
-//                     .then(function () {
-//                         res.status(204).send();
-//                     }).catch(function (e) {
-//                     res.status(500).send();
-//                 });
-//             }
-//         )
-// };
-
 var updateTeamName = function(req, res) {
     var userID = parseInt(req.params.userID, 10);
     var body = _.pick(req.body, 'teamName');
