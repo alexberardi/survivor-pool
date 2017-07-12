@@ -159,8 +159,6 @@ module.exports = {
     userGet: userGet,
     usersGetAll: usersGetAll,
     userCreate: userCreate,
-    userLogin : userLogin,
-    userLogout: userLogout,
     updateTeamName: updateTeamName,
     //updatePassword: updatePassword,
     updateEmail: updateEmail,
