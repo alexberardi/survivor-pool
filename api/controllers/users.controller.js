@@ -39,7 +39,7 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'first', 'last', 'email', 'userTeamName', 'userID');
+    var body = _.pick(req.body, 'fullName', 'email', 'userTeamName', 'userID');
     db.user.create(body)
         .then(function(user) {
             db.userStreaks.create({userID: user.userID, total: 0, current: true})
