@@ -41,15 +41,6 @@ app.get('/games/week/current', function(req, res){
 	ctrlGames.getCurrentWeek(req, res);
 });
 
-//Login Requests
-app.post('/login', function(req, res) {
-    ctrlUsers.userLogin(req, res);
-});
-
-//Logout Requests
-app.delete('/login', function(req, res) {
-	ctrlUsers.userLogout(req, res);
-})
 
 //Populate teams
 app.get('/teams/populate', function(req, res){
@@ -60,10 +51,6 @@ app.get('/teams/populate', function(req, res){
 //USERS REQUESTS
 app.get('/users', function(req, res) {
 	ctrlUsers.usersGetAll(req, res);
-});
-
-app.get('/users/:authid', function(req, res) {
-	ctrlUsers.userGet(req, res);
 });
 
 app.get('/users/count', function(req, res) {
@@ -98,7 +85,7 @@ app.use(function (req, res, next){
 
 app.use(express.static('public'));
 
-db.sequelize.sync()
+db.sequelize.sync({force:true})
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
