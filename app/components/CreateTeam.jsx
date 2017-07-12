@@ -35,9 +35,15 @@ class CreateTeam extends Component {
     }
 	render() {
 		return (
-			<div className="test">
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" className="team-input" ref="teamName" placeholder="Enter Team Name"/>
+			<div className="create-team-container">
+                <div className="card-title">
+                    Looks like you need a team name!
+                </div>
+                <form onSubmit={this.handleSubmit} id="createTeamForm">
+                    <div className="create-team-input-container">
+                        <input type="text" className="team-input" ref="teamName" placeholder="Enter Team Name"/>
+                        <button type="submit" className="secondary-button">Create</button>
+                    </div>
                 </form>
             </div>
 		)

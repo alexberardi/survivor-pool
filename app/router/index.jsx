@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+import {Route, Router, IndexRoute, hashHistory, browserHistory} from 'react-router';
 import Dashboard from 'Dashboard';
 import Login from 'Login';
 import firebase from 'app/firebase/';

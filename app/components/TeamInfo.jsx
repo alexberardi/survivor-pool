@@ -4,17 +4,18 @@ import * as actions from 'actions';
 import * as Users from 'Users';
 
 import CreateTeam from 'CreateTeam';
+import DisplayTeam from 'DisplayTeam';
 
 
 class TeamInfo extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {hasTeamName: false, teamName: "", uid: null};
+		this.state = {hasTeamName: false, teamName: "", uid: null, displayName: null};
 		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 	}
 	componentDidMount() {
 		var {dispatch} = this.props;
-		var {uid} = dispatch(actions.getUserAuthInfo());
+		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
 		var that = this;
 		var teamName;
@@ -24,28 +25,27 @@ class TeamInfo extends Component {
 			if(user.data === null) {
 				hasTeamName = false;
 			} else {
-				hasTeamName = true;
 				teamName = user.data.userTeamName;
+				hasTeamName = teamName === null ? false : true;
 			}
-		})
-		.then(that.setState({hasTeamName, teamName, uid}));
-
+			that.setState({hasTeamName, teamName, uid, displayName});
+		});
 	}
 	refreshTeamDisplay(teamName) {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
 	render() {
-		const hasTeamName = this.state.teamName;
-
+		let hasTeamName = this.state.hasTeamName;
 		let teamDisplay = null;
+
 		if(hasTeamName) {
-			teamDisplay = this.state.teamName;
+			teamDisplay = <DisplayTeam displayName={this.state.displayName} teamName={this.state.teamName}/>
 		} else {
 			teamDisplay = <CreateTeam userID={this.state.uid} refreshTeam={this.refreshTeamDisplay}/>
 		}
 
 		return (
-			<div className="TeamInfo">
+			<div className="card">
 				{teamDisplay}
 			</div>
 		)

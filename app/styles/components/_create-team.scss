@@ -1,0 +1,54 @@
+.create-team-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.create-team-title {
+    padding: 15px 15px 0px 15px;
+    flex: 1;
+    font-family: $Brawler;
+    color: $purple;
+    font-size: 18px;
+}
+
+#createTeamForm {
+    display: flex;
+    flex: 1;
+    padding: 15px;
+
+}
+
+.create-team-input-container {
+    display: flex;
+    flex: 1;
+    border: 2px solid $orange;
+    border-radius: 4px;
+}
+
+.team-input {
+    flex: 2;
+    font-family: $Brawler;
+    color: $purple;
+    margin: 0;
+    padding: 0px 0px 0px 6px;
+}
+
+.secondary-button {
+  font-family: $Brawler;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 39px;
+  width: 100px;
+  font-weight: bold;
+  transition: background .5s;
+  background: $off-white;
+  color: $purple;
+  cursor: pointer;	
+
+}
+
+.secondary-button:hover {
+	color: $off-white;
+	background: $orange;
+}

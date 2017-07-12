@@ -19,6 +19,11 @@ class Dashboard extends Component {
 						<div className="dashboard-title">Dashboard</div>
 						<div className="container">
 							<TeamInfo />
+							<div className="card">
+								<div className="card-title">
+									This is another card
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

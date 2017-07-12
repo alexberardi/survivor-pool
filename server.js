@@ -90,7 +90,7 @@ app.use(function (req, res, next){
 
 app.use(express.static('public'));
 
-db.sequelize.sync({force:true})
+db.sequelize.sync({})
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
