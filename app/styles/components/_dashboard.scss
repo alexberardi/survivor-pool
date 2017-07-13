@@ -7,7 +7,6 @@
 }
 
 .dashboard {
-	height: 100vh;
 	background: $off-white;
 	padding: 0;
 }
@@ -24,22 +23,32 @@
 
 .container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	background: $light-pink;
   border: 3px solid $lavender;
   border-radius: 5px;
   padding: 0;
-  height: 30vh;
+	min-height: 60vh;
+}
+
+.card-row {
+	width: 100%;
+	display: flex;
+	flex-grow: 2;
+	flex-direction: row;
+	min-height: 100px;
 }
 
 .card {
 	flex-direction: column;
 	flex: 1;
+	flex-grow: 2;
 	margin: 20px;
-	width: 100px;
-	max-height: 175px;
+	min-width: 200px;
+	min-height: 175px;
   background-color: #ffe;
 	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
 	&-title {
 		margin: 12px 0px 12px 18px;
@@ -51,13 +60,15 @@
 
 	&-content {
 		border-top: 1px solid $light-grey-border;
-		padding: 12px 18px 0px 18px;
+		padding: 12px 18px 12px 18px;
 		font-family: $Brawler;
 		font-size: 14px;
 		color: $purple;
 	}
+}
 
-	&:hover {
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-	}
+.footer {
+	padding: 20px 0 20px 0;
+	text-align: center;
+	height: 100px;
 }
