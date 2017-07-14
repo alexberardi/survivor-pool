@@ -59,11 +59,22 @@
 	}
 
 	&-content {
+		display: flex;
+		flex: 1;
+		align-items: center;
+  	justify-content: center;
 		border-top: 1px solid $light-grey-border;
-		padding: 12px 18px 12px 18px;
+		margin: 12px 18px 12px 18px;
 		font-family: $Brawler;
 		font-size: 14px;
 		color: $purple;
+	}
+
+	&-container {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		height: 100%
 	}
 }
 

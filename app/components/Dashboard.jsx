@@ -56,7 +56,7 @@ Integer a justo mollis nibh hendrerit porttitor vel nec justo. Pellentesque plac
 										This is another card
 									</div>
 									<div className="card-content">
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate quam et vestibulum luctus. 
+										This is some card content.
 									</div>
 								</div>
 							</div>

@@ -35,7 +35,7 @@ class CreateTeam extends Component {
     }
 	render() {
 		return (
-			<div className="create-team-container">
+			<div className="card-container">
                 <div className="card-title">
                     {this.props.title}
                 </div>

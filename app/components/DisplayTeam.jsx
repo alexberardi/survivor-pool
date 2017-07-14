@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
+import FaEdit from 'react-icons/lib/fa/edit';
 
 import ChangeTeam from 'ChangeTeam';
 
@@ -24,11 +25,11 @@ class DisplayTeam extends Component {
         if(this.state.changeTeam) {
             teamButton = <ChangeTeam userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
         } else {
-            teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}</a>
+            teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
         }
 
 		return (
-			<div>
+			<div className="card-container">
                 <div className="card-title">
                     Your Team
                 </div>
