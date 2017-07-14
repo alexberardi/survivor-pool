@@ -67,7 +67,7 @@ app.post('/users', function(req, res) {
  	ctrlUsers.userCreate(req, res);
 });
 
-app.put('/users/teamName/:userid', function(req, res){
+app.put('/users/teamName/:userID', function(req, res){
 	ctrlUsers.updateTeamName(req, res);
 });
 

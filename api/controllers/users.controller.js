@@ -56,7 +56,7 @@ var userCreate = function(req,res){
 };
 
 var updateTeamName = function(req, res) {
-    var userID = req.params.userid;
+    var userID = req.params.userID;
     var body = _.pick(req.body, 'teamName');
 
     if (!body.hasOwnProperty('teamName')){
