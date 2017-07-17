@@ -19,6 +19,14 @@ export var startLogin = (provider) => {
 				email: results.user.email
 			};
 
+			firebase.auth().currentUser.getToken(true).then(function(token) {
+				localStorage.setItem('token', token);
+			})
+			.catch(function(error) {
+				firebase.auth().signOut().then(() => {
+				});
+			});
+
 			Users.getUser(authUser.uid).then(function(user) {
 				if(user.data === null) {
 					axios.post('/users', {
