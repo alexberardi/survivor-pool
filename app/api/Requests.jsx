@@ -1,6 +1,9 @@
 import axios from 'axios';
 import firebase from 'app/firebase/';
 
+const token = localStorage.getItem('token');
+axios.defaults.headers.common['Authorization'] = token;
+
 var getRequest = function(address, data) {
    return axios.get(address);
 }

@@ -21,7 +21,6 @@ export var startLogin = (provider) => {
 
 			firebase.auth().currentUser.getToken(true).then(function(token) {
 				localStorage.setItem('token', token);
-				axios.defaults.headers.common['Authorization'] = token;
 			})
 			.catch(function(error) {
 				firebase.auth().signOut().then(() => {
