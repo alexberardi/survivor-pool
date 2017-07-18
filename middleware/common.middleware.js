@@ -11,8 +11,20 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-      		var uid = decodedToken.uid;
-      		res.status(200).send();
+      		var userID = decodedToken.uid;
+          db.user.findOne({
+            where: {
+              userID: userID
+            }
+          })
+          .then(function(user) {
+            if (user) {
+              next();
+            } else {
+              console.log('not user');
+              res.status(401).send();
+            }
+          })
     		})
     		.catch(function(error) {
           console.log('Invalid Token.');
@@ -32,8 +44,7 @@ var checkAdmin = function (req, res, next) {
           })
           .then(function(admin) {
             if (admin) {
-              console.log('is Administrator');
-              res.status(200).send();
+              next();
             } else {
               console.log('not administrator');
               res.status(401).send();
