@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
+import * as Requests from 'Requests';
 import axios from 'axios';
 
 class CreateTeam extends Component {
@@ -23,9 +24,8 @@ class CreateTeam extends Component {
         let teamName = this.refs.teamName.value;
         
         if(teamName.length > 0) {
-            axios.put(`/users/teamName/${userID}`, {
-                teamName
-            }).then(function(res) {
+            Requests.makeRequest(`/users/teamName/${userID}`, 'put', {teamName})
+            .then(function(res) {
                 that.props.refreshTeam(teamName);
             })
             .catch(function(error) {

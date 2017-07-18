@@ -1,5 +1,5 @@
 import firebase, {googleProvider, facebookProvider} from 'app/firebase/';
-import * as Users from 'Users';
+import * as Requests from 'Requests';
 import axios from 'axios';
 
 export var startLogin = (provider) => {
@@ -19,14 +19,23 @@ export var startLogin = (provider) => {
 				email: results.user.email
 			};
 
-			Users.getUser(authUser.uid).then(function(user) {
+			firebase.auth().currentUser.getToken(true).then(function(token) {
+				localStorage.setItem('token', token);
+				axios.defaults.headers.common['Authorization'] = token;
+			})
+			.catch(function(error) {
+				firebase.auth().signOut().then(() => {
+				});
+			});
+
+			Requests.makeRequest(`/users/${authUser.uid}`, 'get').then(function(user) {
 				if(user.data === null) {
-					axios.post('/users', {
+					let user = {
 						fullName: authUser.displayName, 
 						email: authUser.email,
 						userID: authUser.uid
-					})
-					.then(function(res) {
+					}
+					Requests.makeRequest('/users', 'post', user).then(function(res) {
 						console.log('created user');
 					})
 					.catch(function(error) {

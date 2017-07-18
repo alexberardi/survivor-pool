@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
-import * as Users from 'Users';
+import * as Requests from 'Requests';
 
 import CreateTeam from 'CreateTeam';
 import DisplayTeam from 'DisplayTeam';
@@ -20,8 +20,8 @@ class TeamInfo extends Component {
 		var that = this;
 		var teamName;
 		var hasTeamName;
-		
-		Users.getUser(uid).then(function(user) {
+
+		Requests.makeRequest(`/users/${uid}`, 'get').then(function(user) {
 			if(user.data === null) {
 				hasTeamName = false;
 			} else {
