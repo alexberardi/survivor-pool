@@ -59,8 +59,7 @@ app.get('/users/count', middleware.checkAuthentication, function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
 
-app.get('/users/:authid', middleware.checkAuthentication, function(req, res) {
-	console.log('here');	
+app.get('/users/:authid', middleware.checkAuthentication, function(req, res) {	
  	ctrlUsers.userGet(req, res);		
 });
 
