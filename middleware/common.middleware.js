@@ -11,7 +11,6 @@ var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
       		var uid = decodedToken.uid;
-          console.log(decodedToken);
       		res.status(200).send();
     		})
     		.catch(function(error) {
