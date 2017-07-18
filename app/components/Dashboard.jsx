@@ -3,6 +3,7 @@ import * as Redux from 'react-redux';
 
 import TeamInfo from 'TeamInfo';
 import Profile from 'Profile';
+import PickInfo from 'PickInfo';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -20,14 +21,7 @@ class Dashboard extends Component {
 						<div className="container">
 							<div className="card-row">
 								<TeamInfo />
-								<div className="card">
-									<div className="card-title">
-										This is another card
-									</div>
-									<div className="card-content">
-								Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam lobortis feugiat justo at dapibus. Donec porttitor fringilla purus, quis cursus diam iaculis non. Aenean eget condimentum metus. Aenean at dui in risus porttitor blandit. Praesent elementum tincidunt mollis. Nullam leo nisi, malesuada at enim sit amet, varius imperdiet nisi. Vestibulum et sem eros. Cras nibh massa, fermentum et tristique in, vestibulum non nulla. Nulla volutpat imperdiet enim, sed consequat nisl hendrerit eu. Cras non finibus ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-									</div>
-								</div>
+								<PickInfo />
 							</div>			
 							<div className="card-row">
 								<div className="card">

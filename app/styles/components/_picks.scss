@@ -1,0 +1,17 @@
+.dashboard-button-container {
+	width: 200px;
+	display: flex;
+	border-radius: 4px;
+    border: 2px solid $orange;
+    margin-right: 1rem;
+}
+
+.dashboard-nav-button {
+    @extend .primary-button-base;
+    flex: 1;
+}
+
+.dashboard-nav-button:hover {
+	color: $off-white;
+	background: $orange;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, Router, IndexRoute, hashHistory, browserHistory} from 'react-router';
 import Dashboard from 'Dashboard';
 import Login from 'Login';
+import Picks from 'Picks';
 import firebase from 'app/firebase/';
 
 var requireLogin = (nextState, replace, next) => {
@@ -22,6 +23,7 @@ export default (
 	<Router history={hashHistory}>
 		<Route path="/">
 			<Route path="dashboard" component={Dashboard} onEnter={requireLogin}/>
+			<Route path="picks" component={Picks} onEnter={requireLogin}/>
 			<IndexRoute component={Login} onEnter={userLoggedIn}/>
 		</Route>
 	</Router>

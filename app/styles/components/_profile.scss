@@ -1,5 +1,10 @@
 .primary-button {
-  font-family: $Brawler;flex-grow: 2;
+  @extend .primary-button-base;
+  flex-grow: 2;
+}
+
+.primary-button-base {
+  font-family: $Brawler;
   box-sizing: border-box;
   font-size: 20px;
   font-weight: bold;
@@ -7,7 +12,6 @@
   background: $off-white;
   color: $purple;
   cursor: pointer;
-
 }
 
 .primary-button:hover {
