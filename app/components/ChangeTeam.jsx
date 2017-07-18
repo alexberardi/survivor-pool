@@ -24,7 +24,7 @@ class ChangeTeam extends Component {
         let teamName = this.refs.teamName.value;
         
         if(teamName.length > 0) {
-            Requests.makeRequest(`/users/teamName/${userID}`, 'put', {teamName})
+            Requests.put(`/users/teamName/${userID}`, {teamName})
             .then(function(res) {
                 that.props.teamSubmit(teamName);
             })

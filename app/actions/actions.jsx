@@ -27,14 +27,14 @@ export var startLogin = (provider) => {
 				});
 			});
 
-			Requests.makeRequest(`/users/${authUser.uid}`, 'get').then(function(user) {
-				if(user.data === null) {
+			Requests.get(`/users/${authUser.uid}`).then(function(user) {
+				if(user.data == "") {
 					let user = {
 						fullName: authUser.displayName, 
 						email: authUser.email,
 						userID: authUser.uid
 					}
-					Requests.makeRequest('/users', 'post', user).then(function(res) {
+					Requests.post('/users', user).then(function(res) {
 						console.log('created user');
 					})
 					.catch(function(error) {
