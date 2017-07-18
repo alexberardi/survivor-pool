@@ -25,6 +25,18 @@ module.exports = function(sequelize, DataTypes) {
 			field: 'userID',
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		isAdmin: {
+			field: 'isAdmin',
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
+		},
+		hasPaid: {
+			field: 'hasPaid',
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
 		}
 	}, {
 		hooks: {

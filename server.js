@@ -31,35 +31,35 @@ app.post('/games/populate', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games/user/:userid', function(req, res){
+app.get ('/games/user/:userid', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
 
-app.get ('/games/started', function(req, res){
+app.get ('/games/started', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getStartedGames(req, res);
 });
 
-app.get('/games/week/current', function(req, res){
+app.get('/games/week/current', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getCurrentWeek(req, res);
 });
 
 
 //Populate teams
-app.get('/teams/populate', function(req, res){
+app.get('/teams/populate', middleware.checkAuthentication, function(req, res){
 	ctrlNFLTeams();
 });
 
 
 //USERS REQUESTS
-app.get('/users', function(req, res) {
+app.get('/users', middleware.checkAuthentication, function(req, res) {
 	ctrlUsers.usersGetAll(req, res);
 });
 
-app.get('/users/count', function(req, res) {
+app.get('/users/count', middleware.checkAuthentication, function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
 
-app.get('/users/:authid', function(req, res) {		
+app.get('/users/:authid', middleware.checkAuthentication, function(req, res) {		
  	ctrlUsers.userGet(req, res);		
 });
 
@@ -67,16 +67,16 @@ app.post('/users', function(req, res) {
  	ctrlUsers.userCreate(req, res);
 });
 
-app.put('/users/teamName/:userID', function(req, res){
+app.put('/users/teamName/:userID', middleware.checkAuthentication, function(req, res){
 	ctrlUsers.updateTeamName(req, res);
 });
 
-app.put('/users/email/:userid', function(req, res){
+app.put('/users/email/:userid', middleware.checkAuthentication, function(req, res){
 	ctrlUsers.updateEmail(req, res);
 });
 
 //User Streaks Requests
-app.get('/standings', function (req, res) {
+app.get('/standings', middleware.checkAuthentication, function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
 });
 
@@ -90,12 +90,29 @@ app.use(function (req, res, next){
 
 app.use(express.static('public'));
 
-db.sequelize.sync({force:true})
+if (env === 'development') {
+	var forceSync = {
+		force: false
+	};
+	db.sequelize.sync(forceSync)
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
 		})
 	);
+} else {
+
+	// NEVER CHANGE - WILL ERASE ALL DATA ON 
+	db.sequelize.sync()
+	.then(
+		app.listen(PORT, function() {
+			console.log('express listening on port ' + PORT + '!');
+		})
+	);
+}
+
+
+
 
 
 
