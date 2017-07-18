@@ -11,20 +11,7 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-      		var userID = decodedToken.uid;
-          db.user.findOne({
-            where: {
-              userID: userID
-            }
-          })
-          .then(function(user) {
-            if (user) {
-              next();
-            } else {
-              console.log('not user');
-              res.status(401).send();
-            }
-          })
+      		next();
     		})
     		.catch(function(error) {
           console.log('Invalid Token.');
