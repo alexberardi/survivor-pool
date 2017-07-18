@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 
 //Games Requests
-app.post('/games/populate', middleware.checkAuthentication, function(req, res) {
+app.post('/games/populate', middleware.checkAdmin, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
@@ -102,7 +102,7 @@ if (env === 'development') {
 	);
 } else {
 
-	// NEVER CHANGE - WILL ERASE ALL DATA ON 
+	// NEVER CHANGE - WILL ERASE ALL DATA ON PRODUCTION
 	db.sequelize.sync()
 	.then(
 		app.listen(PORT, function() {
