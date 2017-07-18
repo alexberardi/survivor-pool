@@ -2,11 +2,11 @@ var db = require('../../db');
 var _ = require('underscore');
 
 var userGet = function(req, res) {
-    var authID = req.params.authid;
+    var userID = req.params.userID;
 
     db.user.findOne({
         where: {
-            userID: authID
+            userID: userID
         }
     })
     .then(function(user) {
@@ -16,6 +16,22 @@ var userGet = function(req, res) {
         res.json(e);
     });
     
+}
+
+var userCheck = function(req, res) {
+    var userID = req.params.userID;
+
+    db.user.findOne({
+        where: {
+            userID: userID
+        }
+    })
+    .then(function(user) {
+        res.json(user);
+    })
+    .catch(function(e) {
+        res.json(e);
+    });
 }
 
 
@@ -125,5 +141,6 @@ module.exports = {
     userCreate: userCreate,
     updateTeamName: updateTeamName,
     updateEmail: updateEmail,
-    userGetCountAll: userGetCountAll 
+    userGetCountAll: userGetCountAll,
+    userCheck: userCheck 
 };

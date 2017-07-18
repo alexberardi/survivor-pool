@@ -27,8 +27,8 @@ export var startLogin = (provider) => {
 				});
 			});
 
-			Requests.get(`/users/${authUser.uid}`).then(function(user) {
-				if(user.data == "") {
+			Requests.get(`/users/exists/${authUser.uid}`).then(function(user) {
+				if(user.data == null) {
 					let user = {
 						fullName: authUser.displayName, 
 						email: authUser.email,

@@ -22,11 +22,11 @@ class TeamInfo extends Component {
 		var hasTeamName;
 
 		Requests.get(`/users/${uid}`).then(function(user) {
-			if(user.data == "") {
+			if(user.data === null) {
 				hasTeamName = false;
 			} else {
 				teamName = user.data.userTeamName;
-				hasTeamName = teamName === "" ? false : true;
+				hasTeamName = teamName === null ? false : true;
 			}
 			that.setState({hasTeamName, teamName, uid, displayName});
 		});
