@@ -8,16 +8,15 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
  });
 
 var checkAuthentication = function(req, res, next) {
-	console.log(req.body.name);     
-			res.status(200).send();
-			admin.auth().verifyIdToken(req.body.idToken)
+			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-    			console.log(decodedToken);
       		var uid = decodedToken.uid;
+          console.log(decodedToken);
       		res.status(200).send();
     		})
     		.catch(function(error) {
-    			console.log(error);
+          console.log('Invalid Token.');
+          res.status(401).send();
     		});
 }
 
