@@ -22,6 +22,7 @@ var userCheck = function(req, res) {
     var userID = req.params.userID;
 
     db.user.findOne({
+        attributes: ['userID'],
         where: {
             userID: userID
         }
