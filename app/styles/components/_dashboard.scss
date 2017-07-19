@@ -1,9 +1,19 @@
-.actions-container {
+.nav {
 	background: $purple;
 	display: flex;
-	justify-content: flex-end;
 	padding: 1rem 1rem 1rem 1rem;
-	border-bottom: 6px solid $pink;
+	box-shadow: 0 3px 6px $orange, 0 3px 6px $orange;
+}
+
+.logo-container {
+	flex: 1;
+	display: flex;
+}
+
+.actions-container {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .dashboard {
@@ -15,19 +25,19 @@
 	margin: 0;
 	padding: 2rem;
 	text-align: center;
-  font-family: $YesterYear;
-  color: $pink;
-  text-shadow: -1px 0 $purple, 0 1px $purple, 1px 0 $purple, 0 -1px $purple;
-  font-size: 72px;
+  	font-family: $YesterYear;
+  	color: $pink;
+  	text-shadow: -1px 0 $purple, 0 1px $purple, 1px 0 $purple, 0 -1px $purple;
+  	font-size: 72px;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
 	background: $light-pink;
-  border: 3px solid $lavender;
-  border-radius: 5px;
-  padding: 0;
+  	border: 3px solid $lavender;
+  	border-radius: 5px;
+  	padding: 0;
 	min-height: 60vh;
 }
 
@@ -46,23 +56,23 @@
 	margin: 20px;
 	min-width: 200px;
 	min-height: 175px;
-  background-color: #ffe;
+  	background-color: #ffe;
 	border-radius: 4px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
 	&-title {
 		margin: 12px 0px 12px 18px;
-    font-family: $Brawler;
-    color: $purple;
-    font-size: 20px;
-    font-weight: bold;
+    	font-family: $Brawler;
+    	color: $purple;
+    	font-size: 20px;
+    	font-weight: bold;
 	}
 
 	&-content {
 		display: flex;
 		flex: 1;
 		align-items: center;
-  	justify-content: center;
+  		justify-content: center;
 		border-top: 1px solid $light-grey-border;
 		margin: 12px 18px 12px 18px;
 		font-family: $Brawler;
@@ -79,7 +89,9 @@
 }
 
 .footer {
-	padding: 20px 0 20px 0;
+	margin: 100px 0 20px 0;
+	font-size: 10px;
+	font-family: arial, sans-serif;
 	text-align: center;
 	height: 100px;
 }

@@ -1,38 +1,38 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
-import {Link, IndexLink, hashHistory} from 'react-router';
 
-import Profile from 'Profile';
+import Nav from 'Nav';
+import Game from 'Game';
+import Footer from 'Footer';
 
 class Picks extends Component {
 	constructor(props) {
 		super(props);
     }
-    toDashboard(e) {
-        e.preventDefault();
-        hashHistory.push('/dashboard');
-    }
+	componentDidMount() {
+		/*
+		get game info for the week
+		games.map((game) => {
+				return (
+					<Game id={game.id} {...game}/>
+				)
+			});
+		*/
+	}
 	render() {
 		return (
 			<div className="dashboard">
-				<div className="actions-container">
-                    <div className="dashboard-button-container">
-                        <button type="button" className="dashboard-nav-button" onClick={this.toDashboard}>Dashboard</button>
-                    </div>
-					<Profile />
-				</div>
+				<Nav page={'Picks'} />
 				<div className="row">
 					<div className="column small-centered small-11 medium-10 large-9">
 						<div className="dashboard-title">Picks</div>
 						<div className="container">
-                            Picks
+							<Game />
 						</div>
 					</div>
 				</div>
 				<div className="row">
-					<div className="footer">
-						Footer
-					</div>
+					<Footer />
 				</div>
 			</div>
 		)

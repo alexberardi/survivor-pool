@@ -15,3 +15,60 @@
 	color: $off-white;
 	background: $orange;
 }
+
+.pick-card {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	flex-grow: 2;
+	margin: 10px;
+  	background-color: #ffe;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+	&-row {
+		width: 100%;
+		display: flex;
+		flex-grow: 2;
+		flex-direction: row;
+		max-height: 120px;
+	}
+
+	&-title {
+		margin: 12px 0px 12px 0px;
+		width: 30%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-right: 1px solid $light-grey-border;
+	}
+
+	&-content {
+		display: flex;
+		color: $purple;
+		font-family: $Brawler;
+		margin: 12px 0px 12px 30px;
+		flex: 1;
+	}
+
+	&-kickoff {
+		flex: 1;
+	}
+
+	&-score {
+		flex: 1;
+	}
+
+	&-info-title {
+		font-size: 20px;
+		width: 50%;
+		border-bottom: 1px solid $light-grey-border;
+	}
+}
+
+.vs-span {
+	color: $purple;
+	font-family: $Brawler;
+	font-size: 20px;
+	padding: 0px 20px 0px 20px;
+}

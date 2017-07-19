@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 
 import TeamInfo from 'TeamInfo';
-import Profile from 'Profile';
+import Nav from 'Nav';
 import PickInfo from 'PickInfo';
+import Footer from 'Footer';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -12,9 +13,7 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div className="dashboard">
-				<div className="actions-container">
-					<Profile />
-				</div>
+				<Nav page={'Dashboard'}/>
 				<div className="row">
 					<div className="column small-centered small-11 medium-10 large-9">
 						<div className="dashboard-title">Dashboard</div>
@@ -58,9 +57,7 @@ Integer a justo mollis nibh hendrerit porttitor vel nec justo. Pellentesque plac
 					</div>
 				</div>
 				<div className="row">
-					<div className="footer">
-						Footer
-					</div>
+					<Footer />
 				</div>
 			</div>
 		)
