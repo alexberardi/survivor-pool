@@ -10,10 +10,26 @@
 	display: flex;
 }
 
+.logo {
+  	font-family: $YesterYear;
+  	color: $purple;
+  	text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
+}
+
+.nav-title {
+	@extend .logo;
+	font-size: 48px;
+	margin-left: 1rem;
+}
+
 .actions-container {
 	flex: 1;
 	display: flex;
 	justify-content: flex-end;
+}
+
+.actions {
+	display: flex;
 }
 
 .dashboard {

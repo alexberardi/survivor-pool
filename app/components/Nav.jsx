@@ -22,10 +22,13 @@ class Nav extends Component {
         return (
             <div className="nav">
 			    <div className="logo-container">
+                    <div className="nav-title">Survivor-Pool</div>
 			    </div>
 				<div className="actions-container">
-                    {dashButton}
-					<Profile />
+                    <div className="actions">
+                        {dashButton}
+                        <Profile />
+                    </div>
 				</div>
 		    </div>
         )
