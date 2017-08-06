@@ -6,7 +6,7 @@ var teamsGetAll = function(req, res) {
 
     db.playerTeams.findAll({
         where : {
-            userid: userID
+            userID: userID
         }
     })
     .then(function(teams) {

@@ -3,15 +3,14 @@ import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import * as Requests from 'Requests';
 
-import CreateTeam from 'CreateTeam';
 import DisplayTeam from 'DisplayTeam';
 
 
 class TeamInfo extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {hasTeamName: false, teamName: "", uid: null, displayName: null};
-		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
+		this.state = {uid: null, displayName: null, teams: null};
+		//this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 	}
 	componentDidMount() {
 		var {dispatch} = this.props;
@@ -19,34 +18,42 @@ class TeamInfo extends Component {
 
 		var that = this;
 		var teamName;
-		var hasTeamName;
+		var hasTeam;
+		var userTeams;
 
-		Requests.get(`/users/${uid}`).then(function(user) {
-			if(user.data === null) {
-				hasTeamName = false;
-			} else {
-				teamName = user.data.userTeamName;
-				hasTeamName = teamName === null ? false : true;
+		Requests.get(`/teams/${uid}`).then(function(teams) {
+			if(teams.data !== null) {
+				userTeams = teams.data;
 			}
-			that.setState({hasTeamName, teamName, uid, displayName});
+			that.setState({uid, displayName, teams: userTeams});
 		});
 	}
-	refreshTeamDisplay(teamName) {
+	/*refreshTeamDisplay(teamName) {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
+	*/
 	render() {
-		let hasTeamName = this.state.hasTeamName;
-		let teamDisplay = null;
+		let userID = this.state.uid;
+		let teams = this.state.teams;
+		let displayName = this.state.displayName;
 
-		if(hasTeamName) {
-			teamDisplay = <DisplayTeam displayName={this.state.displayName} teamName={this.state.teamName} refreshTeam={this.refreshTeamDisplay} userID={this.state.uid}/>
-		} else {
-			teamDisplay = <CreateTeam userID={this.state.uid} refreshTeam={this.refreshTeamDisplay} title={'Looks like you need a team name!'}/>
+		var renderTeams = () => {
+			if(teams === null || teams.length == 0) {
+				return (
+					<p>You don't have any teams!</p>
+				)
+			} 
+
+			return teams.map((team) => {
+				return (
+					<DisplayTeam displayName={displayName} teamName={team.teamName} userID={userID}/>
+				)
+			});
 		}
 
 		return (
 			<div className="card">
-				{teamDisplay}
+				{renderTeams()}
 			</div>
 		)
 	}

@@ -85,13 +85,12 @@ app.get('/standings', middleware.checkAuthentication, function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
 });
 
-
 //User Teams Requests
 app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamsGetAll(req, res);
 });
 
-app.post('/teams/', middleware.checkAuthentication, function(req, res) {
+app.post('/teams', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamCreate(req, res);
 });
 
