@@ -20,6 +20,7 @@ db.teams = sequelize.import(__dirname + '/models/teams.js');
 db.tokens = sequelize.import(__dirname + '/models/tokens.js');
 db.userPicks = sequelize.import(__dirname + '/models/userPicks.js');
 db.userStreaks = sequelize.import(__dirname + '/models/userStreaks.js');
+db.playerTeams = sequelize.import(__dirname + '/models/playerTeams.js');
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
