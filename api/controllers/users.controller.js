@@ -72,38 +72,6 @@ var userCreate = function(req,res){
         });
 };
 
-var updateTeamName = function(req, res) {
-    var userID = req.params.userID;
-    var body = _.pick(req.body, 'teamName');
-
-    if (!body.hasOwnProperty('teamName')){
-        res.status(401).send();
-        return;
-    }
-
-    var attributes = { userTeamName : body.teamName};
-
-    db.user.findOne({
-        where: {
-            userID: userID
-        }
-    })
-    .then(function(user) {
-        if (user) {
-            return user.update(attributes)
-                .then(function(user){
-                    res.json(user.toJSON());
-                }, function(e){
-                    res.status(400).json(e);
-                });
-        } else {
-            res.status(404).send();
-        }
-    }, function(){
-        res.status(500).send();
-    });
-};
-
 var updateEmail = function(req, res) {
     var userID = parseInt(req.params.userID, 10);
     var body = _.pick(req.body, 'email');
@@ -140,7 +108,6 @@ module.exports = {
     userGet: userGet,
     usersGetAll: usersGetAll,
     userCreate: userCreate,
-    updateTeamName: updateTeamName,
     updateEmail: updateEmail,
     userGetCountAll: userGetCountAll,
     userCheck: userCheck 

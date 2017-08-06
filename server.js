@@ -19,6 +19,7 @@ var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
 var ctrlToken = require('./api/controllers/tokens.js');
 var ctrlUsers = require('./api/controllers/users.controller');
 var ctrlUserStreaks = require('./api/controllers/userStreaks.controller');
+var ctrlPlayerTeams = require('./api/controllers/playerTeams.controller.js');
 
 //Middleware
 var middleware = require('./middleware/common.middleware.js');
@@ -75,10 +76,6 @@ app.post('/users', function(req, res) {
  	ctrlUsers.userCreate(req, res);
 });
 
-app.put('/users/teamName/:userID', middleware.checkAuthentication, function(req, res){
-	ctrlUsers.updateTeamName(req, res);
-});
-
 app.put('/users/email/:userid', middleware.checkAuthentication, function(req, res){
 	ctrlUsers.updateEmail(req, res);
 });
@@ -86,6 +83,20 @@ app.put('/users/email/:userid', middleware.checkAuthentication, function(req, re
 //User Streaks Requests
 app.get('/standings', middleware.checkAuthentication, function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
+});
+
+
+//User Teams Requests
+app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
+	ctrlPlayerTeams.teamsGetAll(req, res);
+});
+
+app.post('/teams/', middleware.checkAuthentication, function(req, res) {
+	ctrlPlayerTeams.teamCreate(req, res);
+});
+
+app.put('/teams/:teamID', middleware.checkAuthentication, function(req, res){
+	ctrlPlayerTeams.updateTeamName(req, res);
 });
 
 app.use(function (req, res, next){
