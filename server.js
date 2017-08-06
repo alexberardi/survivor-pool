@@ -43,6 +43,10 @@ app.get('/games/week/current', middleware.checkAuthentication, function(req, res
 	ctrlGames.getCurrentWeek(req, res);
 });
 
+app.post('/games/update', middleware.checkAuthentication, function(req, res) {
+	ctrlGames.updateGames(req, res);
+});
+
 
 //Populate teams
 app.get('/teams/populate', middleware.checkAuthentication, function(req, res){
