@@ -57,15 +57,17 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'fullName', 'email', 'userTeamName', 'userID');
+    var body = _.pick(req.body, 'fullName', 'email', 'userID');
     db.user.create(body)
         .then(function(user) {
-            db.userStreaks.create({userID: user.userID, total: 0, current: true})
-                .then(function(streak){
-                    res.json(user.toPublicJSON());
-            });
+            db.playerTeams.create({userID: user.userID, teamName: user.fullName + '\'s team'})
+                .then (function(team) {
+                    db.teamStreaks.create({teamID: team.teamID, userID: user.userID, total: 0, current: true})
+                    .then(function(streak){
+                        res.json(user.toPublicJSON());
+                    });
+                });                
         })
-
         .catch(function(e) {
             console.log(e);
             res.status(400).json(e);

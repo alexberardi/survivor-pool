@@ -4,7 +4,7 @@ var db = require('../../db');
 var updateStreak = function(req, res) {
        var body = _.pick(req.body, 'userID', 'current');
 
-        db.userStreaks.findOne({where: {userID: body.userID, current: true}})
+        db.teamStreaks.findOne({where: {userID: body.userID, current: true}})
             .then(function(streak){
                 if (Boolean(body.current) === true) {
                     body.total = streak.total + 1;
@@ -39,7 +39,7 @@ var getStandings = function(req, res) {
 
 
 var getCountActive = function(req, res) {
-    db.userStreaks.count({where: {current: true}})
+    db.teamStreaks.count({where: {current: true}})
         .then(function(streaks){
             res.json(streaks);
         })
@@ -50,7 +50,7 @@ var getCountActive = function(req, res) {
 
 var checkActive = function (req, res) {
     var userID = parseInt(req.params.userID, 10);
-    db.userStreaks.findOne({
+    db.teamStreaks.findOne({
         where: {
             userID: userID
         }

@@ -1,7 +1,7 @@
 var _ = require('underscore');
 
 module.exports = function(sequelize, DataTypes){
-	return sequelize.define('teams', {
+	return sequelize.define('nflTeams', {
 		teamName: {
 			field: 'teamName',
 			type: DataTypes.STRING,

@@ -9,7 +9,7 @@ var makePick = function(req, res) {
     body.gameId = parseInt(body.gameid);
 
 
-    db.userPicks.findOne(
+    db.teamPicks.findOne(
         {
             where: {
                 week: {$ne : parseInt(body.week)},
@@ -19,7 +19,7 @@ var makePick = function(req, res) {
         })
         .then(function(game){
             if (!game) {
-                db.userPicks.findOne({where: {userid: body.userid, week: body.week}})
+                db.teamPicks.findOne({where: {userid: body.userid, week: body.week}})
                     .then(function(pick){
                         if(pick) {
                             db.games.findOne({
@@ -43,7 +43,7 @@ var makePick = function(req, res) {
                                 })
 
                         } else {
-                            db.userPicks.create(body)
+                            db.teamPicks.create(body)
                                 .then(function(pick){
                                     res.json(pick);
                                 })
@@ -53,7 +53,7 @@ var makePick = function(req, res) {
                                 });
                         }
                     }, function(e) {
-                        db.userPicks.create(body)
+                        db.teamPicks.create(body)
                             .then(function(pick){
                                 res.json(pick);
                             })
@@ -73,7 +73,7 @@ var makePick = function(req, res) {
 
 var getPicks = function(req, res) {
     var userID = parseInt(req.params.userid, 10);
-    db.userPicks.findAll({
+    db.teamPicks.findAll({
         order: [
             ['week', 'DESC']
         ],
@@ -92,7 +92,7 @@ var getPicks = function(req, res) {
 var getAdminPicks = function(req, res) {
     var week = parseInt(req.query.week);
 
-    db.sequelize.query("SELECT U.Id, U.email, UP.TeamName, UP.Week FROM users U JOIN UserPicks UP ON UP.UserID = U.ID WHERE U.ID IN (1,5) AND Week = " + week)
+    db.sequelize.query("SELECT U.Id, U.email, TP.TeamName, TP.Week FROM users U JOIN TeamPicks TP ON TP.UserID = U.ID WHERE U.ID IN (1,5) AND Week = " + week)
         .then(function(picks){
             res.json(picks);
         })
@@ -105,7 +105,7 @@ var getAdminPicks = function(req, res) {
 var getPopularPicks = function(req, res) {
     var week = parseInt(req.query.week);
 
-    db.sequelize.query("SELECT teamname, count(teamname) as count FROM userpicks WHERE week='" + week + "' GROUP BY teamname")
+    db.sequelize.query("SELECT teamname, count(teamname) as count FROM TeamPicks WHERE week='" + week + "' GROUP BY teamname")
         .then(function(picks){
             res.json(picks);
         })
@@ -118,7 +118,7 @@ var getCurrentPicks = function(req, res) {
     var userID = parseInt(req.params.userid, 10);
     db.games.max('week')
         .then(function(max){
-            db.userPicks.findAll({
+            db.teamPicks.findAll({
                 where: {
                     week: max,
                     userid: userID

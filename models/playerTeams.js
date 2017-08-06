@@ -1,5 +1,13 @@
 module.exports = function(sequelize, DataTypes){
 	return sequelize.define('playerTeams', {
+        teamID: {
+			field: 'teamID',
+			unique: true,
+			primaryKey: true,
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			allowNull: false
+        },
         userID: {
 			field: 'userID',
 			type: DataTypes.STRING,
@@ -15,7 +23,7 @@ module.exports = function(sequelize, DataTypes){
 			field: 'isActive',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
-			defaultValue: false
+			defaultValue: true
         },
         hasPaid: {
 			field: 'hasPaid',

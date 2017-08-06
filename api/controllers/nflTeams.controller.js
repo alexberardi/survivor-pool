@@ -22,12 +22,12 @@ module.exports = function(req, res){
                 teamCity: sanitizeTeam.v
             }
             console.log(homeTeamInfo);
-            db.teams.create(homeTeamInfo)
+            db.nflTeams.create(homeTeamInfo)
                 .catch(function(e){
                     error = e;
                 });
 
-            db.teams.create(awayTeamInfo)
+            db.nflTeams.create(awayTeamInfo)
                 .catch(function(e){
                     error = e;
                 });

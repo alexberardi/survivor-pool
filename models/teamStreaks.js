@@ -1,8 +1,13 @@
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define('userstreaks', {
+    return sequelize.define('teamStreaks', {
         userID: {
             field: 'userID',
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        teamID: {
+            field: 'teamID',
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         total: {
