@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
+import {Link, IndexLink} from 'react-router';
 import * as actions from 'actions';
 import FaEdit from 'react-icons/lib/fa/edit';
 
@@ -20,21 +21,43 @@ class DisplayTeam extends Component {
         this.props.refreshTeam(teamName);
         this.setState({changeTeam: false, teamName: teamName});
     }
+    componentDidMount() {
+        //check for Pick
+    }
 	render() {
         var teamButton;
+        var hasPick = false;
+        var pickDisplay;
+        // remove
+
         if(this.state.changeTeam) {
             teamButton = <ChangeTeam userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
         } else {
             teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
         }
+        
+        if(!hasPick) {
+			pickDisplay = <Link to="/picks" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
+		} else {
+			// display pick
+			pickDisplay = '';
+		}
 
 		return (
 			<div className="card-container">
                 <div className="card-title">
-                    Your Team
+                   Team: 
+                   <div>{teamButton}</div>
                 </div>
                 <div className="card-content">
-                    {teamButton}
+                    <div className="card-column">
+                        <div className="card-column-container"> 
+                            <p>This week's pick: {pickDisplay}</p>
+                        </div>
+                        <div className="card-column-container"> 
+                            <p>Last week's pick:</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 		)

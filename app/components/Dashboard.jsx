@@ -5,7 +5,6 @@ import * as actions from 'actions';
 import * as Requests from 'Requests';
 import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
-import PickInfo from 'PickInfo';
 import Footer from 'Footer';
 import FaExclamation from 'react-icons/lib/fa/exclamation';
 
@@ -45,10 +44,7 @@ class Dashboard extends Component {
 						<div className="dashboard-title">Dashboard</div>
 						{message}
 						<div className="container">
-							<div className="card-row">
-								<TeamInfo />
-								<PickInfo />
-							</div>			
+							<TeamInfo />
 							<div className="card-row">
 								<div className="card">
 									<div className="card-title">

@@ -5,7 +5,6 @@ import * as Requests from 'Requests';
 
 import DisplayTeam from 'DisplayTeam';
 
-
 class TeamInfo extends Component {
 	constructor(props) {
 		super(props);
@@ -40,19 +39,23 @@ class TeamInfo extends Component {
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
 				return (
-					<p>You don't have any teams!</p>
+					<div className="card">
+						<p>You don't have any teams!</p>
+					</div>
 				)
 			} 
 
-			return teams.map((team) => {
+			return teams.map((team, index) => {
 				return (
-					<DisplayTeam displayName={displayName} teamName={team.teamName} userID={userID}/>
+					<div className="card" key={index}>
+						<DisplayTeam displayName={displayName} teamName={team.teamName} userID={userID}/>
+					</div>
 				)
 			});
 		}
 
 		return (
-			<div className="card">
+			<div className="card-row">
 				{renderTeams()}
 			</div>
 		)
