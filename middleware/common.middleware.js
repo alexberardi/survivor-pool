@@ -11,12 +11,28 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
+          req.userID = decodedToken.user_id;
       		next();
     		})
     		.catch(function(error) {
           console.log('Invalid Token.');
           res.status(401).send();
     		});
+}
+
+var checkAuthenticationWithTeamID = function(req, res, next) {
+    db.playerTeams.findOne({
+      where: {
+        teamID: req.params.teamID,
+        userID: req.userID
+      }
+    })
+    .then(function(team){
+      next();
+    })
+    .catch(function(error) {
+      res.status(401).send();
+    })
 }
 
 var checkAdmin = function (req, res, next) {
@@ -50,5 +66,6 @@ var checkAdmin = function (req, res, next) {
 
   module.exports = {
   	checkAuthentication: checkAuthentication,
-    checkAdmin: checkAdmin
+    checkAdmin: checkAdmin,
+    checkAuthenticationWithTeamID: checkAuthenticationWithTeamID
   };
