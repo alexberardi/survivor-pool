@@ -9,7 +9,7 @@ class TeamInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {uid: null, displayName: null, teams: null};
-		//this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
+		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 	}
 	componentDidMount() {
 		var {dispatch} = this.props;
@@ -27,10 +27,9 @@ class TeamInfo extends Component {
 			that.setState({uid, displayName, teams: userTeams});
 		});
 	}
-	/*refreshTeamDisplay(teamName) {
+	refreshTeamDisplay(teamName) {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
-	*/
 	render() {
 		let userID = this.state.uid;
 		let teams = this.state.teams;
@@ -48,7 +47,7 @@ class TeamInfo extends Component {
 			return teams.map((team, index) => {
 				return (
 					<div className="card" key={index}>
-						<DisplayTeam displayName={displayName} teamName={team.teamName} userID={userID}/>
+						<DisplayTeam teamID={team.teamID} displayName={displayName} teamName={team.teamName} userID={userID} refreshTeam={this.refreshTeamDisplay}/>
 					</div>
 				)
 			});

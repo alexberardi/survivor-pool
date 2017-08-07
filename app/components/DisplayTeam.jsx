@@ -9,7 +9,7 @@ import ChangeTeam from 'ChangeTeam';
 class DisplayTeam extends Component {
 	constructor(props) {
         super(props);
-        this.state = {displayName: props.displayName, teamName: props.teamName, changeTeam: false, uid: props.userID};
+        this.state = {displayName: props.displayName, teamName: props.teamName, teamID: props.teamID, changeTeam: false, uid: props.userID};
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
     }
@@ -31,7 +31,7 @@ class DisplayTeam extends Component {
         // remove
 
         if(this.state.changeTeam) {
-            teamButton = <ChangeTeam userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
+            teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
         } else {
             teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
         }
