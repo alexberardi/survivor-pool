@@ -46,8 +46,8 @@ class DisplayTeam extends Component {
 		return (
 			<div className="card-container">
                 <div className="card-title">
-                   Team: 
                    <div>{teamButton}</div>
+                   <div className="team-title">Team</div>
                 </div>
                 <div className="card-content">
                     <div className="card-column">

@@ -73,6 +73,7 @@
 .card-row {
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	flex-grow: 2;
 	flex-direction: row;
 	min-height: 100px;

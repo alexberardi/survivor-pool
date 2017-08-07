@@ -4,12 +4,14 @@ import * as actions from 'actions';
 import * as Requests from 'Requests';
 
 import DisplayTeam from 'DisplayTeam';
+import AddTeam from 'AddTeam';
 
 class TeamInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {uid: null, displayName: null, teams: null};
 		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
+		this.refreshPlayerTeams = this.refreshPlayerTeams.bind(this);
 	}
 	componentDidMount() {
 		var {dispatch} = this.props;
@@ -30,6 +32,19 @@ class TeamInfo extends Component {
 	refreshTeamDisplay(teamName) {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
+	refreshPlayerTeams() {
+		let userID = this.state.uid;
+		let teams = this.state.teams;
+		let userTeams;
+		var that = this;
+
+		Requests.get(`/teams/${userID}`).then(function(teams) {
+			if(teams.data !== null) {
+				userTeams = teams.data;
+			}
+			that.setState({teams: userTeams});
+		});
+	}
 	render() {
 		let userID = this.state.uid;
 		let teams = this.state.teams;
@@ -47,16 +62,21 @@ class TeamInfo extends Component {
 			return teams.map((team, index) => {
 				return (
 					<div className="card" key={index}>
-						<DisplayTeam teamID={team.teamID} displayName={displayName} teamName={team.teamName} userID={userID} refreshTeam={this.refreshTeamDisplay}/>
+						<DisplayTeam teamID={team.teamID} displayName={displayName} teamName={team.teamName} userID={userID} refreshTeam={this.refreshTeamDisplay} refreshPlayerTeams={this.refreshPlayerTeams}/>
 					</div>
 				)
 			});
 		}
 
 		return (
-			<div className="card-row">
-				{renderTeams()}
-			</div>
+			<div>
+				<div className="card-row">
+					{renderTeams()}
+					<div className="card">
+						<AddTeam  refreshPlayerTeams={this.refreshPlayerTeams}/>
+					</div>
+				</div>
+			</div> 
 		)
 	}
 };
