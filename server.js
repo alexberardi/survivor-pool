@@ -86,6 +86,10 @@ app.get('/standings', middleware.checkAuthentication, function (req, res) {
 });
 
 //User Teams Requests
+app.delete('/teams/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+	ctrlPlayerTeams.deleteTeam(req, res);
+});
+
 app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamsGetAll(req, res);
 });

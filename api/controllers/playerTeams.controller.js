@@ -1,6 +1,21 @@
 var _ = require('underscore');
 var db = require('../../db');
 
+var deleteTeam = function(req, res) {
+    var teamID = req.params.teamID;
+    db.playerTeams.findOne({
+            where:  {teamID : teamID} 
+        })
+    .then(function(team){
+        team.destroy();
+        res.status(200).send();
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.status(500).send();
+    });
+}
+
 var teamsGetAll = function(req, res) {
     var userID = req.params.userID;
 
@@ -62,6 +77,7 @@ var updateTeamName = function(req, res) {
 };
 
 module.exports = {
+    deleteTeam: deleteTeam,
     teamsGetAll: teamsGetAll,
     teamCreate: teamCreate,
     updateTeamName: updateTeamName
