@@ -11,7 +11,7 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-          req.userID = decodedToken.user_id;
+          req.userID = decodedToken.uid;
       		next();
     		})
     		.catch(function(error) {
@@ -20,7 +20,7 @@ var checkAuthentication = function(req, res, next) {
     		});
 }
 
-var checkAuthenticationWithTeamID = function(req, res, next) {
+var checkTeamID = function(req, res, next) {
     db.playerTeams.findOne({
       where: {
         teamID: req.params.teamID,
@@ -28,7 +28,11 @@ var checkAuthenticationWithTeamID = function(req, res, next) {
       }
     })
     .then(function(team){
-      next();
+      if(team) {
+        next();
+      } else {
+        res.status(401).send();
+      }
     })
     .catch(function(error) {
       res.status(401).send();
@@ -67,5 +71,5 @@ var checkAdmin = function (req, res, next) {
   module.exports = {
   	checkAuthentication: checkAuthentication,
     checkAdmin: checkAdmin,
-    checkAuthenticationWithTeamID: checkAuthenticationWithTeamID
+    checkTeamID: checkTeamID
   };

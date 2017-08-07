@@ -94,7 +94,7 @@ app.post('/teams', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamCreate(req, res);
 });
 
-app.put('/teams/:teamID', middleware.checkAuthentication, middleware.checkAuthenticationWithTeamID, function(req, res){
+app.put('/teams/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
 	ctrlPlayerTeams.updateTeamName(req, res);
 });
 
