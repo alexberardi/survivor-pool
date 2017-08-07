@@ -7,24 +7,18 @@ import axios from 'axios';
 class ChangeTeam extends Component {
 	constructor(props) {
         super(props);
-        this.state = {userID: props.userID};
+        this.state = {userID: props.userID, teamID: props.teamID};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(e) {
         e.preventDefault();
-        let userID = this.state.userID;
+        let teamID = this.state.teamID;
         let that = this;
-
-        if(userID === null) {
-            var {dispatch} = this.props;
-            var {uid} = dispatch(actions.getUserAuthInfo());
-            userID = uid;
-        }
 
         let teamName = this.refs.teamName.value;
         
         if(teamName.length > 0) {
-            Requests.put(`/users/teamName/${userID}`, {teamName})
+            Requests.put(`/teams/${teamID}`, {teamName})
             .then(function(res) {
                 that.props.teamSubmit(teamName);
             })
