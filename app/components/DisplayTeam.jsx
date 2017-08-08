@@ -2,16 +2,28 @@ import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import {Link, IndexLink} from 'react-router';
 import * as actions from 'actions';
+import * as Requests from 'Requests';
 import FaEdit from 'react-icons/lib/fa/edit';
+import FaTrashO from 'react-icons/lib/fa/trash-o';
 
 import ChangeTeam from 'ChangeTeam';
 
 class DisplayTeam extends Component {
 	constructor(props) {
         super(props);
-        this.state = {displayName: props.displayName, teamName: props.teamName, teamID: props.teamID, changeTeam: false, uid: props.userID};
+        this.state = {
+            displayName: props.displayName, 
+            teamName: props.teamName, 
+            teamID: props.teamID, 
+            changeTeam: false, 
+            deleteTeam: false, 
+            uid: props.userID
+        };
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+        this.handleTeamDelete = this.handleTeamDelete.bind(this);
+        this.deleteTeam = this.deleteTeam.bind(this);
+        this.cancelDelete = this.cancelDelete.bind(this);
     }
     handleTeamChange(e) {
         e.preventDefault();
@@ -21,6 +33,24 @@ class DisplayTeam extends Component {
         this.props.refreshTeam(teamName);
         this.setState({changeTeam: false, teamName: teamName});
     }
+    handleTeamDelete(e) {
+        e.preventDefault();
+        this.setState({deleteTeam: true});
+    }
+    deleteTeam(e) {
+        e.preventDefault();
+        let teamID = this.state.teamID;
+        let that = this;
+
+        Requests.delete(`/teams/${teamID}`).then(function(response) {
+            that.setState({deleteTeam: false});
+            that.props.refreshPlayerTeams();
+        });
+    }
+    cancelDelete(e) {
+        e.preventDefault();
+        this.setState({deleteTeam: false});
+    }
     componentDidMount() {
         //check for Pick
     }
@@ -28,12 +58,24 @@ class DisplayTeam extends Component {
         var teamButton;
         var hasPick = false;
         var pickDisplay;
+        var deleteButton;
         // remove
 
         if(this.state.changeTeam) {
             teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
         } else {
             teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
+        }
+
+        if(this.state.deleteTeam) {
+            deleteButton = <div className="confirmation">Are you sure you want to delete this team? 
+                    <div className="confirmation-link">
+                        <a href="#" className="delete-team-confirm" onClick={this.deleteTeam}>Yes</a>
+                        <a href="#" className="delete-team-cancel" onClick={this.cancelDelete}>No</a>
+                    </div>
+                </div>
+        } else {
+            deleteButton = <a href="#" className="delete-team-link" onClick={this.handleTeamDelete}><FaTrashO size={25} /></a>
         }
         
         if(!hasPick) {
@@ -59,6 +101,7 @@ class DisplayTeam extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="team-delete-container">{deleteButton}</div>
             </div>
 		)
 	}

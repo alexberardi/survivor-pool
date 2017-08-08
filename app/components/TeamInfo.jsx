@@ -52,16 +52,12 @@ class TeamInfo extends Component {
 
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
-				return (
-					<div className="card">
-						<p>You don't have any teams!</p>
-					</div>
-				)
+				return 
 			} 
 
-			return teams.map((team, index) => {
+			return teams.map((team) => {
 				return (
-					<div className="card" key={index}>
+					<div className="card" key={team.teamID}>
 						<DisplayTeam teamID={team.teamID} displayName={displayName} teamName={team.teamName} userID={userID} refreshTeam={this.refreshTeamDisplay} refreshPlayerTeams={this.refreshPlayerTeams}/>
 					</div>
 				)
@@ -73,7 +69,7 @@ class TeamInfo extends Component {
 				<div className="card-row">
 					{renderTeams()}
 					<div className="card">
-						<AddTeam  refreshPlayerTeams={this.refreshPlayerTeams}/>
+						<AddTeam refreshPlayerTeams={this.refreshPlayerTeams}/>
 					</div>
 				</div>
 			</div> 

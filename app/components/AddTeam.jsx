@@ -61,7 +61,7 @@ class AddTeam extends Component {
 		return (
 			<div className="card-container">
                 <div className="card-title">
-                    Add Another Team
+                    Create a Team
                 </div>
                 <div className="card-content">
                     {addTeamButton()}

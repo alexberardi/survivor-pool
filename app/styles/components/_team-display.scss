@@ -3,3 +3,58 @@
     color: $light-color;
     opacity: 0.8;
 }
+
+.team-delete-container {
+    margin: 0px 12px 12px 12px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.confirmation {
+    padding: 9px;
+    border: solid 2px $red;
+    border-radius: 4px;
+    background-color: $light-red;
+    color: $white;
+    &-link {
+        display: flex;
+
+    }
+}
+
+.delete-team-link {
+    margin: 15px 12px 15px 0px;
+    color: $red;
+    &:hover, &:active {
+        color: $orange;
+    }
+}
+
+.delete-team-cancel {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: $white;
+    &:active, &:hover {
+        border: 2px solid $white;
+        background-color: $orange;
+        color: $white;
+    }
+}
+
+.delete-team-confirm {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: $white;
+    margin-right: 12px;
+    &:active, &:hover {
+        border: 2px solid $white;
+        background-color: $orange;
+        color: $white;
+    }
+}

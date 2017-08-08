@@ -41,5 +41,15 @@ module.exports = {
             }
         });
 
-	}
+    },
+    delete: function(address) {
+        return axios.delete(address).then(function(response) {
+            return response;
+        }).catch(function(error) {
+            if(error.status == '401') {
+                firebase.auth().signOut().then(() => {
+                });
+            }
+        });
+    }
 };
