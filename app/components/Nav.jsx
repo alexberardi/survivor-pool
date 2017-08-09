@@ -12,11 +12,20 @@ class Nav extends Component {
         e.preventDefault();
         hashHistory.push('/dashboard');
     }
+    toAdmin(e) {
+        e.preventDefault();
+        hashHistory.push('/admin');
+    }
 	render() {
         let dashButton = null;
+        let adminButton = null;
 
         if(this.props.page != 'Dashboard') {
             dashButton = <DashButton onClick={this.toDashboard} />;
+        }
+
+        if(this.props.admin) {
+            adminButton = <AdminButton onClick={this.toAdmin} />;
         }
 
         return (
@@ -26,6 +35,7 @@ class Nav extends Component {
 			    </div>
 				<div className="actions-container">
                     <div className="actions">
+                        {adminButton}
                         {dashButton}
                         <Profile />
                     </div>
@@ -39,6 +49,14 @@ function DashButton(props) {
     return (
         <div className="dashboard-button-container">
 			<button type="button" className="dashboard-nav-button" onClick={props.onClick}>Dashboard</button>
+		</div>
+    )
+}
+
+function AdminButton(props) {
+    return (
+        <div className="dashboard-button-container">
+			<button type="button" className="dashboard-nav-button" onClick={props.onClick}>Admin</button>
 		</div>
     )
 }

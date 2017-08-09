@@ -29,16 +29,13 @@ class Dashboard extends Component {
 		let adminPage;
 		let message;
 
-		if(isAdmin) {
-		}
-
 		if(!hasPaid) {
 			message = <div className="message"><FaExclamation size={40} style={{marginLeft: '12px', marginRight: '12px'}} /> <div className="message-text">You haven't paid entry for the season.</div></div>;
 		}
 
 		return (
 			<div className="dashboard">
-				<Nav page={'Dashboard'}/>
+				<Nav admin={isAdmin} page={'Dashboard'}/>
 				<div className="row">
 					<div className="column small-centered small-11 medium-10 large-9">
 						<div className="dashboard-title">Dashboard</div>

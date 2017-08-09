@@ -3,6 +3,7 @@ import {Route, Router, IndexRoute, hashHistory, browserHistory} from 'react-rout
 import Dashboard from 'Dashboard';
 import Login from 'Login';
 import Picks from 'Picks';
+import Admin from 'Admin';
 import firebase from 'app/firebase/';
 
 var requireLogin = (nextState, replace, next) => {
@@ -19,11 +20,13 @@ var userLoggedIn = (nextState, replace, next) => {
 	next();
 };
 
+
 export default (
 	<Router history={hashHistory}>
 		<Route path="/">
 			<Route path="dashboard" component={Dashboard} onEnter={requireLogin}/>
 			<Route path="picks" component={Picks} onEnter={requireLogin}/>
+			<Route path="admin" component={Admin} onEnter={requireLogin}/>
 			<IndexRoute component={Login} onEnter={userLoggedIn}/>
 		</Route>
 	</Router>
