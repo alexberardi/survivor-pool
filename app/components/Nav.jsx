@@ -31,7 +31,7 @@ class Nav extends Component {
         return (
             <div className="nav">
 			    <div className="logo-container">
-                    <div className="nav-title">Survivor-Pool</div>
+                    <div className="nav-title">Survivor Pool</div>
 			    </div>
 				<div className="actions-container">
                     <div className="actions">
