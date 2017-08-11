@@ -13,7 +13,7 @@ class TeamInfo extends Component {
 		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 		this.refreshPlayerTeams = this.refreshPlayerTeams.bind(this);
 	}
-	componentDidMount() {
+	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 

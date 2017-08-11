@@ -12,7 +12,7 @@ class Picks extends Component {
 		super(props);
 		this.state = {uid: null, games: null, startedGames: null};
     }
-	componentDidMount() {
+	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
