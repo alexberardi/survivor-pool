@@ -32,6 +32,16 @@ var teamsGetAll = function(req, res) {
     });
 }
 
+var teamsGetAllAdmin = function(req, res) {
+    db.sequelize.query("SELECT PT.teamID, PT.teamName, PT.isActive, PT.hasPaid, U.fullName, U.email FROM playerTeams PT JOIN users U ON U.userID = PT.userID")
+        .then(function(playerTeams){
+            res.json(playerTeams);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        });
+}
+
 var teamCreate = function(req,res){
     var body = _.pick(req.body, 'teamName', 'userID');
     db.playerTeams.create(body)
@@ -79,6 +89,7 @@ var updateTeamName = function(req, res) {
 module.exports = {
     deleteTeam: deleteTeam,
     teamsGetAll: teamsGetAll,
+    teamsGetAllAdmin: teamsGetAllAdmin,
     teamCreate: teamCreate,
     updateTeamName: updateTeamName
 }

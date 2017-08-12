@@ -6,14 +6,15 @@ import {Link, IndexLink, hashHistory} from 'react-router';
 
 import Nav from 'Nav';
 import Footer from 'Footer';
+import UserTeam from 'UserTeam';
 
 class Admin extends Component {
 	constructor(props) {
         super(props);
-        this.state = {isAdmin: false};
+        this.state = {isAdmin: false, userTeams: null};
         this.populateGames = this.populateGames.bind(this);
     }
-	componentDidMount() {
+	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
@@ -25,7 +26,13 @@ class Admin extends Component {
             } else {
                 hashHistory.push('/dashboard');
             }
-		});
+        });
+        
+        Requests.get('/teams/admin/users').then(function(teams) {
+            if(teams.data[0]) {
+                that.setState({userTeams:teams.data[0]});
+            }
+        });
     }
     populateGames() {
         Requests.post('/games/populate', {})
@@ -37,6 +44,28 @@ class Admin extends Component {
             })
     }
 	render() {
+        let userTeams = this.state.userTeams;
+
+        var renderUserTeams = () =>  {
+            if(userTeams === null || userTeams.length == 0) {
+				return (
+					 <div className="pick-card-row">
+						<div className="pick-card">
+							<div className="pick-card-content">
+								 Loading User Teams...
+							</div>
+						</div>
+					</div>
+				)
+            }
+
+            return userTeams.map((userTeam) => {
+				return (
+					<UserTeam key={userTeam.teamID} {...userTeam}/>
+				)
+            })
+        }
+
         if(this.state.isAdmin) {
             return (
                 <div className="dashboard">
@@ -55,6 +84,14 @@ class Admin extends Component {
 			                                    <button type="button" className="dashboard-nav-button" onClick={this.populateGames}>Populate Games</button>
 		                                    </div>
                                          </div>
+                                    </div>
+                                </div>
+                                <div className="card-row">
+                                    <div className="userteams-container">
+                                        <div className="userteams-container-title">
+                                            User Teams
+                                        </div>
+                                        {renderUserTeams()}
                                     </div>
                                 </div>
                             </div>

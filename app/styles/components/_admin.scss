@@ -16,3 +16,61 @@
 	color: $off-white;
 	background: $orange;
 }
+
+.userteams-container {
+	&-title {
+		margin: 12px 18px 12px 18px;
+		font-family: $Brawler;
+    	color: $purple;
+    	font-size: 20px;
+		font-weight: bold;
+		border-bottom: 1px solid $light-grey-border;
+	}
+	flex-direction: column;
+	flex: 1;
+	flex-grow: 2;
+	margin: 20px;
+	min-width: 200px;
+	min-height: 175px;
+  	background-color: #ffe;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.userteam-card {
+	flex: 1;
+	flex-direction: column;
+	margin: 10px;
+	background-color: #ffe;
+	border: 1px solid $purple;  
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	&-title {
+		display: flex;
+		margin: 12px 18px 12px 18px;
+    	font-family: $Brawler;
+    	color: $purple;
+    	font-size: 20px;
+		font-weight: bold;
+		&-icons {
+			display: flex;
+			flex: 1;
+			flex-direction: row-reverse;
+
+		}
+	}
+	&-content {
+		display: flex;
+		flex: 1;
+		border-top: 1px solid $light-grey-border;
+		margin: 12px 18px 12px 18px;
+		font-family: $Brawler;
+		font-size: 14px;
+		color: $purple;
+	}
+	&-item {
+		margin: 10px 0 0 10px;
+		color: $purple;
+		font-family: $Brawler;
+	}
+}

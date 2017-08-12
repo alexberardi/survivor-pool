@@ -94,6 +94,10 @@ app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamsGetAll(req, res);
 });
 
+app.get('/teams/admin/users', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.teamsGetAllAdmin(req, res);
+});
+
 app.post('/teams', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamCreate(req, res);
 });
