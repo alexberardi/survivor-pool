@@ -5,6 +5,7 @@ import * as actions from 'actions';
 import * as Requests from 'Requests';
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
+import FaFrownO from 'react-icons/lib/fa/frown-o';
 
 import ChangeTeam from 'ChangeTeam';
 
@@ -15,6 +16,7 @@ class DisplayTeam extends Component {
             displayName: props.displayName, 
             teamName: props.teamName, 
             teamID: props.teamID, 
+            isActive: props.isActive,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -59,51 +61,68 @@ class DisplayTeam extends Component {
         var hasPick = false;
         var pickDisplay;
         var deleteButton;
-        // remove
+        const isActive = this.state.isActive;
 
-        if(this.state.changeTeam) {
-            teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
-        } else {
-            teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
-        }
+        if(isActive) {
+            if(this.state.changeTeam) {
+                teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
+            } else {
+                teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
+            }
 
-        if(this.state.deleteTeam) {
-            deleteButton = <div className="confirmation">Are you sure you want to delete this team? 
-                    <div className="confirmation-link">
-                        <a href="#" className="delete-team-confirm" onClick={this.deleteTeam}>Yes</a>
-                        <a href="#" className="delete-team-cancel" onClick={this.cancelDelete}>No</a>
-                    </div>
-                </div>
-        } else {
-            deleteButton = <a href="#" className="delete-team-link" onClick={this.handleTeamDelete}><FaTrashO size={25} /></a>
-        }
-        
-        if(!hasPick) {
-			pickDisplay = <Link to="/picks" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
-		} else {
-			// display pick
-			pickDisplay = '';
-		}
-
-		return (
-			<div className="card-container">
-                <div className="card-title">
-                   <div>{teamButton}</div>
-                   <div className="team-title">Team</div>
-                </div>
-                <div className="card-content">
-                    <div className="card-column">
-                        <div className="card-column-container"> 
-                            <p>This week's pick: {pickDisplay}</p>
-                        </div>
-                        <div className="card-column-container"> 
-                            <p>Last week's pick:</p>
+            if(this.state.deleteTeam) {
+                deleteButton = <div className="confirmation">Are you sure you want to delete this team? 
+                        <div className="confirmation-link">
+                            <a href="#" className="delete-team-confirm" onClick={this.deleteTeam}>Yes</a>
+                            <a href="#" className="delete-team-cancel" onClick={this.cancelDelete}>No</a>
                         </div>
                     </div>
+            } else {
+                deleteButton = <a href="#" className="delete-team-link" onClick={this.handleTeamDelete}><FaTrashO size={25} /></a>
+            }
+            
+            if(!hasPick) {
+                pickDisplay = <Link to="/picks" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
+            } else {
+                // display pick
+                pickDisplay = '';
+            }
+
+            return (
+                <div className="card-container">
+                    <div className="card-title">
+                        <div>{teamButton}</div>
+                        <div className="team-title">Team</div>
+                    </div>
+                    <div className="card-content">
+                        <div className="card-column">
+                            <div className="card-column-container"> 
+                                <p>This week's pick: {pickDisplay}</p>
+                            </div>
+                            <div className="card-column-container"> 
+                                <p>Last week's pick:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="team-delete-container">{deleteButton}</div>
                 </div>
-                <div className="team-delete-container">{deleteButton}</div>
-            </div>
-		)
+            )
+        } else {
+            // Team is inactive
+            return (
+                <div className="card-container">
+                    <div className="card-title">
+                        <div>{this.state.teamName}</div>
+                        <div className="team-title">Team <FaFrownO size={20} style={{color: 'red'}}/></div>
+                    </div>
+                    <div className="card-content">
+                        <div className="team-eliminated">
+                            Eliminated
+                        </div>
+                    </div>
+                </div>
+            )
+        }
 	}
 };
 
