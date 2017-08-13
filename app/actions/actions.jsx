@@ -16,8 +16,10 @@ export var startLogin = (provider) => {
 			let authUser = {
 				uid: results.user.uid,
 				displayName: results.user.displayName,
-				email: results.user.email
+				email: results.user.email,
+				pictureURL: results.user.photoURL
 			};
+
 
 			firebase.auth().currentUser.getToken(true).then(function(token) {
 				localStorage.setItem('token', token);
@@ -32,7 +34,8 @@ export var startLogin = (provider) => {
 					let user = {
 						fullName: authUser.displayName, 
 						email: authUser.email,
-						userID: authUser.uid
+						userID: authUser.uid,
+						pictureURL: authUser.pictureURL
 					}
 					Requests.post('/users', user).then(function(res) {
 						console.log('created user');

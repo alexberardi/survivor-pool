@@ -57,7 +57,7 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'fullName', 'email', 'userID');
+    var body = _.pick(req.body, 'fullName', 'email', 'userID', 'pictureURL');
     db.user.create(body)
         .then(function(user) {
             db.playerTeams.create({userID: user.userID, teamName: user.fullName + '\'s team'})
