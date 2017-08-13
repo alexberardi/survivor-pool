@@ -14,7 +14,7 @@ var deleteTeam = function(req, res) {
         console.log(error);
         res.status(500).send();
     });
-}
+};
 
 var teamsGetAll = function(req, res) {
     var userID = req.params.userID;
@@ -30,7 +30,7 @@ var teamsGetAll = function(req, res) {
     .catch(function(e) {
         res.json(e);
     });
-}
+};
 
 var teamsGetAllAdmin = function(req, res) {
     db.sequelize.query("SELECT PT.teamID, PT.teamName, PT.isActive, PT.hasPaid, U.fullName, U.email FROM playerTeams PT JOIN users U ON U.userID = PT.userID")
@@ -40,6 +40,66 @@ var teamsGetAllAdmin = function(req, res) {
         .catch(function(e){
             return res.status(500).json(e);
         });
+};
+
+var updateTeamActive = function(req, res) {
+    var body = _.pick(req.body, 'teamID', 'active');
+    var attributes = {isActive: body.active};
+
+    if(!body.hasOwnProperty('teamID')) {
+        res.status(401).send();
+        return;
+    }
+
+    db.playerTeams.findOne({
+        where: {
+            teamID: body.teamID
+        }
+    })
+    .then(function(team) {
+        if(team) {
+            return team.update(attributes)
+                .then(function(team) {
+                    res.json(team.toJSON());
+                }, function(e) {
+                    res.status(400).json(e);
+                });
+        } else {
+            res.status(404).send();
+        }
+    }, function() {
+        res.status(500).send();
+    });
+};
+
+var updateTeamPaid = function(req, res) {
+    var body = _.pick(req.body, 'teamID', 'paid');
+    var attributes = {hasPaid: body.paid};
+
+    if(!body.hasOwnProperty('teamID')) {
+        res.status(401).send();
+        return;
+    }
+
+    db.playerTeams.findOne({
+        where: {
+            teamID: body.teamID
+        }
+    })
+    .then(function(team) {
+        if(team) {
+            return team.update(attributes)
+                .then(function(team) {
+                    res.json(team.toJSON());
+                }, function(e) {
+                    res.status(400).json(e);
+                });
+        } else {
+            res.status(404).send();
+        }
+    }, function() {
+        res.status(500).send();
+    });
 }
 
 var teamCreate = function(req,res){
@@ -91,5 +151,7 @@ module.exports = {
     teamsGetAll: teamsGetAll,
     teamsGetAllAdmin: teamsGetAllAdmin,
     teamCreate: teamCreate,
-    updateTeamName: updateTeamName
+    updateTeamName: updateTeamName,
+    updateTeamActive: updateTeamActive,
+    updateTeamPaid: updateTeamPaid
 }
