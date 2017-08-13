@@ -11,21 +11,36 @@ import FaExclamation from 'react-icons/lib/fa/exclamation';
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: false};
+		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true};
 	}
 	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
 		var that = this;
-		
+		var displayName;
+		var isAdmin = this.state.isAdmin;
+		var hasPaid = this.state.hasPaid;
 		Requests.get(`/users/${uid}`).then(function(user) {
-			that.setState({userID: uid, displayName, isAdmin: user.data.isAdmin, hasPaid: user.data.hasPaid});
+			displayName = user.data.displayName;
+			isAdmin = user.data.isAdmin;
+			that.setState({userID: uid, displayName, isAdmin});
+		});
+		Requests.get(`/teams/${uid}`).then(function(teams) {
+			if(teams.data !== null) {
+				teams.data.forEach(function(team) {
+					if(team.hasPaid == false) {
+						hasPaid = false;
+					}
+				});
+			}
+			that.setState({hasPaid});
 		});
 	}
 	render() {
 		let isAdmin = this.state.isAdmin;
 		let hasPaid = this.state.hasPaid;
+
 		let adminPage;
 		let message;
 
