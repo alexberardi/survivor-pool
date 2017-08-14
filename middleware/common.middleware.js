@@ -11,20 +11,21 @@ var serviceAccount = require("../app/firebase/serviceAccountKey.json");
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-          req.userID = decodedToken.uid;
       		next();
     		})
     		.catch(function(error) {
           console.log('Invalid Token.');
+          console.log(error);
           res.status(401).send();
     		});
 }
 
 var checkTeamID = function(req, res, next) {
+
     db.playerTeams.findOne({
       where: {
         teamID: req.params.teamID,
-        userID: req.userID
+        userID: req.body.userID
       }
     })
     .then(function(team){

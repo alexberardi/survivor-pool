@@ -18,8 +18,9 @@ var ctrlGames = require('./api/controllers/games.controller');
 var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
 var ctrlToken = require('./api/controllers/tokens.js');
 var ctrlUsers = require('./api/controllers/users.controller');
-var ctrlUserStreaks = require('./api/controllers/userStreaks.controller');
+var ctrlUserStreaks = require('./api/controllers/teamStreaks.controller');
 var ctrlPlayerTeams = require('./api/controllers/playerTeams.controller.js');
+var ctrlTeamPicks = require('./api/controllers/teamPicks.controller.js');
 
 //Middleware
 var middleware = require('./middleware/common.middleware.js');
@@ -48,6 +49,10 @@ app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.updateGames(req, res);
 });
 
+
+app.post('/picks/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+	ctrlTeamPicks.makePick(req, res);
+});
 
 //Populate teams
 app.get('/teams/populate', middleware.checkAuthentication, function(req, res){
