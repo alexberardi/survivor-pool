@@ -7,12 +7,14 @@ import {Link, IndexLink, hashHistory} from 'react-router';
 import Nav from 'Nav';
 import Footer from 'Footer';
 import UserTeam from 'UserTeam';
+import UserTeamSearch from 'UserTeamSearch';
 
 class Admin extends Component {
 	constructor(props) {
         super(props);
-        this.state = {isAdmin: false, userTeams: null};
+        this.state = {isAdmin: false, userTeams: null, filteredTeams: null};
         this.populateGames = this.populateGames.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 	componentWillMount() {
 		var {dispatch} = this.props;
@@ -34,6 +36,22 @@ class Admin extends Component {
             }
         });
     }
+    handleSearch(searchText) {
+        let userTeams = this.state.userTeams;
+        searchText = searchText.toLowerCase();
+        let filteredTeams = userTeams.filter((team) => {
+            let teamName = team.teamName.toLowerCase();
+            let email = team.email.toLowerCase();
+            let fullName = team.fullName.toLowerCase();
+
+            return searchText.length === 0 || 
+            teamName.indexOf(searchText) > -1 ||
+            email.indexOf(searchText) > -1 ||
+            fullName.indexOf(searchText) > -1;
+        });
+
+        this.setState({filteredTeams});
+    }
     populateGames() {
         Requests.post('/games/populate', {})
             .then(function(res) {
@@ -44,7 +62,12 @@ class Admin extends Component {
             })
     }
 	render() {
-        let userTeams = this.state.userTeams;
+        let userTeams;
+        if(this.state.filteredTeams !== null) {
+            userTeams = this.state.filteredTeams;
+        } else {
+            userTeams = this.state.userTeams;
+        }
 
         var renderUserTeams = () =>  {
             if(userTeams === null || userTeams.length == 0) {
@@ -52,7 +75,7 @@ class Admin extends Component {
 					 <div className="pick-card-row">
 						<div className="pick-card">
 							<div className="pick-card-content">
-								 Loading User Teams...
+								 None found.
 							</div>
 						</div>
 					</div>
@@ -90,6 +113,7 @@ class Admin extends Component {
                                     <div className="userteams-container">
                                         <div className="userteams-container-title">
                                             User Teams
+                                            <UserTeamSearch handleSearch={this.handleSearch}/>
                                         </div>
                                         {renderUserTeams()}
                                     </div>
