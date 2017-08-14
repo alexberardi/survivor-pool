@@ -28,11 +28,8 @@ class Dashboard extends Component {
 		});
 		Requests.get(`/teams/${uid}`).then(function(teams) {
 			if(teams.data !== null) {
-				teams.data.forEach(function(team) {
-					if(team.hasPaid == false) {
-						hasPaid = false;
-					}
-				});
+				let playerTeams = teams.data;
+				hasPaid = playerTeams.every(team => team.hasPaid);
 			}
 			that.setState({hasPaid});
 		});
