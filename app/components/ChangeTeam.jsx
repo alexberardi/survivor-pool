@@ -7,7 +7,7 @@ import axios from 'axios';
 class ChangeTeam extends Component {
 	constructor(props) {
         super(props);
-        this.state = {userID: props.userID, teamID: props.teamID};
+        this.state = {userID: props.userID, teamID: props.teamID, admin: props.admin};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(e) {
@@ -15,18 +15,19 @@ class ChangeTeam extends Component {
         let teamID = this.state.teamID;
         let userID = this.state.userID;
         let that = this;
+        let url = this.state.admin ? `/teams/name/${teamID}` : `/teams/${teamID}`;
 
         let teamName = this.refs.teamName.value;
-        
+
         if(teamName.length > 0) {
-            Requests.put(`/teams/${teamID}`, {userID, teamName})
-            .then(function(res) {
-                that.props.teamSubmit(teamName);
-            })
-            .catch(function(error) {
-                console.log(error);
-            })
-        }
+            Requests.put(url, {userID, teamName})
+                .then(function(res) {
+                    that.props.teamSubmit(teamName);
+                })
+                .catch(function(error) {
+                    console.log(error);
+            });
+        } 
     }
 	render() {
 		return (

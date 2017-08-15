@@ -17,6 +17,7 @@ class DisplayTeam extends Component {
             teamName: props.teamName, 
             teamID: props.teamID, 
             isActive: props.isActive,
+            hasPaid: props.hasPaid,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -65,7 +66,7 @@ class DisplayTeam extends Component {
 
         if(isActive) {
             if(this.state.changeTeam) {
-                teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName}/>
+                teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName} admin={false}/>
             } else {
                 teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
             }
@@ -77,7 +78,7 @@ class DisplayTeam extends Component {
                             <a href="#" className="delete-team-cancel" onClick={this.cancelDelete}>No</a>
                         </div>
                     </div>
-            } else {
+            } else if(!this.state.hasPaid) {
                 deleteButton = <a href="#" className="delete-team-link" onClick={this.handleTeamDelete}><FaTrashO size={25} /></a>
             }
             

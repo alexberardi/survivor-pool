@@ -119,6 +119,10 @@ app.put('/teams/paid/:teamID', middleware.checkAuthentication, middleware.checkA
 	ctrlPlayerTeams.updateTeamPaid(req, res);
 });
 
+app.put('/teams/name/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.updateTeamName(req, res);
+});
+
 app.use(function (req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https') {
     res.redirect('http://' + req.hostname + req.url);
