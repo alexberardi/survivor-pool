@@ -35,6 +35,7 @@ class Picks extends Component {
 	render() {
 		let games = this.state.games;
 		let started = this.state.startedGames;
+
 		let week = games !== null ? games[0].week : 0;
 
 		var renderGames = () => {
@@ -49,6 +50,14 @@ class Picks extends Component {
 					</div>
 				)
 			}
+			games.forEach(function(game) {
+				started.forEach(function(start) {
+					if(start.gameID == game.gameID) {
+						game.started = true;
+					}
+				});
+			});
+
 			return games.map((game) => {
 				return (
 					<Game key={game.gameID} {...game}/>
