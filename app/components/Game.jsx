@@ -4,6 +4,7 @@ import * as Redux from 'react-redux';
 class Game extends Component {
     constructor(props) {
 		super(props);
+		this.state = {picked: false, ...props};
     }
 	render() {
 		let kickoffDate = this.props.gameDate.substring(4,6) + "/" + this.props.gameDate.substring(6,8) + "/" + this.props.gameDate.substring(0,4); 
@@ -17,10 +18,10 @@ class Game extends Component {
 
 		if(this.props.started && quarter !== 'F') {
 			progress = <StartedText quarter={quarter}/>
-			border = '2px solid #AA3939;';
+			border = '2px solid #AA3939';
 		} else if(quarter == 'F') {
 			progress = <FinalText />
-			border = '2px solid #AA3939;';
+			border = '2px solid #AA3939';
 		} else if(quarter == 'P') {
 			progress = '';
 		} 
@@ -59,6 +60,8 @@ class Game extends Component {
                             <div className="pick-card-info-title">Kickoff:</div>
 							<div>{kickoffDate} at {this.props.time}</div>
 							{progress}
+						</div>
+						<div className="pick-card-confirmation">
 						</div>
 					</div>
 				</div>

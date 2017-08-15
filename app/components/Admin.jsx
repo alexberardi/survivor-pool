@@ -72,9 +72,9 @@ class Admin extends Component {
         var renderUserTeams = () =>  {
             if(userTeams === null || userTeams.length == 0) {
 				return (
-					 <div className="pick-card-row">
-						<div className="pick-card">
-							<div className="pick-card-content">
+					 <div className="card-row">
+						<div className="card">
+							<div className="card-title">
 								 None found.
 							</div>
 						</div>

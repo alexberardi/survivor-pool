@@ -21,7 +21,6 @@ var checkAuthentication = function(req, res, next) {
 }
 
 var checkTeamID = function(req, res, next) {
-
     db.playerTeams.findOne({
       where: {
         teamID: req.params.teamID,

@@ -13,12 +13,13 @@ class ChangeTeam extends Component {
     handleSubmit(e) {
         e.preventDefault();
         let teamID = this.state.teamID;
+        let userID = this.state.userID;
         let that = this;
 
         let teamName = this.refs.teamName.value;
         
         if(teamName.length > 0) {
-            Requests.put(`/teams/${teamID}`, {teamName})
+            Requests.put(`/teams/${teamID}`, {userID, teamName})
             .then(function(res) {
                 that.props.teamSubmit(teamName);
             })

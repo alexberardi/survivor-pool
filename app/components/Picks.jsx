@@ -20,13 +20,10 @@ class Picks extends Component {
 
 		//Get Games
 		Requests.post('/games/update', {}).then(function(response) {
-			console.log('Updated Games');
 			Requests.get(`/games/user/${uid}`).then(function(games) {
-				console.log('Fetched Games');
 				let currentWeekGames = games.data;
 				Requests.get('/games/started').then(function(started) {
 					let startedGames = started.data;
-					console.log('Fetched Started Games');
 					that.setState({games: currentWeekGames, startedGames});
 				});
 			});
