@@ -54,7 +54,7 @@
 	}
 
 	&-kickoff {
-		flex: 1;
+		flex-basis: 200px;
 	}
 
 	&-score {
@@ -66,6 +66,45 @@
 		width: 50%;
 		border-bottom: 1px solid $light-grey-border;
 	}
+}
+
+.pick-confirmation {
+	margin: 12px 20px 12px 12px;
+    flex: 1;
+    color: $purple;
+    font-weight: bold;
+    &-link {
+        display: flex;
+    }
+}
+
+.pick-team-cancel {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: #ffe;
+    &:active, &:hover {
+        border: 2px solid #ffe;
+        background-color: $orange;
+        color: $white;
+    }
+}
+
+.pick-team-confirm {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: #ffe;
+    margin-right: 12px;
+    &:active, &:hover {
+        border: 2px solid #ffe;
+        background-color: $orange;
+        color: $white;
+    }
 }
 
 .game-started {

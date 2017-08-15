@@ -83,7 +83,7 @@ class DisplayTeam extends Component {
             }
             
             if(!hasPick) {
-                pickDisplay = <Link to="/picks" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
+                pickDisplay = <Link to={`picks/${this.state.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
             } else {
                 // display pick
                 pickDisplay = '';

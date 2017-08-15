@@ -50,9 +50,12 @@ app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.updateGames(req, res);
 });
 
-
 app.post('/picks/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlTeamPicks.makePick(req, res);
+});
+
+app.get('/picks/:userID', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getCurrentPicks(req, res);
 });
 
 //Messages requests

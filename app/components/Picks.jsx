@@ -10,11 +10,17 @@ import Footer from 'Footer';
 class Picks extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {uid: null, games: null, startedGames: null};
+		this.state = {userID: null, games: null, startedGames: null, teamID: this.props.params.teamID, pick: null};
+		this.handlePick = this.handlePick.bind(this);
+		this.cancelPick = this.cancelPick.bind(this);
     }
 	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
+
+		if(this.state.userID == null) {
+			this.setState({userID: uid});
+		}
 
 		var that = this;
 
@@ -28,6 +34,15 @@ class Picks extends Component {
 				});
 			});
 		});
+
+		//Get Picks
+
+	}
+	handlePick(pick) {
+		this.setState({pick});
+	}
+	cancelPick() {
+		this.setState({pick: null});
 	}
 	render() {
 		let games = this.state.games;
@@ -57,7 +72,7 @@ class Picks extends Component {
 
 			return games.map((game) => {
 				return (
-					<Game key={game.gameID} {...game}/>
+					<Game key={game.gameID} teamID={this.state.teamID} userID={this.state.userID} currentPick={this.state.pick} handlePick={this.handlePick} cancelPick={this.cancelPick} {...game}/>
 				)
 			})
 		}
