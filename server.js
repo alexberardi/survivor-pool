@@ -14,6 +14,7 @@ var db = require('./db.js');
 
 
 //Entities
+var ctrlAdminMessages = require('./api/controllers/adminMessages.controller')
 var ctrlGames = require('./api/controllers/games.controller');
 var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
 var ctrlToken = require('./api/controllers/tokens.js');
@@ -53,6 +54,19 @@ app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 app.post('/picks/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlTeamPicks.makePick(req, res);
 });
+
+//Messages requests
+app.post('/messages/', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.addMessage(req, res);
+});
+
+app.delete('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.deleteMessage(req, res);
+});
+
+app.put('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.updateMessage(req, res);
+})
 
 //Populate teams
 app.get('/teams/populate', middleware.checkAuthentication, function(req, res){
