@@ -10,12 +10,13 @@ var makePick = function(req, res) {
             where: {
                 week: {$ne : parseInt(body.week)},
                 userID: body.userID,
+                teamID: body.teamID,
                 teamName: body.teamName
             }
         })
         .then(function(game){
             if (!game) {
-                db.teamPicks.findOne({where: {userID: body.userID, week: body.week}})
+                db.teamPicks.findOne({where: {userID: body.userID, teamID: body.teamID, week: body.week}})
                     .then(function(pick){
                         if(pick) {
                             db.games.findOne({
@@ -44,7 +45,6 @@ var makePick = function(req, res) {
                                     res.json(pick);
                                 })
                                 .catch(function(e){
-                                    console.log(e);
                                     res.status(400).json(e);
                                 });
                         }
@@ -54,7 +54,6 @@ var makePick = function(req, res) {
                                 res.json(pick);
                             })
                             .catch(function(e){
-                                console.log(e);
                                 res.status(500).json(e);
                             });
                     });
