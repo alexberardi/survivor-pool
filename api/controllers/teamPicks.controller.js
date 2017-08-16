@@ -1,70 +1,72 @@
 var _ = require('underscore');
 var db = require('../../db');
-
+var ctrlGames = require('../../api/controllers/games.controller');
 
 var makePick = function(req, res) {
-    var body = _.pick(req.body, 'week', 'userID','teamID', 'gameID', 'teamName');
-    body.gameID = parseInt(body.gameID, 10);
-    db.teamPicks.findOne(
-        {
-            where: {
-                week: {$ne : parseInt(body.week)},
-                userID: body.userID,
-                teamID: body.teamID,
-                teamName: body.teamName
-            }
-        })
-        .then(function(game){
-            if (!game) {
-                db.teamPicks.findOne({where: {userID: body.userID, teamID: body.teamID, week: body.week}})
-                    .then(function(pick){
-                        if(pick) {
-                            db.games.findOne({
-                                where: {
-                                    gameID: pick.gameID
-                                }
-                            })
-                                .then( function(currentgame){
-                                    if (currentgame.quarter === 'P') {
-                                        return pick.update(body)
-                                            .then(function(pick){
-                                                res.json(pick.toJSON());
-                                            }, function(e){
-                                                res.status(400).json(e);
-                                            });
-                                    } else {
-                                        res.status(402).send();
-                                    }
-                                }, function(e) {
-                                  res.status(500).send();
-                                })
+    ctrlGames.updateGamesAsync().then(function(){
 
-                        } else {
+        var body = _.pick(req.body, 'week', 'userID','teamID', 'gameID', 'teamName');
+        body.gameID = parseInt(body.gameID, 10);
+        db.teamPicks.findOne(
+            {
+                where: {
+                    week: {$ne : parseInt(body.week)},
+                    userID: body.userID,
+                    teamID: body.teamID,
+                    teamName: body.teamName
+                }
+            })
+            .then(function(game){
+                if (!game) {
+                    db.teamPicks.findOne({where: {userID: body.userID, teamID: body.teamID, week: body.week}})
+                        .then(function(pick){
+                            if(pick) {
+                                db.games.findOne({
+                                    where: {
+                                        gameID: pick.gameID
+                                    }
+                                })
+                                    .then( function(currentgame){
+                                        if (currentgame.quarter === 'P') {
+                                            return pick.update(body)
+                                                .then(function(pick){
+                                                    res.json(pick.toJSON());
+                                                }, function(e){
+                                                    res.status(400).json(e);
+                                                });
+                                        } else {
+                                            res.status(402).send();
+                                        }
+                                    }, function(e) {
+                                      res.status(500).send();
+                                    })
+
+                            } else {
+                                db.teamPicks.create(body)
+                                    .then(function(pick){
+                                        res.json(pick);
+                                    })
+                                    .catch(function(e){
+                                        res.status(400).json(e);
+                                    });
+                            }
+                        }, function(e) {
                             db.teamPicks.create(body)
                                 .then(function(pick){
                                     res.json(pick);
                                 })
                                 .catch(function(e){
-                                    res.status(400).json(e);
+                                    res.status(500).json(e);
                                 });
-                        }
-                    }, function(e) {
-                        db.teamPicks.create(body)
-                            .then(function(pick){
-                                res.json(pick);
-                            })
-                            .catch(function(e){
-                                res.status(500).json(e);
-                            });
-                    });
-            }
-            else {
-                res.status(401).send();
-            }
-        });
+                        });
+                }
+                else {
+                    res.status(401).send();
+                }
+            });
+    });
 
-
-}
+};
 
 var getPicks = function(req, res) {
     var userID = parseInt(req.params.userID, 10);

@@ -71,6 +71,36 @@ var updateGames = function(req, res) {
     });
 }
 
+var updateGamesAsync = function(req, res) {
+    return new Promise(function(resolve, reject) {
+        request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body) {
+            body = JSON.parse(body);
+            week = body.w;
+
+            games = body.gms;
+
+            games.forEach(function(game) {
+                db.games.update(
+                {
+                    homeScore: parseInt(game.hs, 10),
+                    awayScore: parseInt(game.vs, 10),
+                    quarter: game.q
+                },{
+                    where: {
+                        gameID: parseInt(game.gsis, 10)
+                    }
+                }
+                )
+                .catch(function(error) {
+                    console.log(error);
+                    reject("Error occurred");
+                })
+            });
+            resolve("All games updated");
+        });
+    });
+};
+
 var getWeeklyGames = function(req, res){
     db.games.max('week')
         .then(function(max){
@@ -124,7 +154,8 @@ var getCurrentWeek = function(req, res) {
 module.exports = {
     populateGames: populateGames,
     getWeeklyGames: getWeeklyGames,
-    updateGames: updateGames,
     getStartedGames: getStartedGames,
-    getCurrentWeek: getCurrentWeek
+    getCurrentWeek: getCurrentWeek,
+    updateGames: updateGames,
+    updateGamesAsync: updateGamesAsync
 }
