@@ -23,7 +23,7 @@ class Game extends Component {
 		}
 	}
 	startPick(pick) {
-		if(!this.props.started) {
+		if(!this.props.started && !this.props.disabled) {
 			if(this.props.pick !== null && pick.teamPicked !== this.props.pick.teamName) {
 				this.props.startPick(pick);
 			} else if(this.props.pick === null){
@@ -37,8 +37,10 @@ class Game extends Component {
 
 	}
 	submitPick(e) {
-		e.preventDefault();
-		this.props.submitPick();
+		if(!this.props.disabled) {
+			e.preventDefault();
+			this.props.submitPick();
+		}
 	}
 	cancelPick(e) {
 		e.preventDefault();

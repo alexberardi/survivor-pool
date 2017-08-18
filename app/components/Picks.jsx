@@ -11,6 +11,7 @@ class Picks extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			disabled: false,
 			userID: null,
 			games: null, 
 			startedGames: null, 
@@ -35,6 +36,9 @@ class Picks extends Component {
 
 		var that = this;
 
+		let picked = false;
+		let pick = null;
+
 		//Get Games
 		Requests.post('/games/update', {}).then(function(response) {
 			Requests.get(`/games/user/${uid}`).then(function(games) {
@@ -42,15 +46,19 @@ class Picks extends Component {
 				Requests.get('/games/started').then(function(started) {
 					let startedGames = started.data;
 					that.setState({games: currentWeekGames, startedGames});
-				});
+				}).then(Requests.get(`/picks/${uid}/${that.state.teamID}`).then(function(pick) {
+					if(pick.data[0]) {
+						let startedGames = that.state.startedGames;
+						let disabled = false;
+						startedGames.forEach((game) =>  {
+							if(game.gameID === pick.data[0].gameID) {
+								disabled = true;
+							}
+						});
+						that.setState({picked: true, pick: pick.data[0], disabled});
+					}
+				}));
 			});
-		});
-
-		//Get Current Pick
-		Requests.get(`/picks/${uid}/${this.state.teamID}`).then(function(pick) {
-			if(pick.data[0]) {
-				that.setState({picked: true, pick: pick.data[0]});
-			}
 		});
 	}
 	formatGameInfo(game) {				
@@ -162,6 +170,7 @@ class Picks extends Component {
 				return (
 					<Game 
 						key={game.gameID} 
+						disabled={this.state.disabled}
 						teamID={this.state.teamID} 
 						userID={this.state.userID} 
 						startPick={this.startPick}
