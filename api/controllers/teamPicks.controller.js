@@ -69,13 +69,12 @@ var makePick = function(req, res) {
 };
 
 var getPicks = function(req, res) {
-    var userID = parseInt(req.params.userID, 10);
     db.teamPicks.findAll({
         order: [
             ['week', 'DESC']
         ],
         where : {
-            userID: userID
+            userID: req.params.userID
         }
     })
         .then(function(picks){
@@ -112,13 +111,13 @@ var getPopularPicks = function(req, res) {
 };
 
 var getCurrentPicks = function(req, res) {
-    var userID = parseInt(req.params.userID, 10);
     db.games.max('week')
         .then(function(max){
             db.teamPicks.findAll({
                 where: {
                     week: max,
-                    userID: userID
+                    userID: req.params.userID,
+                    teamID: req.params.teamID
                 }
             })
                 .then(function(userPick){

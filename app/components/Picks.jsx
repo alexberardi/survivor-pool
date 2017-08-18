@@ -10,9 +10,20 @@ import Footer from 'Footer';
 class Picks extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {userID: null, games: null, startedGames: null, teamID: this.props.params.teamID, pick: null};
-		this.handlePick = this.handlePick.bind(this);
+		this.state = {
+			userID: null,
+			games: null, 
+			startedGames: null, 
+			teamID: this.props.params.teamID,
+			pickStarted: false,
+			pickTemp: null,
+			pick: null
+		};
+		this.startPick = this.startPick.bind(this);
+		this.submitPick = this.submitPick.bind(this);
 		this.cancelPick = this.cancelPick.bind(this);
+		this.formatGameInfo = this.formatGameInfo.bind(this);
+		this.refreshPicks = this.refreshPicks.bind(this);
     }
 	componentWillMount() {
 		var {dispatch} = this.props;
@@ -35,14 +46,77 @@ class Picks extends Component {
 			});
 		});
 
-		//Get Picks
-
+		//Get Current Pick
+		Requests.get(`/picks/${uid}/${this.state.teamID}`).then(function(pick) {
+			if(pick.data[0]) {
+				that.setState({picked: true, pick: pick.data[0]});
+			}
+		});
 	}
-	handlePick(pick) {
-		this.setState({pick});
+	formatGameInfo(game) {				
+		let gameInfo = {
+			week: game.week,
+			gameID: game.gameID,
+			quarter: game.quarter,
+			awayImage: `/images/${game.awayTeamName.toLowerCase()}.gif`,
+			awayTeamName: game.awayTeamName,
+			homeImage: `/images/${game.homeTeamName.toLowerCase()}.gif`,
+			homeTeamName: game.homeTeamName,
+			started: game.started,
+			homeScore: game.homeScore,
+			awayScore: game.awayScore,
+			kickoffTime: game.time,
+			kickoffDate: game.gameDate.substring(4,6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4)
+		};
+
+		switch(game.quarter) {
+			case "P":
+				gameInfo.quarterText = "Pregame";
+				break;
+			case "H":
+				gameInfo.quarterText = "Half-Time";
+				break;
+			case "F":
+				gameInfo.quarterText = "Final";
+				break;
+			case "FO":
+				gameInfo.quarterText = "Final / Overtime";
+			default:
+				gameInfo.quarterText = 'Q' + game.quarter;
+		}
+
+		return gameInfo;
+	}	
+	startPick(pick) {
+		if(pick !== null) {
+			this.setState({pickStarted: true, pickTemp: pick});
+		}
 	}
 	cancelPick() {
-		this.setState({pick: null});
+		this.setState({pickStarted: false, pickTemp: null});
+		this.refreshPicks();
+	}
+	submitPick() {
+		let that = this;
+		this.state.pickTemp.teamName = this.state.pickTemp.teamPicked;
+
+        Requests.post(`/picks/${this.state.teamID}`, this.state.pickTemp)
+            .then(function(res) {
+				that.setState({pickStarted: false, pick: null});
+				that.refreshPicks();
+            })
+            .catch(function(error) {
+                console.log('Error picking game', error);
+            });
+	}
+	refreshPicks() {
+		var that = this;
+
+		Requests.get(`/picks/${this.state.userID}/${this.state.teamID}`).then(function(pick) {
+			if(pick.data[0]) {
+				that.setState({picked: true, pick: pick.data[0]});
+			}
+		});
 	}
 	render() {
 		let games = this.state.games;
@@ -71,8 +145,33 @@ class Picks extends Component {
 			});
 
 			return games.map((game) => {
+				let formattedGame = this.formatGameInfo(game);
+
+				if(this.state.pickTemp !== null) {
+					if(formattedGame.gameID == this.state.pickTemp.gameID) {
+						formattedGame.pickedGame = true;
+						formattedGame.pickedTeam = this.state.pickTemp.teamPicked;
+					}
+				} else if(this.state.pick !== null) {
+					if(formattedGame.gameID == this.state.pick.gameID) {
+						formattedGame.pickedGame = true;
+						formattedGame.pickedTeam = this.state.pick.teamName;
+					}
+				}
+
 				return (
-					<Game key={game.gameID} teamID={this.state.teamID} userID={this.state.userID} currentPick={this.state.pick} handlePick={this.handlePick} cancelPick={this.cancelPick} {...game}/>
+					<Game 
+						key={game.gameID} 
+						teamID={this.state.teamID} 
+						userID={this.state.userID} 
+						startPick={this.startPick}
+						submitPick={this.submitPick}
+						cancelPick={this.cancelPick}
+						pick={this.state.pick}
+						pickTemp={this.state.pickTemp}
+						pickStarted={this.state.pickStarted}
+						picked={this.state.picked}
+					{...formattedGame}/>
 				)
 			})
 		}
