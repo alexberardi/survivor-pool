@@ -18,6 +18,7 @@ class DisplayTeam extends Component {
             teamID: props.teamID, 
             isActive: props.isActive,
             hasPaid: props.hasPaid,
+            pick: null,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -54,12 +55,20 @@ class DisplayTeam extends Component {
         e.preventDefault();
         this.setState({deleteTeam: false});
     }
-    componentDidMount() {
-        //check for Pick
+    componentWillMount() {
+        //Current Pick
+        var that = this;
+        if(this.state.isActive) {
+            Requests.get(`/picks/${this.state.uid}/${this.state.teamID}`).then(function(pick) {
+                if(pick.data[0]) {  
+                    that.setState({pick: pick.data[0]});
+                }
+            });
+        }
     }
 	render() {
         var teamButton;
-        var hasPick = false;
+        var hasPick = this.state.pick === null ? false : true;
         var pickDisplay;
         var deleteButton;
         const isActive = this.state.isActive;
@@ -85,8 +94,8 @@ class DisplayTeam extends Component {
             if(!hasPick) {
                 pickDisplay = <Link to={`picks/${this.state.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
             } else {
-                // display pick
-                pickDisplay = '';
+                let logoURL = `/images/${this.state.pick.teamName.toLowerCase()}.gif`;
+                pickDisplay = <GetLogo pickURL={logoURL} teamID={this.state.teamID}/>
             }
 
             return (
@@ -98,7 +107,7 @@ class DisplayTeam extends Component {
                     <div className="card-content">
                         <div className="card-column">
                             <div className="card-column-container"> 
-                                <p>This week's pick: {pickDisplay}</p>
+                                <div>{pickDisplay}</div>
                             </div>
                             <div className="card-column-container"> 
                                 <p>Last week's pick:</p>
@@ -126,5 +135,17 @@ class DisplayTeam extends Component {
         }
 	}
 };
+
+function GetLogo(props) {
+    return (
+        <div>
+            <div>Current Pick:</div>
+            <img src={props.pickURL} height="70" width="70"/>
+            <div>
+                <Link to={`picks/${props.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
+            </div>
+        </div>
+    )
+}
 
 export default Redux.connect()(DisplayTeam);

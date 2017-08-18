@@ -72,12 +72,12 @@ class Game extends Component {
 			progress = <div className="game-started">
 							Started | {quarterText}
 						</div>
-			border = '2px solid #AA3939';
+			border = '4px solid #AA3939';
 		} else if(this.props.quarter == 'F') {
 			progress =   <div className="game-final">
 							{quarterText}
 						</div>
-			border = '2px solid #AA3939';
+			border = '4px solid #AA3939';
 		} else if(this.props.quarter == 'P') {
 			progress = 	<div className="game-pre">
 							{quarterText}
