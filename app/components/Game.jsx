@@ -99,9 +99,25 @@ class Game extends Component {
 				<div className="pick-card" style={{border: border}}>
 					<div className="pick-card-title">
 						<div className="logo-container">
-							<img src={this.props.awayImage} height="70" width="70" style={{border: awayBorder, borderRadius: '6px'}} onClick={() => this.startPick(this.formatPick(this.props.awayTeamName))}/>
+							<GetLogo 
+								away={true}
+								awayBorder={awayBorder} 
+								disabledAway={this.props.disabledAway}
+								awayTeamName={this.props.awayTeamName} 
+								awayImage={this.props.awayImage} 
+								startPick={this.startPick}
+								formatPick={this.formatPick} 
+							/>
 							<span className="vs-span">AT</span>
-							<img src={this.props.homeImage} height="70" width="70" style={{border: homeBorder, borderRadius: '6px'}} onClick={() => this.startPick(this.formatPick(this.props.homeTeamName))}/>
+							<GetLogo 
+								away={false}
+								homeBorder={homeBorder} 
+								disabledHome={this.props.disabledHome}
+								homeTeamName={this.props.homeTeamName}
+								homeImage={this.props.homeImage}
+								startPick={this.startPick}
+								formatPick={this.formatPick}  
+							/>
 						</div>
 						<div className="score-container">
                             {this.props.awayScore} - {this.props.homeScore}
@@ -123,5 +139,22 @@ class Game extends Component {
     }
 };
 
+function GetLogo(props) {
+	let logo = null;
+	if(props.away) {
+		if(props.disabledAway) {
+			logo = <img src={props.awayImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '6px'}} />
+		} else {
+			logo = <img src={props.awayImage} height="70" width="70" style={{border: props.awayBorder, borderRadius: '6px'}} onClick={() => props.startPick(props.formatPick(props.awayTeamName))}/>
+		}
+	} else {
+		if(props.disabledHome) {
+			logo = <img src={props.homeImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '6px'}} />
+		} else {
+			logo = <img src={props.homeImage} height="70" width="70" style={{border: props.homeBorder, borderRadius: '6px'}} onClick={() => props.startPick(props.formatPick(props.homeTeamName))}/>
+		}
+	}
+	return logo;
+}
 
 export default Redux.connect()(Game);

@@ -74,7 +74,8 @@ var getPicks = function(req, res) {
             ['week', 'DESC']
         ],
         where : {
-            userID: req.params.userID
+            userID: req.params.userID,
+            teamID: req.params.teamID
         }
     })
         .then(function(picks){

@@ -18,7 +18,8 @@ class GameList extends Component {
 			teamID: this.props.params.teamID,
 			pickStarted: false,
 			pickTemp: null,
-			pick: null
+			pick: null,
+			allPicks: null
 		};
 		this.startPick = this.startPick.bind(this);
 		this.submitPick = this.submitPick.bind(this);
@@ -39,7 +40,7 @@ class GameList extends Component {
 		let picked = false;
 		let pick = null;
 
-		//Get Games
+		//Get Games & Picks
 		Requests.post('/games/update', {}).then(function(response) {
 			Requests.get(`/games/user/${uid}`).then(function(games) {
 				let currentWeekGames = games.data;
@@ -57,7 +58,11 @@ class GameList extends Component {
 						});
 						that.setState({picked: true, pick: pick.data[0], disabled});
 					}
-				}));
+				}).then(Requests.get(`/picks/all/${uid}/${that.state.teamID}`).then(function(picks) {
+					if(picks.data) {
+						that.setState({allPicks: picks.data});
+					}
+				})));
 			});
 		});
 	}
@@ -127,6 +132,7 @@ class GameList extends Component {
 		});
 	}
 	render() {
+		let allPicks = this.state.allPicks;
 		let games = this.state.games;
 		let started = this.state.startedGames;
 
@@ -145,11 +151,22 @@ class GameList extends Component {
 				)
 			}
 			games.forEach(function(game) {
+				game.disabledAway = false;
+				game.disabledHome = false;
+
 				started.forEach(function(start) {
 					if(start.gameID == game.gameID) {
 						game.started = true;
 					}
 				});
+				if(allPicks.length > 0) {
+					allPicks.forEach(function(pick) {
+						if(pick.week !== game.week) {
+							game.disabledAway = pick.teamName === game.awayTeamName ? true : false;
+							game.disabledHome = pick.teamName === game.homeTeamName ? true : false;
+						}
+					});
+				}
 			});
 
 			return games.map((game) => {
@@ -171,6 +188,8 @@ class GameList extends Component {
 					<Game 
 						key={game.gameID} 
 						disabled={this.state.disabled}
+						disabledAway={game.disabledAway}
+						disabledHome={game.disabledHome}
 						teamID={this.state.teamID} 
 						userID={this.state.userID} 
 						startPick={this.startPick}
