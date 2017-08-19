@@ -7,7 +7,7 @@ import Nav from 'Nav';
 import Game from 'Game';
 import Footer from 'Footer';
 
-class Picks extends Component {
+class GameList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -204,4 +204,4 @@ class Picks extends Component {
 	}
 };
 
-export default Redux.connect()(Picks);
+export default Redux.connect()(GameList);
