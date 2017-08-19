@@ -58,6 +58,10 @@ app.get('/picks/:userID/:teamID', middleware.checkAuthentication, function(req, 
 	ctrlTeamPicks.getCurrentPicks(req, res);
 });
 
+app.get('/picks/last/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getLastWeekPick(req, res);
+});
+
 //Messages requests
 app.post('/messages/', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlAdminMessages.addMessage(req, res);

@@ -20,6 +20,7 @@ class DisplayTeam extends Component {
             isActive: props.isActive,
             hasPaid: props.hasPaid,
             pick: null,
+            lastPick: null,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -66,13 +67,26 @@ class DisplayTeam extends Component {
                 }
             });
         }
+
+        Requests.get(`/picks/last/${this.state.uid}/${this.state.teamID}`).then(function(last) {
+            if(last.data[0]) {  
+                that.setState({lastPick: last.data[0]});
+            }
+        });
     }
 	render() {
         var teamButton;
         var hasPick = this.state.pick === null ? false : true;
+        var lastPick;
         var pickDisplay;
         var deleteButton;
+
         const isActive = this.state.isActive;
+        
+        if(this.state.lastPick) {
+            let logoURL = `/images/${this.state.lastPick.teamName.toLowerCase()}.gif`;
+            lastPick = <GetLastPick pickURL={logoURL}/>
+        }
 
         if(isActive) {
             if(this.state.changeTeam) {
@@ -114,7 +128,7 @@ class DisplayTeam extends Component {
                                 <div>{pickDisplay}</div>
                             </div>
                             <div className="card-column-container"> 
-                                <p>Last week's pick:</p>
+                                {lastPick}
                             </div>
                         </div>
                     </div>
@@ -133,8 +147,15 @@ class DisplayTeam extends Component {
                         <div className="team-title">Team</div>
                     </div>
                     <div className="card-content">
-                        <div className="team-eliminated">
-                            Eliminated
+                        <div className="card-column">
+                            <div className="card-column-container"> 
+                                <div className="team-eliminated">
+                                    Eliminated
+                                </div>
+                            </div>
+                            <div className="card-column-container"> 
+                                {lastPick}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,12 +164,27 @@ class DisplayTeam extends Component {
 	}
 };
 
+function GetLastPick(props) {
+    return (
+        <div className="pick-container">
+            <div className="pick-logo-container">
+                <div className="pick-logo-title">
+                    Last Pick:
+                </div>
+               <img src={props.pickURL} height="80" width="80"/>
+            </div>
+        </div>
+    )
+}
+
 function GetCurrentPick(props) {
     return (
         <div className="pick-container">
             <div className="pick-logo-container">
-                Current Pick:
-                <img src={props.pickURL} height="70" width="70"/>
+                <div className="pick-logo-title">
+                    Current Pick:
+                </div>
+                <img src={props.pickURL} height="80" width="80"/>
             </div>
             <div>
                 <Link to={`picks/${props.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>

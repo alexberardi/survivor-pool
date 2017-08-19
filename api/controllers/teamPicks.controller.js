@@ -132,10 +132,34 @@ var getCurrentPicks = function(req, res) {
         });
 }
 
+var getLastWeekPick = function(req, res) {
+    db.games.max('week')
+        .then(function(max) {
+            let lastWeek = max - 1;
+            db.teamPicks.findAll({
+                where: {
+                    week: lastWeek,
+                    userID: req.params.userID,
+                    teamID: req.params.teamID
+                }
+            })
+            .then(function(userPick) {
+                res.json(userPick);
+            })
+            .catch(function(e) {
+                return res.status(500).json(e);
+            });
+        })
+        .catch(function(e) {
+            return res.status(500).json(e);
+        });
+}
+
 module.exports = {
     makePick: makePick,
     getPicks: getPicks,
     getCurrentPicks: getCurrentPicks,
     getPopularPicks: getPopularPicks,
-    getAdminPicks: getAdminPicks
+    getAdminPicks: getAdminPicks,
+    getLastWeekPick: getLastWeekPick
 };
