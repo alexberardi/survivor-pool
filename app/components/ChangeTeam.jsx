@@ -34,7 +34,7 @@ class ChangeTeam extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="change-team-input-container">
-                        <input type="text" className="team-input" ref="teamName" maxLength={25} defaultValue={this.props.teamName}/>
+                        <input type="text" className="team-input" ref="teamName" maxLength={45} defaultValue={this.props.teamName}/>
                         <button type="submit" className="secondary-button">Change</button>
                     </div>
                 </form>

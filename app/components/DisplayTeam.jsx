@@ -5,7 +5,8 @@ import * as actions from 'actions';
 import * as Requests from 'Requests';
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
-import FaFrownO from 'react-icons/lib/fa/frown-o';
+import FaCheck from 'react-icons/lib/fa/check';
+import FaClose from 'react-icons/lib/fa/close';
 
 import ChangeTeam from 'ChangeTeam';
 
@@ -46,7 +47,7 @@ class DisplayTeam extends Component {
         let teamID = this.state.teamID;
         let that = this;
 
-        Requests.delete(`/teams/${teamID}`).then(function(response) {
+        Requests.delete(`/teams/${this.state.uid}/${teamID}`).then(function(response) {
             that.setState({deleteTeam: false});
             that.props.refreshPlayerTeams();
         });
@@ -95,11 +96,14 @@ class DisplayTeam extends Component {
                 pickDisplay = <Link to={`picks/${this.state.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
             } else {
                 let logoURL = `/images/${this.state.pick.teamName.toLowerCase()}.gif`;
-                pickDisplay = <GetLogo pickURL={logoURL} teamID={this.state.teamID}/>
+                pickDisplay = <GetCurrentPick pickURL={logoURL} teamID={this.state.teamID}/>
             }
 
             return (
                 <div className="card-container">
+                    <div className="active-container">
+                        <FaCheck size={20} style={{color: '#00ad61'}}/>
+                    </div>
                     <div className="card-title">
                         <div>{teamButton}</div>
                         <div className="team-title">Team</div>
@@ -121,9 +125,12 @@ class DisplayTeam extends Component {
             // Team is inactive
             return (
                 <div className="card-container">
+                    <div className="active-container">
+                        <FaClose size={20} style={{color: '#AA3939'}}/>
+                    </div>
                     <div className="card-title">
                         <div>{this.state.teamName}</div>
-                        <div className="team-title">Team <FaFrownO size={20} style={{color: 'red'}}/></div>
+                        <div className="team-title">Team</div>
                     </div>
                     <div className="card-content">
                         <div className="team-eliminated">
@@ -136,11 +143,13 @@ class DisplayTeam extends Component {
 	}
 };
 
-function GetLogo(props) {
+function GetCurrentPick(props) {
     return (
-        <div>
-            <div>Current Pick:</div>
-            <img src={props.pickURL} height="70" width="70"/>
+        <div className="pick-container">
+            <div className="pick-logo-container">
+                Current Pick:
+                <img src={props.pickURL} height="70" width="70"/>
+            </div>
             <div>
                 <Link to={`picks/${props.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
             </div>

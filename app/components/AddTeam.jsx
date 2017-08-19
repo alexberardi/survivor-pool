@@ -46,7 +46,7 @@ class AddTeam extends Component {
                 return (
                     <form onSubmit={this.handleSubmit}>
                          <div className="change-team-input-container">
-                                <input type="text" className="team-input" ref="teamName" maxLength={25} />
+                                <input type="text" className="team-input" ref="teamName" maxLength={30} />
                                 <button type="submit" className="secondary-button">Create</button>
                             </div>
                     </form>
@@ -54,7 +54,7 @@ class AddTeam extends Component {
               
             } else {
                 return (
-                    <a href="#" className="team-link" onClick={this.handleTeamAdd}>Create<FaPlusSquare size={25} style={{marginLeft: '12px'}} /></a>
+                    <a href="#" className="team-link" onClick={this.handleTeamAdd}>Create<FaPlusSquare size={45} style={{marginLeft: '12px'}} /></a>
                 )
             }
         }

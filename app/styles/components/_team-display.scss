@@ -69,6 +69,23 @@
     }
 }
 
+.pick-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.pick-logo-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.active-container {
+    margin: 6px 6px 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);

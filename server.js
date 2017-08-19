@@ -108,7 +108,7 @@ app.get('/standings', middleware.checkAuthentication, function (req, res) {
 });
 
 //User Teams Requests
-app.delete('/teams/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+app.delete('/teams/:userID/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlPlayerTeams.deleteTeam(req, res);
 });
 

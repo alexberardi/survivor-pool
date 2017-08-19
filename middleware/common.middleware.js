@@ -21,10 +21,11 @@ var checkAuthentication = function(req, res, next) {
 }
 
 var checkTeamID = function(req, res, next) {
+    let userID = req.body.userID ? req.body.userID : req.params.userID;
     db.playerTeams.findOne({
       where: {
         teamID: req.params.teamID,
-        userID: req.body.userID
+        userID: userID
       }
     })
     .then(function(team){
