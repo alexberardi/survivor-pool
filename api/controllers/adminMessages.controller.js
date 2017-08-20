@@ -2,7 +2,7 @@ var _ = require('underscore');
 var db = require('../../db');
 
 var addMessage = function(req, res) {
-	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage');
+	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage', 'messageType');
 
 	db.adminMessages.create(body)
 		.then(function(message) {
@@ -29,7 +29,7 @@ var deleteMessage = function(req, res) {
 };
 
 var updateMessage = function(req, res) {
-	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage');
+	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage', 'messageType');
 	body.messageID = req.params.messageID;
 
 	db.adminMessages.findOne({

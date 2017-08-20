@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: true
+		},
+		messageType: {
+			field: 'messageType',
+			type: DataTypes.CHAR,
+			allowNull: false
 		}
 	});
 };

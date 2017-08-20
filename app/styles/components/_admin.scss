@@ -57,6 +57,18 @@
     border-radius: 4px;
 }
 
+.messages-type-container {
+	border-radius: 4px;
+}
+
+.messages-select {
+	width: 100px;
+    font-family: $Brawler;
+	color: $purple;
+	margin: 0;
+    padding: 0px 12px 0px 12px;
+}
+
 .messages-update-container {
     display: flex;
 	width: 600px;

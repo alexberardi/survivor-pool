@@ -33,11 +33,12 @@ class MessageList extends Component {
         let message = {
             userID: this.state.userID,
             showMesage: true,
-            messageText: this.refs.messageText.value
+            messageText: this.refs.messageText.value,
+            messageType: this.refs.messageType.value
         }
         this.refs.messageText.value = '';
 
-        if(message.messageText.length > 0) {
+        if(message.messageText.length > 0 && message.messageType !== null) {
             Requests.post('/messages/', message)
             .then(function(res) {
                 that.refreshMessages();
@@ -91,6 +92,12 @@ class MessageList extends Component {
                     <form onSubmit={this.addMessage}>
                         <div className="messages-input-container">
                             <input type="text" ref="messageText" placeholder="Enter Message" className="messages-input" />
+                            <div className="messages-type-container">
+                                <select className="messages-select" ref="messageType">
+                                    <option value="U">Urgent</option>
+                                    <option value="N">Normal</option>
+                                </select> 
+                             </div> 
                             <button type="submit" className="dashboard-nav-button">Add Message</button>  
                         </div>
                     </form>

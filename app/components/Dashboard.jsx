@@ -55,7 +55,7 @@ class Dashboard extends Component {
             }
 
             return messages.map((message) => {
-                return <RenderMessage key={message.messageID} text={message.messageText} payment={false}/>
+                return <RenderMessage key={message.messageID} text={message.messageText} payment={false} type={message.messageType}/>
             });
 
 		}
@@ -87,17 +87,28 @@ class Dashboard extends Component {
 
 function RenderMessage(props) {
 	let icon = null;
-	let urgency;
+	let type;
 
 	if(props.payment) {
-		urgency = "message-urgent";
+		type = "message-urgent";
 		icon = <FaExclamation width={40} height={40} style={{marginLeft: '12px', marginRight: '12px'}} /> 
 	} else {
-		urgency = "message-normal";
+		switch(props.type) {
+			case 'U':
+				type = "message-urgent";
+				icon = <FaExclamation width={40} height={40} style={{marginLeft: '12px', marginRight: '12px'}} /> 
+				break;
+			case 'N':
+				type = "message-normal";
+				break;
+			default:
+				type="message-normal";
+				break;				
+		}
 	}
 
 	return (
-		<div className={urgency}>
+		<div className={type}>
 			{icon}
 			<div className="message-text">{props.text}</div>
 		</div>

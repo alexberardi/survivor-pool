@@ -27,7 +27,8 @@ class Message extends Component {
             messageID: this.props.messageID,
             userID: this.props.userID,
             messageText: this.props.messageText,
-            showMessage: !this.props.showMessage
+            showMessage: !this.props.showMessage,
+            messageType: this.props.messageType
         }
         this.setState({showMessage: !this.props.showMessage});
         this.props.updateMessage(message);
@@ -42,7 +43,8 @@ class Message extends Component {
             messageID: this.props.messageID,
             userID: this.props.userID,
             messageText: this.refs.messageText.value,
-            showMessage: this.props.showMessage
+            showMessage: this.props.showMessage,
+            messageType: this.refs.messageType.value
         }
         this.setState({changeMessage: false});
         this.props.updateMessage(message);
@@ -50,6 +52,19 @@ class Message extends Component {
 	render() {
         let showMessage = this.state.showMessage;
         let changeMessage = this.state.changeMessage;
+        let messageType = this.props.messageType;
+
+        switch(messageType) {
+            case 'U':
+                messageType = "Urgent";          
+                break;
+            case 'N':
+                messageType = "Normal";
+                break;
+            default:
+                messageType="Normal";
+                break;				
+        }
 
         let message = null;
         let visible = null;
@@ -66,6 +81,12 @@ class Message extends Component {
                     <form onSubmit={this.submitUpdateMessage}>
                         <div className="messages-update-container">
                             <input type="text" className="messages-input" ref="messageText" defaultValue={this.props.messageText}/>
+                            <div className="messages-type-container">
+                                <select className="messages-select" ref="messageType">
+                                    <option value="U">Urgent</option>
+                                    <option value="N">Normal</option>
+                                </select> 
+                             </div> 
                             <button type="submit" className="secondary-button">Change</button>
                         </div>
                     </form>
@@ -86,6 +107,7 @@ class Message extends Component {
                         </div>
                     </div>
                     <div className="userteam-card-content">
+                        <div className="userteam-card-item">Message Type: {messageType}</div>
                         <div className="userteam-card-item">Added on: {this.props.createDate}</div>
                         <div className="userteam-card-item">Updated on: {this.props.updateDate}</div>
                     </div>
