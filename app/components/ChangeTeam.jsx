@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import * as Requests from 'Requests';
-import axios from 'axios';
 
 class ChangeTeam extends Component {
 	constructor(props) {
@@ -14,7 +13,7 @@ class ChangeTeam extends Component {
         e.preventDefault();
         let teamID = this.state.teamID;
         let userID = this.state.userID;
-        let that = this;
+        const that = this;
         let url = this.state.admin ? `/teams/name/${teamID}` : `/teams/${teamID}`;
 
         let teamName = this.refs.teamName.value;

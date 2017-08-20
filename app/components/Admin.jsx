@@ -8,11 +8,12 @@ import Nav from 'Nav';
 import Footer from 'Footer';
 import UserTeam from 'UserTeam';
 import UserTeamSearch from 'UserTeamSearch';
+import MessageList from 'MessageList';
 
 class Admin extends Component {
 	constructor(props) {
         super(props);
-        this.state = {isAdmin: false, userTeams: null, filteredTeams: null};
+        this.state = {isAdmin: false, userTeams: null, filteredTeams: null, userID: null};
         this.populateGames = this.populateGames.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
@@ -20,7 +21,7 @@ class Admin extends Component {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
-		var that = this;
+		const that = this;
 		
 		Requests.get(`/users/${uid}`).then(function(user) {
             if(user.data.isAdmin) {
@@ -35,16 +36,18 @@ class Admin extends Component {
                 that.setState({userTeams:teams.data[0]});
             }
         });
+
+        this.setState({userID: uid});
     }
     handleSearch(searchText) {
         let userTeams = this.state.userTeams;
         searchText = searchText.toLowerCase();
         let filteredTeams = userTeams.filter((team) => {
-            let teamName = team.teamName.toLowerCase();
-            let email = team.email.toLowerCase();
-            let fullName = team.fullName.toLowerCase();
+        let teamName = team.teamName.toLowerCase();
+        let email = team.email.toLowerCase();
+        let fullName = team.fullName.toLowerCase();
 
-            return searchText.length === 0 || 
+        return searchText.length === 0 || 
             teamName.indexOf(searchText) > -1 ||
             email.indexOf(searchText) > -1 ||
             fullName.indexOf(searchText) > -1;
@@ -117,6 +120,9 @@ class Admin extends Component {
                                         </div>
                                         {renderUserTeams()}
                                     </div>
+                                </div>
+                                <div className="card-row">
+                                    <MessageList userID={this.state.userID}/>
                                 </div>
                             </div>
                         </div>

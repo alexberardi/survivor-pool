@@ -17,7 +17,7 @@ class TeamInfo extends Component {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
-		var that = this;
+		const that = this;
 		var teamName;
 		var hasTeam;
 		var userTeams;
@@ -36,7 +36,7 @@ class TeamInfo extends Component {
 		let userID = this.state.uid;
 		let teams = this.state.teams;
 		let userTeams;
-		var that = this;
+		const that = this;
 
 		Requests.get(`/teams/${userID}`).then(function(teams) {
 			if(teams.data !== null) {

@@ -49,8 +49,41 @@ var updateMessage = function(req, res) {
     });
 }
 
+var selectAllMessages = function(req, res) {
+    db.adminMessages.findAll({
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then(function(messages) {
+        res.json(messages);
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.status(500).send();
+    });
+}
+
+var selectActiveMessages = function(req, res) {
+    db.adminMessages.findAll({
+        order: [
+            ['createdAt', 'DESC']
+        ],
+        where: {
+            showMessage: true
+        }
+    }).then(function(messages) {
+        res.json(messages);
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.status(500).send();
+    });
+}
+
 module.exports = {
 	addMessage: addMessage,
 	deleteMessage: deleteMessage,
-	updateMessage: updateMessage
+    updateMessage: updateMessage,
+    selectAllMessages: selectAllMessages,
+    selectActiveMessages: selectActiveMessages
 }

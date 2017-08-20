@@ -20,7 +20,7 @@ class UserTeam extends Component {
     }
     toggleActive(e) {
         e.preventDefault();
-        let that = this;
+        const that = this;
         let active = !this.state.isActive;
         let teamID = this.state.teamID;
 
@@ -35,7 +35,7 @@ class UserTeam extends Component {
     }
     togglePaid(e) {
         e.preventDefault();
-        let that = this;
+        const that = this;
         let paid = !this.state.hasPaid;
         let teamID = this.state.teamID;
 
@@ -63,15 +63,15 @@ class UserTeam extends Component {
         let teamButton = null;
 
         if(isActive) {
-            activeIndicator = <FaCheck size={25} style={{color: 'green'}} onClick={this.toggleActive}/>
+            activeIndicator = <a href="#" onClick={this.toggleActive}> <FaCheck size={25} style={{color: '#00ad61'}}/> </a>
         } else {
-            activeIndicator = <FaClose size={25} style={{color: 'red'}} onClick={this.toggleActive}/>
+            activeIndicator = <a href="#" onClick={this.toggleActive}> <FaClose size={25} style={{color: '#AA3939'}}/> </a>
         }
 
         if(isPaid) {
-            paidIndicator = <FaDollar size={25} style={{color: 'green'}} onClick={this.togglePaid}/>
+            paidIndicator = <a href="#" onClick={this.togglePaid}> <FaDollar size={25} style={{color: '#00ad61'}}/> </a>
         } else {
-            paidIndicator = <FaDollar size={25} style={{color: 'red'}} onClick={this.togglePaid}/>
+            paidIndicator = <a href="#" onClick={this.togglePaid}> <FaDollar size={25} style={{color: '#AA3939'}}/> </a>
         }
 
         if(this.state.changeTeam) {

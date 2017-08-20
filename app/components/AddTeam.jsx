@@ -23,7 +23,7 @@ class AddTeam extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        let that = this;
+        const that = this;
         let team = {
             userID: this.state.userID,
             teamName: this.refs.teamName.value

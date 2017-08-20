@@ -35,7 +35,7 @@ class GameList extends Component {
 			this.setState({userID: uid});
 		}
 
-		var that = this;
+		const that = this;
 
 		let picked = false;
 		let pick = null;
@@ -110,7 +110,7 @@ class GameList extends Component {
 		this.refreshPicks();
 	}
 	submitPick() {
-		let that = this;
+		const that = this;
 		this.state.pickTemp.teamName = this.state.pickTemp.teamPicked;
 
         Requests.post(`/picks/${this.state.teamID}`, this.state.pickTemp)
@@ -123,7 +123,7 @@ class GameList extends Component {
             });
 	}
 	refreshPicks() {
-		var that = this;
+		const that = this;
 
 		Requests.get(`/picks/${this.state.userID}/${this.state.teamID}`).then(function(pick) {
 			if(pick.data[0]) {

@@ -37,6 +37,47 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.messages-container {
+	flex-direction: column;
+	flex: 1;
+	flex-grow: 2;
+	margin: 20px;
+	min-width: 200px;
+	min-height: 175px;
+  	background-color: #ffe;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.messages-input-container {
+	flex-basis: 600px;
+    display: flex;
+    flex: 1;
+    border: 2px solid $orange;
+    border-radius: 4px;
+}
+
+.messages-update-container {
+    display: flex;
+	width: 600px;
+    border: 2px solid $orange;
+    border-radius: 4px;
+}
+
+.messages-input {
+    flex: 2;
+    font-family: $Brawler;
+    color: $purple;
+    margin: 0;
+    padding: 0px 0px 0px 6px;
+}
+
+.messages-update-container {
+	flex: 1;
+	display: flex;
+}
+
+
 .userteam-card {
 	flex: 1;
 	flex-direction: column;
@@ -56,7 +97,9 @@
 			display: flex;
 			flex: 1;
 			flex-direction: row-reverse;
-
+			> a {
+				margin: 0 6px 0 6px;
+			}
 		}
 	}
 	&-content {

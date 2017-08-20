@@ -77,7 +77,15 @@ app.delete('/messages/:messageID', middleware.checkAuthentication, middleware.ch
 
 app.put('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlAdminMessages.updateMessage(req, res);
+});
+
+app.get('/messages/', middleware.checkAuthentication, function(req, res) {
+	ctrlAdminMessages.selectAllMessages(req, res);
 })
+
+app.get('/messages/active/', middleware.checkAuthentication, function(req, res) {
+	ctrlAdminMessages.selectActiveMessages(req, res);
+});
 
 //Populate teams
 app.get('/teams/populate', middleware.checkAuthentication, function(req, res){

@@ -47,7 +47,7 @@
   	font-size: 72px;
 }
 
-.message {
+.message-urgent {
 	display: flex;
 	padding: 6px;
 	margin-bottom: 1rem;
@@ -58,6 +58,24 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	border-radius: 4px;
 	font-size: 24px;
+}
+
+.message-normal {
+	display: flex;
+	justify-content: center;
+	padding: 6px;
+	margin-bottom: 1rem;
+	background: white;
+	font-family: $Brawler;
+	color: $purple;
+	border: 2px solid $purple;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	border-radius: 4px;
+	font-size: 24px;
+}
+
+.message-text {
+	margin-left: 10px;
 }
 
 .container {

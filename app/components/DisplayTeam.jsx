@@ -46,7 +46,7 @@ class DisplayTeam extends Component {
     deleteTeam(e) {
         e.preventDefault();
         let teamID = this.state.teamID;
-        let that = this;
+        const that = this;
 
         Requests.delete(`/teams/${this.state.uid}/${teamID}`).then(function(response) {
             that.setState({deleteTeam: false});
@@ -59,7 +59,7 @@ class DisplayTeam extends Component {
     }
     componentWillMount() {
         //Current Pick
-        var that = this;
+        const that = this;
         if(this.state.isActive) {
             Requests.get(`/picks/${this.state.uid}/${this.state.teamID}`).then(function(pick) {
                 if(pick.data[0]) {  
