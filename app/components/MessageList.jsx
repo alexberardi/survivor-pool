@@ -94,8 +94,9 @@ class MessageList extends Component {
                             <input type="text" ref="messageText" placeholder="Enter Message" className="messages-input" />
                             <div className="messages-type-container">
                                 <select className="messages-select" ref="messageType">
-                                    <option value="U">Urgent</option>
                                     <option value="N">Normal</option>
+                                    <option value="U">Urgent</option>
+                                    <option value="G">Good News</option>
                                 </select> 
                              </div> 
                             <button type="submit" className="dashboard-nav-button">Add Message</button>  

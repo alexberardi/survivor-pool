@@ -61,6 +61,9 @@ class Message extends Component {
             case 'N':
                 messageType = "Normal";
                 break;
+            case 'G':
+                messageType = "Good News";
+                break;
             default:
                 messageType="Normal";
                 break;				
@@ -83,8 +86,9 @@ class Message extends Component {
                             <input type="text" className="messages-input" ref="messageText" defaultValue={this.props.messageText}/>
                             <div className="messages-type-container">
                                 <select className="messages-select" ref="messageType">
-                                    <option value="U">Urgent</option>
                                     <option value="N">Normal</option>
+                                    <option value="U">Urgent</option>
+                                    <option value="G">Good News</option>
                                 </select> 
                              </div> 
                             <button type="submit" className="secondary-button">Change</button>

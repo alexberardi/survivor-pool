@@ -7,6 +7,8 @@ import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';
 import FaExclamation from 'react-icons/lib/fa/exclamation';
+import FaBullhorn from 'react-icons/lib/fa/bullhorn';
+import FaCheckCircle from 'react-icons/lib/fa/check-circle'; 
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -100,6 +102,11 @@ function RenderMessage(props) {
 				break;
 			case 'N':
 				type = "message-normal";
+				icon = <FaBullhorn width={40} height={40} style={{marginLeft: '12px', marginRight: '12px'}} /> 
+				break;
+			case 'G':
+				type = "message-good";
+				icon =<FaCheckCircle width={40} height={40} style={{marginLeft: '12px', marginRight: '12px'}} /> 
 				break;
 			default:
 				type="message-normal";
