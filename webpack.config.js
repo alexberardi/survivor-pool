@@ -34,7 +34,7 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_KEY: JSON.stringify(process.env.API_KEY),
         AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
-        DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
+        DATABASE_URL: JSON.stringify(process.env.FIREBASEDATABASE_URL),
         STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET),
         MESSAGE_SENDER: JSON.stringify(process.env.MESSAGE_SENDER)
       }
