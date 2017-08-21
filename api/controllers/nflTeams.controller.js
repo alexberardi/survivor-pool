@@ -13,29 +13,24 @@ module.exports = function(req, res){
             var sanitizeTeam = _.pick(game, 'h', 'v', 'vnn', 'hnn');
 
             var homeTeamInfo = {
-                teamname: sanitizeTeam.hnn,
-                teamcity: sanitizeTeam.h
-            }
-            var awayTeamInfo ={
-                teamname: sanitizeTeam.vnn,
-                teamcity: sanitizeTeam.v
+                teamName: sanitizeTeam.hnn,
+                teamCity: sanitizeTeam.h
             }
 
-            db.teams.create(homeTeamInfo)
+            var awayTeamInfo ={
+                teamName: sanitizeTeam.vnn,
+                teamCity: sanitizeTeam.v
+            }
+            console.log(homeTeamInfo);
+            db.nflTeams.create(homeTeamInfo)
                 .catch(function(e){
                     error = e;
                 });
 
-            db.teams.create(awayTeamInfo)
+            db.nflTeams.create(awayTeamInfo)
                 .catch(function(e){
                     error = e;
                 });
         })
-        if (!error) {
-            res.status(200).send();
-        } else {
-            res.status(400).json(e);
-        }
-
     });
 }

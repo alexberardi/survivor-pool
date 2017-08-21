@@ -15,11 +15,13 @@ if (env === 'production') {
 
 var db = {};
 db.user = sequelize.import(__dirname + '/models/user.js');
-db.token = sequelize.import(__dirname + '/models/token.js');
 db.games = sequelize.import(__dirname + '/models/games.js');
-db.teams = sequelize.import(__dirname + '/models/teams.js');
-db.userPicks = sequelize.import(__dirname + '/models/userPicks.js');
-db.userStreaks = sequelize.import(__dirname + '/models/userStreaks.js');
+db.nflTeams = sequelize.import(__dirname + '/models/nflTeams.js');
+db.tokens = sequelize.import(__dirname + '/models/tokens.js');
+db.teamPicks = sequelize.import(__dirname + '/models/teamPicks.js');
+db.teamStreaks = sequelize.import(__dirname + '/models/teamStreaks.js');
+db.playerTeams = sequelize.import(__dirname + '/models/playerTeams.js');
+db.adminMessages = sequelize.import(__dirname + '/models/adminMessages.js');
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

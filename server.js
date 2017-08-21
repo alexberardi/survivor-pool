@@ -1,157 +1,195 @@
+//Basic Packages
 var express = require('express');
 var bodyParser = require('body-parser');
-var bcrypt = require('bcryptjs');
-var app = express();
-var db = require('./db.js');
-var middleware = require('./middleware.js')(db);
 var request = require('request');
 
-var ctrlUsers = require('./api/controllers/users.controller');
+// Create our app
+var app = express();
+const PORT = process.env.PORT || 3000;
+const env = process.env.NODE_ENV || 'development';
+
+
+//Database
+var db = require('./db.js');
+
+
+//Entities
+var ctrlAdminMessages = require('./api/controllers/adminMessages.controller')
 var ctrlGames = require('./api/controllers/games.controller');
 var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
-var ctrlUserPicks = require('./api/controllers/userPicks.controller');
-var ctrlUserStreaks = require('./api/controllers/userStreaks.controller');
+var ctrlToken = require('./api/controllers/tokens.js');
+var ctrlUsers = require('./api/controllers/users.controller');
+var ctrlUserStreaks = require('./api/controllers/teamStreaks.controller');
+var ctrlPlayerTeams = require('./api/controllers/playerTeams.controller.js');
+var ctrlTeamPicks = require('./api/controllers/teamPicks.controller.js');
 
-var PORT = process.env.PORT || 3000;
-
-var env = process.env.NODE_ENV || 'development';
-
-var keys = {}
-if (env === 'production') {
-	keys = {
-		encrypt: process.env.EKEY,
-		decrypt: process.env.DKEY
-	};
-} else {
-	keys = {
-		encrypt: 'abcdef',
-		decrypt: 'abcdef'
-	}
-}
-
+//Middleware
+var middleware = require('./middleware/common.middleware.js');
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
 
 
-//USERS REQUESTS
-app.get('/users',  middleware.requireAuthentication, function(req, res) {
-	ctrlUsers.usersGetAll(req, res);
-});
-
-app.get('/users/count', middleware.requireAuthentication, function(req, res) {
-	ctrlUsers.userGetCountAll(req, res);
-});
-
-// app.post('/users', function(req, res) {
-// 	ctrlUsers.userCreate(req, res);
-// });
-
-app.post('/users/login', function(req, res){
-	ctrlUsers.userLogin(req, res);
-});
-
-app.put('/users/teamName/:userid', middleware.requireAuthentication, function(req, res){
-	ctrlUsers.updateTeamName(req, res);
-});
-
-app.put('/users/password/:userid', middleware.requireAuthentication,  function(req, res){
-	ctrlUsers.updatePassword(req, res);
-});
-
-app.put('/users/email/:userid', middleware.requireAuthentication, function(req, res){
-	ctrlUsers.updateEmail(req, res);
-});
-
-//GAMES REQUESTS
-app.get('/games/populate', function(req, res) {
+//Games Requests
+app.post('/games/populate', middleware.checkAdmin, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games/user/:userid',  middleware.requireAuthentication, function(req, res){
+app.get ('/games/user/:userid', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
 
-app.get ('/games/started',  middleware.requireAuthentication, function(req, res){
+app.get ('/games/started', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getStartedGames(req, res);
 });
 
-app.get('/games/week/current', middleware.requireAuthentication, function(req, res){
+app.get('/games/week/current', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getCurrentWeek(req, res);
 });
 
-
-app.put('/games/liveUpdate/:gameid', middleware.requireAuthentication, function(req, res){
+app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.updateGames(req, res);
 });
 
+app.post('/picks/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+	ctrlTeamPicks.makePick(req, res);
+});
 
-//TEAMS REQUESTS
-app.get('teams/populate', function(req, res){
+app.get('/picks/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getCurrentPicks(req, res);
+});
+
+app.get('/picks/last/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getLastWeekPick(req, res);
+});
+
+app.get('/picks/all/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getPicks(req, res);
+});
+
+//Messages requests
+app.post('/messages/', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.addMessage(req, res);
+});
+
+app.delete('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.deleteMessage(req, res);
+});
+
+app.put('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlAdminMessages.updateMessage(req, res);
+});
+
+app.get('/messages/', middleware.checkAuthentication, function(req, res) {
+	ctrlAdminMessages.selectAllMessages(req, res);
+})
+
+app.get('/messages/active/', middleware.checkAuthentication, function(req, res) {
+	ctrlAdminMessages.selectActiveMessages(req, res);
+});
+
+//Populate teams
+app.get('/teams/populate', middleware.checkAuthentication, function(req, res){
 	ctrlNFLTeams();
 });
 
-//PICKS REQUESTS
-app.get('/picks/user/:userid', middleware.requireAuthentication,  function(req, res){
-	ctrlUserPicks.getPicks(req, res);
+
+//USERS REQUESTS
+app.get('/users', middleware.checkAuthentication, function(req, res) {
+	ctrlUsers.usersGetAll(req, res);
 });
 
-app.get('/picks/current/:userid', middleware.requireAuthentication,  function(req, res){
-	ctrlUserPicks.getCurrentPicks(req, res);
+app.get('/users/count', middleware.checkAuthentication, function(req, res) {
+	ctrlUsers.userGetCountAll(req, res);
 });
 
-app.get('/picks/popular', middleware.requireAuthentication, function(req, res){
-	ctrlUserPicks.getPopularPicks(req, res);
+app.get('/users/:userID', middleware.checkAuthentication, function(req, res) {	
+ 	ctrlUsers.userGet(req, res);		
 });
 
-app.post('/picks/:userid',  middleware.requireAuthentication, function(req, res){
-	ctrlUserPicks.makePick(req, res);
+app.get('/users/exists/:userID', function(req, res) {
+	ctrlUsers.userCheck(req, res);
 });
 
-app.get('/picks/admins', middleware.requireAuthentication, function(req,res){
-	ctrlUserPicks.getAdminPicks(req,res);
+app.post('/users', function(req, res) {
+ 	ctrlUsers.userCreate(req, res);
 });
 
-//STREAK REQUESTS
-app.get('/streak/active/:userid', middleware.requireAuthentication,  function(res, req){
-	ctrlUserStreaks.checkActive(res, req);
+app.put('/users/email/:userid', middleware.checkAuthentication, function(req, res){
+	ctrlUsers.updateEmail(req, res);
 });
 
-app.get('/streak/count/active', middleware.requireAuthentication, function(res, req){
-	ctrlUserStreaks.getCountActive(res, req);
-});
-
-app.post('/streak', function (req, res) {
-	ctrlUserStreaks.updateStreak();
-});
-
-
-
-//STANDINGS REQUESTS
-app.get('/standings', middleware.requireAuthentication,  function (req, res) {
+//User Streaks Requests
+app.get('/standings', middleware.checkAuthentication, function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
 });
 
-
-//DELETE Token- logout
-// DELETE users/login
-app.delete('/users/login', middleware.requireAuthentication, function(req, res){
-	req.token.destroy()
-	.then(function(){
-		res.status(204).send();
-	}).
-	catch(function(e){
-		res.status(500).send();
-	});
+//User Teams Requests
+app.delete('/teams/:userID/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+	ctrlPlayerTeams.deleteTeam(req, res);
 });
 
+app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
+	ctrlPlayerTeams.teamsGetAll(req, res);
+});
 
+app.get('/teams/admin/users', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.teamsGetAllAdmin(req, res);
+});
 
-db.sequelize.sync()
+app.post('/teams', middleware.checkAuthentication, function(req, res) {
+	ctrlPlayerTeams.teamCreate(req, res);
+});
+
+app.put('/teams/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
+	ctrlPlayerTeams.updateTeamName(req, res);
+});
+
+app.put('/teams/active/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.updateTeamActive(req, res);
+});
+
+app.put('/teams/paid/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.updateTeamPaid(req, res);
+});
+
+app.put('/teams/name/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+	ctrlPlayerTeams.updateTeamName(req, res);
+});
+
+app.use(function (req, res, next){
+  if (req.headers['x-forwarded-proto'] === 'https') {
+    res.redirect('http://' + req.hostname + req.url);
+  } else {
+    next();
+  }
+});
+
+app.use(express.static('public'));
+
+if (env === 'development') {
+	var forceSync = {
+		force: false
+	};
+	db.sequelize.sync(forceSync)
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
 		})
 	);
+} else {
+
+	// NEVER CHANGE - WILL ERASE ALL DATA ON PRODUCTION
+	db.sequelize.sync()
+	.then(
+		app.listen(PORT, function() {
+			console.log('express listening on port ' + PORT + '!');
+		})
+	);
+}
+
+
+
+
+
 
 

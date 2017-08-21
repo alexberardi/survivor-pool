@@ -1,0 +1,147 @@
+.dashboard-button-container {
+	width: 200px;
+	height: 60px;
+	display: flex;
+	border-radius: 4px;
+    border: 2px solid $orange;
+    margin-right: 1rem;
+}
+
+.dashboard-nav-button {
+    @extend .primary-button-base;
+    flex: 1;
+}
+
+.dashboard-nav-button:hover {
+	color: $off-white;
+	background: $orange;
+}
+
+.pick-card {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	flex-grow: 2;
+	margin: 10px;
+  	background-color: #ffe;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+	&-row {
+		width: 100%;
+		display: flex;
+		flex-grow: 2;
+		flex-direction: row;
+		max-height: 120px;
+	}
+
+	&-title {
+		margin: 12px 0px 12px 0px;
+		width: 30%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border-right: 1px solid $light-grey-border;
+	}
+
+	&-content {
+		display: flex;
+		color: $purple;
+		font-family: $Brawler;
+		margin: 6px 0px 6px 30px;
+		flex: 1;
+	}
+
+	&-kickoff {
+		flex-basis: 200px;
+	}
+
+	&-score {
+		flex: 1;
+	}
+
+	&-info-title {
+		font-size: 20px;
+		width: 50%;
+		border-bottom: 1px solid $light-grey-border;
+	}
+}
+
+.pick-confirmation {
+	margin: 12px 20px 12px 12px;
+    flex: 1;
+    color: $purple;
+    font-weight: bold;
+    &-link {
+        display: flex;
+    }
+}
+
+.pick-team-cancel {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: #ffe;
+    &:active, &:hover {
+        border: 2px solid #ffe;
+        background-color: $orange;
+        color: $white;
+    }
+}
+
+.pick-team-confirm {
+    flex: 1;
+    text-align: center;
+    border: 2px solid $purple;
+    border-radius: 4px;
+    color: $purple;
+    background-color: #ffe;
+    margin-right: 12px;
+    &:active, &:hover {
+        border: 2px solid #ffe;
+        background-color: $orange;
+        color: $white;
+    }
+}
+
+.game-started {
+	color: $red;
+	font-family: $Brawler;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.game-final {
+	color: $purple;
+	font-family: $Brawler;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.game-pre {
+	color: $green;
+	font-family: $Brawler;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.score-container {
+	flex: 1;
+	color: $purple;
+	font-family: $Brawler;
+	font-size: 18px;
+}
+
+.logo-container {
+	flex: 2;
+}
+
+.vs-span {
+	color: $purple;
+	font-family: $Brawler;
+	font-size: 20px;
+	padding: 0px 20px 0px 20px;
+}

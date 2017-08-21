@@ -2,42 +2,102 @@ var request = require('request');
 var _ = require('underscore');
 var db = require('../../db');
 
-var populateGames = function(req, res){
-    request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
-        body = JSON.parse(body)
-        week = body.w;
-
-        games = body.gms;
-        var error;
-
-        games.forEach(function(game){
+var createGamesArray = function(games) {
+    var newGamesArray = [];
+    games.forEach(function(game){
             var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
 
             var gameInfo = {
-                gameid: sanitizeGame.gsis,
-                hometeamname: sanitizeGame.hnn,
-                hometeamcityabbr: sanitizeGame.h,
-                homescore: sanitizeGame.hs,
-                awayteamname: sanitizeGame.vnn,
-                awayteamcityabbr: sanitizeGame.v,
-                awayscore: sanitizeGame.vs,
-                dayofweek: sanitizeGame.d,
+                gameID: sanitizeGame.gsis,
+                homeTeamName: sanitizeGame.hnn,
+                homeTeamCityAbbr: sanitizeGame.h,
+                homeScore: sanitizeGame.hs,
+                awayTeamName: sanitizeGame.vnn,
+                awayTeamCityAbbr: sanitizeGame.v,
+                awayScore: sanitizeGame.vs,
+                dayOfWeek: sanitizeGame.d,
                 time: sanitizeGame.t,
-                gamedate: sanitizeGame.eid,
+                gameDate: sanitizeGame.eid,
                 quarter: sanitizeGame.q,
                 week: week,
             }
-            db.games.create(gameInfo)
-                .catch(function(e){
-                    error = e;
-                });
-        })
-        if (!error) {
-            res.status(200).send();
-        } else {
-            res.status(400).json(e);
-        }
+            newGamesArray.push(gameInfo);
+        });
+    return newGamesArray;
+};
 
+var populateGames = function(req, res){
+    request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body){
+        body = JSON.parse(body);
+        week = body.w;
+
+        games = body.gms;
+        
+        db.games.bulkCreate(createGamesArray(games))
+            .then(function(results){
+                res.status(200).send();
+            })
+            .catch(function(e) {
+                console.log(e);
+                res.status(400).send();
+            });
+    });
+};
+
+var updateGames = function(req, res) {
+    request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body) {
+        body = JSON.parse(body);
+        week = body.w;
+
+        games = body.gms;
+
+        games.forEach(function(game) {
+            db.games.update(
+            {
+                homeScore: parseInt(game.hs, 10),
+                awayScore: parseInt(game.vs, 10),
+                quarter: game.q
+            },{
+                where: {
+                    gameID: parseInt(game.gsis, 10)
+                }
+            }
+            )
+            .catch(function(error) {
+                res.status(400).send();
+            })
+        });
+        res.status(200).send();
+    });
+}
+
+var updateGamesAsync = function(req, res) {
+    return new Promise(function(resolve, reject) {
+        request.get('http://www.nfl.com/liveupdate/scorestrip/ss.json', function(err, innerRes, body) {
+            body = JSON.parse(body);
+            week = body.w;
+
+            games = body.gms;
+
+            games.forEach(function(game) {
+                db.games.update(
+                {
+                    homeScore: parseInt(game.hs, 10),
+                    awayScore: parseInt(game.vs, 10),
+                    quarter: game.q
+                },{
+                    where: {
+                        gameID: parseInt(game.gsis, 10)
+                    }
+                }
+                )
+                .catch(function(error) {
+                    console.log(error);
+                    reject("Error occurred");
+                })
+            });
+            resolve("All games updated");
+        });
     });
 };
 
@@ -57,30 +117,6 @@ var getWeeklyGames = function(req, res){
         .catch(function(e){
             return res.status(500).json(e);
         });
-}
-
-var updateGames = function(req, res) {
-    var gameid = parseInt(req.params.gameid, 10);
-    var body = _.pick(req.body, 'homescore', 'awayscore', 'quarter');
-
-    body.homescore = parseInt(body.homescore, 10);
-    body.awayscore = parseInt(body.awayscore, 10)
-
-    db.games.findOne({
-        where: {
-            gameid: gameid
-        }
-    })
-        .then(function(game) {
-            game.update(body)
-                .then(function(game){
-                    res.json(game.toJSON());
-                })
-
-        })
-        .catch(function(e){
-            res.status(400).send();
-        })
 }
 
 var getStartedGames = function(req, res) {
@@ -118,7 +154,8 @@ var getCurrentWeek = function(req, res) {
 module.exports = {
     populateGames: populateGames,
     getWeeklyGames: getWeeklyGames,
-    updateGames: updateGames,
     getStartedGames: getStartedGames,
-    getCurrentWeek: getCurrentWeek
+    getCurrentWeek: getCurrentWeek,
+    updateGames: updateGames,
+    updateGamesAsync: updateGamesAsync
 }

@@ -1,0 +1,9 @@
+Survivor Pool Pick 'em League Rules
+Overview: You pick one NFL team per week to win in their respective matchup. If they win, you move on to the next week. If they lose, you are out. You may only select the same NFL team once throughout the entire season. The picks are not made against the spread and ties are counted as losses.
+
+1) Each user can have multiple teams (user-teams), provided they pay the entry fee for each one of them.
+2) One pick per user-team is required each week. If one of your user-teams does not have a selection that week, it is counted as a loss and that user-team is disqualified.
+3) Surviving is user-team specific, so if you have "Team A" and "Team B" and "Team B's" selection loses, "Team A" is still active if their selection wins and vice-versa.
+4) Similar to 3, NFL team selections are user-team specific as well. So if "Team A" takes the Giants in week 1, "Team B" is allowed to take the Giants any week of the season (including week 1).
+5) All picks must be made before that particular NFL game has started.
+6) You cannot edit your pick if your current selection's NFL game has started.

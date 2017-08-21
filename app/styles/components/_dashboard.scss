@@ -1,0 +1,162 @@
+.nav {
+	background: $purple;
+	display: flex;
+	padding: 1rem 1rem 1rem 1rem;
+	box-shadow: 0 3px 6px $light-pink, 0 3px 6px $light-pink;
+}
+
+.logo-container {
+	flex: 1;
+	display: flex;
+}
+
+.logo {
+  	font-family: $YesterYear;
+  	color: $purple;
+  	text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
+}
+
+.nav-title {
+	@extend .logo;
+	font-size: 48px;
+	margin-left: 1rem;
+}
+
+.actions-container {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.actions {
+	display: flex;
+}
+
+.dashboard {
+	background: $off-white;
+	padding: 0;
+}
+
+.dashboard-title {
+	margin: 0;
+	padding: 2rem;
+	text-align: center;
+  	font-family: $YesterYear;
+  	color: $pink;
+  	text-shadow: -1px 0 $purple, 0 1px $purple, 1px 0 $purple, 0 -1px $purple;
+  	font-size: 72px;
+}
+
+.message-type {
+	display: flex;
+	padding: 6px;
+	margin-bottom: 1rem;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	border-radius: 4px;
+	font-size: 24px;
+}
+
+.message-urgent {
+	@extend .message-type;
+	background: $light-red;
+	font-family: $Brawler;
+	color: white;
+	border: 2px solid $red;
+}
+
+.message-good {
+	@extend .message-type;
+	background: $light-green;
+	font-family: $Brawler;
+	color: white;
+	border: 2px solid $green;
+}
+
+.message-normal {
+	@extend .message-type;
+	background: white;
+	font-family: $Brawler;
+	color: $purple;
+	border: 2px solid $purple;
+}
+
+.message-text {
+	margin-left: 10px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	background: $light-pink;
+  	border: 3px solid $lavender;
+  	border-radius: 5px;
+  	padding: 0;
+	min-height: 60vh;
+}
+
+.card-row {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 2;
+	flex-direction: row;
+	min-height: 100px;
+}
+
+.card-column {
+	width: 100%;
+	display: flex;
+	flex-grow: 2;
+	flex-direction: column;
+	&-container {
+		flex: 1;
+		padding: 20px 0 30px 0;
+	}
+}
+
+.card {
+	flex-direction: column;
+	flex: 1;
+	flex-grow: 2;
+	margin: 20px;
+	min-width: 200px;
+	min-height: 175px;
+  	background-color: #ffe;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+	&-title {
+		margin: 12px 18px 12px 18px;
+    	font-family: $Brawler;
+    	color: $purple;
+    	font-size: 20px;
+    	font-weight: bold;
+	}
+
+	&-content {
+		display: flex;
+		flex: 1;
+		align-items: center;
+  		justify-content: center;
+		border-top: 1px solid $light-grey-border;
+		margin: 12px 18px 12px 18px;
+		font-family: $Brawler;
+		font-size: 14px;
+		color: $purple;
+	}
+
+	&-container {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		height: 100%
+	}
+}
+
+.footer {
+	margin: 100px 0 20px 0;
+	font-size: 10px;
+	font-family: arial, sans-serif;
+	text-align: center;
+	height: 100px;
+}

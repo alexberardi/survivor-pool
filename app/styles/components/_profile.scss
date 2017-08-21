@@ -1,0 +1,33 @@
+.primary-button {
+  @extend .primary-button-base;
+  flex-grow: 2;
+}
+
+.primary-button-base {
+  font-family: $Brawler;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background .5s;
+  background: $off-white;
+  color: $purple;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+	color: $off-white;
+	background: $orange;
+}
+
+.profile-container {
+  width: 200px;
+  height: 60px;
+  display:flex;
+	align-content: column;
+	border-radius: 4px;
+	border: 2px solid $orange;
+}
+
+.profile-image {
+  width: 55px;
+}
