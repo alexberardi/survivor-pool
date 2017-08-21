@@ -11,6 +11,9 @@
   },
   "author": "Jimmy Timmons & Xander West Side",
   "license": "",
+  "engines": {
+    "node": "6.11.0"
+  },
   "dependencies": {
     "axios": "^0.9.1",
     "babel-core": "^6.5.1",
