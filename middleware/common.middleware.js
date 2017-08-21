@@ -6,7 +6,7 @@ if (process.env.NODE_ENV) {
   serviceAccount = process.env.serviceAccountKey;
 } else {
     try{
-      serviceAccount = require("../app/firebase/serviceAccountKey.json");    
+      //serviceAccount = require("../app/firebase/serviceAccountKey.json");    
     } catch (e) {
 
     }  
