@@ -1,11 +1,11 @@
 var admin = require("firebase-admin");
 var db = require('../db.js');
 
-var serviceAccountKey;
+var serviceAccount;
 if (process.env.NODE_ENV) {
-  serviceAccountKey = process.env.serviceAccountKey;
+  serviceAccount = process.env.serviceAccountKey;
 } else {
-  serviceAccountKey = require("../app/firebase/serviceAccountKey.json");
+  serviceAccount = require("../app/firebase/serviceAccountKey.json");
 }
 
  admin.initializeApp({
