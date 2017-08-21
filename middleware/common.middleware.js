@@ -5,7 +5,11 @@ var serviceAccount;
 if (process.env.NODE_ENV) {
   serviceAccount = process.env.serviceAccountKey;
 } else {
-  serviceAccount = require("../app/firebase/serviceAccountKey.json");
+    try{
+      serviceAccount = require("../app/firebase/serviceAccountKey.json");    
+    } catch (e) {
+
+    }  
 }
 
  admin.initializeApp({
