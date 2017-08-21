@@ -8,8 +8,6 @@ if (process.env.NODE_ENV) {
   serviceAccountKey = require("../app/firebase/serviceAccountKey.json");
 }
 
-var serviceAccount = require("../app/firebase/serviceAccountKey.json");
-
  admin.initializeApp({
    credential: admin.credential.cert(serviceAccount),
    databaseURL: "https://survivor-pool-4e4e2.firebaseio.com"
