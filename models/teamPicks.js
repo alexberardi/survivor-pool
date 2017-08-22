@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes){
         },
         userID: {
             field: 'userID',
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         teamID: {
