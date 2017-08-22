@@ -4,6 +4,7 @@ var db = require('../db.js');
 var serviceAccount;
 if (process.env.NODE_ENV == 'production') {
   serviceAccount = {
+    "project_id": "survivor-pool-4e4e2",
 		"private_key": process.env.FIREBASE_PRIVATE_KEY,
 		"client_email": process.env.FIREBASE_CLIENT_EMAIL
 		}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "SET NODE_ENV=test&& karma start",
-    "start": "SET NODE_ENV=production&& node server.js",
+    "start": "node server.js",
     "dev": "SET NODE_ENV=development&& node server.js",
     "postinstall": "npm run build",
     "build": "webpack"
