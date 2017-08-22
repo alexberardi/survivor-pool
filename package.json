@@ -6,7 +6,7 @@
   "scripts": {
     "test": "SET NODE_ENV=test&& karma start",
     "start": "node server.js",
-    "dev": "SET NODE_ENV=development&& node server.js",
+    "dev": "SET NODE_ENV=develop&& node server.js",
     "postinstall": "npm run build",
     "build": "webpack"
   },
