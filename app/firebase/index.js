@@ -6,7 +6,11 @@ try {
   	authDomain: process.env.AUTH_DOMAIN,
   	databaseURL: process.env.FIREBASEDATABASE_URL,
   	storageBucket: process.env.STORAGE_BUCKET,
-  	messagingSenderId: process.env.MESSAGE_SENDER
+  	messagingSenderId: process.env.MESSAGE_SENDER,
+	credential: admin.credential.cert({
+			"private_key": process.env.FIREBASE_PRIVATE_KEY,
+			"client_email": process.env.FIREBASE_CLIENT_EMAIL
+		})
 	};
 
 	firebase.initializeApp(config);
