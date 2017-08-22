@@ -33,7 +33,7 @@ var teamsGetAll = function(req, res) {
 };
 
 var teamsGetAllAdmin = function(req, res) {
-    db.sequelize.query("SELECT PT.teamID, PT.teamName, PT.isActive, PT.hasPaid, U.fullName, U.email FROM playerTeams PT JOIN users U ON U.userID = PT.userID")
+    db.sequelize.query("SELECT PT.teamID, PT.teamName, PT.isActive, PT.hasPaid, U.fullName, U.email FROM `playerTeams` PT JOIN users U ON U.userID = PT.userID")
         .then(function(playerTeams){
             res.json(playerTeams);
         })
