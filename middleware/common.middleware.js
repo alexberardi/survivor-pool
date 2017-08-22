@@ -2,11 +2,14 @@ var admin = require("firebase-admin");
 var db = require('../db.js');
 
 var serviceAccount;
-if (process.env.NODE_ENV) {
-  serviceAccount = process.env.serviceAccountKey;
+if (process.env.NODE_ENV == 'production') {
+  serviceAccount = {
+		"private_key": process.env.FIREBASE_PRIVATE_KEY,
+		"client_email": process.env.FIREBASE_CLIENT_EMAIL
+		}
 } else {
     try{
-      //serviceAccount = require("../app/firebase/serviceAccountKey.json");    
+      serviceAccount = require("../app/firebase/serviceAccountKey.json");    
     } catch (e) {
 
     }  
