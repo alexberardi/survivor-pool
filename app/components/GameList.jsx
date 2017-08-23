@@ -159,7 +159,7 @@ class GameList extends Component {
 						game.started = true;
 					}
 				});
-				if(allPicks.length > 0) {
+				if(allPicks !== null) {
 					allPicks.forEach(function(pick) {
 						if(pick.week !== game.week) {
 							game.disabledAway = pick.teamName === game.awayTeamName ? true : false;
