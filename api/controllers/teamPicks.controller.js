@@ -5,25 +5,25 @@ var ctrlGames = require('../../api/controllers/games.controller');
 var makePick = function(req, res) {
     ctrlGames.updateGamesAsync().then(function(){
 
-        var body = _.pick(req.body, 'week', 'userID','teamID', 'gameID', 'teamName');
-        body.gameID = parseInt(body.gameID, 10);
+        var body = _.pick(req.body, 'week', 'user_id','team_id', 'game_id', 'team_name');
+        body.game_id = parseInt(body.game_id, 10);
         db.teamPicks.findOne(
             {
                 where: {
                     week: {$ne : parseInt(body.week)},
-                    userID: body.userID,
-                    teamID: body.teamID,
-                    teamName: body.teamName
+                    user_id: body.user_id,
+                    team_id: body.team_id,
+                    team_name: body.team_name
                 }
             })
             .then(function(game){
                 if (!game) {
-                    db.teamPicks.findOne({where: {userID: body.userID, teamID: body.teamID, week: body.week}})
+                    db.teamPicks.findOne({where: {user_id: body.user_id, team_id: body.team_id, week: body.week}})
                         .then(function(pick){
                             if(pick) {
                                 db.games.findOne({
                                     where: {
-                                        gameID: pick.gameID
+                                        game_id: pick.game_id
                                     }
                                 })
                                     .then( function(currentgame){
@@ -74,8 +74,8 @@ var getPicks = function(req, res) {
             ['week', 'DESC']
         ],
         where : {
-            userID: req.params.userID,
-            teamID: req.params.teamID
+            user_id: req.params.user_id,
+            team_id: req.params.team_id
         }
     })
         .then(function(picks){
@@ -89,7 +89,7 @@ var getPicks = function(req, res) {
 var getAdminPicks = function(req, res) {
     var week = parseInt(req.query.week);
 
-    db.sequelize.query("SELECT U.Id, U.email, TP.TeamName, TP.Week FROM users U JOIN TeamPicks TP ON TP.userID = U.ID WHERE U.ID IN (1,5) AND Week = " + week)
+    db.sequelize.query("SELECT U.Id, U.email, TP.team_name, TP.Week FROM users U JOIN teampicks TP ON TP.user_id = U.ID WHERE U.ID IN (1,5) AND Week = " + week)
         .then(function(picks){
             res.json(picks);
         })
@@ -102,7 +102,7 @@ var getAdminPicks = function(req, res) {
 var getPopularPicks = function(req, res) {
     var week = parseInt(req.query.week);
 
-    db.sequelize.query("SELECT teamname, count(teamname) as count FROM TeamPicks WHERE week='" + week + "' GROUP BY teamname")
+    db.sequelize.query("SELECT team_name, count(team_name) as count FROM teampicks WHERE week='" + week + "' GROUP BY team_name")
         .then(function(picks){
             res.json(picks);
         })
@@ -117,8 +117,8 @@ var getCurrentPicks = function(req, res) {
             db.teamPicks.findAll({
                 where: {
                     week: max,
-                    userID: req.params.userID,
-                    teamID: req.params.teamID
+                    user_id: req.params.user_id,
+                    team_id: req.params.team_id
                 }
             })
                 .then(function(userPick){
@@ -140,8 +140,8 @@ var getLastWeekPick = function(req, res) {
             db.teamPicks.findAll({
                 where: {
                     week: lastWeek,
-                    userID: req.params.userID,
-                    teamID: req.params.teamID
+                    user_id: req.params.user_id,
+                    team_id: req.params.team_id
                 }
             })
             .then(function(userPick) {

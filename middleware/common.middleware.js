@@ -34,11 +34,11 @@ var checkAuthentication = function(req, res, next) {
 }
 
 var checkTeamID = function(req, res, next) {
-    let userID = req.body.userID ? req.body.userID : req.params.userID;
+    let user_id = req.body.user_id ? req.body.user_id : req.params.user_id;
     db.playerTeams.findOne({
       where: {
-        teamID: req.params.teamID,
-        userID: userID
+        team_id: req.params.team_id,
+        user_id: user_id
       }
     })
     .then(function(team){
@@ -56,11 +56,11 @@ var checkTeamID = function(req, res, next) {
 var checkAdmin = function (req, res, next) {
   admin.auth().verifyIdToken(req.get('Authorization') || '')
         .then(function(decodedToken) {
-          var userID = decodedToken.uid;
+          var user_id = decodedToken.uid;
           db.user.findOne({
             where: {
-              userID: userID,
-              isAdmin: true
+              user_id: user_id,
+              is_admin: true
             }
           })
           .then(function(admin) {

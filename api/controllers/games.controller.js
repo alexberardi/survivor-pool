@@ -8,16 +8,16 @@ var createGamesArray = function(games) {
             var sanitizeGame = _.pick(game, 'hs', 'd', 'gsis', 'vs', 'eid', 'h', 'v', 'vnn', 't', 'q', 'hnn');
 
             var gameInfo = {
-                gameID: sanitizeGame.gsis,
-                homeTeamName: sanitizeGame.hnn,
-                homeTeamCityAbbr: sanitizeGame.h,
-                homeScore: sanitizeGame.hs,
-                awayTeamName: sanitizeGame.vnn,
-                awayTeamCityAbbr: sanitizeGame.v,
-                awayScore: sanitizeGame.vs,
-                dayOfWeek: sanitizeGame.d,
+                game_id: sanitizeGame.gsis,
+                home_team_name: sanitizeGame.hnn,
+                home_team_city_abbr: sanitizeGame.h,
+                home_score: sanitizeGame.hs,
+                away_team_name: sanitizeGame.vnn,
+                away_team_city_abbr: sanitizeGame.v,
+                away_score: sanitizeGame.vs,
+                day_of_week: sanitizeGame.d,
                 time: sanitizeGame.t,
-                gameDate: sanitizeGame.eid,
+                game_date: sanitizeGame.eid,
                 quarter: sanitizeGame.q,
                 week: week,
             }
@@ -54,12 +54,12 @@ var updateGames = function(req, res) {
         games.forEach(function(game) {
             db.games.update(
             {
-                homeScore: parseInt(game.hs, 10),
-                awayScore: parseInt(game.vs, 10),
+                home_score: parseInt(game.hs, 10),
+                away_score: parseInt(game.vs, 10),
                 quarter: game.q
             },{
                 where: {
-                    gameID: parseInt(game.gsis, 10)
+                    game_id: parseInt(game.gsis, 10)
                 }
             }
             )
@@ -82,12 +82,12 @@ var updateGamesAsync = function(req, res) {
             games.forEach(function(game) {
                 db.games.update(
                 {
-                    homeScore: parseInt(game.hs, 10),
-                    awayScore: parseInt(game.vs, 10),
+                    home_score: parseInt(game.hs, 10),
+                    away_score: parseInt(game.vs, 10),
                     quarter: game.q
                 },{
                     where: {
-                        gameID: parseInt(game.gsis, 10)
+                        game_id: parseInt(game.gsis, 10)
                     }
                 }
                 )

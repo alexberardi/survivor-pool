@@ -2,44 +2,44 @@ var _ = require('underscore');
 
 module.exports = function(sequelize, DataTypes){
 	return sequelize.define('games', {
-		gameID: {
-			field: 'gameID',
+		game_id: {
+			field: 'game_id',
 			unique: true,
 			type: DataTypes.INTEGER,
 			allowNull: false
 			},
-		homeTeamName: {
-			field: 'homeTeamName',
+		home_team_name: {
+			field: 'home_team_name',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		homeTeamCityAbbr: {
-			field: 'homeTeamCityAbbr',
+		home_team_city_abbr: {
+			field: 'home_team_city_abbr',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		homeScore: {
-			field: 'homeScore',
+		home_score: {
+			field: 'home_score',
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		awayTeamName: {
-			field: 'awayTeamName',
+		away_team_name: {
+			field: 'away_team_name',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		awayTeamCityAbbr: {
-			field: 'awayTeamCityAbbr',
+		away_team_city_abbr: {
+			field: 'away_team_city_abbr',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		awayScore: {
-			field: 'awayScore',
+		away_score: {
+			field: 'away_score',
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		dayOfWeek: {
-			field: 'dayOfWeek',
+		day_of_week: {
+			field: 'day_of_week',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
@@ -48,8 +48,8 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		gameDate: {
-			field: 'gameDate',
+		game_date: {
+			field: 'game_date',
 			type: DataTypes.STRING,
 			allowNull: false
 		},

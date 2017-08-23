@@ -1,39 +1,35 @@
 var _ = require('underscore');
 
 module.exports = function(sequelize, DataTypes){
-	return sequelize.define('adminMessages', {
-		messageID: {
-			field: 'messageID',
+	return sequelize.define('adminmessages', {
+		message_id: {
+			field: 'message_id',
 			primaryKey: true,
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			allowNull: false			
 		},
-		userID: {
-			field: 'userID',
+		user_id: {
+			field: 'user_id',
 			type: DataTypes.STRING,
 			primaryKey: false,
 			allowNull: false
 		}, 
-		messageText: {
-			field: 'messageText',
+		message_text: {
+			field: 'message_text',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		showMessage: {
-			field: 'showMessage',
+		show_message: {
+			field: 'show_message',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: true
 		},
-		messageType: {
-			field: 'messageType',
+		message_type: {
+			field: 'message_type',
 			type: DataTypes.STRING,
 			allowNull: false
 		}
-	},
-	{
-		tableName: 'adminMessages',
-		freezeTableName: true
 	});
 };

@@ -1,38 +1,34 @@
 module.exports = function(sequelize, DataTypes){
-	return sequelize.define('playerTeams', {
-        teamID: {
-			field: 'teamID',
+	return sequelize.define('playerteams', {
+        team_id: {
+			field: 'team_id',
 			primaryKey: true,
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			allowNull: false
         },
-        userID: {
-			field: 'userID',
+        user_id: {
+			field: 'user_id',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		teamName: {
-			field: 'teamName',
+		team_name: {
+			field: 'team_name',
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false
         },
-        isActive: {
-			field: 'isActive',
+        is_active: {
+			field: 'is_active',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: true
         },
-        hasPaid: {
-			field: 'hasPaid',
+        has_paid: {
+			field: 'has_paid',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false
 		},
-	},
-	{
-		tableName: 'adminMessages',
-		freezeTableName: true
 	});
 };

@@ -2,7 +2,7 @@ var _ = require('underscore');
 var db = require('../../db');
 
 var addMessage = function(req, res) {
-	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage', 'messageType');
+	var body = _.pick(req.body, 'user_id', 'message_text', 'show_message', 'message_type');
 
 	db.adminMessages.create(body)
 		.then(function(message) {
@@ -14,9 +14,9 @@ var addMessage = function(req, res) {
 };
 
 var deleteMessage = function(req, res) {
-	var messageID = req.params.messageID;
+	var message_id = req.params.message_id;
 	db.adminMessages.findOne({
-            where:  {messageID : messageID} 
+            where:  {message_id : message_id} 
         })
     .then(function(message){
         message.destroy();
@@ -29,12 +29,12 @@ var deleteMessage = function(req, res) {
 };
 
 var updateMessage = function(req, res) {
-	var body = _.pick(req.body, 'userID', 'messageText', 'showMessage', 'messageType');
-	body.messageID = req.params.messageID;
+	var body = _.pick(req.body, 'user_id', 'message_text', 'show_message', 'message_type');
+	body.message_id = req.params.message_id;
 
 	db.adminMessages.findOne({
         where: {
-            messageID: body.messageID
+            message_id: body.message_id
         }
     })
     .then(function(message) {

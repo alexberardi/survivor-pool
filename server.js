@@ -34,7 +34,7 @@ app.post('/games/populate', middleware.checkAdmin, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
-app.get ('/games/user/:userid', middleware.checkAuthentication, function(req, res){
+app.get ('/games/user/:user_id', middleware.checkAuthentication, function(req, res){
 	ctrlGames.getWeeklyGames(req, res);
 });
 
@@ -50,19 +50,19 @@ app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.updateGames(req, res);
 });
 
-app.post('/picks/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+app.post('/picks/:team_id', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlTeamPicks.makePick(req, res);
 });
 
-app.get('/picks/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getCurrentPicks(req, res);
 });
 
-app.get('/picks/last/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/last/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getLastWeekPick(req, res);
 });
 
-app.get('/picks/all/:userID/:teamID', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/all/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getPicks(req, res);
 });
 
@@ -71,11 +71,11 @@ app.post('/messages/', middleware.checkAuthentication, middleware.checkAdmin, fu
 	ctrlAdminMessages.addMessage(req, res);
 });
 
-app.delete('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+app.delete('/messages/:message_id', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlAdminMessages.deleteMessage(req, res);
 });
 
-app.put('/messages/:messageID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+app.put('/messages/:message_id', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlAdminMessages.updateMessage(req, res);
 });
 
@@ -102,11 +102,11 @@ app.get('/users/count', middleware.checkAuthentication, function(req, res) {
 	ctrlUsers.userGetCountAll(req, res);
 });
 
-app.get('/users/:userID', middleware.checkAuthentication, function(req, res) {	
+app.get('/users/:user_id', middleware.checkAuthentication, function(req, res) {	
  	ctrlUsers.userGet(req, res);		
 });
 
-app.get('/users/exists/:userID', function(req, res) {
+app.get('/users/exists/:user_id', function(req, res) {
 	ctrlUsers.userCheck(req, res);
 });
 
@@ -114,7 +114,7 @@ app.post('/users', function(req, res) {
  	ctrlUsers.userCreate(req, res);
 });
 
-app.put('/users/email/:userid', middleware.checkAuthentication, function(req, res){
+app.put('/users/email/:user_id', middleware.checkAuthentication, function(req, res){
 	ctrlUsers.updateEmail(req, res);
 });
 
@@ -124,11 +124,11 @@ app.get('/standings', middleware.checkAuthentication, function (req, res) {
 });
 
 //User Teams Requests
-app.delete('/teams/:userID/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+app.delete('/teams/:user_id/:team_id', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlPlayerTeams.deleteTeam(req, res);
 });
 
-app.get('/teams/:userID', middleware.checkAuthentication, function(req, res) {
+app.get('/teams/:user_id', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamsGetAll(req, res);
 });
 
@@ -140,19 +140,19 @@ app.post('/teams', middleware.checkAuthentication, function(req, res) {
 	ctrlPlayerTeams.teamCreate(req, res);
 });
 
-app.put('/teams/:teamID', middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
+app.put('/teams/:team_id', middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
 	ctrlPlayerTeams.updateTeamName(req, res);
 });
 
-app.put('/teams/active/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+app.put('/teams/active/:team_id', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlPlayerTeams.updateTeamActive(req, res);
 });
 
-app.put('/teams/paid/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+app.put('/teams/paid/:team_id', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlPlayerTeams.updateTeamPaid(req, res);
 });
 
-app.put('/teams/name/:teamID', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
+app.put('/teams/name/:team_id', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlPlayerTeams.updateTeamName(req, res);
 });
 
@@ -168,7 +168,7 @@ app.use(express.static('public'));
 
 if (env === 'development') {
 	var forceSync = {
-		force: false
+		force: true
 	};
 	db.sequelize.sync(forceSync)
 	.then(

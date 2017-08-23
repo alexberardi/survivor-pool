@@ -4,11 +4,13 @@ var env = process.env.NODE_ENV || 'development';
 
 module.exports = function(sequelize, DataTypes) {
 	var user = sequelize.define('user', {
-		fullName: {
+		full_name: {
+			field: 'full_name',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
 		email: {
+			field: 'email',
 			type: DataTypes.STRING,
 			allowNull: false,
 			unique: true,
@@ -16,25 +18,25 @@ module.exports = function(sequelize, DataTypes) {
 				isEmail: true
 			}
 		},
-		userID: {
-			field: 'userID',
+		user_id: {
+			field: 'user_id',
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		isAdmin: {
-			field: 'isAdmin',
+		is_admin: {
+			field: 'is_admin',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false
 		},
-		hasPaid: {
-			field: 'hasPaid',
+		has_paid: {
+			field: 'has_paid',
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false
 		},
-		pictureURL: {
-			field: 'pictureURL',
+		picture_url: {
+			field: 'picture_url',
 			type: DataTypes.STRING,
 			allowNull: true
 		}
@@ -49,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
 		instanceMethods: {
 			toPublicJSON: function() {
 				var json = this.toJSON();
-				return _.pick(json, 'userID', 'email', 'createdAt', 'updatedAt');
+				return _.pick(json, 'user_id', 'email', 'createdAt', 'updatedAt');
 			}
 		}
 	});

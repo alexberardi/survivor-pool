@@ -2,11 +2,11 @@ var db = require('../../db');
 var _ = require('underscore');
 
 var userGet = function(req, res) {
-    var userID = req.params.userID;
+    var user_id = req.params.user_id;
 
     db.user.findOne({
         where: {
-            userID: userID
+            user_id: user_id
         }
     })
     .then(function(user) {
@@ -19,12 +19,12 @@ var userGet = function(req, res) {
 }
 
 var userCheck = function(req, res) {
-    var userID = req.params.userID;
+    var user_id = req.params.user_id;
 
     db.user.findOne({
-        attributes: ['userID'],
+        attributes: ['user_id'],
         where: {
-            userID: userID
+            user_id: user_id
         }
     })
     .then(function(user) {
@@ -57,12 +57,12 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'fullName', 'email', 'userID', 'pictureURL');
+    var body = _.pick(req.body, 'full_name', 'email', 'user_id', 'picture_url');
     db.user.create(body)
         .then(function(user) {
-            db.playerTeams.create({userID: user.userID, teamName: user.fullName + '\'s team'})
+            db.playerTeams.create({user_id: user.user_id, team_name: user.full_name + '\'s team'})
                 .then (function(team) {
-                    db.teamStreaks.create({teamID: team.teamID, userID: user.userID, total: 0, current: true})
+                    db.teamStreaks.create({team_id: team.team_id, user_id: user.user_id, total: 0, current: true})
                     .then(function(streak){
                         res.json(user.toPublicJSON());
                     });
@@ -75,7 +75,7 @@ var userCreate = function(req,res){
 };
 
 var updateEmail = function(req, res) {
-    var userID = parseInt(req.params.userID, 10);
+    var user_id = parseInt(req.params.user_id, 10);
     var body = _.pick(req.body, 'email');
 
     if (!body.hasOwnProperty('email')){
@@ -87,7 +87,7 @@ var updateEmail = function(req, res) {
 
     db.user.findOne({
         where: {
-            userID: userID
+            user_id: user_id
         }
     })
         .then(function(user) {

@@ -2,9 +2,9 @@ var _ = require('underscore');
 var db = require('../../db');
 
 var deleteTeam = function(req, res) {
-    var teamID = req.params.teamID;
+    var team_id = req.params.team_id;
     db.playerTeams.findOne({
-            where:  {teamID : teamID} 
+            where:  {team_id : team_id} 
         })
     .then(function(team){
         team.destroy();
@@ -17,11 +17,11 @@ var deleteTeam = function(req, res) {
 };
 
 var teamsGetAll = function(req, res) {
-    var userID = req.params.userID;
+    var user_id = req.params.user_id;
 
     db.playerTeams.findAll({
         where : {
-            userID: userID
+            user_id: user_id
         }
     })
     .then(function(teams) {
@@ -33,7 +33,7 @@ var teamsGetAll = function(req, res) {
 };
 
 var teamsGetAllAdmin = function(req, res) {
-    db.sequelize.query("SELECT PT.teamID, PT.teamName, PT.isActive, PT.hasPaid, U.fullName, U.email FROM playerTeams PT JOIN users U ON U.userID = PT.userID")
+    db.sequelize.query("SELECT PT.team_id, PT.team_name, PT.is_active, PT.has_paid, U.full_name, U.email FROM playerteams PT JOIN users U ON U.user_id = PT.user_id")
         .then(function(playerTeams){
             res.json(playerTeams);
         })
@@ -43,17 +43,17 @@ var teamsGetAllAdmin = function(req, res) {
 };
 
 var updateTeamActive = function(req, res) {
-    var body = _.pick(req.body, 'teamID', 'active');
-    var attributes = {isActive: body.active};
+    var body = _.pick(req.body, 'team_id', 'active');
+    var attributes = {is_active: body.active};
 
-    if(!body.hasOwnProperty('teamID')) {
+    if(!body.hasOwnProperty('team_id')) {
         res.status(401).send();
         return;
     }
 
     db.playerTeams.findOne({
         where: {
-            teamID: body.teamID
+            team_id: body.team_id
         }
     })
     .then(function(team) {
@@ -73,17 +73,17 @@ var updateTeamActive = function(req, res) {
 };
 
 var updateTeamPaid = function(req, res) {
-    var body = _.pick(req.body, 'teamID', 'paid');
-    var attributes = {hasPaid: body.paid};
+    var body = _.pick(req.body, 'team_id', 'paid');
+    var attributes = {has_paid: body.paid};
 
-    if(!body.hasOwnProperty('teamID')) {
+    if(!body.hasOwnProperty('team_id')) {
         res.status(401).send();
         return;
     }
 
     db.playerTeams.findOne({
         where: {
-            teamID: body.teamID
+            team_id: body.team_id
         }
     })
     .then(function(team) {
@@ -103,7 +103,7 @@ var updateTeamPaid = function(req, res) {
 }
 
 var teamCreate = function(req,res){
-    var body = _.pick(req.body, 'teamName', 'userID');
+    var body = _.pick(req.body, 'team_name', 'user_id');
     db.playerTeams.create(body)
         .then(function(team) {
             res.json(team);
@@ -115,19 +115,19 @@ var teamCreate = function(req,res){
 };
 
 var updateTeamName = function(req, res) {
-    var teamID = req.params.teamID;
-    var body = _.pick(req.body, 'teamName');
+    var team_id = req.params.team_id;
+    var body = _.pick(req.body, 'team_name');
 
-    if (!body.hasOwnProperty('teamName')){
+    if (!body.hasOwnProperty('team_name')){
         res.status(401).send();
         return;
     }
 
-    var attributes = { teamName : body.teamName};
+    var attributes = { team_name : body.team_name};
 
     db.playerTeams.findOne({
         where: {
-            teamID: teamID
+            team_id: team_id
         }
     })
     .then(function(team) {
