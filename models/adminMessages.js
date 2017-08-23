@@ -33,6 +33,7 @@ module.exports = function(sequelize, DataTypes){
 		}
 	},
 	{
-		tableName: 'adminMessages'
+		tableName: 'adminMessages',
+		freezeTableName: true
 	});
 };
