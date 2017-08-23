@@ -2,5 +2,6 @@ node_modules/
 public/bundle.js
 *.env
 *.DS_Store
+.idea/
 data/*.sqlite
 serviceAccountKey.json
