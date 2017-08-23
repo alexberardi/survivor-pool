@@ -179,7 +179,7 @@ if (env === 'development') {
 } else {
 
 	// NEVER CHANGE - WILL ERASE ALL DATA ON PRODUCTION
-	db.sequelize.sync({force: true})
+	db.sequelize.sync({})
 	.then(
 		app.listen(PORT, function() {
 			console.log('express listening on port ' + PORT + '!');
