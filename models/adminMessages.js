@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes){
 		},
 		messageType: {
 			field: 'messageType',
-			type: DataTypes.CHAR,
+			type: DataTypes.STRING,
 			allowNull: false
 		}
 	});
