@@ -12,7 +12,7 @@ import ChangeTeam from 'ChangeTeam';
 class UserTeam extends Component {
     constructor(props) {
         super(props);
-        this.state = {isActive: props.isActive, teamID: props.teamID, hasPaid: props.hasPaid, teamName: props.teamName, changeTeam: false};
+        this.state = {isActive: props.is_active, teamID: props.team_id, hasPaid: props.has_paid, teamName: props.team_name, changeTeam: false};
         this.toggleActive = this.toggleActive.bind(this);
         this.togglePaid = this.togglePaid.bind(this);
         this.teamSubmit = this.teamSubmit.bind(this);
@@ -22,11 +22,11 @@ class UserTeam extends Component {
         e.preventDefault();
         const that = this;
         let active = !this.state.isActive;
-        let teamID = this.state.teamID;
+        let team_id = this.state.teamID;
 
-        Requests.put(`/teams/active/${teamID}`, {active, teamID})
+        Requests.put(`/teams/active/${team_id}`, {active, team_id})
             .then(function(res) {
-                that.setState({isActive: res.data.isActive});
+                that.setState({isActive: res.data.is_active});
             })
             .catch(function(error) {
                 console.log(error);
@@ -37,11 +37,11 @@ class UserTeam extends Component {
         e.preventDefault();
         const that = this;
         let paid = !this.state.hasPaid;
-        let teamID = this.state.teamID;
+        let team_id = this.state.teamID;
 
-        Requests.put(`/teams/paid/${teamID}`, {paid, teamID})
+        Requests.put(`/teams/paid/${team_id}`, {paid, team_id})
             .then(function(res) {
-                that.setState({hasPaid: res.data.hasPaid});
+                that.setState({hasPaid: res.data.has_paid});
             })
             .catch(function(error) {
                 console.log(error);
@@ -91,7 +91,7 @@ class UserTeam extends Component {
                         </div>
                     </div>
                     <div className="userteam-card-content">
-                        <div className="userteam-card-item">{this.props.fullName}</div>
+                        <div className="userteam-card-item">{this.props.full_name}</div>
                         <div className="userteam-card-item">{this.props.email}</div>
                     </div>
                 </div>

@@ -25,14 +25,14 @@ class Dashboard extends Component {
 		var hasPaid = this.state.hasPaid;
 
 		Requests.get(`/users/${uid}`).then(function(user) {
-			displayName = user.data.displayName;
-			isAdmin = user.data.isAdmin;
+			displayName = user.data.full_name;
+			isAdmin = user.data.is_admin;
 			that.setState({userID: uid, displayName, isAdmin});
 		});
 		Requests.get(`/teams/${uid}`).then(function(teams) {
 			if(teams.data !== null) {
 				let playerTeams = teams.data;
-				hasPaid = playerTeams.every(team => team.hasPaid);
+				hasPaid = playerTeams.every(team => team.has_paid);
 			}
 			that.setState({hasPaid});
 		});
@@ -57,7 +57,7 @@ class Dashboard extends Component {
             }
 
             return messages.map((message) => {
-                return <RenderMessage key={message.messageID} text={message.messageText} payment={false} type={message.messageType}/>
+                return <RenderMessage key={message.message_id} text={message.message_text} payment={false} type={message.message_type}/>
             });
 
 		}

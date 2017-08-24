@@ -31,14 +31,14 @@ class MessageList extends Component {
 
         const that = this;
         let message = {
-            userID: this.state.userID,
-            showMesage: true,
-            messageText: this.refs.messageText.value,
-            messageType: this.refs.messageType.value
+            user_id: this.state.userID,
+            show_message: true,
+            message_text: this.refs.messageText.value,
+            message_type: this.refs.messageType.value
         }
         this.refs.messageText.value = '';
 
-        if(message.messageText.length > 0 && message.messageType !== null) {
+        if(message.message_text.length > 0 && message.message_type !== null) {
             Requests.post('/messages/', message)
             .then(function(res) {
                 that.refreshMessages();
@@ -58,7 +58,7 @@ class MessageList extends Component {
     updateMessage(message) {
         const that = this;
 
-        Requests.put(`/messages/${message.messageID}`, message)
+        Requests.put(`/messages/${message.message_id}`, message)
         .then(function(res) {
             that.refreshMessages();
         });
@@ -80,7 +80,7 @@ class MessageList extends Component {
             return messages.map((message) => {
                 message.createDate = moment(new Date(message.createdAt)).format("YYYY-MM-DD HH:mm");
                 message.updateDate = moment(new Date(message.updatedAt)).format("YYYY-MM-DD HH:mm");
-                return <Message key={message.messageID} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} {...message} />
+                return <Message key={message.message_id} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} {...message} />
             });
 
         }

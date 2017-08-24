@@ -9,7 +9,7 @@ import FaEdit from 'react-icons/lib/fa/edit';
 class Message extends Component {
     constructor(props) {
         super(props);
-        this.state = {showMessage: props.showMessage, changeMessage: false}
+        this.state = {showMessage: props.show_message, changeMessage: false}
         this.startDelete = this.startDelete.bind(this);
         this.startToggleVisible = this.startToggleVisible.bind(this);
         this.startUpdateMessage = this.startUpdateMessage.bind(this);
@@ -18,19 +18,19 @@ class Message extends Component {
     startDelete(e) {
         e.preventDefault();
 
-        this.props.deleteMessage(this.props.messageID);
+        this.props.deleteMessage(this.props.message_id);
     }
     startToggleVisible(e) {
         e.preventDefault();
 
         let message = {
-            messageID: this.props.messageID,
-            userID: this.props.userID,
-            messageText: this.props.messageText,
-            showMessage: !this.props.showMessage,
-            messageType: this.props.messageType
+            message_id: this.props.message_id,
+            user_id: this.props.user_id,
+            message_text: this.props.message_text,
+            show_message: !this.props.show_message,
+            message_type: this.props.message_type
         }
-        this.setState({showMessage: !this.props.showMessage});
+        this.setState({showMessage: !this.props.show_message});
         this.props.updateMessage(message);
     }
     startUpdateMessage(e) {
@@ -40,11 +40,11 @@ class Message extends Component {
     submitUpdateMessage(e) {
         e.preventDefault();
         let message = {
-            messageID: this.props.messageID,
-            userID: this.props.userID,
-            messageText: this.refs.messageText.value,
-            showMessage: this.props.showMessage,
-            messageType: this.refs.messageType.value
+            message_id: this.props.message_id,
+            user_id: this.props.user_id,
+            message_text: this.refs.messageText.value,
+            show_message: this.props.show_message,
+            message_type: this.refs.messageType.value
         }
         this.setState({changeMessage: false});
         this.props.updateMessage(message);
@@ -52,7 +52,7 @@ class Message extends Component {
 	render() {
         let showMessage = this.state.showMessage;
         let changeMessage = this.state.changeMessage;
-        let messageType = this.props.messageType;
+        let messageType = this.props.message_type;
 
         switch(messageType) {
             case 'U':
@@ -83,7 +83,7 @@ class Message extends Component {
                 <div> 
                     <form onSubmit={this.submitUpdateMessage}>
                         <div className="messages-update-container">
-                            <input type="text" className="messages-input" ref="messageText" defaultValue={this.props.messageText}/>
+                            <input type="text" className="messages-input" ref="messageText" defaultValue={this.props.message_text}/>
                             <div className="messages-type-container">
                                 <select className="messages-select" ref="messageType">
                                     <option value="N">Normal</option>
@@ -96,7 +96,7 @@ class Message extends Component {
                     </form>
                 </div>
         } else {
-            message = <a href="#" className="team-link" onClick={this.startUpdateMessage}>{this.props.messageText}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
+            message = <a href="#" className="team-link" onClick={this.startUpdateMessage}>{this.props.message_text}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
         }
 
 

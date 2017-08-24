@@ -54,15 +54,15 @@ app.post('/picks/:team_id', middleware.checkAuthentication, middleware.checkTeam
 	ctrlTeamPicks.makePick(req, res);
 });
 
-app.get('/picks/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/:user_id/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getCurrentPicks(req, res);
 });
 
-app.get('/picks/last/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/last/:user_id/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getLastWeekPick(req, res);
 });
 
-app.get('/picks/all/:userID/:team_id', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/all/:user_id/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getPicks(req, res);
 });
 

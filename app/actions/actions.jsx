@@ -32,10 +32,10 @@ export var startLogin = (provider) => {
 			Requests.get(`/users/exists/${authUser.uid}`).then(function(user) {
 				if(user.data == null) {
 					let user = {
-						fullName: authUser.displayName, 
+						full_name: authUser.displayName, 
 						email: authUser.email,
-						userID: authUser.uid,
-						pictureURL: authUser.pictureURL
+						user_id: authUser.uid,
+						picture_url: authUser.pictureURL
 					}
 					Requests.post('/users', user).then(function(res) {
 						console.log('created user');

@@ -25,11 +25,11 @@ class AddTeam extends Component {
 
         const that = this;
         let team = {
-            userID: this.state.userID,
-            teamName: this.refs.teamName.value
+            user_id: this.state.userID,
+            team_name: this.refs.teamName.value
         }
 
-        if(team.teamName.length > 0) {
+        if(team.team_name.length > 0) {
             Requests.post('/teams', team)
             .then(function(res) {
                 that.props.refreshPlayerTeams();

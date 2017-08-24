@@ -15,16 +15,16 @@ class Game extends Component {
 	}
 	formatPick(teamName) {
 		return {
-			gameID: this.props.gameID,
-			teamID: this.props.teamID,
-			userID: this.props.userID,
+			game_id: this.props.gameID,
+			team_id: this.props.teamID,
+			user_id: this.props.userID,
 			week: this.props.week,
-			teamPicked: teamName
+			team_picked: teamName
 		}
 	}
 	startPick(pick) {
 		if(!this.props.started && !this.props.disabled) {
-			if(this.props.pick !== null && pick.teamPicked !== this.props.pick.teamName) {
+			if(this.props.pick !== null && pick.team_picked !== this.props.pick.teamName) {
 				this.props.startPick(pick);
 			} else if(this.props.pick === null){
 				this.props.startPick(pick);
@@ -55,15 +55,15 @@ class Game extends Component {
 		let quarterText = this.props.quarterText.toString();
 
 		if(this.props.picked && this.props.pick !== null) {
-			if(this.props.pick.gameID == this.props.gameID) {
-				if(this.props.pick.teamName === this.props.awayTeamName) {
+			if(this.props.pick.game_id == this.props.gameID) {
+				if(this.props.pick.team_name === this.props.awayTeamName) {
 					awayBorder = '3px solid #362C6A';
-				} else if(this.props.pick.teamName === this.props.homeTeamName) {
+				} else if(this.props.pick.team_name === this.props.homeTeamName) {
 					homeBorder = '3px solid #362C6A';
 				}
 				pickConfirmation = 
 				<div className="pick-confirmation">
-					You chose the {this.props.pick.teamName}
+					You chose the {this.props.pick.team_name}
 				</div>
 			}
 		}
@@ -86,7 +86,7 @@ class Game extends Component {
 
 		if(this.props.pickStarted && this.props.pickedGame) {
             pickConfirmation = 
-			<div className="pick-confirmation">Are you sure you want to pick the {this.props.pickTemp.teamPicked}? 
+			<div className="pick-confirmation">Are you sure you want to pick the {this.props.pickTemp.team_picked}? 
                     <div className="pick-confirmation-link">
                         <a href="#" className="pick-team-confirm" onClick={this.submitPick}>Yes</a>
                         <a href="#" className="pick-team-cancel" onClick={this.cancelPick}>No</a>

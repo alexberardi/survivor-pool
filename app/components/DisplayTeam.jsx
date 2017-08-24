@@ -84,7 +84,7 @@ class DisplayTeam extends Component {
         const isActive = this.state.isActive;
         
         if(this.state.lastPick) {
-            let logoURL = `/images/${this.state.lastPick.teamName.toLowerCase()}.gif`;
+            let logoURL = `/images/${this.state.lastPick.team_name.toLowerCase()}.gif`;
             lastPick = <GetLastPick pickURL={logoURL}/>
         }
 
@@ -109,7 +109,7 @@ class DisplayTeam extends Component {
             if(!hasPick) {
                 pickDisplay = <Link to={`picks/${this.state.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
             } else {
-                let logoURL = `/images/${this.state.pick.teamName.toLowerCase()}.gif`;
+                let logoURL = `/images/${this.state.pick.team_name.toLowerCase()}.gif`;
                 pickDisplay = <GetCurrentPick pickURL={logoURL} teamID={this.state.teamID}/>
             }
 

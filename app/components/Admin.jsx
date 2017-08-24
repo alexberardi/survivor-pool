@@ -24,7 +24,7 @@ class Admin extends Component {
 		const that = this;
 		
 		Requests.get(`/users/${uid}`).then(function(user) {
-            if(user.data.isAdmin) {
+            if(user.data.is_admin) {
                 that.setState({isAdmin: true});
             } else {
                 hashHistory.push('/dashboard');
@@ -43,14 +43,14 @@ class Admin extends Component {
         let userTeams = this.state.userTeams;
         searchText = searchText.toLowerCase();
         let filteredTeams = userTeams.filter((team) => {
-        let teamName = team.teamName.toLowerCase();
-        let email = team.email.toLowerCase();
-        let fullName = team.fullName.toLowerCase();
+            let teamName = team.team_name.toLowerCase();
+            let email = team.email.toLowerCase();
+            let fullName = team.full_name.toLowerCase();
 
-        return searchText.length === 0 || 
-            teamName.indexOf(searchText) > -1 ||
-            email.indexOf(searchText) > -1 ||
-            fullName.indexOf(searchText) > -1;
+            return searchText.length === 0 || 
+                teamName.indexOf(searchText) > -1 ||
+                email.indexOf(searchText) > -1 ||
+                fullName.indexOf(searchText) > -1;
         });
 
         this.setState({filteredTeams});
@@ -87,7 +87,7 @@ class Admin extends Component {
 
             return userTeams.map((userTeam) => {
 				return (
-					<UserTeam key={userTeam.teamID} {...userTeam}/>
+					<UserTeam key={userTeam.team_id} {...userTeam}/>
 				)
             })
         }

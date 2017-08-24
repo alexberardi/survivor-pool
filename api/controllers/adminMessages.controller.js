@@ -69,7 +69,7 @@ var selectActiveMessages = function(req, res) {
             ['createdAt', 'DESC']
         ],
         where: {
-            showMessage: true
+            show_message: true
         }
     }).then(function(messages) {
         res.json(messages);

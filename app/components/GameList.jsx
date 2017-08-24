@@ -40,6 +40,7 @@ class GameList extends Component {
 		let picked = false;
 		let pick = null;
 
+
 		//Get Games & Picks
 		Requests.post('/games/update', {}).then(function(response) {
 			Requests.get(`/games/user/${uid}`).then(function(games) {
@@ -52,7 +53,7 @@ class GameList extends Component {
 						let startedGames = that.state.startedGames;
 						let disabled = false;
 						startedGames.forEach((game) =>  {
-							if(game.gameID === pick.data[0].gameID) {
+							if(game.game_id === pick.data[0].game_id) {
 								disabled = true;
 							}
 						});
@@ -69,17 +70,17 @@ class GameList extends Component {
 	formatGameInfo(game) {				
 		let gameInfo = {
 			week: game.week,
-			gameID: game.gameID,
+			gameID: game.game_id,
 			quarter: game.quarter,
-			awayImage: `/images/${game.awayTeamName.toLowerCase()}.gif`,
-			awayTeamName: game.awayTeamName,
-			homeImage: `/images/${game.homeTeamName.toLowerCase()}.gif`,
-			homeTeamName: game.homeTeamName,
+			awayImage: `/images/${game.away_team_name.toLowerCase()}.gif`,
+			awayTeamName: game.away_team_name,
+			homeImage: `/images/${game.home_team_name.toLowerCase()}.gif`,
+			homeTeamName: game.home_team_name,
 			started: game.started,
-			homeScore: game.homeScore,
-			awayScore: game.awayScore,
+			homeScore: game.home_score,
+			awayScore: game.away_score,
 			kickoffTime: game.time,
-			kickoffDate: game.gameDate.substring(4,6) + "/" + game.gameDate.substring(6,8) + "/" + game.gameDate.substring(0,4)
+			kickoffDate: game.game_date.substring(4,6) + "/" + game.game_date.substring(6,8) + "/" + game.game_date.substring(0,4)
 		};
 
 		switch(game.quarter) {
@@ -111,7 +112,7 @@ class GameList extends Component {
 	}
 	submitPick() {
 		const that = this;
-		this.state.pickTemp.teamName = this.state.pickTemp.teamPicked;
+		this.state.pickTemp.team_name = this.state.pickTemp.team_picked;
 
         Requests.post(`/picks/${this.state.teamID}`, this.state.pickTemp)
             .then(function(res) {
@@ -155,15 +156,15 @@ class GameList extends Component {
 				game.disabledHome = false;
 
 				started.forEach(function(start) {
-					if(start.gameID == game.gameID) {
+					if(start.game_id == game.game_id) {
 						game.started = true;
 					}
 				});
 				if(allPicks !== null) {
 					allPicks.forEach(function(pick) {
 						if(pick.week !== game.week) {
-							game.disabledAway = pick.teamName === game.awayTeamName ? true : false;
-							game.disabledHome = pick.teamName === game.homeTeamName ? true : false;
+							game.disabledAway = pick.team_name === game.away_team_name ? true : false;
+							game.disabledHome = pick.team_name === game.home_team_name ? true : false;
 						}
 					});
 				}
@@ -173,20 +174,20 @@ class GameList extends Component {
 				let formattedGame = this.formatGameInfo(game);
 
 				if(this.state.pickTemp !== null) {
-					if(formattedGame.gameID == this.state.pickTemp.gameID) {
+					if(formattedGame.gameID == this.state.pickTemp.game_id) {
 						formattedGame.pickedGame = true;
-						formattedGame.pickedTeam = this.state.pickTemp.teamPicked;
+						formattedGame.pickedTeam = this.state.pickTemp.team_picked;
 					}
 				} else if(this.state.pick !== null) {
-					if(formattedGame.gameID == this.state.pick.gameID) {
+					if(formattedGame.gameID == this.state.pick.game_id) {
 						formattedGame.pickedGame = true;
-						formattedGame.pickedTeam = this.state.pick.teamName;
+						formattedGame.pickedTeam = this.state.pick.team_name;
 					}
 				}
 
 				return (
 					<Game 
-						key={game.gameID} 
+						key={game.game_id} 
 						disabled={this.state.disabled}
 						disabledAway={game.disabledAway}
 						disabledHome={game.disabledHome}
