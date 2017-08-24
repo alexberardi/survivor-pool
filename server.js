@@ -50,6 +50,8 @@ app.post('/games/update', middleware.checkAuthentication, function(req, res) {
 	ctrlGames.updateGames(req, res);
 });
 
+//picks requests
+
 app.post('/picks/:team_id', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
 	ctrlTeamPicks.makePick(req, res);
 });
@@ -64,6 +66,10 @@ app.get('/picks/last/:user_id/:team_id', middleware.checkAuthentication, functio
 
 app.get('/picks/all/:user_id/:team_id', middleware.checkAuthentication, function(req, res) {
 	ctrlTeamPicks.getPicks(req, res);
+});
+
+app.get('/schedule/:user_id/:team_id/:week', function(req, res){
+	ctrlTeamPicks.getSchedule(req, res);
 });
 
 //Messages requests
@@ -168,7 +174,7 @@ app.use(express.static('public'));
 
 if (env === 'development') {
 	var forceSync = {
-		force: true
+		force: false
 	};
 	db.sequelize.sync(forceSync)
 	.then(

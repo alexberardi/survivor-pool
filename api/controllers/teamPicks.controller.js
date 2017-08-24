@@ -156,11 +156,59 @@ var getLastWeekPick = function(req, res) {
         });
 }
 
+
+var getSchedule = function (req, res) {
+    ctrlGames.updateGamesAsync().then(function(resolution, requesting) {
+        var week = parseInt(req.params.week, 10);
+
+        if (!week) {
+            db.games.max('week')
+                .then(function(max){
+                    week = max;
+                });
+        }
+        var updatedGames = [], currentSelection, previousSelections = [];
+
+        db.games.findAll({
+            where: {
+                week: week
+            }
+        }).then(function(games) {
+            games.forEach(function(game){
+                game = Object.assign(game.dataValues, {has_started: (!game.quarter === 'P')});
+                updatedGames.push(game);
+            });
+        });
+
+        db.teamPicks.findAll({
+            where: {
+                team_id: req.params.team_id,
+                user_id: req.params.user_id
+            }
+        })
+        .then(function(picks){
+            if(picks) {
+                picks.forEach(function(pick){
+                    if (pick.week === week){
+                        currentSelection = pick;
+                    } else {
+                        previousSelections.push(pick);
+                    }
+
+                });
+            }
+
+            res.json({ games: updatedGames, currentSelection: currentSelection, previousSelections: previousSelections });          
+        });
+    });      
+}
+
 module.exports = {
     makePick: makePick,
     getPicks: getPicks,
     getCurrentPicks: getCurrentPicks,
     getPopularPicks: getPopularPicks,
     getAdminPicks: getAdminPicks,
-    getLastWeekPick: getLastWeekPick
+    getLastWeekPick: getLastWeekPick,
+    getSchedule: getSchedule
 };
