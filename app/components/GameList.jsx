@@ -52,11 +52,13 @@ class GameList extends Component {
 					if(pick.data[0]) {
 						let startedGames = that.state.startedGames;
 						let disabled = false;
-						startedGames.forEach((game) =>  {
-							if(game.game_id === pick.data[0].game_id) {
-								disabled = true;
-							}
-						});
+						if(startedGames !== null) {
+							startedGames.forEach((game) =>  {
+								if(game.game_id === pick.data[0].game_id) {
+									disabled = true;
+								}
+							});
+						} 
 						that.setState({picked: true, pick: pick.data[0], disabled});
 					}
 				}).then(Requests.get(`/picks/all/${uid}/${that.state.teamID}`).then(function(picks) {
