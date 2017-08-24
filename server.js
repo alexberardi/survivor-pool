@@ -68,7 +68,7 @@ app.get('/picks/all/:user_id/:team_id', middleware.checkAuthentication, function
 	ctrlTeamPicks.getPicks(req, res);
 });
 
-app.get('/schedule/:user_id/:team_id/:week', function(req, res){
+app.get('/schedule/:user_id/:team_id/:week',middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
 	ctrlTeamPicks.getSchedule(req, res);
 });
 
