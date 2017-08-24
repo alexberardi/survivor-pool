@@ -168,7 +168,7 @@ app.use(express.static('public'));
 
 if (env === 'development') {
 	var forceSync = {
-		force: true
+		force: false
 	};
 	db.sequelize.sync(forceSync)
 	.then(
