@@ -175,7 +175,7 @@ var getSchedule = function (req, res) {
             }
         }).then(function(games) {
             games.forEach(function(game){
-                game = Object.assign(game.dataValues, {has_started: (!game.quarter === 'P')});
+                game = Object.assign(game.dataValues, {has_started: (game.quarter !== 'P')});
                 updatedGames.push(game);
             });
         });

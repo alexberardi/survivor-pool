@@ -13,35 +13,43 @@ import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true, messages: null};
+		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true, messages: null, week: 0};
 	}
 	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
-		const that = this;
-		var displayName;
-		var isAdmin = this.state.isAdmin;
-		var hasPaid = this.state.hasPaid;
-
-		Requests.get(`/users/${uid}`).then(function(user) {
-			displayName = user.data.full_name;
-			isAdmin = user.data.is_admin;
-			that.setState({userID: uid, displayName, isAdmin});
-		});
-		Requests.get(`/teams/${uid}`).then(function(teams) {
+		const userInfo = Requests.get(`/users/${uid}`).then((user) => {
+			return [user.data.user_id, user.data.full_name, user.data.is_admin];
+		})
+		
+		const teamInfo = Requests.get(`/teams/${uid}`).then((teams) => {
 			if(teams.data !== null) {
-				let playerTeams = teams.data;
-				hasPaid = playerTeams.every(team => team.has_paid);
+				return teams.data.every(team => team.has_paid);
 			}
-			that.setState({hasPaid});
-		});
+		})
 
-		Requests.get('/messages/active/').then(function(messages) {
+		const messageInfo = Requests.get('/messages/active/').then((messages) => {
             if(messages.data) {
-                that.setState({messages: messages.data});
+                return messages.data;
             }
-        }); 
+		})
+
+		const weekInfo = Requests.get('/games/week/current').then((week) => {
+			return week.data;
+		})
+
+		Promise.all([userInfo, teamInfo, messageInfo, weekInfo])
+		.then((values) => 
+		this.setState({
+			userID: values[0][0],
+			displayName: values[0][1],
+			isAdmin: values[0][2],
+			hasPaid: values[1],
+			messages: values[2],
+			week: values[3]
+		}))
+		.catch((error) => console.log(error));
 	}
 	render() {
 		let isAdmin = this.state.isAdmin;

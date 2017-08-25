@@ -37,35 +37,26 @@ class GameList extends Component {
 
 		const that = this;
 
-		let picked = false;
-		let pick = null;
-
-
-		//Get Games & Picks
-		Requests.post('/games/update', {}).then(function(response) {
-			Requests.get(`/games/user/${uid}`).then(function(games) {
-				let currentWeekGames = games.data;
-				Requests.get('/games/started').then(function(started) {
-					let startedGames = started.data;
-					that.setState({games: currentWeekGames, startedGames});
-				}).then(Requests.get(`/picks/${uid}/${that.state.teamID}`).then(function(pick) {
-					if(pick.data[0]) {
-						let startedGames = that.state.startedGames;
-						let disabled = false;
-						if(startedGames !== null) {
-							startedGames.forEach((game) =>  {
-								if(game.game_id === pick.data[0].game_id) {
-									disabled = true;
-								}
-							});
-						} 
-						that.setState({picked: true, pick: pick.data[0], disabled});
-					}
-				}).then(Requests.get(`/picks/all/${uid}/${that.state.teamID}`).then(function(picks) {
-					if(picks.data) {
-						that.setState({allPicks: picks.data});
-					}
-				})));
+		Requests.get('/games/week/current')
+		.then((week) => {return week.data})
+		.then(currentWeek => {
+			Requests.get(`/schedule/${uid}/${this.state.teamID}/${currentWeek}`).then((response) => {
+				let games = response.data.games;
+				let allPicks = response.data.previousSelections || null;
+				let currentPick = response.data.currentSelection || null;
+				var disabled = false;
+				if(currentPick !== null) {
+					disabled = games.some((game) => {
+						return (game.has_started && game.game_id === currentPick.game_id)
+					});
+				}
+				that.setState({
+					games: response.data.games,
+					allPicks: response.data.previousSelections,
+					pick: currentPick,
+					disabled,
+					picked: (currentPick)
+				});
 			});
 		});
 	}
@@ -78,7 +69,7 @@ class GameList extends Component {
 			awayTeamName: game.away_team_name,
 			homeImage: `/images/${game.home_team_name.toLowerCase()}.gif`,
 			homeTeamName: game.home_team_name,
-			started: game.started,
+			started: game.has_started,
 			homeScore: game.home_score,
 			awayScore: game.away_score,
 			kickoffTime: game.time,
@@ -137,8 +128,6 @@ class GameList extends Component {
 	render() {
 		let allPicks = this.state.allPicks;
 		let games = this.state.games;
-		let started = this.state.startedGames;
-
 		let week = games !== null ? games[0].week : 0;
 
 		var renderGames = () => {
@@ -157,11 +146,6 @@ class GameList extends Component {
 				game.disabledAway = false;
 				game.disabledHome = false;
 
-				started.forEach(function(start) {
-					if(start.game_id == game.game_id) {
-						game.started = true;
-					}
-				});
 				if(allPicks !== null) {
 					allPicks.forEach(function(pick) {
 						if(pick.week !== game.week) {
