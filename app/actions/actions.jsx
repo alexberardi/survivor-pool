@@ -87,3 +87,15 @@ export var getUserAuthInfo = () => {
 		}
 	} 
 }
+
+export var refreshToken = () => {
+	return (dispatch, getState) => {
+		firebase.auth().currentUser.getToken(true).then(function(token) {
+				localStorage.setItem('token', token);
+			})
+			.catch(function(error) {
+				firebase.auth().signOut().then(() => {
+				});
+			});
+	}
+}

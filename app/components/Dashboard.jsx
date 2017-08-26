@@ -18,6 +18,7 @@ class Dashboard extends Component {
 	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
+		dispatch(actions.refreshToken());
 
 		const userInfo = Requests.get(`/users/${uid}`).then((user) => {
 			return [user.data.user_id, user.data.full_name, user.data.is_admin];
