@@ -106,7 +106,12 @@ var teamCreate = function(req,res){
     var body = _.pick(req.body, 'team_name', 'user_id');
     db.playerTeams.create(body)
         .then(function(team) {
-            res.json(team);
+            body = Object.assign(body, {team_id: team.team_id, total:0, current: true});
+            db.teamStreaks.create(body)
+                .then(function(streak){
+                    res.json(team);
+                })
+
         })
         .catch(function(e) {
             console.log(e);

@@ -75,7 +75,7 @@ app.get('/picks/all/:user_id/:team_id', middleware.checkAuthentication, function
 	ctrlTeamPicks.getPicks(req, res);
 });
 
-app.get('/schedule/:user_id/:team_id/:week',middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
+app.get('/schedule/:user_id/:team_id/:week', /*middleware.checkAuthentication, middleware.checkTeamID,*/ function(req, res){
 	ctrlTeamPicks.getSchedule(req, res);
 });
 
@@ -149,7 +149,7 @@ app.get('/teams/admin/users', middleware.checkAuthentication, middleware.checkAd
 	ctrlPlayerTeams.teamsGetAllAdmin(req, res);
 });
 
-app.post('/teams', middleware.checkAuthentication, function(req, res) {
+app.post('/teams', /*middleware.checkAuthentication, */function(req, res) {
 	ctrlPlayerTeams.teamCreate(req, res);
 });
 
