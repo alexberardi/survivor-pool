@@ -122,7 +122,7 @@ class GameList extends Component {
 	render() {
 		let allPicks = this.state.allPicks;
 		let games = this.state.games;
-		let week = games !== null ? games[0].week : 0;
+		let week = this.state.week;
 
 		var renderGames = () => {
 			if(games === null || games.length == 0) {
