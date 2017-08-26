@@ -14,7 +14,7 @@ class MessageList extends Component {
         this.updateMessage = this.updateMessage.bind(this);
         this.refreshMessages = this.refreshMessages.bind(this);
     }
-    componentWillMount() {
+    componentDidMount() {
         this.refreshMessages(); 
     }
     refreshMessages() {

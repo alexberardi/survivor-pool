@@ -16,7 +16,7 @@ class Dashboard extends Component {
 		super(props);
 		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true, messages: null, week: 0};
 	}
-	componentWillMount() {
+	componentDidMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 		dispatch(actions.refreshToken());

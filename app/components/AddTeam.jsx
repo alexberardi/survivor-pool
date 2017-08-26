@@ -11,7 +11,7 @@ class AddTeam extends Component {
         this.handleTeamAdd = this.handleTeamAdd.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentWillMount() {
+    componentDidMount() {
 		var {dispatch} = this.props;
 		var {uid} = dispatch(actions.getUserAuthInfo());
         this.setState({userID: uid});

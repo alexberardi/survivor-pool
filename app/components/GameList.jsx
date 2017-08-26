@@ -27,7 +27,7 @@ class GameList extends Component {
 		this.formatGameInfo = this.formatGameInfo.bind(this);
 		this.refreshPicks = this.refreshPicks.bind(this);
     }
-	componentWillMount() {
+	componentDidMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 		const week = dispatch(actions.getWeek());

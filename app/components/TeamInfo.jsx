@@ -13,20 +13,16 @@ class TeamInfo extends Component {
 		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 		this.refreshPlayerTeams = this.refreshPlayerTeams.bind(this);
 	}
-	componentWillMount() {
+	componentDidMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
 		const that = this;
-		var teamName;
-		var hasTeam;
-		var userTeams;
 
 		Requests.get(`/teams/${uid}`).then(function(teams) {
 			if(teams.data !== null) {
-				userTeams = teams.data;
+				that.setState({uid, displayName, teams: teams.data});
 			}
-			that.setState({uid, displayName, teams: userTeams});
 		});
 	}
 	refreshTeamDisplay(teamName) {
@@ -34,15 +30,12 @@ class TeamInfo extends Component {
 	}
 	refreshPlayerTeams() {
 		let userID = this.state.uid;
-		let teams = this.state.teams;
-		let userTeams;
 		const that = this;
 
 		Requests.get(`/teams/${userID}`).then(function(teams) {
 			if(teams.data !== null) {
-				userTeams = teams.data;
+				that.setState({teams: teams.data});
 			}
-			that.setState({teams: userTeams});
 		});
 	}
 	render() {
@@ -53,7 +46,12 @@ class TeamInfo extends Component {
 
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
-				return 
+				this.refreshPlayerTeams();
+				return (
+					<div className="card">
+						Loading Teams...
+					</div>
+				)
 			} 
 
 			return teams.map((team) => {

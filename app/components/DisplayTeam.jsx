@@ -57,8 +57,7 @@ class DisplayTeam extends Component {
         e.preventDefault();
         this.setState({deleteTeam: false});
     }
-    componentWillMount() {
-        //Current Pick
+    componentDidMount() {
         const that = this;
         if(this.state.isActive) {
             Requests.get(`/picks/${this.state.uid}/${this.state.teamID}`).then(function(pick) {

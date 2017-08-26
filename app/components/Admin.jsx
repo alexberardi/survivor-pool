@@ -17,7 +17,7 @@ class Admin extends Component {
         this.populateGames = this.populateGames.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
-	componentWillMount() {
+	componentDidMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
