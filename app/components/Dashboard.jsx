@@ -6,6 +6,7 @@ import * as Requests from 'Requests';
 import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';
+import Rules from 'Rules';
 import FaExclamation from 'react-icons/lib/fa/exclamation';
 import FaBullhorn from 'react-icons/lib/fa/bullhorn';
 import FaCheckCircle from 'react-icons/lib/fa/check-circle'; 
@@ -87,6 +88,7 @@ class Dashboard extends Component {
 						{renderMessages()}
 						<div className="container">
 							<TeamInfo week={this.state.week}/>
+							<Rules />
 						</div>
 					</div>
 				</div>
