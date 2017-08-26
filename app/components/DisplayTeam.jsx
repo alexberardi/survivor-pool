@@ -23,7 +23,8 @@ class DisplayTeam extends Component {
             lastPick: null,
             changeTeam: false, 
             deleteTeam: false, 
-            uid: props.userID
+            uid: props.userID,
+            week: props.week
         };
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
@@ -107,10 +108,10 @@ class DisplayTeam extends Component {
             }
             
             if(!hasPick) {
-                pickDisplay = <Link to={`picks/${this.state.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
+                pickDisplay = <Link to={`picks/${this.state.teamID}/${this.state.week}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Make a Pick</Link>
             } else {
                 let logoURL = `/images/${this.state.pick.team_name.toLowerCase()}.gif`;
-                pickDisplay = <GetCurrentPick pickURL={logoURL} teamID={this.state.teamID}/>
+                pickDisplay = <GetCurrentPick pickURL={logoURL} teamID={this.state.teamID} week={this.state.week}/>
             }
 
             return (
@@ -187,7 +188,7 @@ function GetCurrentPick(props) {
                 <img src={props.pickURL} height="80" width="80"/>
             </div>
             <div>
-                <Link to={`picks/${props.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
+                <Link to={`picks/${props.teamID}/${props.week}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
             </div>
         </div>
     )

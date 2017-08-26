@@ -37,7 +37,7 @@ class Dashboard extends Component {
 		})
 
 		const weekInfo = Requests.get('/games/week/current').then((week) => {
-			return week.data;
+			return parseInt(week.data);
 		})
 
 		Promise.all([userInfo, teamInfo, messageInfo, weekInfo])
@@ -84,7 +84,7 @@ class Dashboard extends Component {
 						{paymentIndicator}
 						{renderMessages()}
 						<div className="container">
-							<TeamInfo />
+							<TeamInfo week={this.state.week}/>
 						</div>
 					</div>
 				</div>

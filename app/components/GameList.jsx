@@ -19,7 +19,8 @@ class GameList extends Component {
 			pickStarted: false,
 			pickTemp: null,
 			pick: null,
-			allPicks: null
+			allPicks: null,
+			week: this.props.params.week
 		};
 		this.startPick = this.startPick.bind(this);
 		this.submitPick = this.submitPick.bind(this);
@@ -37,28 +38,22 @@ class GameList extends Component {
 
 		const that = this;
 
-		Requests.get('/games/week/current')
-		.then((week) => {
-			console.log(week, 'week data');
-			return week.data})
-		.then(currentWeek => {
-			Requests.get(`/schedule/${uid}/${this.state.teamID}/${currentWeek}`).then((response) => {
-				let games = response.data.games;
-				let allPicks = response.data.previousSelections || null;
-				let currentPick = response.data.currentSelection || null;
-				var disabled = false;
-				if(currentPick !== null) {
-					disabled = games.some((game) => {
-						return (game.has_started && game.game_id === currentPick.game_id)
-					});
-				}
-				that.setState({
-					games: response.data.games,
-					allPicks: response.data.previousSelections,
-					pick: currentPick,
-					disabled,
-					picked: (currentPick)
+		Requests.get(`/schedule/${uid}/${this.state.teamID}/${this.state.week}`).then((response) => {
+			let games = response.data.games;
+			let allPicks = response.data.previousSelections || null;
+			let currentPick = response.data.currentSelection || null;
+			var disabled = false;
+			if(currentPick !== null) {
+				disabled = games.some((game) => {
+					return (game.has_started && game.game_id === currentPick.game_id)
 				});
+			}
+			that.setState({
+				games: response.data.games,
+				allPicks: response.data.previousSelections,
+				pick: currentPick,
+				disabled,
+				picked: (currentPick)
 			});
 		});
 	}
