@@ -1,16 +1,19 @@
 var admin = require("firebase-admin");
 var db = require('../db.js');
 
-var serviceAccount;
+var serviceAccount, databaseURL;
 if (process.env.NODE_ENV == 'production') {
+  console.log('here');
   serviceAccount = {
     "project_id": "survivor-pool-4e4e2",
 		"private_key": process.env.FIREBASE_PRIVATE_KEY,
 		"client_email": process.env.FIREBASE_CLIENT_EMAIL
-		}
+		};
+    databaseURL = "https://survivor-pool-4e4e2.firebaseio.com";
 } else {
     try{
-      serviceAccount = require("../app/firebase/serviceAccountKey.json");    
+      serviceAccount = require("../app/firebase/serviceAccountKey.json"); 
+      databaseURL = "https://survivor-pool-dev.firebaseio.com";   
     } catch (e) {
 
     }  
@@ -18,7 +21,7 @@ if (process.env.NODE_ENV == 'production') {
 
  admin.initializeApp({
    credential: admin.credential.cert(serviceAccount),
-   databaseURL: "https://survivor-pool-4e4e2.firebaseio.com"
+   databaseURL: databaseURL
  });
 
 var checkAuthentication = function(req, res, next) {

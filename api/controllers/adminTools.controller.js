@@ -3,15 +3,55 @@ var db = require('../../db');
 
 var advanceWeek = function(req, res) {
 	var week = parseInt(req.params.week, 10);
-	getGamesForWeek(week).then(function(games){
-		var winnersLosersObject = buildWinnersLosersArrays(games);
-		deactivateLosers(week, winnersLosersObject.losers).then(function(losers){
-			advanceWinners(week, winnersLosersObject.winners).then(function(winners) {
-				res.status(200).send();
+	checkGamesCompleted(week).then(function(continueProcessing) {
+		if (continueProcessing){
+			getGamesForWeek(week).then(function(games){
+				var winnersLosersObject = buildWinnersLosersArrays(games);
+				deactivateLosers(week, winnersLosersObject.losers).then(function(losers){
+					advanceWinners(week, winnersLosersObject.winners).then(function(winners) {
+						checkForTeamsWithNoPick(week).then(function(moreLosers){
+							res.status(200).send();
+						});							
+					});
+				});
 			});
-		});
-	});
+			
+		} else {
+			res.status(401).send();
+		}
+		
+	});		
 };
+
+function checkGamesCompleted(week) {
+	//TO DO SELECT COUNT(*) FROM GAMES WHERE WEEK = week AND QUARTER <> 'F'
+	//IF 0 RESOLVE TRUE
+}
+
+function checkForTeamsWithNoPick(week) {
+	db.teamStreaks.findAll({
+		where: {current: true}
+	})
+	.then(function(activeTeams){
+		db.teamPicks.findAll({
+			where: {
+				week: week
+			}
+		})
+		.then(function(teamsWithPicks){
+
+		})
+	})
+}
+
+function buildPropertyArrayFromResultsObject(arrayOfObjects, prop) {
+	var returnArray = [];
+	arrayOfObjects.forEach(function(obj){
+		returnArray.push(obj[prop]);
+	});
+	return returnArray;
+}
+
 
 function advanceWinners(week, winners) {
 	return new Promise(function(resolve, reject) {
@@ -22,30 +62,21 @@ function advanceWinners(week, winners) {
 			}
 		})
 		.then(function(advancingTeams){
-			var advancingTeamsArray = [];
-			advancingTeams.forEach(function(advancingTeam){
-				advancingTeamsArray.push(advancingTeam.team_id);
-			});
-
+			var advancingTeamsArray = buildPropertyArrayFromResultsObject(advancingTeams, 'team_id');
 			db.teamStreaks.update(
-			{
-				total: week
-			},
-			{
-				where: {
-					team_id: {$in: advancingTeamsArray}
-				}
-			})
-			.then(function(winningTeamStreams){
-				resolve(winningTeamStreams);
+				{total: week},
+				{
+					where: { team_id: {$in: advancingTeamsArray} }
+				})
+			.then(function(winningTeamStreaks){
+				resolve(winningTeamStreaks);
 				})
 			})		
 	});
 }
 
 function buildWinnersLosersArrays(games) {
-	var losers = [];
-	var winners = [];
+	var losers = [], winners = [];
 
 	games.forEach(function(game){
 			if( parseInt(game.home_score, 10) === parseInt(game.away_score, 10) ) { //if there is a tie, both teams lose
@@ -63,8 +94,7 @@ function buildWinnersLosersArrays(games) {
 }
 
 function deactivateLosers(week, losers) {
-	return new Promise(function(resolve, reject){
-		
+	return new Promise(function(resolve, reject){		
 		db.teamPicks.findAll({
 			where: {
 				team_name: {$in : losers},
@@ -72,11 +102,7 @@ function deactivateLosers(week, losers) {
 			}
 		})
 		.then(function(losersToDeactivate){
-			var losersArray = [];			
-			losersToDeactivate.forEach(function(loserToDeactivate){
-				losersArray.push(loserToDeactivate.team_id);
-			});
-
+			var losersArray = buildPropertyArrayFromResultsObject(losersToDeactivate, 'team_id');
 			db.playerTeams.update(
 				{ is_active: false},
 				{
@@ -87,19 +113,12 @@ function deactivateLosers(week, losers) {
 			)
 			.then(function(losers){
 				resolve(losers);
-			})
-		})
-
-
-
-
-		
-	})
+			});
+		});		
+	});
 }
 
 function getGamesForWeek(week){
-	var ctrlGames = require('./games.controller');
-
 	return new Promise(function(resolve, reject) {
 		db.games.findAll({
 			where: {
