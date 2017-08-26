@@ -25,7 +25,7 @@ export default (
 	<Router history={hashHistory}>
 		<Route path="/">
 			<Route path="dashboard" component={Dashboard} onEnter={requireLogin}/>
-			<Route path="picks/:teamID/:week" component={GameList} onEnter={requireLogin}/>
+			<Route path="picks/:teamID" component={GameList} onEnter={requireLogin}/>
 			<Route path="admin" component={Admin} onEnter={requireLogin}/>
 			<IndexRoute component={Login} onEnter={userLoggedIn}/>
 		</Route>

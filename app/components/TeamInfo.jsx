@@ -59,7 +59,7 @@ class TeamInfo extends Component {
 			return teams.map((team) => {
 				return (
 					<div className="card" key={team.team_id}>
-						<DisplayTeam teamID={team.team_id} displayName={displayName} teamName={team.team_name} hasPaid={team.has_paid} isActive={team.is_active} userID={userID} refreshTeam={this.refreshTeamDisplay} refreshPlayerTeams={this.refreshPlayerTeams} week={week}/>
+						<DisplayTeam teamID={team.team_id} displayName={displayName} teamName={team.team_name} hasPaid={team.has_paid} isActive={team.is_active} userID={userID} refreshTeam={this.refreshTeamDisplay} refreshPlayerTeams={this.refreshPlayerTeams} />
 					</div>
 				)
 			});

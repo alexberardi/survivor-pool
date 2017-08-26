@@ -37,6 +37,8 @@ class Dashboard extends Component {
 		})
 
 		const weekInfo = Requests.get('/games/week/current').then((week) => {
+			let currentWeek = parseInt(week.data);
+			dispatch(actions.setWeek(currentWeek));
 			return parseInt(week.data);
 		})
 

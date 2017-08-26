@@ -98,3 +98,16 @@ export var refreshToken = () => {
 			});
 	}
 }
+
+export var setWeek = (week) =>  {
+	return {
+		type: 'SET_WEEK',
+		week
+	}
+}
+
+export var getWeek = () =>  {
+	return (dispatch, getState) => {
+		return getState().week.currentWeek;
+	}
+}

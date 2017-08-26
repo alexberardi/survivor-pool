@@ -12,3 +12,14 @@ export var authReducer = (state = {}, action) => {
 			return state;
 	}
 }
+
+export var weekReducer = (state = {}, action) => {
+	switch (action.type) {
+		case 'SET_WEEK':
+			return {
+				currentWeek: action.week
+			}
+		default:
+			return state;
+	}
+}

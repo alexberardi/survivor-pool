@@ -1,10 +1,11 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
-import {authReducer} from 'reducers';
+import {authReducer, weekReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
 	var reducer = redux.combineReducers({
-		auth: authReducer
+		auth: authReducer,
+		week: weekReducer
 	});
 
 	var store = redux.createStore(reducer, initialState, redux.compose(
