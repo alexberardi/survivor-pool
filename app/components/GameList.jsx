@@ -32,10 +32,6 @@ class GameList extends Component {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
-		if(this.state.userID == null) {
-			this.setState({userID: uid});
-		}
-
 		const that = this;
 
 		Requests.get(`/schedule/${uid}/${this.state.teamID}/${this.state.week}`).then((response) => {
@@ -53,7 +49,8 @@ class GameList extends Component {
 				allPicks: response.data.previousSelections,
 				pick: currentPick,
 				disabled,
-				picked: (currentPick)
+				picked: (currentPick),
+				userID: uid
 			});
 		});
 	}
