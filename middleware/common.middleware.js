@@ -19,8 +19,6 @@ if (process.env.NODE_ENV == 'production') {
     }  
 }
 
-console.log(serviceAccount);
-
  admin.initializeApp({
    credential: admin.credential.cert(serviceAccount),
    databaseURL: databaseURL
