@@ -38,7 +38,9 @@ class GameList extends Component {
 		const that = this;
 
 		Requests.get('/games/week/current')
-		.then((week) => {return week.data})
+		.then((week) => {
+			console.log(week, 'week data');
+			return week.data})
 		.then(currentWeek => {
 			Requests.get(`/schedule/${uid}/${this.state.teamID}/${currentWeek}`).then((response) => {
 				let games = response.data.games;

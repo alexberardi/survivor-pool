@@ -23,27 +23,26 @@ export var startLogin = (provider) => {
 
 			firebase.auth().currentUser.getToken(true).then(function(token) {
 				localStorage.setItem('token', token);
+				Requests.get(`/users/exists/${authUser.uid}`).then(function(user) {
+					if(user.data == null) {
+						let user = {
+							full_name: authUser.displayName, 
+							email: authUser.email,
+							user_id: authUser.uid,
+							picture_url: authUser.pictureURL
+						}
+						Requests.post('/users', user).then(function(res) {
+							console.log('created user');
+						})
+						.catch(function(error) {
+							console.log(error);
+						})
+					}
+				});
 			})
 			.catch(function(error) {
 				firebase.auth().signOut().then(() => {
 				});
-			});
-
-			Requests.get(`/users/exists/${authUser.uid}`).then(function(user) {
-				if(user.data == null) {
-					let user = {
-						full_name: authUser.displayName, 
-						email: authUser.email,
-						user_id: authUser.uid,
-						picture_url: authUser.pictureURL
-					}
-					Requests.post('/users', user).then(function(res) {
-						console.log('created user');
-					})
-					.catch(function(error) {
-						console.log(error);
-					})
-				}
 			});
 
 		}, (error) => {
