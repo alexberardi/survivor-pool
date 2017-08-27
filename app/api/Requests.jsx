@@ -12,6 +12,7 @@ module.exports = {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
                     localStorage.setItem('token', null);
+                    location.reload();
                 });
             }
        });
@@ -26,6 +27,7 @@ module.exports = {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
                     localStorage.setItem('token', null);
+                    location.reload();
                 });
             }
         }); 
@@ -40,6 +42,7 @@ module.exports = {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
                     localStorage.setItem('token', null);
+                    location.reload();
                 });
             }
         });
@@ -52,6 +55,7 @@ module.exports = {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
                     localStorage.setItem('token', null);
+                    location.reload();
                 });
             }
         });
