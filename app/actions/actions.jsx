@@ -36,6 +36,9 @@ export var startLogin = (provider) => {
 						})
 						.catch(function(error) {
 							console.log(error);
+							if(error.status == '401') {
+			                    localStorage.setItem('token', null);
+			            	}
 						})
 					}
 				});

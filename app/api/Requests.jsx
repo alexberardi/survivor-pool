@@ -11,6 +11,7 @@ module.exports = {
        }).catch(function(error) {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
+                    localStorage.setItem('token', null);
                 });
             }
        });
@@ -24,6 +25,7 @@ module.exports = {
         }).catch(function(error) {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
+                    localStorage.setItem('token', null);
                 });
             }
         }); 
@@ -37,6 +39,7 @@ module.exports = {
         }).catch(function(error) {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
+                    localStorage.setItem('token', null);
                 });
             }
         });
@@ -48,6 +51,7 @@ module.exports = {
         }).catch(function(error) {
             if(error.status == '401') {
                 firebase.auth().signOut().then(() => {
+                    localStorage.setItem('token', null);
                 });
             }
         });
