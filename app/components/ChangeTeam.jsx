@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
+import firebase from 'firebase';
+import axios from 'axios';
 
 class ChangeTeam extends Component {
 	constructor(props) {
@@ -19,12 +20,15 @@ class ChangeTeam extends Component {
         let teamName = this.refs.teamName.value;
 
         if(teamName.length > 0) {
-            Requests.put(url, {user_id: userID, team_name: teamName})
-                .then(function(res) {
-                    that.props.teamSubmit(teamName);
-                })
-                .catch(function(error) {
-                    console.log(error);
+            firebase.auth().currentUser.getToken(true).then(function(token) {
+                axios.defaults.headers.common['Authorization'] = token;
+                axios.put(url, {token, user_id: userID, team_name: teamName})
+                    .then(function(res) {
+                        that.props.teamSubmit(teamName);
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                });
             });
         } 
     }

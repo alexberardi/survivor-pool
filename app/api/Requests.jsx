@@ -1,8 +1,5 @@
 import axios from 'axios';
-import firebase from 'app/firebase/';
-
-const token = localStorage.getItem('token');
-axios.defaults.headers.common['Authorization'] = token;
+import firebase from 'app/firebase/';;
 
 module.exports = {
     get: function(address) {

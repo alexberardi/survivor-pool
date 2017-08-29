@@ -4,7 +4,6 @@ import * as actions from 'actions';
 import firebase from 'firebase';
 import axios from 'axios';
 
-import * as Requests from 'Requests';
 import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';

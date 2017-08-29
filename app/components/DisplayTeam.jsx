@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import {Link, IndexLink} from 'react-router';
+import firebase from 'firebase';
+import axios from 'axios';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
+
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
 import FaCheck from 'react-icons/lib/fa/check';
@@ -48,9 +50,12 @@ class DisplayTeam extends Component {
         let teamID = this.state.teamID;
         const that = this;
 
-        Requests.delete(`/teams/${this.state.uid}/${teamID}`).then(function(response) {
-            that.setState({deleteTeam: false});
-            that.props.refreshPlayerTeams();
+        firebase.auth().currentUser.getToken(true).then(function(token) {
+            axios.defaults.headers.common['Authorization'] = token;
+            axios.delete(`/teams/${that.state.uid}/${teamID}`).then(function(response) {
+                that.setState({deleteTeam: false});
+                that.props.refreshPlayerTeams();
+            });
         });
     }
     cancelDelete(e) {
@@ -60,17 +65,25 @@ class DisplayTeam extends Component {
     componentDidMount() {
         const that = this;
         if(this.state.isActive) {
-            Requests.get(`/picks/${this.state.uid}/${this.state.teamID}`).then(function(pick) {
-                if(pick.data[0]) {  
-                    that.setState({pick: pick.data[0]});
-                }
+            
+            firebase.auth().currentUser.getToken(true).then(function(token) {
+                axios.defaults.headers.common['Authorization'] = token;
+                axios.get(`/picks/${that.state.uid}/${that.state.teamID}`).then(function(pick) {
+                    if(pick.data[0]) {  
+                        that.setState({pick: pick.data[0]});
+                    }
+                });
             });
         }
 
-        Requests.get(`/picks/last/${this.state.uid}/${this.state.teamID}`).then(function(last) {
-            if(last.data[0]) {  
-                that.setState({lastPick: last.data[0]});
-            }
+        
+        firebase.auth().currentUser.getToken(true).then(function(token) {
+            axios.defaults.headers.common['Authorization'] = token;
+            axios.get(`/picks/last/${that.state.uid}/${that.state.teamID}`).then(function(last) {
+                if(last.data[0]) {  
+                    that.setState({lastPick: last.data[0]});
+                }
+            });
         });
     }
 	render() {

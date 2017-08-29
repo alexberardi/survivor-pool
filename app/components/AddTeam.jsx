@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
+import firebase from 'firebase';
+import axios from 'axios';
+
 import FaPlusSquare from 'react-icons/lib/fa/plus-square';
 
 class AddTeam extends Component {
@@ -24,20 +26,26 @@ class AddTeam extends Component {
         e.preventDefault();
 
         const that = this;
-        let team = {
-            user_id: this.state.userID,
-            team_name: this.refs.teamName.value
-        }
 
-        if(team.team_name.length > 0) {
-            Requests.post('/teams', team)
-            .then(function(res) {
-                that.props.refreshPlayerTeams();
-                that.setState({addTeam: false});
-            })
-            .catch(function(error) {
-                console.log(error);
-            })
+        if(this.refs.teamName.value.length > 0) {
+            firebase.auth().currentUser.getToken(true).then(function(token) {
+                axios.defaults.headers.common['Authorization'] = token;
+
+                let team = {
+                    token,
+                    user_id: that.state.userID,
+                    team_name: that.refs.teamName.value
+                }
+
+                axios.post('/teams', team)
+                    .then(function(res) {
+                        that.props.refreshPlayerTeams();
+                        that.setState({addTeam: false});
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    })
+            });
         }
     }
 	render() {
