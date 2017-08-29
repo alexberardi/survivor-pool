@@ -62,16 +62,13 @@ class AddTeam extends Component {
               
             } else {
                 return (
-                    <a href="#" className="team-link" onClick={this.handleTeamAdd}>Create<FaPlusSquare size={45} style={{marginLeft: '12px'}} /></a>
+                    <a href="#" className="team-link" onClick={this.handleTeamAdd}>Create a New Team<FaPlusSquare size={45} style={{marginLeft: '12px'}} /></a>
                 )
             }
         }
 		return (
-			<div className="card-container">
-                <div className="card-title">
-                    Create a Team
-                </div>
-                <div className="card-content">
+			<div className="add-team-card-container">
+                <div className="add-team-card-content">
                     {addTeamButton()}
                 </div>
             </div>

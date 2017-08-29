@@ -1,8 +1,12 @@
 .nav {
 	background: $purple;
+	background: -webkit-linear-gradient(left, $pink , $purple); 
+	background: -o-linear-gradient(right, $pink , $purple); 
+	background: -moz-linear-gradient(right, $pink , $purple); 
+	background: linear-gradient(to right, $pink , $purple); 
 	display: flex;
 	padding: 1rem 1rem 1rem 1rem;
-	box-shadow: 0 3px 6px $light-pink, 0 3px 6px $light-pink;
+	box-shadow: 0 3px 6px $orange 0 3px 6px $orange;
 }
 
 .logo-container {
@@ -12,8 +16,8 @@
 
 .logo {
   	font-family: $YesterYear;
-  	color: $purple;
-  	text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0 #FFF, 0 -1px #FFF;
+  	color: white;
+  	text-shadow: -1px 0 $purple, 0 2px $purple, 2px 0 $purple, 0 -1px $purple;
 }
 
 .nav-title {
@@ -139,6 +143,44 @@
 		align-items: center;
   		justify-content: center;
 		border-top: 1px solid $light-grey-border;
+		margin: 12px 18px 12px 18px;
+		font-family: $Brawler;
+		font-size: 14px;
+		color: $purple;
+	}
+
+	&-container {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		height: 100%
+	}
+}
+
+.add-team-card {
+	flex-direction: column;
+	flex: 1;
+	flex-grow: 2;
+	margin: 20px;
+	min-width: 200px;
+	min-height: 175px;
+	border: 6px dashed $purple;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+	&-title {
+		margin: 12px 18px 12px 18px;
+    	font-family: $Brawler;
+    	color: $purple;
+    	font-size: 20px;
+    	font-weight: bold;
+	}
+
+	&-content {
+		display: flex;
+		flex: 1;
+		align-items: center;
+  		justify-content: center;
 		margin: 12px 18px 12px 18px;
 		font-family: $Brawler;
 		font-size: 14px;

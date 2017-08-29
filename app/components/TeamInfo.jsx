@@ -74,7 +74,7 @@ class TeamInfo extends Component {
 			<div>
 				<div className="card-row">
 					{renderTeams()}
-					<div className="card">
+					<div className="add-team-card">
 						<AddTeam refreshPlayerTeams={this.refreshPlayerTeams}/>
 					</div>
 				</div>

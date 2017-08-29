@@ -13,12 +13,19 @@ class Profile extends Component {
 	}
 	render() {
 		var {dispatch} = this.props;
-		var {photoURL} = dispatch(actions.getUserAuthInfo());
+		var {displayName, photoURL} = dispatch(actions.getUserAuthInfo());
 
 		return (
 			<div className="profile-container">
-				<img className="profile-image"  src={photoURL} />
-				<button type="button" className="primary-button" onClick={this.onLogout}>Logout</button>
+				<img className="profile-image" src={photoURL} />
+				<div>
+					<div className="profile-name-container">
+						Hey, {displayName} !
+					</div>
+					<div>
+						<a href="#" className="logout-link" onClick={this.onLogout}>Logout</a>
+					</div>
+				</div>
 			</div>
 		)
 	}

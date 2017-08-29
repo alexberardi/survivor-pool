@@ -104,7 +104,7 @@ class DisplayTeam extends Component {
             if(this.state.changeTeam) {
                 teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName} admin={false}/>
             } else {
-                teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
+                teamButton = <div>{this.state.teamName}<a href="#" className="change-team-link" onClick={this.handleTeamChange}><FaEdit size={25} style={{marginLeft: '12px'}} /></a></div>
             }
 
             if(this.state.deleteTeam) {
