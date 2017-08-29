@@ -21,6 +21,7 @@ class Dashboard extends Component {
 	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
+		var that = this;
 
 		firebase.auth().currentUser.getToken(true).then(function(token) {
 			axios.defaults.headers.common['Authorization'] = token;
@@ -49,7 +50,7 @@ class Dashboard extends Component {
 	
 			Promise.all([userInfo, teamInfo, messageInfo, weekInfo])
 			.then((values) => 
-			this.setState({
+			that.setState({
 				userID: values[0][0],
 				displayName: values[0][1],
 				isAdmin: values[0][2],
