@@ -16,7 +16,7 @@ module.exports = {
     },
     post: function(address, data) {
         return axios.post(address, {
-            token,
+            token: axios.defaults.headers.common['Authorization'],
             ...data
         }).then(function(response) {
             return response;
@@ -31,7 +31,7 @@ module.exports = {
     },
 	put: function(address, data) {
 		return axios.put(address, {
-            token,
+            token: axios.defaults.headers.common['Authorization'],
             ...data
         }).then(function(response) {
             return response;
