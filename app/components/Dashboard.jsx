@@ -15,7 +15,7 @@ import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true, messages: null, week: 0};
+		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: false, messages: null, week: 0};
 	}
 	componentWillMount() {
 		var {dispatch} = this.props;
