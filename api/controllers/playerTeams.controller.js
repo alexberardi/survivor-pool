@@ -103,20 +103,28 @@ var updateTeamPaid = function(req, res) {
 }
 
 var teamCreate = function(req,res){
-    var body = _.pick(req.body, 'team_name', 'user_id');
-    db.playerTeams.create(body)
-        .then(function(team) {
-            body = Object.assign(body, {team_id: team.team_id, total:0, current: true});
-            db.teamStreaks.create(body)
-                .then(function(streak){
-                    res.json(team);
-                })
 
-        })
-        .catch(function(e) {
-            console.log(e);
-            res.status(400).json(e);
-        });
+    var dateCutOff = new Date('2017-09-11 22:20:00');
+    
+    if (new Date() < dateCutOff) {
+        var body = _.pick(req.body, 'team_name', 'user_id');
+        db.playerTeams.create(body)
+            .then(function(team) {
+                body = Object.assign(body, {team_id: team.team_id, total:0, current: true});
+                db.teamStreaks.create(body)
+                    .then(function(streak){
+                        res.json(team);
+                    })
+
+            })
+            .catch(function(e) {
+                console.log(e);
+                res.status(400).json(e);
+            });
+    } else {
+        var e = {error: 'The cutoff time to add a team has passed.'};
+        res.status(401).json(e);
+    }
 };
 
 var updateTeamName = function(req, res) {
