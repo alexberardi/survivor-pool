@@ -74,7 +74,7 @@ class PickHistory extends Component {
                 }
 
                 return (
-                    <img key={index} src={imageURL} className={style} height="40" width="40" style={{margin: '6px 6px 6px 6px', borderRadius: '50%', padding: '3px 3px 3px 3px'}}/>
+                    <img key={index} src={imageURL} className={style} height="40" width="40" style={{margin: '6px 6px 6px 6px', padding: '3px 3px 3px 3px'}}/>
                 )
             });
         }
