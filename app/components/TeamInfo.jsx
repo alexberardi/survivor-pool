@@ -54,11 +54,7 @@ class TeamInfo extends Component {
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
 				this.refreshPlayerTeams();
-				return (
-					<div className="card">
-						Loading Teams...
-					</div>
-				)
+				return 
 			} 
 
 			return teams.map((team) => {
