@@ -26,17 +26,87 @@ var updateStreak = function(req, res) {
             });
 };
 
-var getStandings = function(req, res) {
-    var user_id = parseInt(req.params.user_id, 10);
-    db.sequelize.query('SELECT userstreaks.total, users.team_name, users.first, users.last, userstreaks.current FROM userstreaks JOIN users on userstreaks.user_id = users.user_id ORDER BY userstreaks.total DESC')
-        .then(function(streaks){
-            res.json(streaks);
-        })
-        .catch(function(e){
-            return res.status(500).json(e);
-        });
-};
 
+function getMaxWeek(){
+    return new Promise(function(resolve, reject){
+        db.games.max('week')
+            .then(function(week){
+                resolve(week);
+            });
+    });
+}
+
+function checkCurrentUserGames(user_id) {
+    return new Promise(function(resolve, reject){
+        getMaxWeek()
+            .then(function(week){
+                var tempObj = {
+                    showCurrentPick: true,
+                    week: week
+                };
+                var query = 'SELECT *, g.quarter as current_quarter FROM teampicks tp JOIN games g on tp.game_id = g.game_id where user_id = :user_id AND g.week = :week';
+                db.sequelize.query(query, {replacements: {user_id: user_id, week: week}, type: db.sequelize.QueryTypes.SELECT})
+                    .then(function(picksAndGames){
+                        picksAndGames.forEach(function(pickedGame){
+                            if(pickedGame.current_quarter === 'P') {
+                                tempObj.showCurrentPick = false;
+                            }
+                        });
+                        
+                        resolve(tempObj);
+
+
+                    })
+            });            
+    });        
+}
+
+var getStandings = function(req, res) {
+    //var query = 'SELECT * FROM users u JOIN playerteams pt on pt.user_id = u.user_id LEFT JOIN teampicks tp  on tp.team_id = pt.team_id JOIN teamstreaks ts on ts.team_id = pt.team_id';
+    checkCurrentUserGames(req.body.user_id)
+        .then(function(showCurrentPicks){
+            var arr = [];
+            var promises = [];
+            db.user.findAll({})
+            .then(function(users){        
+                users.forEach(function(user){            
+                    var query;
+                    if(showCurrentPicks.showCurrentPick){
+                        query = 'SELECT pt.team_name as player_team_name, pt.is_active as is_active, ts.total as streak_total, tp.team_name as currentpick FROM playerteams pt LEFT JOIN teamstreaks ts on ts.team_id = pt.team_id LEFT JOIN teamPicks tp on tp.team_id = pt.team_id  where pt.user_id = :user_id AND (tp.week = :week OR tp.week is null)' ;
+
+                        promises.push(                
+                            db.sequelize.query(query, {replacements: {user_id: user.user_id, week: showCurrentPicks.week}, type: db.sequelize.QueryTypes.SELECT})
+                                .then(function(teams){
+                                        arr.push({
+                                            user_id: user.user_id,
+                                            full_name: user.full_name,
+                                            teams: teams
+                                        })
+                                })
+                            );
+                    } else {
+                        query = 'SELECT pt.team_name as player_team_name, pt.is_active as is_active, ts.total as streak_total FROM playerteams pt LEFT JOIN teamstreaks ts on ts.team_id = pt.team_id where pt.user_id = :user_id'
+                        promises.push(                
+                            db.sequelize.query(query, {replacements: {user_id: user.user_id}, type: db.sequelize.QueryTypes.SELECT})
+                                .then(function(teams){
+                                        arr.push({
+                                            user_id: user.user_id,
+                                            full_name: user.full_name,
+                                            teams: teams
+                                        });
+                                })
+                            );
+                    }                    
+                });
+                Promise.all(promises).then(function(stuff){
+                    res.json(arr);
+                })
+                   
+            })
+        })    
+        
+
+};
 
 var getCountActive = function(req, res) {
     db.teamStreaks.count({where: {current: true}})
@@ -48,27 +118,10 @@ var getCountActive = function(req, res) {
         });
 };
 
-var checkActive = function (req, res) {
-    var user_id = parseInt(req.params.user_id, 10);
-    db.teamStreaks.findOne({
-        where: {
-            user_id: user_id
-        }
-    })
-        .then(function(streak){
-          if (streak.current === true) {
-              res.status(200).send();
-          }
-          else {
-              res.status(401).send();
-          }
-        })
-};
 
 module.exports = {
     updateStreak: updateStreak,
     getStandings: getStandings,
-    checkActive: checkActive,
     getCountActive: getCountActive
 };
 

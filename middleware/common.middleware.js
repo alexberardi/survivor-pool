@@ -27,6 +27,7 @@ if (process.env.NODE_ENV == 'production') {
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
+          req.body.user_id = decodedToken.user_id;
       		next();
     		})
     		.catch(function(error) {
