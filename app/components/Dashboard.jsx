@@ -8,6 +8,7 @@ import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';
 import Rules from 'Rules';
+
 import FaExclamation from 'react-icons/lib/fa/exclamation';
 import FaBullhorn from 'react-icons/lib/fa/bullhorn';
 import FaCheckCircle from 'react-icons/lib/fa/check-circle'; 
@@ -87,7 +88,7 @@ class Dashboard extends Component {
 			<div className="dashboard">
 				<Nav admin={isAdmin} page={'Dashboard'}/>
 				<div className="row">
-					<div className="column small-centered small-11 medium-10 large-9">
+					<div className="column small-centered small-11 medium-11 large-11">
 						<div className="dashboard-title">Dashboard</div>
 						{paymentIndicator}
 						{renderMessages()}

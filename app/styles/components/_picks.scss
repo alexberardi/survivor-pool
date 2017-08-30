@@ -107,6 +107,17 @@
     }
 }
 
+.picked-team {
+	opacity: 0.3;
+	border: 2px dotted $red;
+	border-radius: 50%;
+}
+
+.pick-history-title {
+	border-bottom: 1px solid $light-grey-border;
+	margin-bottom: 20px;
+}
+
 .game-started {
 	color: $red;
 	font-family: $Brawler;

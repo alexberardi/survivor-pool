@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import axios from 'axios';
 import * as actions from 'actions';
 
+import PickHistory from 'PickHistory';
+
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
 import FaCheck from 'react-icons/lib/fa/check';
@@ -22,7 +24,6 @@ class DisplayTeam extends Component {
             isActive: props.isActive,
             hasPaid: props.hasPaid,
             pick: null,
-            lastPick: null,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -62,10 +63,9 @@ class DisplayTeam extends Component {
         e.preventDefault();
         this.setState({deleteTeam: false});
     }
-    componentDidMount() {
+    componentWillMount() {
         const that = this;
         if(this.state.isActive) {
-            
             firebase.auth().currentUser.getToken(true).then(function(token) {
                 axios.defaults.headers.common['Authorization'] = token;
                 axios.get(`/picks/${that.state.uid}/${that.state.teamID}`).then(function(pick) {
@@ -75,30 +75,14 @@ class DisplayTeam extends Component {
                 });
             });
         }
-
-        
-        firebase.auth().currentUser.getToken(true).then(function(token) {
-            axios.defaults.headers.common['Authorization'] = token;
-            axios.get(`/picks/last/${that.state.uid}/${that.state.teamID}`).then(function(last) {
-                if(last.data[0]) {  
-                    that.setState({lastPick: last.data[0]});
-                }
-            });
-        });
     }
 	render() {
         var teamButton;
         var hasPick = this.state.pick === null ? false : true;
-        var lastPick;
         var pickDisplay;
         var deleteButton;
 
         const isActive = this.state.isActive;
-        
-        if(this.state.lastPick) {
-            let logoURL = `/images/${this.state.lastPick.team_name.toLowerCase()}.gif`;
-            lastPick = <GetLastPick pickURL={logoURL}/>
-        }
 
         if(isActive) {
             if(this.state.changeTeam) {
@@ -139,8 +123,9 @@ class DisplayTeam extends Component {
                             <div className="card-column-container"> 
                                 <div>{pickDisplay}</div>
                             </div>
-                            <div className="card-column-container"> 
-                                {lastPick}
+                            <div className="card-column-container">
+                                <div className="pick-history-title">Pick History</div>
+                                <PickHistory userID={this.state.uid} teamID={this.state.teamID}/>
                             </div>
                         </div>
                     </div>
@@ -166,7 +151,8 @@ class DisplayTeam extends Component {
                                 </div>
                             </div>
                             <div className="card-column-container"> 
-                                {lastPick}
+                                <div className="pick-history-title">Pick History</div>
+                                <PickHistory userID={this.state.uid} teamID={this.state.teamID}/>
                             </div>
                         </div>
                     </div>
@@ -175,19 +161,6 @@ class DisplayTeam extends Component {
         }
 	}
 };
-
-function GetLastPick(props) {
-    return (
-        <div className="pick-container">
-            <div className="pick-logo-container">
-                <div className="pick-logo-title">
-                    Last Pick:
-                </div>
-               <img src={props.pickURL} height="80" width="80"/>
-            </div>
-        </div>
-    )
-}
 
 function GetCurrentPick(props) {
     return (
