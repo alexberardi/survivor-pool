@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
+import firebase from 'firebase';
+import axios from 'axios';
 
-import * as Requests from 'Requests';
 import TeamInfo from 'TeamInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';
 import Rules from 'Rules';
+
 import FaExclamation from 'react-icons/lib/fa/exclamation';
 import FaBullhorn from 'react-icons/lib/fa/bullhorn';
 import FaCheckCircle from 'react-icons/lib/fa/check-circle'; 
@@ -14,46 +16,50 @@ import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: true, messages: null, week: 0};
+		this.state = {userID: null, displayName: null, isAdmin: false, hasPaid: false, messages: null, week: 0};
 	}
-	componentDidMount() {
+	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
-		dispatch(actions.refreshToken());
+		var that = this;
 
-		const userInfo = Requests.get(`/users/${uid}`).then((user) => {
-			return [user.data.user_id, user.data.full_name, user.data.is_admin];
-		})
-		
-		const teamInfo = Requests.get(`/teams/${uid}`).then((teams) => {
-			if(teams.data !== null) {
-				return teams.data.every(team => team.has_paid);
-			}
-		})
+		firebase.auth().currentUser.getToken(true).then(function(token) {
+			axios.defaults.headers.common['Authorization'] = token;
+			const userInfo = axios.get(`/users/${uid}`).then((user) => {
+				return [user.data.user_id, user.data.full_name, user.data.is_admin];
+			})
+	
+			const teamInfo = axios.get(`/teams/${uid}`).then((teams) => {
+				if(teams.data !== null) {
+					return teams.data.every(team => team.has_paid);
+				}
+			})
+	
+			const messageInfo = axios.get('/messages/active').then((messages) => {
+				if(messages.data) {
+					return messages.data;
+				}
+			})
+	
+			const weekInfo = axios.get('/games/week/current').then((week) => {
+				let currentWeek = parseInt(week.data);
+				dispatch(actions.setWeek(currentWeek));
+				return parseInt(week.data);
+			})
 
-		const messageInfo = Requests.get('/messages/active/').then((messages) => {
-            if(messages.data) {
-                return messages.data;
-            }
-		})
-
-		const weekInfo = Requests.get('/games/week/current').then((week) => {
-			let currentWeek = parseInt(week.data);
-			dispatch(actions.setWeek(currentWeek));
-			return parseInt(week.data);
-		})
-
-		Promise.all([userInfo, teamInfo, messageInfo, weekInfo])
-		.then((values) => 
-		this.setState({
-			userID: values[0][0],
-			displayName: values[0][1],
-			isAdmin: values[0][2],
-			hasPaid: values[1],
-			messages: values[2],
-			week: values[3]
-		}))
-		.catch((error) => console.log(error));
+	
+			Promise.all([userInfo, teamInfo, messageInfo, weekInfo])
+			.then((values) => 
+			that.setState({
+				userID: values[0][0],
+				displayName: values[0][1],
+				isAdmin: values[0][2],
+				hasPaid: values[1],
+				messages: values[2],
+				week: values[3]
+			}))
+			.catch((error) => console.log(error));
+		});
 	}
 	render() {
 		let isAdmin = this.state.isAdmin;
@@ -82,7 +88,7 @@ class Dashboard extends Component {
 			<div className="dashboard">
 				<Nav admin={isAdmin} page={'Dashboard'}/>
 				<div className="row">
-					<div className="column small-centered small-11 medium-10 large-9">
+					<div className="column small-centered small-11 medium-11 large-11">
 						<div className="dashboard-title">Dashboard</div>
 						{paymentIndicator}
 						{renderMessages()}

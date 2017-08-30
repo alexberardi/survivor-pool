@@ -1,5 +1,4 @@
 import firebase, {googleProvider, facebookProvider} from 'app/firebase/';
-import * as Requests from 'Requests';
 import axios from 'axios';
 
 export var startLogin = (provider) => {
@@ -22,8 +21,8 @@ export var startLogin = (provider) => {
 
 
 			firebase.auth().currentUser.getToken(true).then(function(token) {
-				localStorage.setItem('token', token);
-				Requests.get(`/users/exists/${authUser.uid}`).then(function(user) {
+				axios.defaults.headers.common['Authorization'] = token;
+				axios.get(`/users/exists/${authUser.uid}`).then(function(user) {
 					if(user.data == null) {
 						let user = {
 							full_name: authUser.displayName, 
@@ -31,13 +30,13 @@ export var startLogin = (provider) => {
 							user_id: authUser.uid,
 							picture_url: authUser.pictureURL
 						}
-						Requests.post('/users', user).then(function(res) {
+						axios.post('/users', user).then(function(res) {
 							console.log('created user');
 						})
 						.catch(function(error) {
 							console.log(error);
 							if(error.status == '401') {
-			                    localStorage.setItem('token', null);
+								console.log('error creating user');
 			            	}
 						})
 					}
@@ -88,18 +87,6 @@ export var getUserAuthInfo = () => {
 			uid
 		}
 	} 
-}
-
-export var refreshToken = () => {
-	return (dispatch, getState) => {
-		firebase.auth().currentUser.getToken(true).then(function(token) {
-				localStorage.setItem('token', token);
-			})
-			.catch(function(error) {
-				firebase.auth().signOut().then(() => {
-				});
-			});
-	}
 }
 
 export var setWeek = (week) =>  {

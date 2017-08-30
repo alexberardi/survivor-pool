@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
 
 class Game extends Component {
     constructor(props) {

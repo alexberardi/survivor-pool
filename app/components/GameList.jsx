@@ -120,7 +120,8 @@ class GameList extends Component {
 					pick: currentPick,
 					disabled,
 					picked: (currentPick),
-					userID: uid
+					userID: uid,
+					week: week
 				});
 			});
 		}

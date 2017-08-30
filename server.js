@@ -34,8 +34,6 @@ app.put('/admin/advanceWeek/:week', function(req, res){
 	ctrlAdminTools.advanceWeek(req, res);
 });
 
-
-
 //Games Requests
 app.post('/games/populate', middleware.checkAdmin, function(req, res) {
 	ctrlGames.populateGames(req, res);

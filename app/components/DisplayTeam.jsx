@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import {Link, IndexLink} from 'react-router';
+import firebase from 'firebase';
+import axios from 'axios';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
+
+import PickHistory from 'PickHistory';
+
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
 import FaCheck from 'react-icons/lib/fa/check';
@@ -20,7 +24,6 @@ class DisplayTeam extends Component {
             isActive: props.isActive,
             hasPaid: props.hasPaid,
             pick: null,
-            lastPick: null,
             changeTeam: false, 
             deleteTeam: false, 
             uid: props.userID
@@ -48,50 +51,44 @@ class DisplayTeam extends Component {
         let teamID = this.state.teamID;
         const that = this;
 
-        Requests.delete(`/teams/${this.state.uid}/${teamID}`).then(function(response) {
-            that.setState({deleteTeam: false});
-            that.props.refreshPlayerTeams();
+        firebase.auth().currentUser.getToken(true).then(function(token) {
+            axios.defaults.headers.common['Authorization'] = token;
+            axios.delete(`/teams/${that.state.uid}/${teamID}`).then(function(response) {
+                that.setState({deleteTeam: false});
+                that.props.refreshPlayerTeams();
+            });
         });
     }
     cancelDelete(e) {
         e.preventDefault();
         this.setState({deleteTeam: false});
     }
-    componentDidMount() {
+    componentWillMount() {
         const that = this;
         if(this.state.isActive) {
-            Requests.get(`/picks/${this.state.uid}/${this.state.teamID}`).then(function(pick) {
-                if(pick.data[0]) {  
-                    that.setState({pick: pick.data[0]});
-                }
+            firebase.auth().currentUser.getToken(true).then(function(token) {
+                axios.defaults.headers.common['Authorization'] = token;
+                axios.get(`/picks/${that.state.uid}/${that.state.teamID}`).then(function(pick) {
+                    if(pick.data[0]) {  
+                        that.setState({pick: pick.data[0]});
+                    }
+                });
             });
         }
-
-        Requests.get(`/picks/last/${this.state.uid}/${this.state.teamID}`).then(function(last) {
-            if(last.data[0]) {  
-                that.setState({lastPick: last.data[0]});
-            }
-        });
     }
 	render() {
         var teamButton;
         var hasPick = this.state.pick === null ? false : true;
-        var lastPick;
         var pickDisplay;
         var deleteButton;
 
         const isActive = this.state.isActive;
-        
-        if(this.state.lastPick) {
-            let logoURL = `/images/${this.state.lastPick.team_name.toLowerCase()}.gif`;
-            lastPick = <GetLastPick pickURL={logoURL}/>
-        }
 
         if(isActive) {
             if(this.state.changeTeam) {
                 teamButton = <ChangeTeam teamID={this.state.teamID} userID={this.state.uid} teamSubmit={this.handleTeamSubmit} teamName={this.state.teamName} admin={false}/>
             } else {
-                teamButton = <a href="#" className="team-link" onClick={this.handleTeamChange}>{this.state.teamName}<FaEdit size={25} style={{marginLeft: '12px'}} /></a>
+                teamButton = <div>{this.state.teamName}<a href="#" className="change-team-link" onClick={this.handleTeamChange}><FaEdit size={25} style={{marginLeft: '12px'}} /></a></div>
             }
 
             if(this.state.deleteTeam) {
@@ -126,8 +123,9 @@ class DisplayTeam extends Component {
                             <div className="card-column-container"> 
                                 <div>{pickDisplay}</div>
                             </div>
-                            <div className="card-column-container"> 
-                                {lastPick}
+                            <div className="card-column-container">
+                                <div className="pick-history-title">Pick History</div>
+                                <PickHistory userID={this.state.uid} teamID={this.state.teamID}/>
                             </div>
                         </div>
                     </div>
@@ -153,7 +151,8 @@ class DisplayTeam extends Component {
                                 </div>
                             </div>
                             <div className="card-column-container"> 
-                                {lastPick}
+                                <div className="pick-history-title">Pick History</div>
+                                <PickHistory userID={this.state.uid} teamID={this.state.teamID}/>
                             </div>
                         </div>
                     </div>
@@ -162,19 +161,6 @@ class DisplayTeam extends Component {
         }
 	}
 };
-
-function GetLastPick(props) {
-    return (
-        <div className="pick-container">
-            <div className="pick-logo-container">
-                <div className="pick-logo-title">
-                    Last Pick:
-                </div>
-               <img src={props.pickURL} height="80" width="80"/>
-            </div>
-        </div>
-    )
-}
 
 function GetCurrentPick(props) {
     return (

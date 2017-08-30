@@ -4,7 +4,7 @@
 	display: flex;
 	border-radius: 4px;
     border: 2px solid $orange;
-    margin-right: 1rem;
+    margin-right: 2rem;
 }
 
 .dashboard-nav-button {
@@ -105,6 +105,17 @@
         background-color: $orange;
         color: $white;
     }
+}
+
+.picked-team {
+	opacity: 0.3;
+	border: 2px dotted $red;
+	border-radius: 50%;
+}
+
+.pick-history-title {
+	border-top: 1px solid $light-grey-border;
+	padding: 20px 0 20px 0;
 }
 
 .game-started {

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
-import * as Requests from 'Requests';
+import firebase from 'firebase';
+import axios from 'axios';
 
 import DisplayTeam from 'DisplayTeam';
 import AddTeam from 'AddTeam';
@@ -13,16 +14,19 @@ class TeamInfo extends Component {
 		this.refreshTeamDisplay = this.refreshTeamDisplay.bind(this);
 		this.refreshPlayerTeams = this.refreshPlayerTeams.bind(this);
 	}
-	componentDidMount() {
+	componentWillMount() {
 		var {dispatch} = this.props;
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 
 		const that = this;
 
-		Requests.get(`/teams/${uid}`).then(function(teams) {
-			if(teams.data !== null) {
-				that.setState({uid, displayName, teams: teams.data});
-			}
+		firebase.auth().currentUser.getToken(true).then(function(token) {
+			axios.defaults.headers.common['Authorization'] = token;
+			axios.get(`/teams/${uid}`).then((teams) => {
+				if(teams.data !== null) {
+					that.setState({uid, displayName, teams: teams.data});
+				}
+			});
 		});
 	}
 	refreshTeamDisplay(teamName) {
@@ -32,10 +36,13 @@ class TeamInfo extends Component {
 		let userID = this.state.uid;
 		const that = this;
 
-		Requests.get(`/teams/${userID}`).then(function(teams) {
-			if(teams.data !== null) {
-				that.setState({teams: teams.data});
-			}
+		firebase.auth().currentUser.getToken(true).then(function(token) {
+			axios.defaults.headers.common['Authorization'] = token;
+			axios.get(`/teams/${userID}`).then((teams) => {
+				if(teams.data !== null) {
+					that.setState({teams: teams.data});
+				}
+			});
 		});
 	}
 	render() {
@@ -47,11 +54,7 @@ class TeamInfo extends Component {
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
 				this.refreshPlayerTeams();
-				return (
-					<div className="card">
-						Loading Teams...
-					</div>
-				)
+				return 
 			} 
 
 			return teams.map((team) => {
@@ -67,7 +70,7 @@ class TeamInfo extends Component {
 			<div>
 				<div className="card-row">
 					{renderTeams()}
-					<div className="card">
+					<div className="add-team-card">
 						<AddTeam refreshPlayerTeams={this.refreshPlayerTeams}/>
 					</div>
 				</div>

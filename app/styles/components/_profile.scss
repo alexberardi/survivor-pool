@@ -20,14 +20,29 @@
 }
 
 .profile-container {
-  width: 200px;
   height: 60px;
+  margin-right: 1rem;
   display:flex;
 	align-content: column;
-	border-radius: 4px;
-	border: 2px solid $orange;
+}
+
+.profile-name-container {
+  font-family: $Brawler;
+  padding-left: 20px;
+  color: $off-white;
 }
 
 .profile-image {
   width: 55px;
+  border-radius: 50%;
+  border: 2px solid $orange;
+}
+
+.logout-link {
+  padding-left: 20px;
+  font-family: $Brawler;
+  color: $orange;
+  &:active, &:hover {
+    color: $off-white;
+  }
 }
