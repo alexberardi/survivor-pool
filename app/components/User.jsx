@@ -21,7 +21,7 @@ class User extends Component {
         let activeIndicator; 
         let image;
         let activeUser = teams.some((team) => {
-            return (team.is_active === 1);
+            return (team.is_active === 1 || team._is_active);
         }); 
 
         if(this.props.picture_url.length > 0) {
@@ -93,7 +93,7 @@ function RenderTeam(props) {
         streak = <span>No streak yet!</span>
     }
 
-    if(props.is_active === 1) {
+    if(props.is_active === 1 || props.is_active) {
         activeIndicator = <FaCheck size={25} style={{color: '#00ad61'}}/>
     } else {
         activeIndicator = <FaClose size={25} style={{color: '#AA3939'}}/>
