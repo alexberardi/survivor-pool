@@ -12,10 +12,10 @@ class StandingsInfo extends Component {
 				<div className="card">
 					<div className="card-container">
                         <div className="card-title">
-                            Standings Info
-                            <Link to={'standings'}>View Standings</Link>
+                            Standings <Link className="link" to={'standings'}>View</Link>
                         </div>
                         <div className="card-content">
+                            Statistics Coming Soon..
                         </div>
                     </div>
 				</div>

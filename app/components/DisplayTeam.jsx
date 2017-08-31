@@ -172,7 +172,7 @@ function GetCurrentPick(props) {
                 <img src={props.pickURL} height="80" width="80"/>
             </div>
             <div>
-                <Link to={`picks/${props.teamID}`} activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
+                <Link to={`picks/${props.teamID}`} className="link" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>Change</Link>
             </div>
         </div>
     )
