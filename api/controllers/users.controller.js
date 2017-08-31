@@ -57,21 +57,28 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var body = _.pick(req.body, 'full_name', 'email', 'user_id', 'picture_url');
-    db.user.create(body)
-        .then(function(user) {
-            db.playerTeams.create({user_id: user.user_id, team_name: user.full_name + '\'s team'})
-                .then (function(team) {
-                    db.teamStreaks.create({team_id: team.team_id, user_id: user.user_id, total: 0, current: true})
-                    .then(function(streak){
-                        res.json(user.toPublicJSON());
-                    });
-                });                
-        })
-        .catch(function(e) {
-            console.log(e);
-            res.status(400).json(e);
-        });
+    var dateCutOff = new Date('2017-09-11 22:20:00');
+    
+    if (new Date() < dateCutOff) {
+        var body = _.pick(req.body, 'full_name', 'email', 'user_id', 'picture_url');
+        db.user.create(body)
+            .then(function(user) {
+                db.playerTeams.create({user_id: user.user_id, team_name: user.full_name + '\'s team'})
+                    .then (function(team) {
+                        db.teamStreaks.create({team_id: team.team_id, user_id: user.user_id, total: 0, current: true})
+                        .then(function(streak){
+                            res.json(user.toPublicJSON());
+                        });
+                    });                
+            })
+            .catch(function(e) {
+                console.log(e);
+                res.status(400).json(e);
+            });
+    } else {
+        var e = {error: 'The cutoff time to sign up has passed.'};
+        res.status(401).json(e);
+    }       
 };
 
 var updateEmail = function(req, res) {

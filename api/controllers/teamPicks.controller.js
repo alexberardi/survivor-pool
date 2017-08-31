@@ -172,7 +172,8 @@ var getSchedule = function (req, res) {
         db.games.findAll({
             where: {
                 week: week
-            }
+            },
+                order: ['game_date', 'time', 'game_id']
         }).then(function(games) {
             games.forEach(function(game){
                 game = Object.assign(game.dataValues, {has_started: (game.quarter !== 'P')});
