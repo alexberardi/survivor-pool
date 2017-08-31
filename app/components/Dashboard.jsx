@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import axios from 'axios';
 
 import TeamInfo from 'TeamInfo';
+import StandingsInfo from 'StandingsInfo';
 import Nav from 'Nav';
 import Footer from 'Footer';
 import Rules from 'Rules';
@@ -94,6 +95,7 @@ class Dashboard extends Component {
 						{renderMessages()}
 						<div className="container">
 							<TeamInfo week={this.state.week}/>
+							<StandingsInfo />
 							<Rules />
 						</div>
 					</div>

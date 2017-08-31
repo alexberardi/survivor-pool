@@ -14,6 +14,16 @@
     flex-direction: row-reverse;
 }
 
+.toggle-teams-link {
+    font-family: $Brawler;
+    color: $purple;
+    font-size: 14px;
+    text-decoration: underline;
+    &:hover, &:active, &:focus {
+        color: $orange;
+    }
+}
+
 .confirmation {
     padding: 9px;
     flex: 1;

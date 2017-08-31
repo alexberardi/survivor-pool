@@ -80,6 +80,7 @@ var getStandings = function(req, res) {
                                         arr.push({
                                             user_id: user.user_id,
                                             full_name: user.full_name,
+                                            picture_url: user.picture_url,
                                             teams: teams
                                         })
                                 })
@@ -92,6 +93,7 @@ var getStandings = function(req, res) {
                                         arr.push({
                                             user_id: user.user_id,
                                             full_name: user.full_name,
+                                            picture_url: user.picture_url,
                                             teams: teams
                                         });
                                 })

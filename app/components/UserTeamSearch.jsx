@@ -9,12 +9,12 @@ class UserTeamSearch extends Component {
     }
 	render() {
 		return (
-            <div>
-                <input type="text" ref="searchText" placeholder="Search Teams" onChange={() => {
+            <div className="search-container">
+                <input type="text" ref="searchText" className="search" placeholder="Search Players" onChange={() => {
 						var searchText = this.refs.searchText.value;
 						this.props.handleSearch(searchText);
 				}}/>    
-             </div>
+            </div>
         )
     }
 };

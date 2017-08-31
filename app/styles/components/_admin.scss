@@ -129,3 +129,38 @@
 		font-family: $Brawler;
 	}
 }
+
+.userteam-card-alternate {
+	flex: 1;
+	flex-direction: column;
+	margin: 10px;
+	background-color: $light-grey;
+	border: 1px solid $pink;  
+	border-radius: 12px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.user-card {
+	flex: 1;
+	flex-direction: column;
+	margin: 10px;
+	background-color: #ffe;
+	border: 3px solid $orange;  
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.userteam-streak {
+	margin: 3px 0 6px 0;
+	font-family: $Brawler;
+	font-size: 14px;
+	color: $purple;
+}
+
+.search {
+	color: $purple;
+
+   	&-container {
+		margin: 12px 0 6px 0;
+   	} 
+}

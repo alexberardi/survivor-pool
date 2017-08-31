@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Router, IndexRoute, hashHistory, browserHistory} from 'react-router';
 import Dashboard from 'Dashboard';
+import Standings from 'Standings';
 import Login from 'Login';
 import GameList from 'GameList';
 import Admin from 'Admin';
@@ -26,6 +27,7 @@ export default (
 		<Route path="/">
 			<Route path="dashboard" component={Dashboard} onEnter={requireLogin}/>
 			<Route path="picks/:teamID" component={GameList} onEnter={requireLogin}/>
+			<Route path="standings" component={Standings} onEnter={requireLogin} />
 			<Route path="admin" component={Admin} onEnter={requireLogin}/>
 			<IndexRoute component={Login} onEnter={userLoggedIn}/>
 		</Route>
