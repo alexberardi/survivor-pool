@@ -4,17 +4,32 @@ var uuid = require('uuid');
 
 var deleteTeam = function(req, res) {
     var team_id = req.params.team_id;
-    db.playerTeams.findOne({
-            where:  {team_id : team_id} 
+    var dateCutOff = new Date('2017-09-11 22:20:00');    
+    if (new Date() < dateCutOff) {
+        db.playerTeams.findOne({
+                where:  {team_id : team_id} 
+            })
+        .then(function(team){
+            team.destroy();
+            db.teamStreaks.findOne({
+                where: {
+                    team_id : team_id
+                }
+            })
+            .then(function(streak){
+                streak.destroy();
+                res.status(200).send();
+            })        
         })
-    .then(function(team){
-        team.destroy();
-        res.status(200).send();
-    })
-    .catch(function(error) {
-        console.log(error);
-        res.status(500).send();
-    });
+        .catch(function(error) {
+            console.log(error);
+            res.status(500).send();
+        });
+    } else {
+        res.status(401).json({
+            error: 'Sorry, it is passed the cut off date to delete a team.'
+        });
+    }
 };
 
 var teamsGetAll = function(req, res) {
