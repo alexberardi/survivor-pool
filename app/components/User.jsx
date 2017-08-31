@@ -21,7 +21,7 @@ class User extends Component {
         let activeIndicator; 
         let image;
         let activeUser = teams.some((team) => {
-            return (team.is_active === 1 || team._is_active);
+            return (team.is_active === 1 || team.is_active);
         }); 
 
         if(this.props.picture_url.length > 0) {
