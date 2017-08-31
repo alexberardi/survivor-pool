@@ -47,15 +47,20 @@ function checkCurrentUserGames(user_id) {
                 var query = 'SELECT *, g.quarter as current_quarter FROM teampicks tp JOIN games g on tp.game_id = g.game_id where user_id = :user_id AND g.week = :week';
                 db.sequelize.query(query, {replacements: {user_id: user_id, week: week}, type: db.sequelize.QueryTypes.SELECT})
                     .then(function(picksAndGames){
-                        picksAndGames.forEach(function(pickedGame){
-                            if(pickedGame.current_quarter === 'P') {
-                                tempObj.showCurrentPick = false;
-                            }
-                        });
-                        
+                        if(picksAndGames){
+                            picksAndGames.forEach(function(pickedGame){
+                                if(pickedGame.current_quarter === 'P') {
+                                    tempObj.showCurrentPick = false;
+                                }
+                            });
+                        } else {
+                            tempObj.showCurrentPick = false;                            
+                        }
                         resolve(tempObj);
-
-
+                    })
+                    .catch(function(noGamesPicked){
+                        tempObj.showCurrentPick = false;
+                        resolve(tempObj);
                     })
             });            
     });        
@@ -68,8 +73,10 @@ var getStandings = function(req, res) {
             var arr = [];
             var promises = [];
             db.user.findAll({})
-            .then(function(users){        
-                users.forEach(function(user){            
+            .then(function(users){   
+                console.log(users);     
+                users.forEach(function(user){  
+
                     var query;
                     if(showCurrentPicks.showCurrentPick){
                         query = 'SELECT pt.team_name as player_team_name, pt.is_active as is_active, ts.total as streak_total, tp.team_name as currentpick FROM playerteams pt LEFT JOIN teamstreaks ts on ts.team_id = pt.team_id LEFT JOIN teamPicks tp on tp.team_id = pt.team_id  where pt.user_id = :user_id AND (tp.week = :week OR tp.week is null)' ;
