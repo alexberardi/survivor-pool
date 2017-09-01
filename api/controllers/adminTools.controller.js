@@ -24,8 +24,19 @@ var advanceWeek = function(req, res) {
 };
 
 function checkGamesCompleted(week) {
-	//TO DO SELECT COUNT(*) FROM GAMES WHERE WEEK = week AND QUARTER <> 'F'
-	//IF 0 RESOLVE TRUE
+	db.games.findAndCountAll({
+		where: {
+			week: week,
+			quarter :{$ne: 'F'}
+		}
+	})
+	.then(function(results){
+		if (results.count === 0) {
+			resolve(true);
+		} else {
+			resolve(false);
+		}
+	})
 }
 
 function checkForTeamsWithNoPick(week) {
@@ -33,14 +44,35 @@ function checkForTeamsWithNoPick(week) {
 		where: {current: true}
 	})
 	.then(function(activeTeams){
-		db.teamPicks.findAll({
-			where: {
-				week: week
-			}
-		})
-		.then(function(teamsWithPicks){
-
-		})
+		var noPicks = [];
+		var promises = [];
+		activeTeams.forEach(function(){
+			promises.push(
+				db.teamPicks.findAndCountAll({
+					where: {
+						week: week,
+						team_id: activeTeams.team_id
+					}
+				})
+				.then(function(results){
+					if (results.count < 1) {
+						noPicks.push(activeTeams.team_id)
+					}
+				})
+			);
+		});
+		Promise.all(promises).then(function(stuff){
+			db.playerTeams.update(
+				{is_active: false}, 
+				{
+					where: {
+						team_id: noPicks
+					}
+				})
+			.then(function(noPicksUpdated){
+				resolve(true);
+			})
+        });
 	})
 }
 
