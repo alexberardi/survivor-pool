@@ -219,3 +219,11 @@
 	font-size: 14px;
 	margin-left: 12px;
 }
+
+.textarea {
+	border: 1px solid $purple;
+	color: $purple;
+	&:focus, &:active {
+		outline: none;
+	}
+}
