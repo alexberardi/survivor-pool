@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import FeatureRequest from 'FeatureRequest';
+
 class Rules extends Component {
     constructor(props) {
 		super(props);
@@ -27,6 +29,7 @@ class Rules extends Component {
                                 <li>You cannot edit your pick if your current selection's NFL game has started.</li> 
                             </ul>
                         </div>
+                        <FeatureRequest/>
                     </div>
                 </div>
 		    </div>
