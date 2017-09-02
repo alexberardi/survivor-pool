@@ -2,6 +2,7 @@ var _ = require('underscore');
 var db = require('../../db');
 
 var advanceWeek = function(req, res) {
+
 	var week = parseInt(req.params.week, 10);
 	checkGamesCompleted(week).then(function(continueProcessing) {
 		if (continueProcessing){
@@ -24,55 +25,60 @@ var advanceWeek = function(req, res) {
 };
 
 function checkGamesCompleted(week) {
-	db.games.findAndCountAll({
-		where: {
-			week: week,
-			quarter :{$ne: 'F'}
-		}
+	return new Promise(function(resolve, reject){
+		db.games.findAndCountAll({
+			where: {
+				week: week,
+				quarter :{$ne: 'F'}
+			}
+		})
+		.then(function(results){
+			if (results.count === 0) {
+				resolve(true);
+			} else {
+				resolve(false);
+			}
+		})
 	})
-	.then(function(results){
-		if (results.count === 0) {
-			resolve(true);
-		} else {
-			resolve(false);
-		}
-	})
+		
 }
 
 function checkForTeamsWithNoPick(week) {
-	db.teamStreaks.findAll({
-		where: {current: true}
-	})
-	.then(function(activeTeams){
-		var noPicks = [];
-		var promises = [];
-		activeTeams.forEach(function(){
-			promises.push(
-				db.teamPicks.findAndCountAll({
-					where: {
-						week: week,
-						team_id: activeTeams.team_id
-					}
-				})
-				.then(function(results){
-					if (results.count < 1) {
-						noPicks.push(activeTeams.team_id)
-					}
-				})
-			);
+	return new Promise(function(resolve, reject){
+		db.teamStreaks.findAll({
+			where: {current: true}
+		})
+		.then(function(activeTeams){
+			var noPicks = [];
+			var promises = [];
+			activeTeams.forEach(function(activeTeam){
+				promises.push(
+					db.teamPicks.findAndCountAll({
+						where: {
+							week: week,
+							team_id: activeTeam.team_id
+						}
+					})
+					.then(function(results){
+						if (results.count < 1) {
+							noPicks.push(activeTeam.team_id);
+						}
+					})
+				);
+			});
+			Promise.all(promises).then(function(stuff){
+				db.playerTeams.update(
+					{is_active: false}, 
+					{
+						where: {
+							team_id: {$in:noPicks}
+						}
+					})
+				.then(function(noPicksUpdated){
+					resolve(true);
+				});
+	        });
 		});
-		Promise.all(promises).then(function(stuff){
-			db.playerTeams.update(
-				{is_active: false}, 
-				{
-					where: {
-						team_id: noPicks
-					}
-				})
-			.then(function(noPicksUpdated){
-				resolve(true);
-			})
-        });
 	})
 }
 
@@ -102,8 +108,8 @@ function advanceWinners(week, winners) {
 				})
 			.then(function(winningTeamStreaks){
 				resolve(winningTeamStreaks);
-				})
-			})		
+			})
+		})		
 	});
 }
 
