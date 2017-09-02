@@ -13,31 +13,41 @@ import MessageList from 'MessageList';
 class Admin extends Component {
 	constructor(props) {
         super(props);
-        this.state = {isAdmin: false, userTeams: null, filteredTeams: null, userID: null};
+        this.state = {isAdmin: false, userTeams: null, filteredTeams: null, userID: null, week: 0};
         this.populateGames = this.populateGames.bind(this);
+        this.advanceWeek = this.advanceWeek.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
 	componentDidMount() {
 		var {dispatch} = this.props;
-		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
+        var {uid, displayName} = dispatch(actions.getUserAuthInfo());
+        const week = dispatch(actions.getWeek());
 
 		const that = this;
 		
-		Requests.get(`/users/${uid}`).then(function(user) {
+		const userInfo = Requests.get(`/users/${uid}`).then((user) => {
             if(user.data.is_admin) {
-                that.setState({isAdmin: true});
+                return true;
             } else {
                 hashHistory.push('/dashboard');
             }
         });
         
-        Requests.get('/teams/admin/users').then(function(teams) {
+        const teamInfo = Requests.get('/teams/admin/users').then((teams) => {
             if(teams.data[0]) {
-                that.setState({userTeams:teams.data[0]});
+                return teams.data[0];
             }
         });
 
-        this.setState({userID: uid});
+        Promise.all([userInfo, teamInfo])
+        .then((values) => 
+        that.setState({
+            userID: uid,
+            week: week,
+            isAdmin: values[0],
+            userTeams: values[1],
+        }))
+        .catch((error) => console.log(error))
     }
     handleSearch(searchText) {
         let userTeams = this.state.userTeams;
@@ -57,12 +67,21 @@ class Admin extends Component {
     }
     populateGames() {
         Requests.post('/games/populate', {})
-            .then(function(res) {
+            .then((res) => {
                 console.log('Games Populated Successfully.');
             })
-            .catch(function(error) {
+            .catch((error) => {
                 console.log('Error populating games', error);
             })
+    }
+    advanceWeek() {
+        Requests.put(`/admin/advanceWeek/${this.state.week}`, {})
+        .then((response) => {
+            console.log('Week advanced successfully', response);
+        })
+        .catch((error) => {
+            console.log('Error advancing week', error);
+        })
     }
 	render() {
         let userTeams;
@@ -109,6 +128,9 @@ class Admin extends Component {
                                             <div className="admin-button-container">
 			                                    <button type="button" className="dashboard-nav-button" onClick={this.populateGames}>Populate Games</button>
 		                                    </div>
+                                            <div className="admin-button-container">
+                                                <button type="button" className="dashboard-nav-button" onClick={this.advanceWeek}>Advance Week</button>
+                                            </div>
                                          </div>
                                     </div>
                                 </div>
