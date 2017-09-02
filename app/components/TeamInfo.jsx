@@ -50,6 +50,8 @@ class TeamInfo extends Component {
 		let teams = this.state.teams;
 		let displayName = this.state.displayName;
 		let week = this.props.week;
+		let addTeam;
+		const dateCutOff = new Date('2017-09-11 22:20:00');
 
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {
@@ -66,13 +68,17 @@ class TeamInfo extends Component {
 			});
 		}
 
+		if(new Date < dateCutOff) {
+			addTeam = <div className="add-team-card">
+						<AddTeam refreshPlayerTeams={this.refreshPlayerTeams}/>
+					</div>
+		}
+
 		return (
 			<div>
 				<div className="card-row">
 					{renderTeams()}
-					<div className="add-team-card">
-						<AddTeam refreshPlayerTeams={this.refreshPlayerTeams}/>
-					</div>
+					{addTeam}
 				</div>
 			</div> 
 		)

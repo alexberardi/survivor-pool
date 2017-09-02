@@ -23,7 +23,9 @@ export var startLogin = (provider) => {
 			firebase.auth().currentUser.getToken(true).then(function(token) {
 				axios.defaults.headers.common['Authorization'] = token;
 				axios.get(`/users/exists/${authUser.uid}`).then(function(user) {
-					if(user.data == null) {
+					const dateCutOff = new Date('2017-09-11 22:20:00');
+
+					if(user.data == null && new Date() < dateCutOff) {
 						let user = {
 							full_name: authUser.displayName, 
 							email: authUser.email,
@@ -39,6 +41,9 @@ export var startLogin = (provider) => {
 								console.log('error creating user');
 			            	}
 						})
+					} else if(user.data == null && new Date() > dateCutOff) {
+						firebase.auth().signOut().then(() => {
+						});
 					}
 				});
 			})
