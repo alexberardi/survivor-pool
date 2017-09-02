@@ -16,6 +16,7 @@ var db = require('./db.js');
 //Entities
 var ctrlAdminMessages = require('./api/controllers/adminMessages.controller');
 var ctrlAdminTools = require('./api/controllers/adminTools.controller.js');
+var ctrlFeatureRequests = require('./api/controllers/featureRequests.controller.js');
 var ctrlGames = require('./api/controllers/games.controller');
 var ctrlNFLTeams = require('./api/controllers/nflTeams.controller');
 var ctrlToken = require('./api/controllers/tokens.js');
@@ -30,8 +31,12 @@ var middleware = require('./middleware/common.middleware.js');
 app.use(bodyParser.json());
 
 //Admin Tools Requests
-app.put('/admin/advanceWeek/:week', function(req, res){
+app.put('/admin/advanceWeek/:week', middleware.checkAdmin, function(req, res){
 	ctrlAdminTools.advanceWeek(req, res);
+});
+
+app.post('/features', middleware.checkAuthentication, function(req, res){
+	ctrlFeatureRequests.addFeatureRequest(req, res);
 });
 
 //Games Requests
