@@ -84,6 +84,7 @@ class User extends Component {
 
 function RenderTeam(props) {
     let activeIndicator = null;
+    let currentPick = props.currentpick || '';
     let streak = null;
 
     if(props.streak_total > 0) {
@@ -98,6 +99,11 @@ function RenderTeam(props) {
         activeIndicator = <FaClose size={25} style={{color: '#AA3939'}}/>
     }
 
+    if(currentPick.length > 0) {		
+        let imageURL = `/images/${currentPick.toLowerCase()}.gif`;		
+        currentPick = <div>Current Pick: <img src={imageURL} height="40" width="40" style={{margin: '6px 6px 6px 6px'}} /></div>		
+    }
+
     return (
         <div className="userteam-card-alternate">
             <div className="userteam-card-title">
@@ -110,6 +116,7 @@ function RenderTeam(props) {
             <div className="userteam-card-content"> 
                 <div className="userteam-streak">
                     {streak}
+                    {currentPick}
                 </div>
             </div>
         </div>
