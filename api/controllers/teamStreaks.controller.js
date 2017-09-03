@@ -47,7 +47,7 @@ function checkCurrentUserGames(user_id) {
                 var query = 'SELECT *, g.quarter as current_quarter FROM teampicks tp JOIN games g on tp.game_id = g.game_id where user_id = :user_id AND g.week = :week';
                 db.sequelize.query(query, {replacements: {user_id: user_id, week: week}, type: db.sequelize.QueryTypes.SELECT})
                     .then(function(picksAndGames){
-                        if(picksAndGames){
+                        if(picksAndGames.length === 0){
                             picksAndGames.forEach(function(pickedGame){
                                 if(pickedGame.current_quarter === 'P') {
                                     tempObj.showCurrentPick = false;
