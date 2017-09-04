@@ -40,7 +40,9 @@ var getStandings = function(req, res) {
     getMaxWeek().then(function(week){
         var arr = [];
         var promises = [];
-        db.user.findAll({})
+        db.user.findAll({
+            order: [['full_name', 'ASC']]
+        })
         .then(function(users){   
             users.forEach(function(user){  
                 var query;
