@@ -99,9 +99,9 @@ function RenderTeam(props) {
         activeIndicator = <FaClose size={25} style={{color: '#AA3939'}}/>
     }
 
-    if(currentPick.length > 0) {
-        let imageURL = `/images/${currentPick.toLowerCase()}.gif`;
-        currentPick = <div>Current Pick: <img src={imageURL} height="40" width="40" style={{margin: '6px 6px 6px 6px'}} /></div>
+    if(currentPick.length > 0) {		
+        let imageURL = `/images/${currentPick.toLowerCase()}.gif`;		
+        currentPick = <div>Current Pick: <img src={imageURL} height="40" width="40" style={{margin: '6px 6px 6px 6px'}} /></div>		
     }
 
     return (
