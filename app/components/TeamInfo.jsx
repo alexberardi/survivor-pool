@@ -51,7 +51,7 @@ class TeamInfo extends Component {
 		let displayName = this.state.displayName;
 		let week = this.props.week;
 		let addTeam;
-		const dateCutOff = new Date('2017-09-11 22:20:00');
+		const dateCutOff = new Date('2017-09-12T02:20:00.000Z');
 
 		var renderTeams = () => {
 			if(teams === null || teams.length == 0) {

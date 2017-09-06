@@ -23,8 +23,8 @@ export var startLogin = (provider) => {
 			firebase.auth().currentUser.getToken(true).then(function(token) {
 				axios.defaults.headers.common['Authorization'] = token;
 				axios.get(`/users/exists/${authUser.uid}`).then(function(user) {
-					const dateCutOff = new Date('2017-09-11 22:20:00');
-
+					const dateCutOff = new Date('2017-09-12T02:20:00.000Z');
+					//YYYY-MM-DDTHH:mm:ss.sssZ 
 					if(user.data == null && new Date() < dateCutOff) {
 						let user = {
 							full_name: authUser.displayName, 

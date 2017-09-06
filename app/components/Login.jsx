@@ -13,7 +13,7 @@ class Login extends Component {
 		dispatch(actions.startLogin(provider));
 	}
 	render() { 
-        const dateCutOff = new Date('2017-09-11 22:20:00');
+        const dateCutOff = new Date('2017-09-12T02:20:00.000Z');
         let registrationMessage;
 
         if(new Date > dateCutOff) { 
