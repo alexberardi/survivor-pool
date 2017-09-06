@@ -61,6 +61,7 @@ var getStandings = function(req, res) {
                     );                    
             });
             Promise.all(promises).then(function(stuff){
+                arr = _.sortBy(arr, function(u) { return u.full_name; })
                 res.json(arr);
             });                   
         });
