@@ -148,6 +148,9 @@
 
 .logo-container {
 	flex: 2;
+	img {
+		cursor: pointer;
+	}
 }
 
 .vs-span {
