@@ -37,6 +37,7 @@ class Standings extends Component {
                  }) ||
                 fullName.indexOf(searchText) > -1;
         });
+
         this.setState({filteredUsers});
     }
 	render() {
@@ -61,7 +62,7 @@ class Standings extends Component {
             }
 
             return users.map((user, index) => {
-                return <User key={index} picture_url={user.picture_url} full_name={user.full_name} {...user}/>
+                return <User key={index} picture_url={user.picture_url} full_name={user.full_name} teams={user.teams} {...user}/>
             }); 
         }
 

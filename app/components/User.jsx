@@ -8,7 +8,7 @@ import FaClose from 'react-icons/lib/fa/close';
 class User extends Component {
     constructor(props) {
         super(props);
-        this.state = {...props, showTeams: false};
+        this.state = {showTeams: false};
         this.toggleShowTeams = this.toggleShowTeams.bind(this);
     }
     toggleShowTeams(e) {
@@ -17,7 +17,8 @@ class User extends Component {
     }
 	render() {
         const that = this;
-        const teams = this.state.teams;
+        const teams = this.props.teams;
+
         let activeIndicator; 
         let image;
         let activeUser = teams.some((team) => {
