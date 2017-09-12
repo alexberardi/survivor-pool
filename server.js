@@ -66,7 +66,7 @@ app.post('/picks/:team_id', middleware.checkAuthentication, middleware.checkTeam
 	ctrlTeamPicks.makePick(req, res);
 });
 
-app.get('/picks/:user_id/:team_id', middleware.checkAuthentication, function(req, res) {
+app.get('/picks/:user_id/:team_id', middleware.checkAuthentication,  middleware.checkTeamID, function(req, res) {
 	ctrlTeamPicks.getCurrentPicks(req, res);
 });
 

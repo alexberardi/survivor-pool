@@ -27,18 +27,35 @@ if (process.env.NODE_ENV == 'production') {
 var checkAuthentication = function(req, res, next) {
 			admin.auth().verifyIdToken(req.get('Authorization') || '')
     		.then(function(decodedToken) {
-          req.body.user_id = decodedToken.user_id;
-      		next();
+    		  if(req.params.user_id) {
+    		    if (req.params.user_id === decodedToken.user_id){
+              req.body.user_id = decodedToken.user_id;
+              next();
+            } else {
+              console.log('Invalid User_ID in params.');
+              res.status(401).send();
+            }
+          } else {
+            req.body.user_id = decodedToken.user_id;
+            next();
+          }
     		})
     		.catch(function(error) {
-          console.log('Invalid Token.');
+          console.log('Invalid Token. 2 ');
           console.log(error);
           res.status(401).send();
     		});
 }
 
 var checkTeamID = function(req, res, next) {
-    let user_id = req.body.user_id ? req.body.user_id : req.params.user_id;
+    let user_id;
+
+    if (req.params.user_id) {
+      user_id = req.params.user_id;
+    } else {
+      user_id = req.body.user_id || '';
+    }
+
     db.playerTeams.findOne({
       where: {
         team_id: req.params.team_id,
