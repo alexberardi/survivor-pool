@@ -150,7 +150,17 @@ function deactivateLosers(week, losers) {
 				}
 			)
 			.then(function(losers){
-				resolve(losers);
+        db.teamStreaks.update(
+          { current: false},
+          {
+            where: {
+              team_id: {$in:losersArray}
+            }
+          }
+        )
+					.then(function(losers){
+            resolve(losers);
+					});
 			});
 		});		
 	});
