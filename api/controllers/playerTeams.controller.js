@@ -10,16 +10,16 @@ var deleteTeam = function(req, res) {
                 where:  {team_id : team_id} 
             })
         .then(function(team){
-            team.destroy();
-            db.teamStreaks.findOne({
+           team.destroy();
+           db.teamStreaks.findOne({
                 where: {
                     team_id : team_id
                 }
             })
             .then(function(streak){
-                streak.destroy();
-                res.status(200).send();
-            })        
+             streak.destroy();
+             res.status(200).send();
+            })
         })
         .catch(function(error) {
             console.log(error);
