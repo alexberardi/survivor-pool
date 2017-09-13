@@ -46,7 +46,7 @@ var getStandings = function(req, res) {
         .then(function(users){   
             users.forEach(function(user){  
                 var query;
-                query = 'SELECT pt.team_name as player_team_name, pt.is_active as is_active, ts.total as streak_total, CASE WHEN g.quarter = \'P\' THEN NULL ELSE tp.team_name END as currentpick FROM playerteams pt LEFT JOIN teamstreaks ts on ts.team_id = pt.team_id LEFT JOIN teamPicks tp on tp.team_id = pt.team_id LEFT JOIN games g on g.game_id = tp.game_id where pt.user_id = :user_id AND (tp.week = :week OR tp.week is null)' ;
+                query = 'SELECT pt.team_name as player_team_name, pt.is_active as is_active, ts.total as streak_total, CASE WHEN g.quarter = \'P\' THEN NULL ELSE tp.team_name END as currentpick FROM playerteams pt LEFT JOIN teamstreaks ts on ts.team_id = pt.team_id LEFT JOIN teamPicks tp on tp.team_id = pt.team_id and tp.week = :week LEFT JOIN games g on g.game_id = tp.game_id where pt.user_id = :user_id' ;
                 promises.push(                
                     db.sequelize.query(query, {replacements: {user_id: user.user_id, week: week}, type: db.sequelize.QueryTypes.SELECT})
                         .then(function(teams){
