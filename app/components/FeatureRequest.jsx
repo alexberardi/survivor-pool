@@ -6,7 +6,7 @@ import * as Requests from 'Requests';
 class FeatureRequest extends Component {
 	constructor(props) {
         super(props);
-        this.state = {value: null};
+        this.state = {value: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -14,10 +14,12 @@ class FeatureRequest extends Component {
         e.preventDefault();
         const that = this;
 
-        Requests.post('/features', {message: this.state.value})
-        .then((respose) => {
-            that.setState({value: 'Submitted!'});
-        });
+        if(this.state.value !== '') {
+            Requests.post('/features', {message: this.state.value})
+            .then((respose) => {
+                that.setState({value: 'Submitted!'});
+            });
+        }
     }
     handleChange(e) {
         this.setState({value: e.target.value});
