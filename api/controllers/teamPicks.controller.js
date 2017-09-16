@@ -100,7 +100,7 @@ var getAdminPicks = function(req, res) {
 
 
 var getPopularPicks = function(req, res) {
-    var week = parseInt(req.query.week);
+    var week = parseInt(req.params.week);
 
     db.sequelize.query("SELECT team_name, count(team_name) as count FROM teampicks WHERE week='" + week + "' GROUP BY team_name")
         .then(function(picks){

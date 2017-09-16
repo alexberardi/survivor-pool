@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "description": "SurvivorPool",
   "main": "index.js",
+  "babel" : {
+    "plugins": ["recharts"],
+    "presets": ["es2015"]
+  },
   "scripts": {
     "test": "SET NODE_ENV=test&& karma start",
     "start": "node server.js",
@@ -44,6 +48,7 @@
     "react-icons": "^2.2.5",
     "react-redux": "^5.0.2",
     "react-router": "^2.0.0",
+    "recharts": "^1.0.0-apha.5",
     "redux": "^3.6.0",
     "redux-mock-store": "^1.2.1",
     "redux-thunk": "^2.2.0",
@@ -58,6 +63,7 @@
     "webpack": "^1.12.13"
   },
   "devDependencies": {
+    "babel-plugin-recharts": "^1.1.0",
     "image-webpack-loader": "^3.3.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",

@@ -1,0 +1,13 @@
+.charts-container {
+    border-top: 1px solid $light-grey-border;
+	margin: 12px 18px 12px 18px;
+    display: flex;
+}
+
+.charts-title {
+    margin: 12px 18px 12px 18px;
+    font-family: $Brawler;
+    color: $purple;
+    font-size: 20px;
+    font-weight: bold;
+}
