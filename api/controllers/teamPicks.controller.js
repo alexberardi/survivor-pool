@@ -111,6 +111,16 @@ var getPopularPicks = function(req, res) {
         });
 };
 
+var getAllPopularPicks = function(req, res) {
+    db.sequelize.query("SELECT team_name, COUNT(*) AS count FROM teampicks GROUP BY team_name ORDER BY 2 DESC LIMIT 5")
+        .then(function(picks) {
+            res.json(picks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        })
+};
+
 var getCurrentPicks = function(req, res) {
     db.games.max('week')
         .then(function(max){
@@ -209,6 +219,7 @@ module.exports = {
     getPicks: getPicks,
     getCurrentPicks: getCurrentPicks,
     getPopularPicks: getPopularPicks,
+    getAllPopularPicks: getAllPopularPicks,
     getAdminPicks: getAdminPicks,
     getLastWeekPick: getLastWeekPick,
     getSchedule: getSchedule
