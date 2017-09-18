@@ -85,6 +85,7 @@ export var logout = () => {
 export var getUserAuthInfo = () => {
 	return (dispatch, getState) => {
 		var {displayName, email, photoURL, uid } = getState().auth.user;
+		console.log('getAuthInfo', displayName, email, photoURL, uid);
 		return {
 			displayName,
 			email,
