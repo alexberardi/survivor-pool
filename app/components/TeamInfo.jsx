@@ -22,7 +22,6 @@ class TeamInfo extends Component {
 
 		firebase.auth().currentUser.getToken(true).then(function(token) {
 			axios.defaults.headers.common['Authorization'] = token;
-			console.log(uid, 'teamInfo uid componentWillMount');
 			axios.get(`/teams/${uid}`).then((teams) => {
 				if(teams.data !== null) {
 					that.setState({uid, displayName, teams: teams.data});
@@ -40,7 +39,6 @@ class TeamInfo extends Component {
 
 		firebase.auth().currentUser.getToken(true).then(function(token) {
 			axios.defaults.headers.common['Authorization'] = token;
-			console.log(uid, 'teamInfo userID refreshPlayerTeams');
 			axios.get(`/teams/${uid}`).then((teams) => {
 				if(teams.data !== null) {
 					that.setState({teams: teams.data});

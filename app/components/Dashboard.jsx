@@ -26,7 +26,6 @@ class Dashboard extends Component {
 
 		firebase.auth().currentUser.getToken(true).then(function(token) {
 			axios.defaults.headers.common['Authorization'] = token;
-			console.log(uid, 'Dashboard uid componentWillMount');
 			const userInfo = axios.get(`/users/${uid}`).then((user) => {
 				return [user.data.user_id, user.data.full_name, user.data.is_admin];
 			})
