@@ -34,6 +34,7 @@ class TeamInfo extends Component {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
 	refreshPlayerTeams() {
+		var {dispatch} = this.props;
 		var {uid} = dispatch(actions.getUserAuthInfo());
 		const that = this;
 
