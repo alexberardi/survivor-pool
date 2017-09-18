@@ -63,9 +63,7 @@ class PieChartBuilder extends Component {
     }
 	render() {
         if(this.props.data !== null) {
-            console.log(this.props.data, 'data');
             const data = this.PieChartFormatter(this.props.data, this.props.type);
-            console.log(data, 'formattedData');
             return  (
                 <PieChart width={200} height={250}>
                     <Pie
