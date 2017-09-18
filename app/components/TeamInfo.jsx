@@ -41,7 +41,7 @@ class TeamInfo extends Component {
 			axios.defaults.headers.common['Authorization'] = token;
 			axios.get(`/teams/${uid}`).then((teams) => {
 				if(teams.data !== null) {
-					that.setState({teams: teams.data});
+					that.setState({teams: teams.data, uid});
 				}
 			});
 		});
