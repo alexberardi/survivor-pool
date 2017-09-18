@@ -78,10 +78,21 @@ var getCountActive = function(req, res) {
         });
 };
 
+var getCountAll = function(req, res) {
+    db.teamStreaks.count()
+    .then(function(streaks) {
+        res.json(streaks);
+    })
+    .catch(function(e) {
+        return res.status(500).json(e);
+    })
+};
+
 
 module.exports = {
     updateStreak: updateStreak,
     getStandings: getStandings,
-    getCountActive: getCountActive
+    getCountActive: getCountActive,
+    getCountAll: getCountAll
 };
 

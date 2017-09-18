@@ -100,7 +100,7 @@ var getAdminPicks = function(req, res) {
 
 
 var getPopularPicks = function(req, res) {
-    var week = parseInt(req.query.week);
+    var week = parseInt(req.params.week);
 
     db.sequelize.query("SELECT team_name, count(team_name) as count FROM teampicks WHERE week='" + week + "' GROUP BY team_name")
         .then(function(picks){
@@ -109,6 +109,16 @@ var getPopularPicks = function(req, res) {
         .catch(function(e){
             return res.status(500).json(e);
         });
+};
+
+var getAllPopularPicks = function(req, res) {
+    db.sequelize.query("SELECT team_name, COUNT(*) AS count FROM teampicks GROUP BY team_name ORDER BY 2 DESC LIMIT 5")
+        .then(function(picks) {
+            res.json(picks);
+        })
+        .catch(function(e){
+            return res.status(500).json(e);
+        })
 };
 
 var getCurrentPicks = function(req, res) {
@@ -209,6 +219,7 @@ module.exports = {
     getPicks: getPicks,
     getCurrentPicks: getCurrentPicks,
     getPopularPicks: getPopularPicks,
+    getAllPopularPicks: getAllPopularPicks,
     getAdminPicks: getAdminPicks,
     getLastWeekPick: getLastWeekPick,
     getSchedule: getSchedule

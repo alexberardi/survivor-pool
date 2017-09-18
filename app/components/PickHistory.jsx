@@ -88,7 +88,7 @@ class PickHistory extends Component {
         }      
 
 		return (
-            <div>
+            <div className="history-logos">
                 {renderTeamLogos()}
             </div>
         )

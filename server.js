@@ -78,6 +78,14 @@ app.get('/picks/all/:user_id/:team_id', middleware.checkAuthentication, function
 	ctrlTeamPicks.getPicks(req, res);
 });
 
+app.get('/popular/picks/:week', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getPopularPicks(req, res);
+});
+
+app.get('/popular/teams/all', middleware.checkAuthentication, function(req, res) {
+	ctrlTeamPicks.getAllPopularPicks(req, res);
+});
+
 app.get('/schedule/:user_id/:team_id/:week', middleware.checkAuthentication, middleware.checkTeamID, function(req, res){
 	ctrlTeamPicks.getSchedule(req, res);
 });
@@ -137,6 +145,14 @@ app.put('/users/email/:user_id', middleware.checkAuthentication, function(req, r
 //User Streaks Requests
 app.get('/standings', middleware.checkAuthentication, function (req, res) {
 	ctrlUserStreaks.getStandings(req, res);
+});
+
+app.get('/streaks/all', middleware.checkAuthentication, function(req, res) {
+	ctrlUserStreaks.getCountAll(req, res);
+});
+
+app.get('/streaks/active', middleware.checkAuthentication, function(req, res) {
+	ctrlUserStreaks.getCountActive(req, res);
 });
 
 //User Teams Requests

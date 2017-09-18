@@ -1,0 +1,23 @@
+.charts-container {
+    border-top: 1px solid $light-grey-border;
+	margin: 12px 18px 12px 18px;
+    display: flex;
+}
+
+.charts-title {
+    margin-top: 12px;
+    font-family: $Brawler;
+    color: $purple;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.chart {
+    margin: 0 30px 0 30px;
+}
+
+.bar-chart {
+    flex: 2;
+}
