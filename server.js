@@ -31,7 +31,7 @@ var middleware = require('./middleware/common.middleware.js');
 app.use(bodyParser.json());
 
 //Admin Tools Requests
-app.put('/admin/advanceWeek/:week', middleware.checkAdmin, function(req, res){
+app.put('/admin/advanceWeek/:week',  middleware.checkAuthentication, middleware.checkAdmin, function(req, res){
 	ctrlAdminTools.advanceWeek(req, res);
 });
 
@@ -40,7 +40,7 @@ app.post('/features', middleware.checkAuthentication, function(req, res){
 });
 
 //Games Requests
-app.post('/games/populate', middleware.checkAdmin, function(req, res) {
+app.post('/games/populate', middleware.checkAuthentication, middleware.checkAdmin, function(req, res) {
 	ctrlGames.populateGames(req, res);
 });
 
