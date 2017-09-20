@@ -70,7 +70,7 @@ class StandingsInfo extends Component {
 
         if(this.state.activeStreaks !== null) {
             let streaks = [];
-            streaks.push({name: 'Active', value: this.state.activeStreaks, color: "#00AD61"}, {name: 'Elminated', value: this.state.totalStreaks - this.state.activeStreaks, color: "#AA3939"});
+            streaks.push({name: 'Active', value: this.state.activeStreaks, color: "#00AD61"}, {name: 'Eliminated', value: this.state.totalStreaks - this.state.activeStreaks, color: "#AA3939"});
             alive = <div><PieChartBuilder data={streaks} type={'Users'} /></div>
         } else {
             alive = <div>Loading..</div>
