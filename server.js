@@ -31,7 +31,7 @@ var middleware = require('./middleware/common.middleware.js');
 app.use(bodyParser.json());
 
 //Admin Tools Requests
-app.put('/admins/advanceWeek/:week', middleware.checkAdmin, function(req, res){
+app.put('/admin/advanceWeek/:week', middleware.checkAdmin, function(req, res){
 	ctrlAdminTools.advanceWeek(req, res);
 });
 
