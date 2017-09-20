@@ -71,6 +71,7 @@ class PieChartBuilder extends Component {
                         dataKey="value"
                         innerRadius={50}
                         outerRadius={80}
+                        paddingAngle={10}
                     >
                     {
                         data.map((entry, index) => <Cell key={index} fill={entry.color} />)

@@ -11,14 +11,18 @@ import BarChartBuilder from 'BarChartBuilder';
 class StandingsInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null};
+        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null, week: 0};
     }
-    componentDidMount() {
-        const that = this;
+    componentWillMount() {
         const {dispatch} = this.props;
         const currWeek =  dispatch(actions.getWeek());
         const week = currWeek > 0 ? currWeek - 1 : 1;
-        console.log(currWeek, week, 'weeks');
+        this.setState({week});
+    }
+    componentDidMount() {
+        const that = this;
+        s
+        console.log(week, 'week');
 
         firebase.auth().currentUser.getToken(true).then(function(token) {
             axios.defaults.headers.common['Authorization'] = token;
