@@ -18,6 +18,7 @@ class StandingsInfo extends Component {
         const {dispatch} = this.props;
         const currWeek =  dispatch(actions.getWeek());
         const week = currWeek > 0 ? currWeek - 1 : 1;
+        console.log(currWeek, week, 'weeks');
 
         firebase.auth().currentUser.getToken(true).then(function(token) {
             axios.defaults.headers.common['Authorization'] = token;
