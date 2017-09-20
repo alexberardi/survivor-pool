@@ -11,24 +11,20 @@ import BarChartBuilder from 'BarChartBuilder';
 class StandingsInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null, week: 0};
+        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null};
     }
     componentWillMount() {
-        const {dispatch} = this.props;
-        const currWeek =  dispatch(actions.getWeek());
-        const week = currWeek > 0 ? currWeek - 1 : 1;
-        this.setState({week});
-    }
-    componentDidMount() {
         const that = this;
-        const week = this.state.week;
 
         firebase.auth().currentUser.getToken(true).then(function(token) {
             axios.defaults.headers.common['Authorization'] = token;
 
-            const lastWeekPicks = axios.get(`/popular/picks/${week}`).then((picks) => {
+            const lastWeekPicks = axios.get('/games/week/current').then((week) => {
+				return week = parseInt(week.data) - 1;
+            })
+            .then((week) => axios.get(`/popular/picks/${week}`).then((picks) => {
                 return picks.data[0];
-            }); 
+            }));
 
             const teamCount = axios.get('/streaks/all').then((streaks) => {
                 return streaks.data;
