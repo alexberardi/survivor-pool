@@ -33,7 +33,7 @@ var checkAuthentication = function(req, res, next) {
               next();
             } else {
               console.log('Invalid User_ID in params.');
-              res.status(407).send();
+              res.status(401).send();
             }
           } else {
             req.body.user_id = decodedToken.user_id;
@@ -43,7 +43,7 @@ var checkAuthentication = function(req, res, next) {
     		.catch(function(error) {
           console.log('Invalid Token. 2 ');
           console.log(error);
-          res.status(409).send();
+          res.status(401).send();
     		});
 }
 
@@ -89,17 +89,17 @@ var checkAdmin = function (req, res, next) {
               next();
             } else {
               console.log('not administrator');
-              res.status(405).json({first: "first spot"});
+              res.status(401).send();
             }
           })
           .catch(function(e) {
               console.log('not administrator');
-              res.status(402).json({second: "second spot"});
+              res.status(401).send();
           });
         })
         .catch(function(error) {
           console.log('Invalid Token 2.');
-          res.status(403).json({last: "last spot"});
+          res.status(401).send();
         });
 }
 
