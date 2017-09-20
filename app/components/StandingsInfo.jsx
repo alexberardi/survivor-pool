@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
+import * as actions from 'actions';
 import firebase from 'firebase';
 import axios from 'axios';
 import {Link, IndexLink} from 'react-router';
@@ -10,11 +11,12 @@ import BarChartBuilder from 'BarChartBuilder';
 class StandingsInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null, week: this.props.week};
+        this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null};
     }
-    componentWillMount() {
+    componentDidMount() {
         const that = this;
-        const currWeek =  this.state.week;
+        const {dispatch} = this.props;
+        const currWeek =  dispatch(actions.getWeek());
         const week = currWeek > 0 ? currWeek - 1 : 1;
         console.log(currWeek, week, 'weeks');
 
