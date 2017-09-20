@@ -33,7 +33,7 @@ var checkAuthentication = function(req, res, next) {
               next();
             } else {
               console.log('Invalid User_ID in params.');
-              res.status(401).send();
+              res.status(407).send();
             }
           } else {
             req.body.user_id = decodedToken.user_id;
@@ -43,7 +43,7 @@ var checkAuthentication = function(req, res, next) {
     		.catch(function(error) {
           console.log('Invalid Token. 2 ');
           console.log(error);
-          res.status(401).send();
+          res.status(409).send();
     		});
 }
 
