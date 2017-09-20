@@ -19,5 +19,6 @@
 }
 
 .bar-chart {
+    @extend .chart;
     flex: 2;
 }

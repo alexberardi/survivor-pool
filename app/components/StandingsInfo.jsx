@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as Redux from 'react-redux';
+import * as actions from 'actions';
 import firebase from 'firebase';
 import axios from 'axios';
 import {Link, IndexLink} from 'react-router';
@@ -13,8 +14,10 @@ class StandingsInfo extends Component {
         this.state = {lastWeekPopular : null, totalStreaks: null, activeStreaks: null, popularTeams: null};
     }
     componentWillMount() {
-        const that = this; 
-        const week = this.props.week > 0 ? this.props.week - 1 : 1;
+        const that = this;
+        const {dispatch} = this.props;
+        const currWeek =  dispatch(actions.getWeek());
+        const week = currWeek > 0 ? currWeek - 1 : 1;
 
         firebase.auth().currentUser.getToken(true).then(function(token) {
             axios.defaults.headers.common['Authorization'] = token;

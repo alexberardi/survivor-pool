@@ -84,6 +84,7 @@ class GameList extends Component {
 				that.refreshPicks();
             })
             .catch(function(error) {
+
                 console.log('Error picking game', error);
             });
 	}
@@ -144,22 +145,13 @@ class GameList extends Component {
 					</div>
 				)
 			}
-			games.forEach(function(game) {
-				game.disabledAway = false;
-				game.disabledHome = false;
-
-				if(allPicks !== null) {
-					allPicks.forEach(function(pick) {
-						if(pick.week !== game.week) {
-							game.disabledAway = pick.team_name === game.away_team_name ? true : false;
-							game.disabledHome = pick.team_name === game.home_team_name ? true : false;
-						}
-					});
-				}
-			});
 
 			return games.map((game) => {
+
 				let formattedGame = this.formatGameInfo(game);
+
+				game.disabledAway = ( allPicks.filter(function(pick) { return pick.team_name == game.away_team_name }).length > 0 )
+				game.disabledHome = ( allPicks.filter(function(pick) { return pick.team_name == game.home_team_name }).length > 0 )
 
 				if(this.state.pickTemp !== null) {
 					if(formattedGame.gameID == this.state.pickTemp.game_id) {

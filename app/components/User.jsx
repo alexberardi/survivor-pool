@@ -88,10 +88,18 @@ function RenderTeam(props) {
     let currentPick = props.currentpick || '';
     let streak = null;
 
-    if(props.streak_total > 0) {
-        streak = <span>Streak: {props.streak_total}</span>
-    } else  {
-        streak = <span>No streak yet!</span>
+    if(!props.is_active) {
+        if(props.streak_total > 0) {
+            streak = <span>Eliminated Week: {props.streak_total + 1}</span>
+        } else  {
+            streak = <span>No streak yet!</span>
+        }
+    } else {
+        if(props.streak_total > 0) {
+            streak = <span>Streak: {props.streak_total}</span>
+        } else  {
+            streak = <span>No streak yet!</span>
+        }
     }
 
     if(props.is_active === 1 || props.is_active) {

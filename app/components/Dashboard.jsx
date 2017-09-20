@@ -95,7 +95,7 @@ class Dashboard extends Component {
 						{renderMessages()}
 						<div className="container">
 							<TeamInfo week={this.state.week}/>
-							<StandingsInfo week={this.state.week}/>
+							<StandingsInfo />
 							<Rules />
 						</div>
 					</div>
