@@ -89,17 +89,17 @@ var checkAdmin = function (req, res, next) {
               next();
             } else {
               console.log('not administrator');
-              res.status(401).send();
+              res.status(405).send();
             }
           })
           .catch(function(e) {
               console.log('not administrator');
-              res.status(401).send();
+              res.status(402).send();
           });
         })
         .catch(function(error) {
           console.log('Invalid Token 2.');
-          res.status(401).send();
+          res.status(403).send();
         });
 }
 
