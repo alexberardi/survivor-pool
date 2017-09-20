@@ -29,7 +29,7 @@ function checkGamesCompleted(week) {
 		db.games.findAndCountAll({
 			where: {
 				week: week,
-				quarter :{$ne: 'F'}
+				quarter :{$notIn: ['F', 'FO']}
 			}
 		})
 		.then(function(results){
