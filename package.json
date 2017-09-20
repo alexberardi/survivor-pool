@@ -3,9 +3,13 @@
   "version": "2.0.0",
   "description": "SurvivorPool",
   "main": "index.js",
-  "babel" : {
-    "plugins": ["recharts"],
-    "presets": ["es2015"]
+  "babel": {
+    "plugins": [
+      "recharts"
+    ],
+    "presets": [
+      "es2015"
+    ]
   },
   "scripts": {
     "test": "SET NODE_ENV=test&& karma start",
