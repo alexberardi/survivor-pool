@@ -90,7 +90,7 @@ function RenderTeam(props) {
 
     if(!props.is_active) {
         if(props.streak_total > 0) {
-            streak = <span>Eliminated Week: {props.streak_total + 1}</span>
+            streak = <span>Eliminated Week {props.streak_total + 1}</span>
         } else  {
             streak = <span>No streak yet!</span>
         }
