@@ -63,7 +63,14 @@ class PieChartBuilder extends Component {
     }
 	render() {
         if(this.props.data !== null) {
+            let paddingAngle = 5;
+
             const data = this.PieChartFormatter(this.props.data, this.props.type);
+
+            if(this.props.type == 'Teams') {
+                paddingAngle = 0;
+            }
+
             return  (
                 <PieChart width={200} height={250}>
                     <Pie
@@ -71,7 +78,7 @@ class PieChartBuilder extends Component {
                         dataKey="value"
                         innerRadius={50}
                         outerRadius={80}
-                        paddingAngle={10}
+                        paddingAngle={paddingAngle}
                     >
                     {
                         data.map((entry, index) => <Cell key={index} fill={entry.color} />)

@@ -22,7 +22,6 @@ class StandingsInfo extends Component {
     componentDidMount() {
         const that = this;
         const week = this.state.week;
-        console.log(week, 'week');
 
         firebase.auth().currentUser.getToken(true).then(function(token) {
             axios.defaults.headers.common['Authorization'] = token;
