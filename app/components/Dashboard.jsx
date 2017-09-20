@@ -29,7 +29,7 @@ class Dashboard extends Component {
 			const userInfo = axios.get(`/users/${uid}`).then((user) => {
 				return [user.data.user_id, user.data.full_name, user.data.is_admin];
 			})
-	
+			
 			const teamInfo = axios.get(`/teams/${uid}`).then((teams) => {
 				if(teams.data !== null) {
 					return teams.data.every(team => team.has_paid);

@@ -11,7 +11,7 @@ class BarChartBuilder extends Component {
             const data = this.props.data.map((entry) => {
                 return {
                     team_name: entry.team_name,
-                    Picks: entry.count
+                    Picks: parseInt(entry.count)
                 }   
             });
         

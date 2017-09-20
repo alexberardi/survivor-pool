@@ -33,14 +33,15 @@ class TeamInfo extends Component {
 		this.setState({hasTeamName: true, teamName: teamName});
 	}
 	refreshPlayerTeams() {
-		let userID = this.state.uid;
+		var {dispatch} = this.props;
+		var {uid} = dispatch(actions.getUserAuthInfo());
 		const that = this;
 
 		firebase.auth().currentUser.getToken(true).then(function(token) {
 			axios.defaults.headers.common['Authorization'] = token;
-			axios.get(`/teams/${userID}`).then((teams) => {
+			axios.get(`/teams/${uid}`).then((teams) => {
 				if(teams.data !== null) {
-					that.setState({teams: teams.data});
+					that.setState({teams: teams.data, uid});
 				}
 			});
 		});

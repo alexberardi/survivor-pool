@@ -57,7 +57,7 @@ class StandingsInfo extends Component {
             picks = this.state.lastWeekPopular.map((pick) => {
                 return {
                     name: pick.team_name,
-                    value: pick.count
+                    value: parseInt(pick.count)
                 }
             });
             lastWeek = <div><PieChartBuilder data={picks} type={'Teams'} /></div>
