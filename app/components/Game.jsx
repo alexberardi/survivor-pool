@@ -142,13 +142,13 @@ function GetLogo(props) {
 	let logo = null;
 	if(props.away) {
 		if(props.disabledAway) {
-			logo = <img src={props.awayImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '6px'}} />
+			logo = <img src={props.awayImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '50%'}} />
 		} else {
 			logo = <img src={props.awayImage} height="70" width="70" style={{border: props.awayBorder, borderRadius: '6px'}} onClick={() => props.startPick(props.formatPick(props.awayTeamName))}/>
 		}
 	} else {
 		if(props.disabledHome) {
-			logo = <img src={props.homeImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '6px'}} />
+			logo = <img src={props.homeImage} height="70" width="70" style={{border: '4px solid #AA3939', borderRadius: '50%'}} />
 		} else {
 			logo = <img src={props.homeImage} height="70" width="70" style={{border: props.homeBorder, borderRadius: '6px'}} onClick={() => props.startPick(props.formatPick(props.homeTeamName))}/>
 		}
