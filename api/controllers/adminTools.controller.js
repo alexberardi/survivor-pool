@@ -171,7 +171,7 @@ function getGamesForWeek(week){
 		db.games.findAll({
 			where: {
 				week: week,
-				quarter: 'F'
+				quarter: {$in: ['F', 'FO']}
 			}
 		})
 		.then(function(games) {
