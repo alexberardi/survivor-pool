@@ -188,6 +188,10 @@ app.put('/teams/name/:team_id', middleware.checkAuthentication, middleware.check
 	ctrlPlayerTeams.updateTeamName(req, res);
 });
 
+app.get('/teams/check/:user_id/:team_id', middleware.checkAuthentication, middleware.checkTeamID, function(req, res) {
+	ctrlPlayerTeams.checkActive(req, res);
+});
+
 app.use(function (req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https') {
     res.redirect('http://' + req.hostname + req.url);

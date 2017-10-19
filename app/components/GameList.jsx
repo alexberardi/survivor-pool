@@ -102,6 +102,11 @@ class GameList extends Component {
 		var {uid, displayName} = dispatch(actions.getUserAuthInfo());
 		const week = dispatch(actions.getWeek());
 		const that = this;
+		let active = true;
+
+		Requests.get(`/teams/check/${uid}/${this.state.teamID}`).then((response) => {
+			active = response.data.is_active;
+		});
 
 
 		if(week > 0) {
@@ -115,6 +120,11 @@ class GameList extends Component {
 						return (game.has_started && game.game_id === currentPick.game_id)
 					});
 				}
+				
+				if(!active) {
+					disabled = true;
+				}
+
 				that.setState({
 					games: response.data.games,
 					allPicks: response.data.previousSelections,

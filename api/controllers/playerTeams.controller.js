@@ -228,6 +228,26 @@ var updateTeamName = function(req, res) {
     });        
 };
 
+var checkActive = function(req, res) {
+    var team_id = req.params.team_id;
+    var user_id = req.params.user_id;
+
+    db.playerTeams.findOne({
+        where: {
+            team_id: team_id,
+            user_id: user_id
+        }
+    }).then(function(team) {
+        if(team) {
+            res.json(team.toJSON());
+        } else {
+            res.status(404).send();
+        }
+    }, function(){
+        res.status(500).send();
+     });
+}
+
 module.exports = {
     deleteTeam: deleteTeam,
     teamsGetAll: teamsGetAll,
@@ -235,5 +255,6 @@ module.exports = {
     teamCreate: teamCreate,
     updateTeamName: updateTeamName,
     updateTeamActive: updateTeamActive,
-    updateTeamPaid: updateTeamPaid
+    updateTeamPaid: updateTeamPaid,
+    checkActive: checkActive
 }

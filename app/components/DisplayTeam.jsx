@@ -145,7 +145,8 @@ class DisplayTeam extends Component {
                     </div>
                     <div className="card-content">
                         <div className="card-column">
-                            <div className="card-column-container"> 
+                            <div className="card-column-container">
+                                <Link to={`picks/${this.state.teamID}`} activeClassName="active" activeStyle={{fontWeight: 'bold'}}>View Schedule</Link> 
                                 <div className="team-eliminated">
                                     Eliminated
                                 </div>
